@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html>
+<title> Sean Hofer </title>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="assets\images\favicon.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" type="text/css" href="assets\css\bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets\css\stylish.css">
+  <link rel="stylesheet" type="text/css" href="assets\css\slimscroll.css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900|Bitter:400,700" rel="stylesheet" type="text/css">
+
+  <script type="text/javascript" src="assets\js\jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="assets\js\slimscroll.js"></script>
+  <!-- <script type="text/javascript" src="assets\js\lines.js"></script> -->
+  <script type="text/javascript" src="assets\js\scripts.js"></script>
+  <script type="text/javascript" src="assets\js\lines.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+
+<body class="slideDown">
+  <div id="wrapper">
+    <div class="navbar" id="header">
+      <a href="#" class="headItem activeHeadItem">home</a>
+      <a href="#" class="headItem">about</a>
+      <a href="#" class="headItem">projects</a>
+      <a href="#" class="headItem">contact</a>
+    </div>
+    <div id="main">
+      <div class="subsection activeSubsection" id="home" style="max-width:none;">
+        <div class="glassBox" style="max-width:590px;  position: absolute; max-height:200px;" >
+          <div class="slimScroll">
+            <div class="scroll-wrapper" tabindex="-1" style="height:100%">
+              <p class="title">Hi, I'm Sean Hofer!</p>
+              <p class="subtitle">And this is my personal site.</p>
+            </div>
+          </div>
+        </div>
+        <!-- <svg>
+          <path d="m 180,115 332,0 0,199 -332,0 z" id="rect4154" class="path" stroke="#a8000e" stroke-width="1" fill="none" />
+          <path d="m 172,107 349,0 0,215 -349,0 z" id="rect4156" class="path" stroke="#a8000e" stroke-width="2" fill="none" />
+          <path d="m 340,322 13,0 0,34 -13,0 z" id="rect4160" class="smallpath" stroke="#a8000e" stroke-width="2" fill="none" />
+          <path d="m 288,356 118,0 0,7 -118,0 z" id="rect4162" class="smallpath" stroke="#a8000e" stroke-width="2" fill="none" />
+        </svg> -->
+
+
+      </div>
+      <div class="subsection" id="about">
+        about
+        <div class="glassBox">
+          <div class="slimScroll">
+            <div class="scroll-wrapper" tabindex="-1">
+              <p class="title">I'm Sean.</p>
+              <p class="subtitle">An aspiring web developer and fan of eSports.</p>
+              <p>&emsp; I'm a student at Valencia College pursuing an A.A. in Information Technology, which I intend to complete by the Summer of 2017, at which point I will transfer to UCF to pursue my B.S. in the same field. I'm currently working on a handful of personal projects to self-teach various skills
+              and flesh out my portfolio a bit (available in the next tab!). When I'm not in class or working, I can usually be found doing small side projects or watching LCS (TSM!).</p>
+              <p>&emsp; Back in 2014, I moved to Orlando from Clearwater, FL, after graduating from the Center for Advanced Technologies at Lakewood High School. There, I was a member of a team comprised of hardworking, tech-minded students in charge of the creation and day-to-day operations of the Center's internal and external websites. In particular, I worked on developing the front-end web interface used to interact with our Electronic HallPass System, which replaced our outdated, "standard" high school hallpasses with fancy new ID cards. The system used card readers and a custom-made C# application to interact with our SharePoint database to keep track of when and where students checked in and out.</p>
+              <p>&emsp; As for right now, I'm keeping my nose to the grind, focusing on school and keeping an eye out for any web development- or IT-related positions I can take up that might help me learn more about the field or further my career. If you're interested in contacting me, drop me a line at <a href="mailto:seanhofer8@gmail.com">seanhofer8@gmail.com</a> or hit me up on my <a href="https://linkedin.com/profile/view?id=304844725">LinkedIn</a> page. Or just head over to the Contact tab!</p>
+              <p>&emsp; And thanks for checking out my site, too!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subsection" id="projects">
+        projects
+        <div class="glassBox">
+          <div class="slimScroll">
+            <div class="scroll-wrapper" tabindex="-1">
+              <p class="title">These are my personal projects: </p>
+              <p class="subtitle">This website!</p>
+              <p style="padding-left: 1em">Made from scratch by yours truly, using HTML, CSS3, JavaScript, jQuery, D3.js, and a bit of Bootstrap. The little line animation in the home tab was made by randomly generating SVG paths using JavaScript and animating them with CSS3. I toyed around with a few other ideas, namely drawing specific objects, or generating ASCII images in random orders, but I eventually decided I liked the look of this the most!
+              </p>
+              <p class="subtitle">"Peter O'Tool" Chrome extenstion (Early development)</p>
+              <p style="padding-left: 1em">In the very early stages still, I plan to develop a simple extension for use with Google Chrome that would bring up a larger version of an image on hover, but will also display an image of Peter O'Toole at random on occasion, with the frequency of this occurence being adjustable. A novelty extension, to be sure, but it will mostly serve as a learning tool (and probably as a funny story at some point).
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="subsection" id="contact">
+        contact
+        <div class="glassBox">
+          <div class="slimScroll">
+            <div class="scroll-wrapper" tabindex="-1">
+              <p class="title">Get in touch! </p>
+              <p class="subtitle">Or don't. I'm not your mother.</p>
+              <a href="mailto:seanhofer8@gmail.com" class="bigicon">
+                <i class="fa fa-envelope-o fa-4x"></i>
+              </a>
+              <a href="https://twitter.com/" target="_blank" class="bigicon">
+                <i class="fa fa-twitter fa-4x"></i>
+              </a>
+              <a href="https://github.com/hofers" target="_blank" class="bigicon">
+                <i class="fa fa-github fa-4x"></i>
+              </a>
+              <a href="https://linkedin.com/profile/view?id=304844725" target="_blank" class="bigicon">
+                <i class="fa fa-linkedin fa-4x"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<footer>
+  <div id="border"></div>
+  <div id="contacts">
+    <a href="mailto:seanhofer8@gmail.com" class="icon">
+      <i class="fa fa-envelope-o fa-2x"></i>
+    </a>
+    <a href="https://twitter.com/" target="_blank" class="icon">
+      <i class="fa fa-twitter fa-2x"></i>
+    </a>
+    <a href="https://github.com/hofers" target="_blank" class="icon">
+      <i class="fa fa-github fa-2x"></i>
+    </a>
+    <a href="https://linkedin.com/profile/view?id=304844725" target="_blank" class="icon">
+      <i class="fa fa-linkedin fa-2x"></i>
+    </a>
+  </div>
+</footer>
+
+</html>
