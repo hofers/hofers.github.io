@@ -28,6 +28,9 @@ footer {
 a{
   color:#a8000e;
 }
+a:hover{
+  text-decoration: none;
+}
 #border {
   height: 1px;
   width: 100%;
