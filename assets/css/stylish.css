@@ -30,6 +30,7 @@ a{
 }
 a:hover{
   text-decoration: none;
+  color: #9A010E;
 }
 #border {
   height: 1px;
