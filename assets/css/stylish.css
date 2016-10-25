@@ -30,19 +30,19 @@ a {
 }
 a:hover {
   text-decoration: none;
-  color: #9A010E;
+  color: #4C0006;
 }
 a:focus {
   text-decoration: none;
-  color: #9A010E;
+  color: #4C0006;
 }
 a:active {
   text-decoration: none;
-  color: #9A010E;
+  color: #4C0006;
 }
 a:visited {
   text-decoration: none;
-  color: #9A010E;
+  color: #4C0006;
 }
 
 #border {
