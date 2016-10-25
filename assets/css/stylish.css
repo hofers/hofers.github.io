@@ -40,11 +40,6 @@ a:active {
   text-decoration: none;
   color: #4C0006;
 }
-a:visited {
-  text-decoration: none;
-  color: #4C0006;
-}
-
 #border {
   height: 1px;
   width: 100%;
