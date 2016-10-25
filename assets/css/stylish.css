@@ -25,13 +25,26 @@ footer {
   background-color: #CCCCB2;
   width: 100%;
 }
-a{
+a {
   color:#a8000e;
 }
-a:hover{
+a:hover {
   text-decoration: none;
   color: #9A010E;
 }
+a:focus {
+  text-decoration: none;
+  color: #9A010E;
+}
+a:active {
+  text-decoration: none;
+  color: #9A010E;
+}
+a:visited {
+  text-decoration: none;
+  color: #9A010E;
+}
+
 #border {
   height: 1px;
   width: 100%;
