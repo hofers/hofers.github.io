@@ -1,8 +1,7 @@
 .wufoo {
 	font-family: 'Roboto', sans-serif !important;
 	font-size: 17px;
-    text-align: 'center';
 }
 li.focused {
-    background-color: transparent;
+    background-color: transparent !important;
 }
