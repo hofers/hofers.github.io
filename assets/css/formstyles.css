@@ -13,6 +13,7 @@ li > label {
 }
 li > div, li > span {
 	flex-grow: 1;
+	width: 100%;
 }
 input.text {
 	width: 100%;
