@@ -19,3 +19,6 @@ input.text {
 	width: 100%;
 	padding-left: 2px;
 }
+label.desc {  
+	width: auto;
+}
