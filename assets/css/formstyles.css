@@ -5,3 +5,16 @@
 li.focused {
     background-color: transparent !important;
 }
+form li {
+	display: flex;
+}
+li > label {
+	flex-grow: 2;
+}
+li > div, li > span {
+	flex-grow: 1;
+}
+input.text {
+	width: 100%;
+	padding-left: 2px;
+}
