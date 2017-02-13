@@ -5,7 +5,7 @@
 li.focused {
     background-color: transparent !important;
 }
-form li {
+/*form li {
 	display: flex;
 }
 li > label {
@@ -20,4 +20,4 @@ input.text {
 }
 label.desc {  
 	width: auto;
-}
+}*/
