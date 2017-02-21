@@ -12,6 +12,7 @@ li.focused {
     padding-left: 5px;
 	border-width: 1px;
 	border-color: black;
+	background: none;
 }
 input.text:focus{
 	outline: none;
