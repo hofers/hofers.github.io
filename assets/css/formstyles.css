@@ -5,19 +5,19 @@
 li.focused {
     background-color: transparent !important;
 }
-/*form li {
-	display: flex;
-}
-li > label {
-	flex-grow: 2;
-}
-li > div, li > span {
-	flex-grow: 1;
-}
-input.text {
+.wufoo input.text{
 	width: 100%;
-	padding-left: 2px;
+    box-sizing: border-box;
+    height: 32px;
+    padding-left: 5px;
+	border-width: 1px;
+	border-color: black;
 }
-label.desc {  
-	width: auto;
-}*/
+input.text:focus{
+	outline: none;
+    border-color: #98af49;
+    border-style: solid;
+}
+form li span{
+	width: 48%;
+}
