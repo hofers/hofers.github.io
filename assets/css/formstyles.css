@@ -25,3 +25,33 @@ form li span{
 	width: 49%;
 	margin-right: 1% !important;
 }
+.wufoo input.btTxt {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    margin-top: 18px;
+    padding: 12px 36px 16px;
+    font-size: 22px;
+    line-height: 1.3333333;
+    letter-spacing: .05em;
+    color: #fff;
+    background-color: #98af49;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid #889d41;
+}
+.wufoo input.btTxt:hover {
+    color: #fff;
+    background-color: #798b3a;
+    border-color: #63722f;
+}
+
+.wufoo input.btTxt:active:hover {
+    color: #fff;
+    background-color: #63722f;
+    border-color: #3a431c;
+}
+
+.wufoo input.btTxt:active, input.btTxt:focus {
+    outline: none;
+}
