@@ -16,7 +16,6 @@ input.text, textarea {
     padding-left: 5px !important;
     box-sizing: border-box;
 }
-
 input.text:focus, textarea:focus{
 	outline: none;
     border-color: #98af49 !important;
