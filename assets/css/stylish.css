@@ -11,6 +11,7 @@ svg {
 
 footer {
   position: fixed;
+  font-size: 0.75em;
   right: 0px;
   bottom: 0px;
   height: 35px;
@@ -92,7 +93,7 @@ a {
 
 .bigicon {
   padding-right: 30px;
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: #333; }
   .bigicon:focus {
     color: #a8000e;
@@ -125,7 +126,7 @@ a {
 
 .headItem {
   text-align: center;
-  font-size: 0.875em;
+  font-size: 0.75em;
   width: 25%;
   max-width: 100px;
   height: 60px;
