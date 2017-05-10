@@ -16,7 +16,7 @@ html, body{
 /* custom stylings */
 .wrapper, .scroll-wrapper {
     padding: 5px;
-    position: absolute;
+    /* position: absolute; */
     display: inline-block;
 }
 .scroll-wrapper.mac + .scrollBarContainer{
