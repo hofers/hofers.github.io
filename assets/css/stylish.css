@@ -3,12 +3,6 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px; }
 
-svg {
-  height: 100%;
-  width: 130%;
-  margin-left: -8%;
-  z-index: 1; }
-
 footer {
   position: fixed;
   font-size: 0.75em;
@@ -52,20 +46,23 @@ a {
   text-align: left;
   display: inline-block; }
 
-.title {
+h1 {
   display: inline-block;
   font-size: 3em;
-  color: #a8000e; }
-
-.subtitle {
-  font-size: 1.875em; }
-
-.ascii {
-  float: right;
-  margin-right: 120px;
-  margin-top: 30px;
   color: #a8000e;
-  font-family: monospace; }
+  margin: 10px 0;
+  line-height: 52px;
+  letter-spacing: -0.7px; }
+
+h2 {
+  font-size: 1.875em;
+  margin: 20px 0;
+  line-height: 35px;
+  letter-spacing: -0.7px; }
+
+p {
+  line-height: 25px;
+  letter-spacing: -0.7px; }
 
 .glassBox {
   background-color: rgba(212, 212, 205, 0.8);
@@ -158,21 +155,6 @@ a {
   animation-timing-function: ease;
   -webkit-animation-timing-function: ease; }
 
-.path {
-  stroke-dasharray: 20000;
-  stroke-dashoffset: 20000;
-  animation: dash 90s linear infinite; }
-
-.smallpath {
-  stroke-dasharray: 20000;
-  stroke-dashoffset: 20000;
-  animation: dash 360s linear infinite; }
-
-@keyframes dash {
-  from {
-    stroke-dashoffset: 20000; }
-  to {
-    stroke-dashoffset: 0; } }
 @keyframes slideDown {
   0% {
     opacity: 0;

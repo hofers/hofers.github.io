@@ -57,14 +57,25 @@ a {
     display: inline-block;
 }
 
-.title {
+h1 {
     display: inline-block;
     font-size: 3em;
     color: #a8000e;
+    margin: 10px 0;
+    line-height: 52px;
+    letter-spacing: -0.7px;
 }
 
-.subtitle {
+h2 {
     font-size: 1.875em;
+    margin: 20px 0;
+    line-height: 35px;
+    letter-spacing: -0.7px;
+}
+
+p {
+    line-height: 25px;
+    letter-spacing: -0.7px;
 }
 
 .glassBox {
