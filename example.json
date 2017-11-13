@@ -1,90 +1,89 @@
 {
-    "states": {
-        "Florida": {
-            "tampa": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            },
-            "orlando": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            },
-            "miami": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            },
-            "tallahassee": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            }
+    "Florida": {
+        "tampa": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
         },
-        "Georgia": {
-            "athens": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            },
-            "atlanta": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            },
-            "blue ridge": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            },
-            "stephens": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            }
+        "orlando": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
         },
-        "Alabama": {
-            "birmingham": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            },
-            "talladega": {
-                "IDServices": "",
-                "CompSkills": "",
-                "Literacy": "",
-                "EngClasses": "",
-                "EmpServices": "",
-                "Utilities": ""
-            }
+        "miami": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
+        },
+        "tallahassee": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
+        }
+    },
+    "Georgia": {
+        "athens": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
+        },
+        "atlanta": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
+        },
+        "blue ridge": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
+        },
+        "stephens": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
+        }
+    },
+    "Alabama": {
+        "birmingham": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
+        },
+        "talladega": {
+            "IDServices": "",
+            "CompSkills": "",
+            "Literacy": "",
+            "EngClasses": "",
+            "EmpServices": "",
+            "Utilities": ""
         }
     }
+
 }
