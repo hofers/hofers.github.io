@@ -32,10 +32,10 @@
                 "email": ""
             },
             "Utilities": {
-                "org": "",
-                "address": "",
-                "phone": "",
-                "email": ""
+                "org": "Tampa Utilities",
+                "address": "Fake St.",
+                "phone": "727-532-9863 ext. 1192",
+                "email": "fakemail@place.com"
             }
         },
         "orlando": {
