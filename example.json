@@ -1,88 +1,388 @@
 {
     "Florida": {
         "tampa": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         },
         "orlando": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         },
         "miami": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         },
         "tallahassee": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         }
     },
     "Georgia": {
         "athens": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         },
         "atlanta": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         },
         "blue ridge": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         },
         "stephens": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         }
     },
     "Alabama": {
         "birmingham": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         },
         "talladega": {
-            "IDServices": "",
-            "CompSkills": "",
-            "Literacy": "",
-            "EngClasses": "",
-            "EmpServices": "",
-            "Utilities": ""
+            "IDServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "CompSkills": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Literacy": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EngClasses": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "EmpServices": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            },
+            "Utilities": {
+                "org": "",
+                "address": "",
+                "phone": "",
+                "email": ""
+            }
         }
     }
 
