@@ -1,6 +1,6 @@
 {
-    "Florida": {
-        "tampa": {
+    "North Carolina": {
+        "charlotte": {
             "IDServices": {
                 "org": "",
                 "address": "",
@@ -8,8 +8,8 @@
                 "email": ""
             },
             "CompSkills": {
-                "org": "",
-                "address": "",
+                "org": "<a href='http://goodwillsp.org/train/goodwill-university/computer-and-employability-skills/' target='_blank'>Goodwill Industries of the Southern Piedmont</a>",
+                "address": "5301 Wilkinson Blvd, Charlotte, NC 28208",
                 "phone": "",
                 "email": ""
             },
@@ -26,16 +26,16 @@
                 "email": ""
             },
             "EmpServices": {
-                "org": "",
-                "address": "",
+                "org": "<a href='http://goodwillsp.org/train/goodwill-university/computer-and-employability-skills/' target='_blank'>Goodwill Industries of the Southern Piedmont</a>",
+                "address": "5301 Wilkinson Blvd, Charlotte, NC 28208",
                 "phone": "",
                 "email": ""
             },
             "Utilities": {
-                "org": "Tampa Utilities",
-                "address": "Fake St.",
-                "phone": "727-532-9863 ext. 1192",
-                "email": "fakemail@place.com"
+                "org": "<a href='https://crisisassistance.org/financial-assistance-with-utilities/how-to-get-help/' target='_blank'>Crisis Assistance Ministries</a>",
+                "address": "500-A Spratt Street, Charlotte, NC 28206",
+                "phone": "",
+                "email": ""
             }
         },
         "orlando": {
