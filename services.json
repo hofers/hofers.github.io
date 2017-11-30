@@ -5,189 +5,219 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://goodwillsp.org/train/goodwill-university/computer-and-employability-skills/' target='_blank'>Goodwill Industries of the Southern Piedmont</a>",
+                "org": "Goodwill Industries of the Southern Piedmont",
                 "address": "5301 Wilkinson Blvd, Charlotte, NC 28208",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://goodwillsp.org/train/goodwill-university/computer-and-employability-skills/"
             },
             "Literacy": {
-                "org": "<a href='http://www.fillmycupliteracy.org/contact/' target='_blank'>Fill My Cup Literacy</a>",
+                "org": "Fill My Cup Literacy",
                 "address": "PO Box 480301, Charlotte, NC 28269",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.fillmycupliteracy.org/contact/"
             },
             "EngClasses": {
-                "org": "<a href='http://www.holycomfortercharlotte.org/about/get-connected/ministerios-hispanos/esl/' target='_blank'>The Episcopal Church of the Holy Comforter</a>",
+                "org": "The Episcopal Church of the Holy Comforter",
                 "address": "2701 Park Road, Charlotte, NC 28209",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.holycomfortercharlotte.org/about/get-connected/ministerios-hispanos/esl/"
             },
             "EmpServices": {
-                "org": "<a href='http://goodwillsp.org/train/goodwill-university/computer-and-employability-skills/' target='_blank'>Goodwill Industries of the Southern Piedmont</a>",
+                "org": "Goodwill Industries of the Southern Piedmont",
                 "address": "5301 Wilkinson Blvd, Charlotte, NC 28208",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://goodwillsp.org/train/goodwill-university/computer-and-employability-skills/"
             },
             "Utilities": {
-                "org": "<a href='https://crisisassistance.org/financial-assistance-with-utilities/how-to-get-help/' target='_blank'>Crisis Assistance Ministries</a>",
+                "org": "Crisis Assistance Ministries",
                 "address": "500-A Spratt Street, Charlotte, NC 28206",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://crisisassistance.org/financial-assistance-with-utilities/how-to-get-help/"
             }
         },
         "raleigh": {
             "IDServices": {
-                "org": "<a href='http://www.wakegov.com/humanservices/locations/cornerstone/Pages/default.aspx' target='_blank'>Cornerstone Center</a>",
+                "org": "Cornerstone Center",
                 "address": "220 Snow Ave, Raleigh, NC 27603",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.wakegov.com/humanservices/locations/cornerstone/Pages/default.aspx"
             },
             "CompSkills": {
-                "org": "<a href='https://durhamcountylibrary.org/calendar/computer/' target='_blank'>Durham County Library</a>",
+                "org": "Durham County Library",
                 "address": "300 N. Roxboro St., Durham, NC 27701",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://durhamcountylibrary.org/calendar/computer/"
             },
             "Literacy": {
-                "org": "<a href='http://www.triangleliteracy.org/learn/' target='_blank'>Triangle Literacy Council</a>",
+                "org": "Triangle Literacy Council",
                 "address": "916 West Morgan St., Raleigh NC 27603",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.triangleliteracy.org/learn/"
             },
             "EngClasses": {
-                "org": "<a href='https://www.raleighnc.gov/parks/content/ParksRec/Articles/Programs/ESL/ESLProgram.html' target='_blank'>Cultural Outreach and Enrichment Program</a>",
+                "org": "Cultural Outreach and Enrichment Program",
                 "address": "2401 Wade Ave, Raleigh, NC 27607",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.raleighnc.gov/parks/content/ParksRec/Articles/Programs/ESL/ESLProgram.html"
             },
             "EmpServices": {
-                "org": "<a href='http://cwsrdu.org/services/employment-services/' target='_blank'>Church World Service</a>",
+                "org": "Church World Service",
                 "address": "112 S. Duke St. Suite 4B, Durham, NC 27701",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://cwsrdu.org/services/employment-services/"
             },
             "Utilities": {
-                "org": "<a href='http://wwcm.org/our-services/financial-assistance/' target='_blank'>Western Wake Crisis Ministry</a>",
+                "org": "Western Wake Crisis Ministry",
                 "address": "1600 Olive Chapel Road Suite 408, Apex, NC 27502",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://wwcm.org/our-services/financial-assistance/"
             }
         },
         "durham": {
             "IDServices": {
-                "org": "<a href='http://www.wakegov.com/humanservices/locations/cornerstone/Pages/default.aspx' target='_blank'>Cornerstone Center</a>",
+                "org": "Cornerstone Center",
                 "address": "220 Snow Ave, Raleigh, NC 27603",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.wakegov.com/humanservices/locations/cornerstone/Pages/default.aspx"
             },
             "CompSkills": {
-                "org": "<a href='https://durhamcountylibrary.org/calendar/computer/' target='_blank'>Durham County Library</a>",
+                "org": "Durham County Library",
                 "address": "300 N. Roxboro St., Durham, NC 27701",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://durhamcountylibrary.org/calendar/computer/"
             },
             "Literacy": {
-                "org": "<a href='http://www.triangleliteracy.org/learn/' target='_blank'>Triangle Literacy Council</a>",
+                "org": "Triangle Literacy Council",
                 "address": "916 West Morgan St., Raleigh NC 27603",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.triangleliteracy.org/learn/"
             },
             "EngClasses": {
-                "org": "<a href='https://www.raleighnc.gov/parks/content/ParksRec/Articles/Programs/ESL/ESLProgram.html' target='_blank'>Cultural Outreach and Enrichment Program</a>",
+                "org": "Cultural Outreach and Enrichment Program",
                 "address": "2401 Wade Ave, Raleigh, NC 27607",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.raleighnc.gov/parks/content/ParksRec/Articles/Programs/ESL/ESLProgram.html"
             },
             "EmpServices": {
-                "org": "<a href='http://cwsrdu.org/services/employment-services/' target='_blank'>Church World Service</a>",
+                "org": "Church World Service",
                 "address": "112 S. Duke St. Suite 4B, Durham, NC 27701",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://cwsrdu.org/services/employment-services/"
             },
             "Utilities": {
-                "org": "<a href='http://wwcm.org/our-services/financial-assistance/' target='_blank'>Western Wake Crisis Ministry</a>",
+                "org": "Western Wake Crisis Ministry",
                 "address": "1600 Olive Chapel Road Suite 408, Apex, NC 27502",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://wwcm.org/our-services/financial-assistance/"
             }
         },
         "greensboro": {
             "IDServices": {
-                "org": "<a href='http://faithaction.org/services/id_initiative/' target='_blank'>The Faith Action House</a>",
+                "org": "The Faith Action House",
                 "address": "705 N. Greene Street, Greensboro, NC 27401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://faithaction.org/services/id_initiative/"
             },
             "CompSkills": {
-                "org": "<a href='http://www.greensboro-nc.gov/index.aspx?page=3975' target='_blank'>City of Greensboro Library</a>",
+                "org": "City of Greensboro Library",
                 "address": "300 West Washington Street, Greensboro, NC 27401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.greensboro-nc.gov/index.aspx?page=3975"
             },
             "Literacy": {
-                "org": "<a href='http://www.readingconnections.org/program-descriptions-detail.asp?service-id=316913688' target='_blank'>Reading Connections</a>",
+                "org": "Reading Connections",
                 "address": "122 North Elm Street Suite 920, Greensboro, NC 27401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.readingconnections.org/program-descriptions-detail.asp?service-id=316913688"
             },
             "EngClasses": {
-                "org": "<a href='http://faithaction.org/services/id_initiative/' target='_blank'>The Faith Action House</a>",
+                "org": "The Faith Action House",
                 "address": "705 N. Greene Street, Greensboro, NC 27401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://faithaction.org/services/id_initiative/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.greensboro-nc.gov/index.aspx?page=3975' target='_blank'>City of Greensboro Library</a>",
+                "org": "City of Greensboro Library",
                 "address": "300 West Washington Street, Greensboro, NC 27401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.greensboro-nc.gov/index.aspx?page=3975"
             },
             "Utilities": {
-                "org": "<a href='http://greensborourbanministry.org/services/emergency-assistance/' target='_blank'>Greensboro Urban Ministry</a>",
+                "org": "Greensboro Urban Ministry",
                 "address": "305 W. Gate City Blvd., Greensboro, NC 27406",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://greensborourbanministry.org/services/emergency-assistance/"
             }
         },
         "winston-salem": {
             "IDServices": {
-                "org": "<a href='http://faithaction.org/services/id_initiative/' target='_blank'>Faith Action House</a>",
+                "org": "Faith Action House",
                 "address": "",
                 "phone": "(336) 379-0037",
-                "email": ""
+                "email": "",
+                "website": "http://faithaction.org/services/id_initiative/"
             },
             "CompSkills": {
-                "org": "<a href='http://www.forsythcomputertraining.org/ComputerSkillBuilding.aspx' target='_blank'>Forsyth Country Training Bridge</a>",
+                "org": "Forsyth Country Training Bridge",
                 "address": "650 W 5th Street, Winston-Salem, NC 27101",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.forsythcomputertraining.org/ComputerSkillBuilding.aspx"
             },
             "Literacy": {
-                "org": "<a href='https://ymcanwnc.org/programs/literacy/' target='_blank'>YMCA of North Carolina</a>",
+                "org": "YMCA of North Carolina",
                 "address": "Locations vary by class",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://ymcanwnc.org/programs/literacy/"
             },
             "EngClasses": {
-                "org": "<a href='http://www.forsythtech.edu/courses-programs/job-skills/college-career-readiness/english-as-a-second-language/' target='_blank'>Forsyth Tech Community College</a>",
+                "org": "Forsyth Tech Community College",
                 "address": "2100 Silas Creek Parkway, Winston-Salem, NC 27103",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.forsythtech.edu/courses-programs/job-skills/college-career-readiness/english-as-a-second-language/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.co.forsyth.nc.us/dss/TEAM_WFemployment_services.aspx' target='_blank'>Department of Social Services</a>",
+                "org": "Department of Social Services",
                 "address": "741 North Highland Avenue, Winston-Salem, NC 27101",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.co.forsyth.nc.us/dss/TEAM_WFemployment_services.aspx"
             },
             "Utilities": {
-                "org": "<a href='https://www.salvationarmycarolinas.org/winston-salem/programs/social-services' target='_blank'>Salvation Army Emergency Assistance</a>",
+                "org": "Salvation Army Emergency Assistance",
                 "address": "901 N. Cleveland Ave, Winston-Salem, NC 27101",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.salvationarmycarolinas.org/winston-salem/programs/social-services"
             }
         }
     },
@@ -197,37 +227,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://millennium.greenvillelibrary.org/iii/calendar/list/C&P=%7C1' target='_blank'>Greenville County Libraries</a>",
+                "org": "Greenville County Libraries",
                 "address": "2625 Anderson Road, Greenville, SC 29611",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://millennium.greenvillelibrary.org/iii/calendar/list/C&P=%7C1"
             },
             "Literacy": {
-                "org": "<a href='https://www.greenvilleliteracy.org/' target='_blank'>Greenville Literacy Association</a>",
+                "org": "Greenville Literacy Association",
                 "address": "225 S Pleasantburg Drive, Greenville, SC 29607",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.greenvilleliteracy.org/"
             },
             "EngClasses": {
-                "org": "<a href='https://www.greenvilleliteracy.org/' target='_blank'>Greenville Literacy Association</a>",
+                "org": "Greenville Literacy Association",
                 "address": "225 S Pleasantburg Drive, Greenville, SC 29607",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.greenvilleliteracy.org/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.greenvillewib.com/default.asp' target='_blank'>SC Works</a>",
+                "org": "SC Works",
                 "address": "225 S Pleasantburg Drive Greenville, SC 29607",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.greenvillewib.com/default.asp"
             },
             "Utilities": {
-                "org": "<a href='http://www.fbs.org/ministries/missions-mpact/local-mpact/helping-center/' target='_blank'>First Baptist Spartanburg</a>",
+                "org": "First Baptist Spartanburg",
                 "address": "174 North Dean Street, Spartanburg, SC  29302",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.fbs.org/ministries/missions-mpact/local-mpact/helping-center/"
             }
         },
         "columbia": {
@@ -235,37 +271,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.richlandlibrary.com/inform/computer-basics-classes' target='_blank'>Richland Library</a>",
+                "org": "Richland Library",
                 "address": "1431 Assembly Street, Columbia, SC 29201",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.richlandlibrary.com/inform/computer-basics-classes"
             },
             "Literacy": {
-                "org": "<a href='https://ed.sc.gov/instruction/adult-education/family-literacy/' target='_blank'>South Carolina Family Literacy</a>",
+                "org": "South Carolina Family Literacy",
                 "address": "1429 Senate Street, Columbia, SC 29201",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://ed.sc.gov/instruction/adult-education/family-literacy/"
             },
             "EngClasses": {
-                "org": "<a href='http://cma.sc.gov/hispanic-latino-affairs/english-as-second-language-services/' target='_blank'>The South Carolina Mission for Minority Affairs</a>",
+                "org": "The South Carolina Mission for Minority Affairs",
                 "address": "2221 Devine Street, Suite 408, Columbia, SC 29205",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://cma.sc.gov/hispanic-latino-affairs/english-as-second-language-services/"
             },
             "EmpServices": {
-                "org": "<a href='https://www.wcai.org/' target='_blank'>Wateree Community Action, Inc.</a>",
+                "org": "Wateree Community Action, Inc.",
                 "address": "110 Breedin Street, Manning, SC 29102",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.wcai.org/"
             },
             "Utilities": {
-                "org": "<a href='https://www.wcai.org/' target='_blank'>Wateree Community Action, Inc.</a>",
+                "org": "Wateree Community Action, Inc.",
                 "address": "110 Breedin Street, Manning, SC 29102",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.wcai.org/"
             }
         },
         "charleston": {
@@ -273,37 +315,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='https://tridentlit.org/' target='_blank'>Trident Literacy Association</a>",
+                "org": "Trident Literacy Association",
                 "address": "6185-D Rivers Avenue, North Charleston, SC 29406",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://tridentlit.org/"
             },
             "Literacy": {
-                "org": "<a href='https://tridentlit.org/' target='_blank'>Trident Literacy Association</a>",
+                "org": "Trident Literacy Association",
                 "address": "6185-D Rivers Avenue, North Charleston, SC 29406",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://tridentlit.org/"
             },
             "EngClasses": {
-                "org": "<a href='https://tridentlit.org/' target='_blank'>Trident Literacy Association</a>",
+                "org": "Trident Literacy Association",
                 "address": "6185-D Rivers Avenue, North Charleston, SC 29406",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://tridentlit.org/"
             },
             "EmpServices": {
-                "org": "<a href='http://one80place.org/employment-education/' target='_blank'>One 80 Place</a>",
+                "org": "One 80 Place",
                 "address": "35 Walnut Street, Charleston, SC 29403",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://one80place.org/employment-education/"
             },
             "Utilities": {
-                "org": "<a href='http://www.handsonhealth-sc.org/golocal/golocal.php?nid=3186&mcity=2&filter=L127' target='_blank'>Hands on Health South Carolina</a>",
+                "org": "Hands on Health South Carolina",
                 "address": "171 Ashley Avenue, Charleston, SC 29425",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.handsonhealth-sc.org/golocal/golocal.php?nid=3186&mcity=2&filter=L127"
             }
         },
         "myrtle beach": {
@@ -311,37 +359,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://hcae.horrycountyschools.net/pages/HorryCountyAdultEducation/Programs/English_Classes' target='_blank'>Horry County Literacy Council</a>",
+                "org": "Horry County Literacy Council",
                 "address": "950 Crabtree Lane, Myrtle Beach, SC 29575",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://hcae.horrycountyschools.net/pages/HorryCountyAdultEducation/Programs/English_Classes"
             },
             "Literacy": {
-                "org": "<a href='http://hcae.horrycountyschools.net/pages/HorryCountyAdultEducation/Programs/English_Classes' target='_blank'>Horry County Literacy Council</a>",
+                "org": "Horry County Literacy Council",
                 "address": "950 Crabtree Lane, Myrtle Beach, SC 29575",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://hcae.horrycountyschools.net/pages/HorryCountyAdultEducation/Programs/English_Classes"
             },
             "EngClasses": {
-                "org": "<a href='http://hcae.horrycountyschools.net/pages/HorryCountyAdultEducation/Programs/English_Classes' target='_blank'>Horry County Literacy Council</a>",
+                "org": "Horry County Literacy Council",
                 "address": "950 Crabtree Lane, Myrtle Beach, SC 29575",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://hcae.horrycountyschools.net/pages/HorryCountyAdultEducation/Programs/English_Classes"
             },
             "EmpServices": {
-                "org": "<a href='http://www.scfathersandfamilies.com/programs/a_fathers_place/partners/' target='_blank'>A Father's Place</a>",
+                "org": "A Father's Place",
                 "address": "900 Dunbar Street, Myrtle Beach, SC 29578",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.scfathersandfamilies.com/programs/a_fathers_place/partners/"
             },
             "Utilities": {
-                "org": "<a href='http://www.helpinghandofmyrtlebeach.com/index.php' target='_blank'>Helping Hand of Myrtle Beach</a>",
+                "org": "Helping Hand of Myrtle Beach",
                 "address": "1411 Mr. Joe White Avenue, Myrtle Beach, SC 29577",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.helpinghandofmyrtlebeach.com/index.php"
             }
         }
     },
@@ -351,37 +405,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.cccymca.org/locations/ralphola/education-leadership/' target='_blank'>Central Connecticut Coast YMCA</a>",
+                "org": "Central Connecticut Coast YMCA",
                 "address": "790 Central Avenue, Bridgeport, CT 06607",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.cccymca.org/locations/ralphola/education-leadership/"
             },
             "Literacy": {
-                "org": "<a href='http://bportlibrary.org/lvbpt/' target='_blank'>Bridgeport Library</a>",
+                "org": "Bridgeport Library",
                 "address": "925 Broad Street, Bridgeport, CT 06604",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://bportlibrary.org/lvbpt/"
             },
             "EngClasses": {
-                "org": "<a href='http://www.bridgeportedu.com/adultedu/esl.html' target='_blank'>Bridgeport Adult Education</a>",
+                "org": "Bridgeport Adult Education",
                 "address": "1 Lincoln Boulevard, Bridgeport, CT 06606",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.bridgeportedu.com/adultedu/esl.html"
             },
             "EmpServices": {
-                "org": "<a href='http://www.abcd.org/energy.html' target='_blank'>Action for Bridgeport Community Development</a>",
+                "org": "Action for Bridgeport Community Development",
                 "address": "149 Walker Street, Norwalk, CT 06854",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.abcd.org/energy.html"
             },
             "Utilities": {
-                "org": "<a href='http://www.abcd.org/energy.html' target='_blank'>Action for Bridgeport Community Development</a>",
+                "org": "Action for Bridgeport Community Development",
                 "address": "149 Walker Street, Norwalk, CT 06854",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.abcd.org/energy.html"
             }
         },
         "new haven": {
@@ -389,37 +449,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.elmcitycommunities.org/FamilySelfSufficiency.aspx' target='_blank'>Elm City Communities</a>",
+                "org": "Elm City Communities",
                 "address": "360 Orange Street, New Haven, CT 06509",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.elmcitycommunities.org/FamilySelfSufficiency.aspx"
             },
             "Literacy": {
-                "org": "<a href='http://www.literacyeveryday.org/information.php?page=resources' target='_blank'>Literacy Coalition of Greater New Haven</a>",
+                "org": "Literacy Coalition of Greater New Haven",
                 "address": "4 Science Park, New Haven, CT 06511",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.literacyeveryday.org/information.php?page=resources"
             },
             "EngClasses": {
-                "org": "<a href='http://nhfpl.org/services/literacy/' target='_blank'>New Haven Free Public Library</a>",
+                "org": "New Haven Free Public Library",
                 "address": "133 Elm Street, New Haven, CT 06510",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://nhfpl.org/services/literacy/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.columbushouse.org/programs/income-and-employment-services/' target='_blank'>Columbus House, Inc.</a>",
+                "org": "Columbus House, Inc.",
                 "address": "586 Ella T. Grasso Blvd., New Haven, CT 06519",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.columbushouse.org/programs/income-and-employment-services/"
             },
             "Utilities": {
-                "org": "<a href='https://www.caanh.net/' target='_blank'>Community Action Agency of New Haven</a>",
+                "org": "Community Action Agency of New Haven",
                 "address": "419 Whalley Avenue, New Haven, CT 06511",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.caanh.net/"
             }
         },
         "hartford": {
@@ -427,37 +493,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='https://www.hplct.org/library-services/adults/ged-math' target='_blank'>Hartford Public Library</a>",
+                "org": "Hartford Public Library",
                 "address": "500 Main Street, Hartford, CT 06103",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.hplct.org/library-services/adults/ged-math"
             },
             "Literacy": {
-                "org": "<a href='https://www.hplct.org/library-services/adults/ged-math' target='_blank'>Hartford Public Library</a>",
+                "org": "Hartford Public Library",
                 "address": "500 Main Street, Hartford, CT 06103",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.hplct.org/library-services/adults/ged-math"
             },
             "EngClasses": {
-                "org": "<a href='https://www.hplct.org/library-services/adults/ged-math' target='_blank'>Hartford Public Library</a>",
+                "org": "Hartford Public Library",
                 "address": "500 Main Street, Hartford, CT 06103",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.hplct.org/library-services/adults/ged-math"
             },
             "EmpServices": {
-                "org": "<a href='http://www.crtct.org/en/need-help/energy-a-weatherization/energy-assistance' target='_blank'>Community Renewal Team</a>",
+                "org": "Community Renewal Team",
                 "address": "555 Windsor Street, Hartford, CT 06120",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.crtct.org/en/need-help/energy-a-weatherization/energy-assistance"
             },
             "Utilities": {
-                "org": "<a href='http://www.crtct.org/en/need-help/energy-a-weatherization/energy-assistance' target='_blank'>Community Renewal Team</a>",
+                "org": "Community Renewal Team",
                 "address": "555 Windsor Street, Hartford, CT 06120",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.crtct.org/en/need-help/energy-a-weatherization/energy-assistance"
             }
         },
         "waterbury": {
@@ -465,77 +537,89 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.bronsonlibrary.org/content/1521/1647/default.aspx' target='_blank'>Silas Bronson Library</a>",
+                "org": "Silas Bronson Library",
                 "address": "267 Grand Street, Waterbury, CT 06702",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.bronsonlibrary.org/content/1521/1647/default.aspx"
             },
             "Literacy": {
-                "org": "<a href='http://www.bronsonlibrary.org/content/1521/1647/default.aspx' target='_blank'>Silas Bronson Library</a>",
+                "org": "Silas Bronson Library",
                 "address": "267 Grand Street, Waterbury, CT 06702",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.bronsonlibrary.org/content/1521/1647/default.aspx"
             },
             "EngClasses": {
-                "org": "<a href='http://www.bronsonlibrary.org/content/1521/1647/default.aspx' target='_blank'>Silas Bronson Library</a>",
+                "org": "Silas Bronson Library",
                 "address": "267 Grand Street, Waterbury, CT 06702",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.bronsonlibrary.org/content/1521/1647/default.aspx"
             },
             "EmpServices": {
-                "org": "<a href='http://newoppinc.org/energy-assistance' target='_blank'>New Opportunities</a>",
+                "org": "New Opportunities",
                 "address": "232 North Elm Street, Waterbury, CT 06702",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://newoppinc.org/energy-assistance"
             },
             "Utilities": {
-                "org": "<a href='http://newoppinc.org/energy-assistance' target='_blank'>New Opportunities</a>",
+                "org": "New Opportunities",
                 "address": "232 North Elm Street, Waterbury, CT 06702",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://newoppinc.org/energy-assistance"
             }
         }
     },
     "Tennessee": {
         "chattanooga": {
             "IDServices": {
-                "org": "<a href='http://health.hamiltontn.org/AllServices/HealthCenterLocations/HomelessHealthcareCenter.aspx' target='_blank'>Homeless Health Care Center</a>",
+                "org": "Homeless Health Care Center",
                 "address": "730 E. 11th Street, Chattanooga, TN 37403",
                 "phone": "(432) 265-5708",
-                "email": ""
+                "email": "",
+                "website": "http://health.hamiltontn.org/AllServices/HealthCenterLocations/HomelessHealthcareCenter.aspx"
             },
             "CompSkills": {
-                "org": "<a href='http://www.nnhouse.org/programs/computers-cooking-parenting/' target='_blank'>Northside Neighborhood House</a>",
+                "org": "Northside Neighborhood House",
                 "address": "211 Minor Street, Chattanooga, TN 37405",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.nnhouse.org/programs/computers-cooking-parenting/"
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
-                "org": "<a href='https://www.lapazchattanooga.org/esl/' target='_blank'>La Paz Chattanooga</a>",
+                "org": "La Paz Chattanooga",
                 "address": "1402 Bailey Ave., Chattanooga, TN, 37404",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.lapazchattanooga.org/esl/"
             },
             "EmpServices": {
-                "org": "<a href='https://www.hopefortheinnercity.org/jobs-for-life/' target='_blank'>Hope for the Inner City</a>",
+                "org": "Hope for the Inner City",
                 "address": "1800 Roanoke Ave, Chattanooga, TN 37406",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.hopefortheinnercity.org/jobs-for-life/"
             },
             "Utilities": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "nashville": {
@@ -543,37 +627,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://giveit2goodwill.org/services/' target='_blank'>Goodwill Industries of Middle Tennessee Inc.</a>",
+                "org": "Goodwill Industries of Middle Tennessee Inc.",
                 "address": "1015 Herman Street, Nashville, TN 37208",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://giveit2goodwill.org/services/"
             },
             "Literacy": {
-                "org": "<a href='http://nashvilleliteracy.org/learn/' target='_blank'>Nashville Adult Literacy Council</a>",
+                "org": "Nashville Adult Literacy Council",
                 "address": "4805 Park Ave. Suite 305, Nashville, TN 37209",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://nashvilleliteracy.org/learn/"
             },
             "EngClasses": {
-                "org": "<a href='http://nashvilleliteracy.org/learn/' target='_blank'>Nashville Adult Literacy Council</a>",
+                "org": "Nashville Adult Literacy Council",
                 "address": "4805 Park Ave. Suite 305, Nashville, TN 37209",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://nashvilleliteracy.org/learn/"
             },
             "EmpServices": {
-                "org": "<a href='http://nashvilleliteracy.org/learn/' target='_blank'>Nashville Adult Literacy Council</a>",
+                "org": "Nashville Adult Literacy Council",
                 "address": "4805 Park Ave. Suite 305, Nashville, TN 37209",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://nashvilleliteracy.org/learn/"
             },
             "Utilities": {
-                "org": "<a href='http://www.nashville.gov/Metro-Action-Commission.aspx' target='_blank'>Metro Action Commission</a>",
+                "org": "Metro Action Commission",
                 "address": "800 2nd Avenue North, Nashville, TN",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.nashville.gov/Metro-Action-Commission.aspx"
             }
         },
         "memphis": {
@@ -581,37 +671,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.memphislibrary.org/events-calendar/computer-classes/' target='_blank'>Memphis Public Libraries</a>",
+                "org": "Memphis Public Libraries",
                 "address": "3030 Poplar Avenue, Memphis, TN 38111",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.memphislibrary.org/events-calendar/computer-classes/"
             },
             "Literacy": {
-                "org": "<a href='http://www.literacymidsouth.org/our-programs/' target='_blank'>Literacy Mid- South</a>",
+                "org": "Literacy Mid- South",
                 "address": "P.O Box 111229, Memphis, TN 38111",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.literacymidsouth.org/our-programs/"
             },
             "EngClasses": {
-                "org": "<a href='http://www.literacymidsouth.org/our-programs/' target='_blank'>Literacy Mid- South</a>",
+                "org": "Literacy Mid- South",
                 "address": "P.O Box 111229, Memphis, TN 38111",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.literacymidsouth.org/our-programs/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.memphislibrary.org/resources/business-careers/#JobCareer' target='_blank'>Memphis Public Libraries</a>",
+                "org": "Memphis Public Libraries",
                 "address": "3030 Poplar Avenue, Memphis, TN 38111",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.memphislibrary.org/resources/business-careers/#JobCareer"
             },
             "Utilities": {
-                "org": "<a href='https://www.mifa.org/plus-1' target='_blank'>Metropolitan Inter-Faith Association</a>",
+                "org": "Metropolitan Inter-Faith Association",
                 "address": "910 Vance Avenue, Memphis, TN 38126",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.mifa.org/plus-1"
             }
         },
         "knoxville": {
@@ -619,37 +715,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://friendsofliteracy.org/about-us/our-mission' target='_blank'>Friends of Literacy</a>",
+                "org": "Friends of Literacy",
                 "address": "900 E. Hill Avenue, Knoxville, TN 37915",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://friendsofliteracy.org/about-us/our-mission"
             },
             "Literacy": {
-                "org": "<a href='http://friendsofliteracy.org/about-us/our-mission' target='_blank'>Friends of Literacy</a>",
+                "org": "Friends of Literacy",
                 "address": "900 E. Hill Avenue, Knoxville, TN 37915",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://friendsofliteracy.org/about-us/our-mission"
             },
             "EngClasses": {
-                "org": "<a href='http://www.kin-connect.org/english-classes' target='_blank'>Calvary Baptist Church</a>",
+                "org": "Calvary Baptist Church",
                 "address": "3200 Kingston Pike, Knoxville, TN 37919",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.kin-connect.org/english-classes"
             },
             "EmpServices": {
-                "org": "<a href='http://www.knoxcac.org/newweb/programs-services/workforce-connections' target='_blank'>Community Action Committee</a>",
+                "org": "Community Action Committee",
                 "address": "2247 Western Avenue, Knoxville, TN 37921",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.knoxcac.org/newweb/programs-services/workforce-connections"
             },
             "Utilities": {
-                "org": "<a href='https://www.kub.org/about/community/project-help/' target='_blank'>Knoxville Utilities Board</a>",
+                "org": "Knoxville Utilities Board",
                 "address": "4428 Western Ave, Knoxville, TN 37921",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.kub.org/about/community/project-help/"
             }
         },
         "gatlinburg": {
@@ -657,115 +759,133 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.annaporterpl.org/learn-computer-skills.html' target='_blank'>Anna Porter Public Library</a>",
+                "org": "Anna Porter Public Library",
                 "address": "158 Proffitt Road, Gatlinburg, TN 37738",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.annaporterpl.org/learn-computer-skills.html"
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
-                "org": "<a href='http://www.ws.edu/academics/enrichment/english-second/' target='_blank'>Walters State Community College</a>",
+                "org": "Walters State Community College",
                 "address": "1720 Old Newport Hwy, Sevierville, TN 37876",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.ws.edu/academics/enrichment/english-second/"
             },
             "EmpServices": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         }
     },
     "Florida": {
         "orlando": {
             "IDServices": {
-                "org": "<a href='https://idignity.org/' target='_blank'>IDignity</a>",
+                "org": "IDignity",
                 "address": "410 W. Central Blvd., Orlando, FL 32801-2539",
                 "phone": "(407) 792-1374",
-                "email": ""
+                "email": "",
+                "website": "https://idignity.org/"
             },
             "CompSkills": {
-                "org": "<a href='https://www.ocls.info/classes-events/category/Audio%2520Production/category/Basic%2520Tech%2520Skills/category/Coding%2520%2526%2520Robotics/category/Graphic%2520Design/category/Maker%25252FDIY/category/Web%2520Design' target='_blank'>Orange County Library System</a>",
+                "org": "Orange County Library System",
                 "address": "Locations vary by class",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.ocls.info/classes-events/category/Audio%2520Production/category/Basic%2520Tech%2520Skills/category/Coding%2520%2526%2520Robotics/category/Graphic%2520Design/category/Maker%25252FDIY/category/Web%2520Design"
             },
             "Literacy": {
-                "org": "<a href='https://www.adultliteracyleague.org/get-started/' target='_blank'>Adult Literacy League</a>",
+                "org": "Adult Literacy League",
                 "address": "345 W. Michigan Street Ste. 100, Orlando, FL 32806",
                 "phone": "(407) 422-1540",
-                "email": ""
+                "email": "",
+                "website": "https://www.adultliteracyleague.org/get-started/"
             },
             "EngClasses": {
-                "org": "<a href='https://www.ocls.info/classes-events/category/Language%20Learning' target='_blank'>Orange County Library System</a>",
+                "org": "Orange County Library System",
                 "address": "Locations vary by class",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.ocls.info/classes-events/category/Language%20Learning"
             },
             "EmpServices": {
-                "org": "<a href='https://www.cfec.org/job-seeker-resources/job-skills-classes' target='_blank'>Vocational Services Center</a>",
+                "org": "Vocational Services Center",
                 "address": "",
                 "phone": "(407) 235-1500",
-                "email": ""
+                "email": "",
+                "website": "https://www.cfec.org/job-seeker-resources/job-skills-classes"
             },
             "Utilities": {
-                "org": "<a href='http://www.orangecountyfl.net/FamiliesHealthSocialSvcs/EnergyBillAssistance.aspx#.WYmvY9PyvfY' target='_blank'>Community Action Division</a>",
+                "org": "Community Action Division",
                 "address": "2100 E Michigan Street, Orlando, FL 32806",
                 "phone": "(407) 836-7429",
-                "email": ""
+                "email": "",
+                "website": "http://www.orangecountyfl.net/FamiliesHealthSocialSvcs/EnergyBillAssistance.aspx#.WYmvY9PyvfY"
             }
         },
         "jacksonville": {
             "IDServices": {
-                "org": "<a href='https://www.dmv.org/fl-florida/id-cards.php' target='_blank'>DMV</a>",
+                "org": "DMV",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.dmv.org/fl-florida/id-cards.php"
             },
             "CompSkills": {
-                "org": "<a href='https://www.jaxpubliclibrary.org/events/computer-class' target='_blank'>Jacksonville Public Library</a>",
+                "org": "Jacksonville Public Library",
                 "address": "303 Laura St. N. Jacksonville, FL 32202",
                 "phone": "(904) 238-9000",
-                "email": ""
+                "email": "",
+                "website": "https://www.jaxpubliclibrary.org/events/computer-class"
             },
             "Literacy": {
-                "org": "<a href='https://www.jaxpubliclibrary.org/services/center-adult-learning' target='_blank'>Jacksonville Public Library</a>",
+                "org": "Jacksonville Public Library",
                 "address": "303 Laura St. N. Jacksonville, FL 32202",
                 "phone": "(904) 238-9000",
-                "email": ""
+                "email": "",
+                "website": "https://www.jaxpubliclibrary.org/services/center-adult-learning"
             },
             "EngClasses": {
-                "org": "<a href='https://www.jaxpubliclibrary.org/services/center-adult-learning' target='_blank'>Jacksonville Public Library</a>",
+                "org": "Jacksonville Public Library",
                 "address": "303 Laura St. N. Jacksonville, FL 32202",
                 "phone": "(904) 238-9000",
-                "email": ""
+                "email": "",
+                "website": "https://www.jaxpubliclibrary.org/services/center-adult-learning"
             },
             "EmpServices": {
-                "org": "<a href='http://www.needhelppayingbills.com/html/northeast_florida_community_ac.html' target='_blank'>Northeast Florida Community Action Agency</a>",
+                "org": "Northeast Florida Community Action Agency",
                 "address": "Locations vary by county",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.needhelppayingbills.com/html/northeast_florida_community_ac.html"
             },
             "Utilities": {
-                "org": "<a href='http://www.needhelppayingbills.com/html/northeast_florida_community_ac.html' target='_blank'>Northeast Florida Community Action Agency</a>",
+                "org": "Northeast Florida Community Action Agency",
                 "address": "Locations vary by county",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.needhelppayingbills.com/html/northeast_florida_community_ac.html"
             }
         },
         "tampa": {
@@ -773,37 +893,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.hcplc.org/hcplc/events/' target='_blank'>Hillsborough County Public Library Cooperative</a>",
+                "org": "Hillsborough County Public Library Cooperative",
                 "address": "Locations vary by branch",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.hcplc.org/hcplc/events/"
             },
             "Literacy": {
-                "org": "<a href='http://hillsboroughliteracy.org/learn/learn-to-read/' target='_blank'>Hillsborough Literacy Council</a>",
+                "org": "Hillsborough Literacy Council",
                 "address": "",
                 "phone": "(813) 273-3650",
-                "email": ""
+                "email": "",
+                "website": "http://hillsboroughliteracy.org/learn/learn-to-read/"
             },
             "EngClasses": {
-                "org": "<a href='http://hillsboroughliteracy.org/learn/learn-to-read/' target='_blank'>Hillsborough Literacy Council</a>",
+                "org": "Hillsborough Literacy Council",
                 "address": "",
                 "phone": "(813) 273-3650",
-                "email": ""
+                "email": "",
+                "website": "http://hillsboroughliteracy.org/learn/learn-to-read/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.hiregy.com/' target='_blank'>Hiregy</a>",
+                "org": "Hiregy",
                 "address": "1111 N. Westshore Blvd., Suite 102B, Tampa, FL  33607",
                 "phone": "(813) 449-4800",
-                "email": ""
+                "email": "",
+                "website": "http://www.hiregy.com/"
             },
             "Utilities": {
-                "org": "<a href='http://www.tampaelectric.com/company/community/share/' target='_blank'>Tampa Electric</a>",
+                "org": "Tampa Electric",
                 "address": "",
                 "phone": "(813) 226-0055",
-                "email": ""
+                "email": "",
+                "website": "http://www.tampaelectric.com/company/community/share/"
             }
         },
         "miami": {
@@ -811,37 +937,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.elevatemiami.com/Pages/default.asp' target='_blank'>Elevate Miami</a>",
+                "org": "Elevate Miami",
                 "address": "",
                 "phone": "(305) 416-1555",
-                "email": ""
+                "email": "",
+                "website": "http://www.elevatemiami.com/Pages/default.asp"
             },
             "Literacy": {
-                "org": "<a href='http://www.mdpls.org/services/project-lead.asp' target='_blank'>Miami-Dade Public Library System</a>",
+                "org": "Miami-Dade Public Library System",
                 "address": "",
                 "phone": "(305) 372-6356",
-                "email": ""
+                "email": "",
+                "website": "http://www.mdpls.org/services/project-lead.asp"
             },
             "EngClasses": {
-                "org": "<a href='http://eslfree-usa.blogspot.com/2013/03/free-esl-classes-miami-florida.html' target='_blank'>The English Center Miami-Dade Public Schools</a>",
+                "org": "The English Center Miami-Dade Public Schools",
                 "address": "3501 SW 28 Street, Miami, FL 33133",
                 "phone": "(305) 445-7731",
-                "email": ""
+                "email": "",
+                "website": "http://eslfree-usa.blogspot.com/2013/03/free-esl-classes-miami-florida.html"
             },
             "EmpServices": {
-                "org": "<a href='https://allinoneemployment.com/' target='_blank'>ALL IN ONE Employment Services</a>",
+                "org": "ALL IN ONE Employment Services",
                 "address": "",
                 "phone": "(305) 263-6969",
-                "email": ""
+                "email": "",
+                "website": "https://allinoneemployment.com/"
             },
             "Utilities": {
-                "org": "<a href='http://www.miamidade.gov/socialservices/housing-assistance-energy.asp' target='_blank'>Community Action and Human Services</a>",
+                "org": "Community Action and Human Services",
                 "address": "",
                 "phone": "(786) 469-4640",
-                "email": ""
+                "email": "",
+                "website": "http://www.miamidade.gov/socialservices/housing-assistance-energy.asp"
             }
         },
         "tallahassee": {
@@ -849,37 +981,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.goodwillbigbend.org/training/' target='_blank'>Goodwill</a>",
+                "org": "Goodwill",
                 "address": "300 Mabry St., Tallahassee, FL 32304",
                 "phone": "(850) 576-7145",
-                "email": ""
+                "email": "",
+                "website": "http://www.goodwillbigbend.org/training/"
             },
             "Literacy": {
-                "org": "<a href='https://literacyvolunteersleon.org/' target='_blank'>Literacy Volunteers of Leon County</a>",
+                "org": "Literacy Volunteers of Leon County",
                 "address": "200 W. Park Avenue, Tallahassee, FL 32301",
                 "phone": "(850) 606-2644",
-                "email": ""
+                "email": "",
+                "website": "https://literacyvolunteersleon.org/"
             },
             "EngClasses": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
-                "org": "<a href='https://www.careersourcecapitalregion.com/job-seekers' target='_blank'>CareerSource Capital Region</a>",
+                "org": "CareerSource Capital Region",
                 "address": "325 John Knox Road., Atrium Bldg. Ste. 102, Tallahassee, FL 32303",
                 "phone": "(850) 777-3611",
-                "email": ""
+                "email": "",
+                "website": "https://www.careersourcecapitalregion.com/job-seekers"
             },
             "Utilities": {
-                "org": "<a href='http://capitalareacommunityactionagency.com/about-crisis/' target='_blank'>Community Action Crisis Assistance</a>",
+                "org": "Community Action Crisis Assistance",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://capitalareacommunityactionagency.com/about-crisis/"
             }
         },
         "pensacola": {
@@ -887,77 +1025,89 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='https://mywfpl.com/events#Technology' target='_blank'>West Florida Public Libraries</a>",
+                "org": "West Florida Public Libraries",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://mywfpl.com/events#Technology"
             },
             "Literacy": {
-                "org": "<a href='https://learntoreadnwf.org/' target='_blank'>Learn to Read of Northwest Florida</a>",
+                "org": "Learn to Read of Northwest Florida",
                 "address": "1720 W. Fairfield Dr., Suite 315, Pensacola, FL 32501",
                 "phone": "(850) 432-4347",
-                "email": ""
+                "email": "",
+                "website": "https://learntoreadnwf.org/"
             },
             "EngClasses": {
-                "org": "<a href='http://calvaryofpensacola.org/ESL' target='_blank'>Calvary Baptist Church</a>",
+                "org": "Calvary Baptist Church",
                 "address": "6824 Pine Forest Rd, Bellview, FL 32526",
                 "phone": "(850) 944-6213",
-                "email": ""
+                "email": "",
+                "website": "http://calvaryofpensacola.org/ESL"
             },
             "EmpServices": {
-                "org": "<a href='http://www.goodwill.org/training-and-work-opportunities-for-goodwill-programs/' target='_blank'>Goodwill</a>",
+                "org": "Goodwill",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.goodwill.org/training-and-work-opportunities-for-goodwill-programs/"
             },
             "Utilities": {
-                "org": "<a href='https://escambia.communityos.org/zf/profile/service/id/223458' target='_blank'>Community Action Program ESC Utilities Assistance LIHEAP Program</a>",
+                "org": "Community Action Program ESC Utilities Assistance LIHEAP Program",
                 "address": "1380 North Palafox Street, Pensacola, FL 32501",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://escambia.communityos.org/zf/profile/service/id/223458"
             }
         }
     },
     "Georgia": {
         "atlanta": {
             "IDServices": {
-                "org": "<a href='https://emmaushouseatlanta.org/help-services/' target='_blank'>Emmaus House</a>",
+                "org": "Emmaus House",
                 "address": "1017 Hank Aaron Drive Southwest, Atlanta, GA, 30315",
                 "phone": "(404) 525-5948",
-                "email": ""
+                "email": "",
+                "website": "https://emmaushouseatlanta.org/help-services/"
             },
             "CompSkills": {
-                "org": "<a href='http://ulgatl.org/computer-training/' target='_blank'>Urban League of Greater Atlanta</a>",
+                "org": "Urban League of Greater Atlanta",
                 "address": "229 Peachtree Street NE, Suite 300 Atlanta, GA 30303-1600",
                 "phone": "(404) 659-1150",
-                "email": ""
+                "email": "",
+                "website": "http://ulgatl.org/computer-training/"
             },
             "Literacy": {
-                "org": "<a href='https://literacyaction.org/classes' target='_blank'>Literary Action</a>",
+                "org": "Literary Action",
                 "address": "",
                 "phone": "(404) 818-7323",
-                "email": ""
+                "email": "",
+                "website": "https://literacyaction.org/classes"
             },
             "EngClasses": {
-                "org": "<a href='https://catholiccharitiesatlanta.org/educational-services/' target='_blank'>Catholic Charities Atlanta</a>",
+                "org": "Catholic Charities Atlanta",
                 "address": "",
                 "phone": "(770) 790-3104",
-                "email": "lsiefferman@catholiccharitiesatlanta.org"
+                "email": "lsiefferman@catholiccharitiesatlanta.org",
+                "website": "https://catholiccharitiesatlanta.org/educational-services/"
             },
             "EmpServices": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
-                "org": "<a href='http://www.psc.state.ga.us/consumer_corner/cc_advisory/payassist.asp' target='_blank'>Georgia Public Service Commission</a>",
+                "org": "Georgia Public Service Commission",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.psc.state.ga.us/consumer_corner/cc_advisory/payassist.asp"
             }
         },
         "augusta": {
@@ -965,37 +1115,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://fbcaugusta.org/opportunities/' target='_blank'>First Baptist Church</a>",
+                "org": "First Baptist Church",
                 "address": "3500 Walton Way Ext, Augusta, GA",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://fbcaugusta.org/opportunities/"
             },
             "Literacy": {
-                "org": "<a href='http://www.augusta.edu/education/literacy-center/' target='_blank'>Augusta University</a>",
+                "org": "Augusta University",
                 "address": "1120 15th Street, Augusta, GA 30912",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.augusta.edu/education/literacy-center/"
             },
             "EngClasses": {
-                "org": "<a href='http://www.augusta.edu/ipso/postdoc/english.php' target='_blank'>Augusta University</a>",
+                "org": "Augusta University",
                 "address": "1120 15th Street, Augusta, GA 30912",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.augusta.edu/ipso/postdoc/english.php"
             },
             "EmpServices": {
-                "org": "<a href='http://www.goodwillworks.org/GoodWillStaffing' target='_blank'>Goodwill Middle Georgia and the CRSA</a>",
+                "org": "Goodwill Middle Georgia and the CRSA",
                 "address": "3145 Washington Road, Augusta, GA 30907",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.goodwillworks.org/GoodWillStaffing"
             },
             "Utilities": {
-                "org": "<a href='http://www.psc.state.ga.us/consumer_corner/cc_advisory/payassist.asp' target='_blank'>Georgia Public Service Commission</a>",
+                "org": "Georgia Public Service Commission",
                 "address": "244 Washington Street SW, Atlanta, GA 30334",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.psc.state.ga.us/consumer_corner/cc_advisory/payassist.asp"
             }
         },
         "savannah": {
@@ -1003,37 +1159,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.eoasga.org/programs/job-development-training/' target='_blank'>Economic Opportunity Authority</a>",
+                "org": "Economic Opportunity Authority",
                 "address": "618 West Anderson Street, Savannah, GA 31415",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.eoasga.org/programs/job-development-training/"
             },
             "Literacy": {
-                "org": "<a href='http://www.wesleyctrs-savh.org/Our-Services' target='_blank'>Wesley Community Centers of Savannah</a>",
+                "org": "Wesley Community Centers of Savannah",
                 "address": "1601 Drayton Street, Savannah, GA 31401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.wesleyctrs-savh.org/Our-Services"
             },
             "EngClasses": {
-                "org": "<a href='http://www.savannahtech.edu/ged-esl/english-as-a-second-language-esl/' target='_blank'>Savannah Technical Institute</a>",
+                "org": "Savannah Technical Institute",
                 "address": "5717 White Bluff Road, Savannah, GA 31405",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.savannahtech.edu/ged-esl/english-as-a-second-language-esl/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.eoasga.org/programs/job-development-training/' target='_blank'>Economic Opportunity Authority</a>",
+                "org": "Economic Opportunity Authority",
                 "address": "618 West Anderson Street, Savannah, GA 31415",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.eoasga.org/programs/job-development-training/"
             },
             "Utilities": {
-                "org": "<a href='http://www.eoasga.org/programs/neighborhoodservices/' target='_blank'>Economic Opportunity Authority</a>",
+                "org": "Economic Opportunity Authority",
                 "address": "618 West Anderson Street, Savannah, GA 31415",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.eoasga.org/programs/neighborhoodservices/"
             }
         },
         "columbus": {
@@ -1041,37 +1203,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.cvlga.org/computer-classes/' target='_blank'>Chattahoochee Valley Libraries</a>",
+                "org": "Chattahoochee Valley Libraries",
                 "address": "3000 Macon Road, Columbus, GA 31906",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.cvlga.org/computer-classes/"
             },
             "Literacy": {
-                "org": "<a href='http://www.theliteracyalliance.org/programs.html' target='_blank'>Literacy Alliance</a>",
+                "org": "Literacy Alliance",
                 "address": "P. O. Box 2123, Columbus, GA 31902",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.theliteracyalliance.org/programs.html"
             },
             "EngClasses": {
-                "org": "<a href='https://www.columbustech.edu/adult-education/esl.cms' target='_blank'>Columbus Technical College</a>",
+                "org": "Columbus Technical College",
                 "address": "Manchester Expressway, Columbus, GA 31904",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.columbustech.edu/adult-education/esl.cms"
             },
             "EmpServices": {
-                "org": "<a href='https://enrichmentservices.org/community-services-4/' target='_blank'>Enrichment Services Program, Inc.</a>",
+                "org": "Enrichment Services Program, Inc.",
                 "address": "2601 Cross Country Drive, Columbus, GA 31906",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://enrichmentservices.org/community-services-4/"
             },
             "Utilities": {
-                "org": "<a href='https://enrichmentservices.org/community-services-4/' target='_blank'>Enrichment Services Program, Inc.</a>",
+                "org": "Enrichment Services Program, Inc.",
                 "address": "2601 Cross Country Drive, Columbus, GA 31906",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://enrichmentservices.org/community-services-4/"
             }
         },
         "macon": {
@@ -1079,37 +1247,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.bibblib.org/locations/washington-memorial-library/' target='_blank'>Washington Memorial Library</a>",
+                "org": "Washington Memorial Library",
                 "address": "1180 Washington Avenue, Macon, GA 31201",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.bibblib.org/locations/washington-memorial-library/"
             },
             "Literacy": {
-                "org": "<a href='http://www.mgwib.com/education-literacy.php' target='_blank'>Mercer University Educational Opportunity Council</a>",
+                "org": "Mercer University Educational Opportunity Council",
                 "address": "1658 Coleman Avenue, Macon, GA 31207",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.mgwib.com/education-literacy.php"
             },
             "EngClasses": {
-                "org": "<a href='https://www.bcsdk12.net/site/Default.aspx?PageID=708' target='_blank'>Bibb County School District</a>",
+                "org": "Bibb County School District",
                 "address": "484 Mulberry Street, Macon, GA 31201",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.bcsdk12.net/site/Default.aspx?PageID=708"
             },
             "EmpServices": {
-                "org": "<a href='http://www.maconbibbeoc.com/services/' target='_blank'>Macon-Bibb County Economic Opportunity Council, Inc.</a>",
+                "org": "Macon-Bibb County Economic Opportunity Council, Inc.",
                 "address": "150 Sessions Drive, Macon, GA 31201",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.maconbibbeoc.com/services/"
             },
             "Utilities": {
-                "org": "<a href='http://www.maconbibbeoc.com/services/' target='_blank'>Macon-Bibb County Economic Opportunity Council, Inc.</a>",
+                "org": "Macon-Bibb County Economic Opportunity Council, Inc.",
                 "address": "150 Sessions Drive, Macon, GA 31201",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.maconbibbeoc.com/services/"
             }
         },
         "athens": {
@@ -1117,37 +1291,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
-                "org": "<a href='http://www.athensliteracy.org/' target='_blank'>Athens- Clarke Literacy Council</a>",
+                "org": "Athens- Clarke Literacy Council",
                 "address": "P.O Box 561 Athens, GA 30605",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.athensliteracy.org/"
             },
             "EngClasses": {
-                "org": "<a href='http://www.athensliteracy.org/' target='_blank'>Athens- Clarke Literacy Council</a>",
+                "org": "Athens- Clarke Literacy Council",
                 "address": "P.O Box 561 Athens, GA 30605",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.athensliteracy.org/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.actionathens.org/community-services-and-educational-programs' target='_blank'>Action Incorporated</a>",
+                "org": "Action Incorporated",
                 "address": "594 Oconee Street, Athens, GA 30605",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.actionathens.org/community-services-and-educational-programs"
             },
             "Utilities": {
-                "org": "<a href='http://www.actionathens.org/community-services-and-educational-programs' target='_blank'>Action Incorporated</a>",
+                "org": "Action Incorporated",
                 "address": "594 Oconee Street, Athens, GA 30605",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.actionathens.org/community-services-and-educational-programs"
             }
         }
     },
@@ -1157,37 +1337,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='https://www.gulfportschools.org/Page/3161' target='_blank'>Gulfport School District</a>",
+                "org": "Gulfport School District",
                 "address": "2001 Pass Road, Gulfport, MS",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.gulfportschools.org/Page/3161"
             },
             "Literacy": {
-                "org": "<a href='https://www.goodwillsms.org/training-center' target='_blank'>Goodwill Industries of South Mississippi</a>",
+                "org": "Goodwill Industries of South Mississippi",
                 "address": "2407 31st Street, Gulfport, MS",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.goodwillsms.org/training-center"
             },
             "EngClasses": {
-                "org": "<a href='https://www.gulfportschools.org/Page/3161' target='_blank'>Gulfport School District</a>",
+                "org": "Gulfport School District",
                 "address": "2001 Pass Road, Gulfport, MS",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.gulfportschools.org/Page/3161"
             },
             "EmpServices": {
-                "org": "<a href='https://www.goodwillsms.org/training-center' target='_blank'>Goodwill Industries of South Mississippi</a>",
+                "org": "Goodwill Industries of South Mississippi",
                 "address": "2407 31st Street, Gulfport, MS",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.goodwillsms.org/training-center"
             },
             "Utilities": {
-                "org": "<a href='http://svdpbiloxi.org/main_whatwedo.html' target='_blank'>Society of St. Vincent de Paul</a>",
+                "org": "Society of St. Vincent de Paul",
                 "address": "P.O Box 4098, Biloxi, MS 39531",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://svdpbiloxi.org/main_whatwedo.html"
             }
         },
         "hattiesburg": {
@@ -1195,37 +1381,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.hpfc.lib.ms.us/client/default2e' target='_blank'>Hattiesburg Public Library</a>",
+                "org": "Hattiesburg Public Library",
                 "address": "329 Hardy Street, Hattiesburg, MS 39401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.hpfc.lib.ms.us/client/default2e"
             },
             "Literacy": {
-                "org": "<a href='https://www.learningexpresshub.com/productengine/LELIndex.html#/center/adult-learning-center/home' target='_blank'>Hattiesburg Public Library</a>",
+                "org": "Hattiesburg Public Library",
                 "address": "329 Hardy Street, Hattiesburg, MS 39401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.learningexpresshub.com/productengine/LELIndex.html#/center/adult-learning-center/home"
             },
             "EngClasses": {
-                "org": "<a href='http://www.hpfc.lib.ms.us/client/default2e' target='_blank'>Hattiesburg Public Library</a>",
+                "org": "Hattiesburg Public Library",
                 "address": "329 Hardy Street, Hattiesburg, MS 39401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.hpfc.lib.ms.us/client/default2e"
             },
             "EmpServices": {
-                "org": "<a href='http://www.hpfc.lib.ms.us/client/default2e' target='_blank'>Hattiesburg Public Library</a>",
+                "org": "Hattiesburg Public Library",
                 "address": "329 Hardy Street, Hattiesburg, MS 39401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.hpfc.lib.ms.us/client/default2e"
             },
             "Utilities": {
-                "org": "<a href='http://salvationarmyalm.org/hattiesburg/emergency-assistance/' target='_blank'>The Salvation Army</a>",
+                "org": "The Salvation Army",
                 "address": "5611 US 49, Hattiesburg, MS 39401",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://salvationarmyalm.org/hattiesburg/emergency-assistance/"
             }
         },
         "jackson": {
@@ -1233,115 +1425,133 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.jhlibrary.com/calendar-category/Technology-Classes' target='_blank'>Eudora Welty Library</a>",
+                "org": "Eudora Welty Library",
                 "address": "300 North State Street, Jackson, MS 39201",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.jhlibrary.com/calendar-category/Technology-Classes"
             },
             "Literacy": {
-                "org": "<a href='https://sites.google.com/a/jpsms.org/jps-adult-education-center/administration' target='_blank'>Morrison Adult Education Center</a>",
+                "org": "Morrison Adult Education Center",
                 "address": "1224 Eminence Row, Jackson, MS 39213",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://sites.google.com/a/jpsms.org/jps-adult-education-center/administration"
             },
             "EngClasses": {
-                "org": "<a href='https://sites.google.com/a/jpsms.org/jps-adult-education-center/administration' target='_blank'>Morrison Adult Education Center</a>",
+                "org": "Morrison Adult Education Center",
                 "address": "1224 Eminence Row, Jackson, MS 39213",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://sites.google.com/a/jpsms.org/jps-adult-education-center/administration"
             },
             "EmpServices": {
-                "org": "<a href='http://mdes.ms.gov/i-need-a-job/job-searching-resources/training-education/job-corps/' target='_blank'>Mississippi Department of Employment Security</a>",
+                "org": "Mississippi Department of Employment Security",
                 "address": "1235 Echelon Parkway, Jackson, MS 39215",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://mdes.ms.gov/i-need-a-job/job-searching-resources/training-education/job-corps/"
             },
             "Utilities": {
-                "org": "<a href='http://salvationarmyalm.org/jackson/emergency-assistance/' target='_blank'>The Salvation Army</a>",
+                "org": "The Salvation Army",
                 "address": "110 Presto Lane, Jackson, MS 39206",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://salvationarmyalm.org/jackson/emergency-assistance/"
             }
         }
     },
     "Texas": {
         "dallas": {
             "IDServices": {
-                "org": "<a href='http://thestewpot.org/identification-documentation/' target='_blank'>The Stewpot First Presbyterian Church of Dallas</a>",
+                "org": "The Stewpot First Presbyterian Church of Dallas",
                 "address": "1835 Young Street, Dallas, TX 75201",
                 "phone": "(214) 746-2785",
-                "email": ""
+                "email": "",
+                "website": "http://thestewpot.org/identification-documentation/"
             },
             "CompSkills": {
-                "org": "<a href='http://fortworthtexas.gov/library/computer-classes/' target='_blank'>Fort Worth Library</a>",
+                "org": "Fort Worth Library",
                 "address": "500 W. Third St., Fort Worth, TX 76102-7305",
                 "phone": "(817) 392-6621",
-                "email": ""
+                "email": "",
+                "website": "http://fortworthtexas.gov/library/computer-classes/"
             },
             "Literacy": {
-                "org": "<a href='http://www.tarrantliteracycoalition.org/help/class.html' target='_blank'>Tarrant Literacy Coalition</a>",
+                "org": "Tarrant Literacy Coalition",
                 "address": "",
                 "phone": "(817) 870-0082",
-                "email": ""
+                "email": "",
+                "website": "http://www.tarrantliteracycoalition.org/help/class.html"
             },
             "EngClasses": {
-                "org": "<a href='http://www.ndsm.org/adult-esl-classes/' target='_blank'>North Dallas Shared Ministries</a>",
+                "org": "North Dallas Shared Ministries",
                 "address": "2875 Merrell Road, Dallas, TX 75229",
                 "phone": "(214) 358-8700",
-                "email": ""
+                "email": "",
+                "website": "http://www.ndsm.org/adult-esl-classes/"
             },
             "EmpServices": {
-                "org": "<a href='https://www.goodwillfortworth.org/services/job-resource-centers/' target='_blank'>Goodwill</a>",
+                "org": "Goodwill",
                 "address": "",
                 "phone": "",
-                "email": "JRC@goodwillfw.org"
+                "email": "JRC@goodwillfw.org",
+                "website": "https://www.goodwillfortworth.org/services/job-resource-centers/"
             },
             "Utilities": {
-                "org": "<a href='http://fortworthtexas.gov/cap/energy-assistance/' target='_blank'>Community Action Partners</a>",
+                "org": "Community Action Partners",
                 "address": "200 Texas St., Ft. Worth, TX 76102",
                 "phone": "(817) 392-5790",
-                "email": ""
+                "email": "",
+                "website": "http://fortworthtexas.gov/cap/energy-assistance/"
             }
         },
         "fort worth": {
             "IDServices": {
-                "org": "<a href='http://thestewpot.org/identification-documentation/' target='_blank'>The Stewpot First Presbyterian Church of Dallas</a>",
+                "org": "The Stewpot First Presbyterian Church of Dallas",
                 "address": "1835 Young Street, Dallas, TX 75201",
                 "phone": "(214) 746-2785",
-                "email": ""
+                "email": "",
+                "website": "http://thestewpot.org/identification-documentation/"
             },
             "CompSkills": {
-                "org": "<a href='http://fortworthtexas.gov/library/computer-classes/' target='_blank'>Fort Worth Library</a>",
+                "org": "Fort Worth Library",
                 "address": "500 W. Third St., Fort Worth, TX 76102-7305",
                 "phone": "(817) 392-6621",
-                "email": ""
+                "email": "",
+                "website": "http://fortworthtexas.gov/library/computer-classes/"
             },
             "Literacy": {
-                "org": "<a href='http://www.tarrantliteracycoalition.org/help/class.html' target='_blank'>Tarrant Literacy Coalition</a>",
+                "org": "Tarrant Literacy Coalition",
                 "address": "",
                 "phone": "(817) 870-0082",
-                "email": ""
+                "email": "",
+                "website": "http://www.tarrantliteracycoalition.org/help/class.html"
             },
             "EngClasses": {
-                "org": "<a href='http://www.ndsm.org/adult-esl-classes/' target='_blank'>North Dallas Shared Ministries</a>",
+                "org": "North Dallas Shared Ministries",
                 "address": "2875 Merrell Road, Dallas, TX 75229",
                 "phone": "(214) 358-8700",
-                "email": ""
+                "email": "",
+                "website": "http://www.ndsm.org/adult-esl-classes/"
             },
             "EmpServices": {
-                "org": "<a href='https://www.goodwillfortworth.org/services/job-resource-centers/' target='_blank'>Goodwill</a>",
+                "org": "Goodwill",
                 "address": "",
                 "phone": "",
-                "email": "JRC@goodwillfw.org"
+                "email": "JRC@goodwillfw.org",
+                "website": "https://www.goodwillfortworth.org/services/job-resource-centers/"
             },
             "Utilities": {
-                "org": "<a href='http://fortworthtexas.gov/cap/energy-assistance/' target='_blank'>Community Action Partners</a>",
+                "org": "Community Action Partners",
                 "address": "200 Texas St., Ft. Worth, TX 76102",
                 "phone": "(817) 392-5790",
-                "email": ""
+                "email": "",
+                "website": "http://fortworthtexas.gov/cap/energy-assistance/"
             }
         },
         "houston": {
@@ -1349,37 +1559,43 @@
                 "org": "Main Street Ministries",
                 "address": "5100 Travis Street, Houston, TX 77002",
                 "phone": "(281) 833-3500",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "Houston Public Library",
                 "address": "500 McKinney Street, Houston, TX 77002",
                 "phone": "(832) 393-1313",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
-                "org": "<a href='http://literacyadvance.org/' target='_blank'>Literacy Advance of Houston</a>",
+                "org": "Literacy Advance of Houston",
                 "address": "Locations vary by county",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://literacyadvance.org/"
             },
             "EngClasses": {
-                "org": "<a href='http://literacyadvance.org/' target='_blank'>Literacy Advance of Houston</a>",
+                "org": "Literacy Advance of Houston",
                 "address": "Locations vary by county",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://literacyadvance.org/"
             },
             "EmpServices": {
                 "org": "United Way of Greater Houston",
                 "address": "50 Waugh Drive, Houston, TX 77007",
                 "phone": "(713) 685-2300",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "Northwest Assistance Ministries",
                 "address": "15555 Kuykendahl Road, Houston, TX 77090",
                 "phone": "(281) 885-4555",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "san antonio": {
@@ -1387,37 +1603,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://mysapl.org/' target='_blank'>San Antonio Public Library</a>",
+                "org": "San Antonio Public Library",
                 "address": "Locations vary",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://mysapl.org/"
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "Woodland Baptist Church",
                 "address": "15315 Huebner Road, San Antonio, TX 78248",
                 "phone": "(210) 493-4501",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
-                "org": "<a href='http://mysapl.org/' target='_blank'>San Antonio Public Library</a>",
+                "org": "San Antonio Public Library",
                 "address": "Locations vary",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://mysapl.org/"
             },
             "Utilities": {
                 "org": "Christian Assistance Ministry",
                 "address": "110 McCoullough Ave, San Antonio, TX 78215",
                 "phone": "(210) 223-4099",
-                "email": "Kyle Breon: <a href='mailto:kbreon@cam-sa.org'>kbreon@cam-sa.org</a>"
+                "email": "Kyle Breon: mailto:kbreon@cam-sa.org'>kbreon@cam-sa.org",
+                "website": ""
             }
         },
         "austin": {
@@ -1425,37 +1647,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "Austin Public Library",
                 "address": "800 Guadalupe Street, Austin, TX",
                 "phone": "(512) 974-7400",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
-                "org": "<a href='http://library.austintexas.gov/nip/english-classes' target='_blank'>Austin Public Library</a>",
+                "org": "Austin Public Library",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://library.austintexas.gov/nip/english-classes"
             },
             "EmpServices": {
-                "org": "<a href='https://www.goodwillcentraltexas.org/' target='_blank'>Goodwill Central Texas</a>",
+                "org": "Goodwill Central Texas",
                 "address": "Locations vary",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.goodwillcentraltexas.org/"
             },
             "Utilities": {
                 "org": "All Saints Episcopal Church Financial Assistance",
                 "address": "209 W. 27th Street, Austin, TX 78705",
                 "phone": "(512) 476-3589",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "mcallen": {
@@ -1463,77 +1691,89 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "McAllen Public Library",
                 "address": "4001 N. 23rd St., McAllen, TX 78504",
                 "phone": "(956) 681-3000",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "McAllen Public Library",
                 "address": "4001 N. 23rd St., McAllen, TX 78504",
                 "phone": "(956) 681-3000",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
                 "org": "Rio Grande Texas Employment Resource Center",
                 "address": "5601 N 29th St., McAllen, TX 78504",
                 "phone": "(956) 682-4881",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "Salvation Army",
                 "address": "1600 North 23rd Street, McAllen, TX 78501",
                 "phone": "(956) 682-1468",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         }
     },
     "Alabama": {
         "birmingham": {
             "IDServices": {
-                "org": "<a href='http://oneroofonline.org/programs/projecthomelessconnect/' target='_blank'>One Roof Online</a>",
+                "org": "One Roof Online",
                 "address": "1414 6th Avenue South, Birmingham, AL 35233",
                 "phone": "(205) 254-8833",
-                "email": ""
+                "email": "",
+                "website": "http://oneroofonline.org/programs/projecthomelessconnect/"
             },
             "CompSkills": {
-                "org": "<a href='https://rlccbpl.wordpress.com/' target='_blank'>Regional Library Computer Center</a>",
+                "org": "Regional Library Computer Center",
                 "address": "2100 Park Place, Birmingham, AL 35203",
                 "phone": "(205) 226-3681",
-                "email": "cenrtc@bham.lib.al.us"
+                "email": "cenrtc@bham.lib.al.us",
+                "website": "https://rlccbpl.wordpress.com/"
             },
             "Literacy": {
-                "org": "<a href='https://alliteracycouncil.wordpress.com/learn-to-read/' target='_blank'>AL Literacy Council</a>",
+                "org": "AL Literacy Council",
                 "address": "2301 1st Avenue North, Birmingham, AL 35203",
                 "phone": "(205) 326-1925",
-                "email": ""
+                "email": "",
+                "website": "https://alliteracycouncil.wordpress.com/learn-to-read/"
             },
             "EngClasses": {
-                "org": "<a href='https://alliteracycouncil.wordpress.com/learn-to-speak-english/' target='_blank'>AL Literacy Council</a>",
+                "org": "AL Literacy Council",
                 "address": "Briarwood Presbyterian Church 2200 Briarwood Way, Birmingham, AL 35243",
                 "phone": "(205) 776-5343",
-                "email": ""
+                "email": "",
+                "website": "https://alliteracycouncil.wordpress.com/learn-to-speak-english/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.dannonproject.org/skill_training.php' target='_blank'>Dannon Project</a>",
+                "org": "Dannon Project",
                 "address": "",
                 "phone": "(205) 202-4072",
-                "email": "monica@dannonproject.org"
+                "email": "monica@dannonproject.org",
+                "website": "http://www.dannonproject.org/skill_training.php"
             },
             "Utilities": {
-                "org": "<a href='http://www.servingyou.org/need-help/' target='_blank'>Serving You Ministries</a>",
+                "org": "Serving You Ministries",
                 "address": "6523 1st Avenue North, Birmingham, AL 35206",
                 "phone": "(205) 777-3653",
-                "email": ""
+                "email": "",
+                "website": "http://www.servingyou.org/need-help/"
             }
         },
         "huntsville": {
@@ -1541,37 +1781,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "Downtown Huntsville Library",
                 "address": "915 Monroe St., Huntsville, AL 35801",
                 "phone": "(256) 532-5940",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "Calhoun Community College",
                 "address": "102 Wynn Drive NW, Huntsville, AL 35805",
                 "phone": "(256) 890-4700",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
                 "org": "Huntsville Career Center",
                 "address": "2535 Sparkman Drive NW, Huntsville, AL 35810",
                 "phone": "(256) 851-0537",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "Society of St. Vincent De Paul Huntsville Alabama",
                 "address": "625 Airport Rd., Huntsville, AL 35802",
                 "phone": "(256) 881-9663",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "mobile": {
@@ -1579,19 +1825,22 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "Ben May Main Library",
                 "address": "701 Government Street, Mobile, AL 36602",
                 "phone": "(251) 208-7073",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "Christ UMC",
@@ -1603,13 +1852,15 @@
                 "org": "Alabama Career Center",
                 "address": "515 Springhill Plaza Court, Mobile, AL 36608",
                 "phone": "(251) 461-4490",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "Bana Mobile Resource Center",
                 "address": "1111 East I65 Service Road 8, Mobile, AL 36606",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "montgomery": {
@@ -1617,37 +1868,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "Family Guidance Center",
                 "address": "2358 Fairlane Drive, Montgomery, AL 36116",
                 "phone": "(334) 270-4100",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "Frazer UMC",
                 "address": "6000 Atlanta Hwy., Montgomery, AL",
                 "phone": "(334) 272-8622",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
                 "org": "Heritage Training & Career Center",
                 "address": "2249 Cong W L Dickinson Dr, Montgomery, AL",
                 "phone": "(334) 260-6161",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "St. Jude Social Services",
                 "address": "2048 West Fairview Avenue, Montgomery, AL 36108",
                 "phone": "(334) 265-6791",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "tuscaloosa": {
@@ -1655,37 +1912,43 @@
                 "org": "Temporary Emergency Assistance",
                 "address": "1705 15th Street, Tuscaloosa, AL 35401",
                 "phone": "(205) 758-5535",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "Shelton State Community College",
                 "address": "9500 Old Greensboro Rd, Tuscaloosa, AL 35405",
                 "phone": "(205) 391-2211",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "First Baptist Church Tuscaloosa",
                 "address": "721 Greensboro Avenue, Tuscaloosa, AL 35401",
                 "phone": "(205) 345-7554",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
                 "org": "Tuscaloosa Area Career Center",
                 "address": "202 Skyland Drive, Tuscaloosa, AL 35405",
                 "phone": "(205) 758-7591",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "Temporary Emergency Assistance",
                 "address": "1705 15th Street, Tuscaloosa, AL 35401",
                 "phone": "(205) 758-5535",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "dothan": {
@@ -1693,37 +1956,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "Wallace Community College",
                 "address": "1141 Wallace Drive, Dothan, AL 36303",
                 "phone": "(334) 983-3521",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
                 "org": "Express Employment Professionals",
                 "address": "3702 Ross Clark Circle, Suite 3, Dothan, AL 36303",
                 "phone": "(334) 671-1315",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "Salvation Army Dothan",
                 "address": "1007 South Bell Street, Dothan, AL 36302",
                 "phone": "(334) 792-1911",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "decatur": {
@@ -1731,37 +2000,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "Decatur Public Library",
                 "address": "130 N. Franklin St, Decatur, AL",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
                 "org": "Community Action Partnership of North Alabama",
                 "address": "1909 Central Parkway SW, Decatur, AL 35601",
                 "phone": "(256) 355-7843",
-                "email": ""
+                "email": "",
+                "website": ""
             }
         },
         "auburn": {
@@ -1769,37 +2044,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "Utilities": {
-                "org": "<a href='http://www.achr.com/csbg.htm' target='_blank'>Alabama Council on Human Relations, Inc.</a>",
+                "org": "Alabama Council on Human Relations, Inc.",
                 "address": "950 Shelton Mill Road, Auburn, AL 36830",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.achr.com/csbg.htm"
             }
         },
         "florence": {
@@ -1807,37 +2088,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='https://www.flpl.org/services/public-computers.php' target='_blank'>Florence Lauderdale Public Library</a>",
+                "org": "Florence Lauderdale Public Library",
                 "address": "350 N. Wood Avenue, Florence, AL 35630",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.flpl.org/services/public-computers.php"
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EmpServices": {
-                "org": "<a href='http://salvationarmysouth.org/ways-we-help/social-services/' target='_blank'>The Salvation Army</a>",
+                "org": "The Salvation Army",
                 "address": "1601 Huntsville Road, Florence, AL 35630",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://salvationarmysouth.org/ways-we-help/social-services/"
             },
             "Utilities": {
-                "org": "<a href='http://www.caanw.org/housing' target='_blank'>Community Action Agency of Northwest Alabama</a>",
+                "org": "Community Action Agency of Northwest Alabama",
                 "address": "745 Thompson Street, Florence, AL 35630",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.caanw.org/housing"
             }
         }
     },
@@ -1847,37 +2134,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://nolalibrary.org/event/1441/one-on-one-basic-computer-training-by-topic' target='_blank'>New Orleans Public Library</a>",
+                "org": "New Orleans Public Library",
                 "address": "6301 Canal Boulevard, New Orleans, LA 70124",
                 "phone": "(504) 596-2638",
-                "email": ""
+                "email": "",
+                "website": "http://nolalibrary.org/event/1441/one-on-one-basic-computer-training-by-topic"
             },
             "Literacy": {
-                "org": "<a href='https://www.literacygno.org/' target='_blank'>Literacy Alliance of Greater New Orleans</a>",
+                "org": "Literacy Alliance of Greater New Orleans",
                 "address": "6363 St. Charles Avenue, New Orleans, LA 70118",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://www.literacygno.org/"
             },
             "EngClasses": {
-                "org": "<a href='http://www.ccano.org/english-second-language-classes/' target='_blank'>Church of Christ</a>",
+                "org": "Church of Christ",
                 "address": "4540 Carrollton Ave, New Orleans, LA 70119",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.ccano.org/english-second-language-classes/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.laworks.net/SLDetails.asp?ID=3' target='_blank'>Job 1 and Orleans Youth Career Center</a>",
+                "org": "Job 1 and Orleans Youth Career Center",
                 "address": "3400 Tulane Ave, 2nd Floor, New Orleans, LA 70119",
                 "phone": "(504) 658-4500",
-                "email": ""
+                "email": "",
+                "website": "http://www.laworks.net/SLDetails.asp?ID=3"
             },
             "Utilities": {
-                "org": "<a href='http://www.entergy-neworleans.com/your_home/help.aspx' target='_blank'>Low Income Home Energy Assistance Program</a>",
+                "org": "Low Income Home Energy Assistance Program",
                 "address": "",
                 "phone": "(888) 454-2001",
-                "email": ""
+                "email": "",
+                "website": "http://www.entergy-neworleans.com/your_home/help.aspx"
             }
         },
         "baton rouge": {
@@ -1885,37 +2178,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='https://ebrpl.wordpress.com/2010/10/24/computer-classes-galore/' target='_blank'>East Baton Rouge Parish Library</a>",
+                "org": "East Baton Rouge Parish Library",
                 "address": "7711 Goodwood Blvd, Baton Rouge, LA 70806",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://ebrpl.wordpress.com/2010/10/24/computer-classes-galore/"
             },
             "Literacy": {
-                "org": "<a href='http://www.adultliteracyadvocates.org' target='_blank'>Adult Literacy Advocates</a>",
+                "org": "Adult Literacy Advocates",
                 "address": "7732 Goodwood Blvd, Baton Rouge, LA 70806",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.adultliteracyadvocates.org"
             },
             "EngClasses": {
-                "org": "<a href='http://jeffersonbaptist.org/connect/english-classes/?view=mobile' target='_blank'>Jefferson Baptist Church</a>",
+                "org": "Jefferson Baptist Church",
                 "address": "9135 Jefferson Highway, Baton Rouge, LA 70809",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://jeffersonbaptist.org/connect/english-classes/?view=mobile"
             },
             "EmpServices": {
-                "org": "<a href='http://brgov.com/dept/planning_old/econdev/empservices.htm' target='_blank'>Baton Rouge Vocational Services</a>",
+                "org": "Baton Rouge Vocational Services",
                 "address": "1984 Wooddale Blvd, Baton Rouge, LA 70806",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://brgov.com/dept/planning_old/econdev/empservices.htm"
             },
             "Utilities": {
-                "org": "<a href='http://www.lhc.la.gov/page/energy-assistance' target='_blank'>Louisiana Housing Corporation</a>",
+                "org": "Louisiana Housing Corporation",
                 "address": "2415 Quail Drive, Baton Rouge, LA 70808",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.lhc.la.gov/page/energy-assistance"
             }
         },
         "shreveport": {
@@ -1923,37 +2222,43 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.shreve-lib.org/Index.aspx?NID=96' target='_blank'>Shreve Memorial Library</a>",
+                "org": "Shreve Memorial Library",
                 "address": "885 Bert Kouns Ind. Loop, Shreveport, LA 71118",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.shreve-lib.org/Index.aspx?NID=96"
             },
             "Literacy": {
-                "org": "<a href='http://www.shreve-lib.org/Index.aspx?NID=96' target='_blank'>Shreve Memorial Library</a>",
+                "org": "Shreve Memorial Library",
                 "address": "885 Bert Kouns Ind. Loop, Shreveport, LA 71118",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.shreve-lib.org/Index.aspx?NID=96"
             },
             "EngClasses": {
-                "org": "<a href='http://www.shreve-lib.org/Index.aspx?NID=96' target='_blank'>Shreve Memorial Library</a>",
+                "org": "Shreve Memorial Library",
                 "address": "885 Bert Kouns Ind. Loop, Shreveport, LA 71118",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.shreve-lib.org/Index.aspx?NID=96"
             },
             "EmpServices": {
-                "org": "<a href='http://www.voanorthla.org/resources/' target='_blank'>Volunteers of America North Louisiana</a>",
+                "org": "Volunteers of America North Louisiana",
                 "address": "360 Jordan Street, Shreveport, LA 71101",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.voanorthla.org/resources/"
             },
             "Utilities": {
-                "org": "<a href='http://salvationarmyalm.org/shreveport/social-services/' target='_blank'>The Salvation Army</a>",
+                "org": "The Salvation Army",
                 "address": "200 E. Stoner Ave, Shreveport, LA 71101",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://salvationarmyalm.org/shreveport/social-services/"
             }
         },
         "lafayette": {
@@ -1961,115 +2266,133 @@
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "CompSkills": {
-                "org": "<a href='http://www.smilecaa.org/programs/' target='_blank'>Smile Community Action Partnership</a>",
+                "org": "Smile Community Action Partnership",
                 "address": "501 St. John Street, LaFayette, LA 70501",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.smilecaa.org/programs/"
             },
             "Literacy": {
                 "org": "",
                 "address": "",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": ""
             },
             "EngClasses": {
-                "org": "<a href='https://internationalaffairs.louisiana.edu/intensive-english-program' target='_blank'>English USA</a>",
+                "org": "English USA",
                 "address": "413 Brook Avenue, Lafayette, LA 70506",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "https://internationalaffairs.louisiana.edu/intensive-english-program"
             },
             "EmpServices": {
-                "org": "<a href='http://www.smilecaa.org/programs/' target='_blank'>Smile Community Action Partnership</a>",
+                "org": "Smile Community Action Partnership",
                 "address": "501 St. John Street, LaFayette, LA 70501",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.smilecaa.org/programs/"
             },
             "Utilities": {
-                "org": "<a href='http://www.smilecaa.org/programs/' target='_blank'>Smile Community Action Partnership</a>",
+                "org": "Smile Community Action Partnership",
                 "address": "501 St. John Street, LaFayette, LA 70501",
                 "phone": "",
-                "email": ""
+                "email": "",
+                "website": "http://www.smilecaa.org/programs/"
             }
         }
     },
     "Oklahoma": {
         "oklahoma city": {
             "IDServices": {
-                "org": "<a href='https://www.stpaulsokc.org/' target='_blank'>Guild of St. George</a>",
+                "org": "Guild of St. George",
                 "address": "127 NW 7th Street, Oklahoma City, OK 73102",
                 "phone": "(405) 235-3436",
-                "email": ""
+                "email": "",
+                "website": "https://www.stpaulsokc.org/"
             },
             "CompSkills": {
-                "org": "<a href='http://nacok.org/free-computer-learning-at-ocu/' target='_blank'>Neighborhood Alliance of Central Oklahoma</a>",
+                "org": "Neighborhood Alliance of Central Oklahoma",
                 "address": "1236 N.W. 36th Street, Oklahoma City, OK 73118",
                 "phone": "(405) 528-6322",
-                "email": ""
+                "email": "",
+                "website": "http://nacok.org/free-computer-learning-at-ocu/"
             },
             "Literacy": {
-                "org": "<a href='http://www.communityliteracy.com/programs/' target='_blank'>Community Literacy Centers</a>",
+                "org": "Community Literacy Centers",
                 "address": "5131 N. Classen Circle, Suite 204, Oklahoma City, OK 73118",
                 "phone": "(405) 524-7323",
-                "email": ""
+                "email": "",
+                "website": "http://www.communityliteracy.com/programs/"
             },
             "EngClasses": {
-                "org": "<a href='https://www.rose.edu/content/academics/programs-certifications/esl-learning/' target='_blank'>Rose State College</a>",
+                "org": "Rose State College",
                 "address": "6420 S.E. 15th Street, Midwest City, OK 73110",
                 "phone": "(405) 733-7673",
-                "email": ""
+                "email": "",
+                "website": "https://www.rose.edu/content/academics/programs-certifications/esl-learning/"
             },
             "EmpServices": {
-                "org": "<a href='http://workreadyoklahoma.com/community/what-we-do/' target='_blank'>Work Ready Oklahoma</a>",
+                "org": "Work Ready Oklahoma",
                 "address": "3 E. Main Street, Oklahoma City, OK 73104",
                 "phone": "(405) 418-3923",
-                "email": ""
+                "email": "",
+                "website": "http://workreadyoklahoma.com/community/what-we-do/"
             },
             "Utilities": {
-                "org": "<a href='http://salvationarmyokcac.org/social-services/fans/' target='_blank'>Salvation Army in Oklahoma City</a>",
+                "org": "Salvation Army in Oklahoma City",
                 "address": "1001 N. Pennsylvania Ave., Oklahoma City, OK 73107",
                 "phone": "(405) 246-1060",
-                "email": ""
+                "email": "",
+                "website": "http://salvationarmyokcac.org/social-services/fans/"
             }
         },
         "tulsa": {
             "IDServices": {
-                "org": "<a href='http://www.neighborforneighbor.org/NFNFamilyAssistance.php' target='_blank'>Neighbor for Neighbor Family Assistance Program</a>",
+                "org": "Neighbor for Neighbor Family Assistance Program",
                 "address": "505 East 36th St North, Tulsa, OK 74106-1812",
                 "phone": "(918) 425-5578",
-                "email": ""
+                "email": "",
+                "website": "http://www.neighborforneighbor.org/NFNFamilyAssistance.php"
             },
             "CompSkills": {
-                "org": "<a href='http://www.goodwilltulsa.org/gwt/Class_Descriptions.asp' target='_blank'>Goodwill TulsaWORKS Career Academy</a>",
+                "org": "Goodwill TulsaWORKS Career Academy",
                 "address": "2800 Southwest Blvd, Tulsa, OK 74017",
                 "phone": "(918) 584-7291",
-                "email": ""
+                "email": "",
+                "website": "http://www.goodwilltulsa.org/gwt/Class_Descriptions.asp"
             },
             "Literacy": {
-                "org": "<a href='http://www.tulsalibrary.org/ruth-g-hardman-adult-literacy-service-0' target='_blank'>Tulsa City-County Library - Ruth G. Hardman Adult Literacy Service</a>",
+                "org": "Tulsa City-County Library - Ruth G. Hardman Adult Literacy Service",
                 "address": "2901 S. Harvard, Tulsa, OK",
                 "phone": "(918) 549-7400",
-                "email": ""
+                "email": "",
+                "website": "http://www.tulsalibrary.org/ruth-g-hardman-adult-literacy-service-0"
             },
             "EngClasses": {
-                "org": "<a href='http://captulsa.org/families/family-advancement/esl/' target='_blank'>CAP Tulsa</a>",
+                "org": "CAP Tulsa",
                 "address": "11610 E. 25th St.  Suite 300, Tulsa, OK",
                 "phone": "(918) 382-3366",
-                "email": ""
+                "email": "",
+                "website": "http://captulsa.org/families/family-advancement/esl/"
             },
             "EmpServices": {
-                "org": "<a href='http://www.goodwilltulsa.org/gwt/Jobs_Connection.asp' target='_blank'>Goodwill Job Connection</a>",
+                "org": "Goodwill Job Connection",
                 "address": "2800 SW Boulevard, South Annex, Tulsa, Oklahoma",
                 "phone": "(918) 599-0067",
-                "email": ""
+                "email": "",
+                "website": "http://www.goodwilltulsa.org/gwt/Jobs_Connection.asp"
             },
             "Utilities": {
-                "org": "<a href='https://www.firstchurchtulsa.org/resources/ministry-match/helping-hand-ministries/' target='_blank'>Helping Hands Ministry</a>",
+                "org": "Helping Hands Ministry",
                 "address": "709 South Boston Ave., Tulsa, Oklahoma 74119",
                 "phone": "(918) 584-4701",
-                "email": ""
+                "email": "",
+                "website": "https://www.firstchurchtulsa.org/resources/ministry-match/helping-hand-ministries/"
             }
         }
     }
