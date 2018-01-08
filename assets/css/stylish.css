@@ -19,9 +19,10 @@ a {
   color: #a8000e;
   text-decoration: none;
 }
+
 a:hover,
 a:focus,
-a:active{
+a:active {
   color: #4C0006;
 }
 
@@ -60,7 +61,7 @@ h1 {
   display: inline-block;
   font-size: 3em;
   color: #a8000e;
-  margin: 10px 0;
+  margin: 10px 0px 0px 0px;
   line-height: 52px;
   letter-spacing: -0.7px;
   font-weight: 500;
@@ -68,10 +69,12 @@ h1 {
 }
 
 h2 {
-  font-size: 1.875em;
-  margin: 20px 0;
+  font-size: 1.5em;
   line-height: 35px;
   letter-spacing: -0.7px;
+  font-weight: 500;
+  margin: 6px 0px 0px 0px;
+  color: #4e4e4e;
 }
 
 p {
@@ -83,7 +86,7 @@ p {
   background-color: rgba(214, 206, 206, 0.5);
   padding-right: 25px;
   padding-left: 25px;
-  max-width: 780px;
+  max-width: 740px;
   max-height: calc(100% - 35px);
   height: 100%;
   border-radius: 5px;
@@ -98,7 +101,7 @@ p {
 
 .icon:hover,
 .icon:focus,
- {
+{
   color: #a8000e;
   text-decoration: none;
 }
