@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(160, 160, 160);
+  background-color: rgb(204, 204, 204);
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
 }
@@ -23,7 +23,13 @@ a {
 a:hover,
 a:focus,
 a:active {
-  color: #4C0006;
+  color: rgb(109, 2, 12);
+}
+
+.icon:hover,
+.icon:focus,
+.icon:active {
+  color: #a8000e;
 }
 
 .border {
@@ -43,7 +49,7 @@ a:active {
   margin-top: 40px;
   height: calc(100% - 110px);
   position: relative;
-  background-color: rgb(160, 160, 160);
+  background-color: rgb(204, 204, 204);
   width: 100%;
 }
 
@@ -83,7 +89,7 @@ p {
 }
 
 .glassBox {
-  background-color: rgba(214, 206, 206, 0.5);
+  background-color: rgb(224, 224, 224);
   padding-right: 25px;
   padding-left: 25px;
   max-width: 740px;
@@ -101,7 +107,13 @@ p {
 
 .icon:hover,
 .icon:focus,
-{
+  {
   color: #a8000e;
   text-decoration: none;
+}
+
+@media(max-width: 400px) {
+  .fa-5x {
+    font-size: 4em !important;
+  }
 }
