@@ -34,35 +34,11 @@ a:active {
   color: #a8000e;
 }
 
-.border {
-  height: 1px;
-  width: 100%;
-  background-color: #333;
-  margin-bottom: 3px;
-}
-
-#header {
-  text-align: right;
-  height: 60px;
-  width: auto;
-}
-
 #main {
-  /* margin-top: 40px; */
   height: calc(100% - 110px);
   position: relative;
   background-color: inherit;
   width: 100%;
-}
-
-#wrapper {
-  margin: 0 auto -100px;
-  height: 100%;
-}
-
-#contacts {
-  text-align: left;
-  display: inline-block;
 }
 
 h1 {
@@ -93,6 +69,10 @@ h3 {
   margin: 0px;
   font-weight: 100;
   color: #4e4e4e;
+}
+
+ul {
+  list-style-type: circle;
 }
 
 li {
