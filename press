@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<title> Sean Hofer - Press</title>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="assets\images\favicon.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" type="text/css" href="assets\css\stylish.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900|Bitter:400,700" rel="stylesheet"
+    type="text/css">
+</head>
+<div style="max-width: 790px; margin: auto;">
+  <a href="/" class="button">Home</a>
+  <a href="/portfolio" class="button">Portfolio</a>
+  <a href="/press" class="button active">Press</a>
+</div>
+
+<body class="body">
+  <div id="main">
+    <div id="about">
+      <div class="glassBox">
+        <div style="margin: auto">
+          <h1>Press</h1>
+          <h2>News stories about some of my work</h2>
+          <div>
+            <ul>
+              <li><a href="https://mashable.com/2017/07/14/fed-40-meal-app-low-income-families/" target="_blank">Fed
+                  40 is the 'food pantry of the future' for low-income families | Mashable</a></li>
+              <li><a href="https://www.orlandosentinel.com/get-healthy-orlando/os-new-mobile-app-for-hunger-20161227-story.html"
+                  target="_blank">Nonprofit seeks to end hunger with mobile app | Orlando Sentinel</a></li>
+              <li><a href="https://www.romper.com/p/what-this-app-is-doing-to-help-hungry-moms-their-kids-will-melt-your-heart-74041"
+                  target="_blank">What This App Is Doing To Help Hungry Moms & Their Kids Will Melt Your Heart | Romper</a></li>
+            </ul>
+          </div>
+          <div class="bar"></div>
+          <div style="display: flex; flex-direction: row; justify-content:space-around; padding-bottom: 46px; padding-top: 18px">
+            <a href="mailto:me@seanhofer.com" class="icon" name="Email">
+              <i class="fa fa-envelope-o fa-5x"></i>
+            </a>
+            <a href="https://github.com/hofers" target="_blank" class="icon" name="GitHub">
+              <i class="fa fa-github fa-5x"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/hofers/" target="_blank" class="icon" name="LinkedIn">
+              <i class="fa fa-linkedin fa-5x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

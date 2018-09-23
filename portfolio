@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<title> Sean Hofer - Portfolio</title>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="assets\images\favicon.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" type="text/css" href="assets\css\stylish.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900|Bitter:400,700" rel="stylesheet"
+    type="text/css">
+</head>
+<div style="max-width: 1050px; margin: auto;">
+  <a href="/" class="button">Home</a>
+  <a href="/portfolio" class="button active">Portfolio</a>
+  <a href="/press" class="button">Press</a>
+</div>
+
+<body class="body">
+  <div id="main">
+    <div id="about">
+      <div class="glassBox" style="max-width: 1000px;">
+        <div style="margin: auto">
+          <h1>Sean's Portfolio</h1>
+          <h2>Check out some examples of my past work</h2>
+          <div class="pf-item" id="fc-web" style="margin-top: 20px;">
+            <div class="pf-text">
+              <h2 class="pf-item-title">Full Cart - Web</h2>
+              <h3>Feeding Children Everywhere | September 2018</h3>
+              <p><a href="https://fullcart.org" target="_blank">Full Cart</a> is grocery kit delivery
+                service that spawned from <a href="#fed40-web">Fed 40</a>. It consists of a mobile app
+                built in Flutter as well as a web application which is pure HTML/CSS & jQuery. All hosting, routing and
+                back-end functionality are handled by various services in AWS (S3, CloudFront, Route 53, EC2, RDS,
+                Lambda, API Gateway, etc.). All API functionality is written in Node.js.
+              </p>
+            </div>
+            <div class="pf-img">
+              <a href="https://fullcart.org/" target="_blank"><img src="/assets/images/fullcart.png" alt="Full Cart Web"></a>
+            </div>
+          </div>
+          <div class="pf-item" id="fc-app" style="margin-top: 20px;">
+            <div class="pf-text">
+              <h2 class="pf-item-title">Full Cart - App</h2>
+              <h3>Feeding Children Everywhere | September 2018</h3>
+              <p>The Full Cart app is available on <a href="https://play.google.com/store/apps/details?id=com.fed40"
+                  target="_blank">Android</a> and <a href="https://itunes.apple.com/us/app/fed40/id1166795985" target="_blank">iOS</a>.
+                It is made in Flutter, Google's new Dart-based mobile app SDK. I rewrote the app from its original
+                incarnation in React Native back when the program was Fed 40. The back-end is shared across web and
+                mobile.
+              </p>
+            </div>
+            <div class="pf-img">
+              <a href="https://fullcart.org/" target="_blank"><img src="/assets/images/fc-app.png" alt="Full Cart App Screenshots"></a>
+            </div>
+          </div>
+          <div class="pf-item" id="pdf">
+            <div class="pf-text">
+              <h2 class="pf-item-title">Meal Bag Label Generator</h2>
+              <h3>Feeding Children Everywhere | August 2018</h3>
+              <p>An August 2018 change in our policy regarding product tracking resulted in a need to individually
+                label each meal bag packaged at a hunger project with a sticker denoting the associated project. I was
+                tasked with creating a simple PDF generation interface the operations team could use to create and
+                print the sticker sheets themselves. I accomplished this using <a href="http://pdfkit.org/">PDFKit</a>,
+                JavaScript and very minimal HTML.
+              </p>
+            </div>
+            <div class="pf-img">
+              <a href="https://feedingchildreneverywhere.com/pdf-maker" target="_blank"><img src="assets/images/pdf.png"
+                  alt="PDF Generator"></a>
+            </div>
+          </div>
+          <div class="pf-item" id="rlj">
+            <div class="pf-text">
+              <h2 class="pf-item-title">Red Lentil Jambalaya Landing&nbsp;Page</h2>
+              <h3>Feeding Children Everywhere | May 2017</h3>
+              <p>One of my earliest large projects at FCE was building the landing page for our newly rebranded meal.
+                It's a simple static landing page, hosted on S3 and made with plain old HTML/CSS, with a bit of JS to
+                handle the contact form as well as an animation library.
+              </p>
+            </div>
+            <div class="pf-img">
+              <a href="https://redlentiljambalaya.com/" target="_blank"><img src="/assets/images/rlj.png" alt="RLJ Landing Page"></a>
+            </div>
+          </div>
+          <div class="pf-item" id="fed40-web">
+            <div class="pf-text">
+              <h2 class="pf-item-title">Fed 40 - Web</h2>
+              <h3>Feeding Children Everywhere | January 2017</h3>
+              <p>Fed 40 is what Full Cart was called for the first ~2 years of its existence before being
+                relaunched in September 2018. The website originated as a short and simple form one could fill out to
+                request a box of our meals, with very plain design and bare development. I maintained it and managed it
+                through two complete visual overhauls, during which I implemented new features and improved user
+                experience. (<i>Note: This site is deprecated, so there are
+                  no longer any live instances of it.</i>)
+              </p>
+            </div>
+            <div class="pf-img">
+              <a href="/assets/images/fed40.png"><img src="/assets/images/fed40.png" alt="Fed 40 Web"></a>
+            </div>
+          </div>
+          <div class="pf-item" id="fed40-app">
+            <div class="pf-text">
+              <h2 class="pf-item-title">Fed 40 - App</h2>
+              <h3>Feeding Children Everywhere | January 2017</h3>
+              <p>The original Fed 40 mobile app was programmed in React Native, which I maintained until July 2018 when
+                I rewrote the app from scratch in Flutter. It was originally just a form, with no navigation and little
+                exposition. I expanded the app to include more functionality, like donations and links to blog posts,
+                and also handled the implementation of new designs in two complete visual overhauls of the
+                service. (<i>Note: This app is deprecated, so there are no longer any live links to it.</i>)
+              </p>
+            </div>
+            <div class="pf-img">
+              <a href="/assets/images/fed40-app.png"><img src="/assets/images/fed40-app.png" alt="Fed 40 App Screenshots"></a>
+            </div>
+          </div>
+          <div class="bar"></div>
+          <div style="display: flex; flex-direction: row; justify-content:space-around; padding-bottom: 46px; padding-top: 18px">
+            <a href="mailto:me@seanhofer.com" class="icon" name="Email">
+              <i class="fa fa-envelope-o fa-5x"></i>
+            </a>
+            <a href="https://github.com/hofers" target="_blank" class="icon" name="GitHub">
+              <i class="fa fa-github fa-5x"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/hofers/" target="_blank" class="icon" name="LinkedIn">
+              <i class="fa fa-linkedin fa-5x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
