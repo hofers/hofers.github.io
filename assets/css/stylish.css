@@ -92,7 +92,7 @@ p {
   height: 100%;
   border-radius: 5px;
   z-index: 2;
-  margin: auto;
+  margin: auto auto 80px;
 }
 
 .icon {
@@ -194,6 +194,10 @@ p {
 @media(max-width: 550px) {
   .fa-5x {
     font-size: 4em !important;
+  }
+
+  .glassBox {
+    margin: auto;
   }
 }
 
