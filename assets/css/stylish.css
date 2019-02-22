@@ -101,8 +101,7 @@ p {
 }
 
 .icon:hover,
-.icon:focus,
-  {
+.icon:focus {
   color: #a8000e;
   text-decoration: none;
 }
