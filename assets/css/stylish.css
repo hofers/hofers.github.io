@@ -1,5 +1,10 @@
 body {
-  background-color: rgb(204, 204, 204);
+  background: linear-gradient(135deg, #27faf8, #2767fa, #7227fa, #e227fa, #fa2799, #fa2727, #f6431f, #fab027, #e6fa27, #48fa27, #27faf8);
+  background-size: 2000% 2000%;
+
+  -webkit-animation: Gradiance 90s ease infinite;
+  -moz-animation: Gradiance 90s ease infinite;
+  animation: Gradiance 90s ease infinite;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
   font-display: auto;
@@ -84,7 +89,7 @@ p {
 }
 
 .glassBox {
-  background-color: rgb(224, 224, 224);
+  background-color: rgb(246, 246, 246);
   box-shadow: 1px 2px 5px rgb(90, 90, 90);
   padding: 0px 25px;
   max-width: 740px;
@@ -150,7 +155,7 @@ p {
   box-shadow: 1px 2px 5px rgb(90, 90, 90);
   border-radius: 8px 8px 0px 0px;
   font-family: inherit;
-  background-color: rgb(224, 224, 224);
+  background-color: rgb(246, 246, 246);
   font-size: 18px;
   font-weight: 100;
   color: inherit;
@@ -203,5 +208,47 @@ p {
 @media(max-width: 450px) {
   .fa-5x {
     font-size: 3em !important;
+  }
+}
+
+@-webkit-keyframes Gradiance {
+  0% {
+    background-position: 0% 0%
+  }
+
+  50% {
+    background-position: 50% 50%
+  }
+
+  100% {
+    background-position: 100% 100%
+  }
+}
+
+@-moz-keyframes Gradiance {
+  0% {
+    background-position: 0% 0%
+  }
+
+  50% {
+    background-position: 50% 50%
+  }
+
+  100% {
+    background-position: 100% 100%
+  }
+}
+
+@keyframes Gradiance {
+  0% {
+    background-position: 0% 0%
+  }
+
+  50% {
+    background-position: 50% 50%
+  }
+
+  100% {
+    background-position: 100% 100%
   }
 }
