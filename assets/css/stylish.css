@@ -1,7 +1,6 @@
 body {
-  background: linear-gradient(135deg, #27faf8, #2767fa, #7227fa, #e227fa, #fa2799, #fa2727, #f6431f, #fab027, #e6fa27, #48fa27, #27faf8);
+  background: linear-gradient(45deg, #27faf8, #2767fa, #7227fa, #e227fa, #fa2799, #fa2727, #f6431f, #fab027, #e6fa27, #48fa27, #27faf8);
   background-size: 2000% 2000%;
-
   -webkit-animation: Gradiance 90s ease infinite;
   -moz-animation: Gradiance 90s ease infinite;
   animation: Gradiance 90s ease infinite;
@@ -216,12 +215,20 @@ p {
     background-position: 0% 0%
   }
 
+  25% {
+    background-position: 100% 0%
+  }
+
   50% {
-    background-position: 50% 50%
+    background-position: 100% 100%
+  }
+
+  75% {
+    background-position: 0% 100%
   }
 
   100% {
-    background-position: 100% 100%
+    background-position: 0% 0%
   }
 }
 
@@ -230,12 +237,20 @@ p {
     background-position: 0% 0%
   }
 
+  25% {
+    background-position: 100% 0%
+  }
+
   50% {
-    background-position: 50% 50%
+    background-position: 100% 100%
+  }
+
+  75% {
+    background-position: 0% 100%
   }
 
   100% {
-    background-position: 100% 100%
+    background-position: 0% 0%
   }
 }
 
@@ -244,11 +259,19 @@ p {
     background-position: 0% 0%
   }
 
+  25% {
+    background-position: 100% 0%
+  }
+
   50% {
-    background-position: 50% 50%
+    background-position: 100% 100%
+  }
+
+  75% {
+    background-position: 0% 100%
   }
 
   100% {
-    background-position: 100% 100%
+    background-position: 0% 0%
   }
 }
