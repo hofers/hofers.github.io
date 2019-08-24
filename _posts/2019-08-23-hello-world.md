@@ -1,7 +1,6 @@
 ---
 title: "Hello World!"
 layout: post
-date: 08/23/19
 ---
 # Hello World!
 
