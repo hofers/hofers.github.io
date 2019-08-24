@@ -1,5 +1,5 @@
 ---
-permalink: /blog/
+permalink: /blog
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +43,7 @@ permalink: /blog/
             {% for post in site.posts %}
               <li>
                 <a href="{{ post.url }}"> {{ post.title }} </a>
-                | {{ post.dateField }}
+                | {{ post.subtitle }} | {{ post.dateField }}
               </li>
             {% endfor %}
             </ol>
