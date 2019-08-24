@@ -42,7 +42,7 @@
             {% for post in site.posts %}
               <h3>
                 <a href="{{ post.url }}">
-                  {{ post.name }} - {{ post.position }}
+                  {{ post.title }} - {{ post.date }}
                 </a>
               </h3>
               <p>{{ post.content | markdownify }}</p>
