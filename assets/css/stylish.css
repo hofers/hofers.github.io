@@ -180,7 +180,8 @@ p {
 }
 
 .blog-img {
-  max-width: 90%;
+  width: 100%;
+  padding: 20px 0px 10px;
 }
 
 @media(max-width: 740px) {
