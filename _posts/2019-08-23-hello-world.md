@@ -1,6 +1,7 @@
 ---
 title: "Hello World!"
 layout: post
+dateField: "8/23/19"
 ---
 # Hello World!
 

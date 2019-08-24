@@ -1,15 +1,13 @@
----
----
 <!DOCTYPE html>
 <html lang="en">
 
 
-<title> Sean Hofer - Blog</title>
+<title> Sean Hofer | Blog | {{ page.title }} </title>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Personal site of Sean Hofer, Software/Web Developer in Orlando, Florida">
+  <meta name="description" content="Personal site of Sean Hofer, Front-End Web Developer in Cupertino, CA">
   <link rel="shortcut icon" href="assets\images\favicon.ico" type="image/x-icon" />
 
   <link rel="stylesheet" type="text/css" href="assets\css\stylish.css">
@@ -24,6 +22,7 @@
 
 </head>
 
+
 <body class="body">
   <div style="max-width: 790px; margin: auto;">
     <a href="/" class="button">About</a>
@@ -31,21 +30,13 @@
     <a href="/press" class="button">Press</a>
     <a href="/blog" class="button active">Blog</a>
   </div>
-
   <div id="main">
     <div id="about">
       <div class="glassBox">
         <div style="margin: auto">
-          <h1>Blog</h1>
-          <h2>A blog for my Intro to Game Studies class</h2>
-          <ol>
-            {% for post in site.posts %}
-              <li>
-                <a href="{{ post.url }}"> {{ post.title }} </a>
-                | {{ post.dateField }}
-              </li>
-            {% endfor %}
-            </ol>
+          <div>
+            {{ content }}
+          </div>
           <div class="bar"></div>
           <div class="footer">
             <a href="mailto:me@seanhofer.com" class="icon" aria-label="Email" target="_blank" rel="noreferrer">
