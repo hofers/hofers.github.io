@@ -179,6 +179,14 @@ p {
   max-width: 600px;
 }
 
+.blog-img {
+  max-width: 90%;
+}
+
+.blog-img-container {
+  padding: 20px;
+}
+
 @media(max-width: 740px) {
 
   .pf-item,
