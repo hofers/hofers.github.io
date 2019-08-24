@@ -179,12 +179,7 @@ p {
   max-width: 600px;
 }
 
-.blog-img-cont {
-  max-width: 600px;
-}
-
 .blog-img {
-  display: block;
   width: 100%;
   margin: auto;
   padding: 20px 0px 10px;
