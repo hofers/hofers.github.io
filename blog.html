@@ -38,7 +38,7 @@
         <div style="margin: auto">
           <h1>Blog</h1>
           <h2>A blog for my Intro to Game Studies class</h2>
-          <ol>
+          <ol>{{site.posts}}
             {% for post in site.posts %}
               <li>
                 <a href="{{ post.url }}">
