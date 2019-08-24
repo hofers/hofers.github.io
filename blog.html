@@ -38,16 +38,15 @@
         <div style="margin: auto">
           <h1>Blog</h1>
           <h2>A blog for my Intro to Game Studies class</h2>
-          <div>
+          <ol>
             {% for post in site.posts %}
-              <h3>
+              <li>
                 <a href="{{ post.url }}">
-                  {{ post.title }} - {{ post.date }}
+                  {{ post.title }} | {{ post.date }}
                 </a>
               </h3>
-              <p>{{ post.content | markdownify }}</p>
             {% endfor %}
-            </div>
+            </ol>
           <div class="bar"></div>
           <div class="footer">
             <a href="mailto:me@seanhofer.com" class="icon" aria-label="Email" target="_blank" rel="noreferrer">
