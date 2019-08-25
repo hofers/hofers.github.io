@@ -1,5 +1,6 @@
 ---
 layout: post
+categories: [class]
 title: "He__o Wor_d!"
 subtitle: "I play Hangman on an emulator and blog about it"
 dateField: "8/23/19"
