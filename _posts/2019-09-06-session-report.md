@@ -13,7 +13,7 @@ We recently had our first boardgame lab in class, and for this inaugural session
 
 Wits & Wagers Party is a simplified version of Wits & Wagers in which the objective is to have the most chips at the end of the game. Chips are obtained by correctly wagering (1) and (2) point* tokens on proposed answers to trivia questions. The game plays out like so:
 
-1. Players divide into teams. In our game we played with 3 teams: <span style="color:red;">Red</span> (Martin and Tiffany), <span style="color:blue;">Blue</span> (me), and <span style="color:yellow;">Yellow</span> (AJ and Vanky).
+1. Players divide into teams. In our game we played with 3 teams: <span style="color:red;">Red</span> (Martin and Tiffany), <span style="color:blue;">Blue</span> (me), and <span style="color:#e0bd02;">Yellow</span> (AJ and Vanky).
 2. One player volunteers to be the banker (handles chips) and another volunteers to read the questions. 
 3. Each team gets a answer board, dry-erase marker, and two wagering tokens - one worth (1) point and another worth (2). In the center of the table is the "1 (pays double)" answer card. 
 4. For seven rounds, a question with a numerical answer is posed. Each team decides among themselves upon an approximate guess (or whatever they wish), writes it on their answer board, and places their answer board face down in the center of the table. 
@@ -34,11 +34,11 @@ A detailed session report is below.
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 1990   | 1 **(1)**, 1932 **(2)** |
 | <span style="color:blue;">BLUE</span>   | 1932   |1 **(2)**, 1932 **(1)** |
-| <span style="color:yellow;">YELLOW</span> | 1943  | 1 **(2)**, 1932 **(1)** |
+| <span style="color:#e0bd02;">YELLOW</span> | 1943  | 1 **(2)**, 1932 **(1)** |
 
 **ANSWER: 1919**
 
-| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:yellow;">YELLOW</span>   |
+| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:#e0bd02;">YELLOW</span>   |
 |:--------:|:------:|:---------:|
 |2|4|4
 
@@ -49,11 +49,11 @@ A detailed session report is below.
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 10' 5"   | 10' 5" **(2)**, 12' 3" **(1)** |
 | <span style="color:blue;">BLUE</span>   | 12' 3"  | 10' 5" **(2)**, 12' 3" **(1)** |
-| <span style="color:yellow;">YELLOW</span> | 7' 7" | 10' 5" **(1)**, 12' 3" **(2)** |
+| <span style="color:#e0bd02;">YELLOW</span> | 7' 7" | 10' 5" **(1)**, 12' 3" **(2)** |
 
 **ANSWER: 17' 6"**
 
-| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:yellow;">YELLOW</span>   |
+| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:#e0bd02;">YELLOW</span>   |
 |:--------:|:------:|:---------:|
 |3|5|6
 
@@ -64,11 +64,11 @@ A detailed session report is below.
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 1980   | 1968 **(2)**, 1 **(1)** |
 | <span style="color:blue;">BLUE</span>   | 1968  | 1968 **(2)**, 1 **(1)** |
-| <span style="color:yellow;">YELLOW</span> | 1967 |1968 **(2)**, 1 **(1)** |
+| <span style="color:#e0bd02;">YELLOW</span> | 1967 |1968 **(2)**, 1 **(1)** |
 
 **ANSWER: 1964**
 
-| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:yellow;">YELLOW</span>   |
+| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:#e0bd02;">YELLOW</span>   |
 |:--------:|:------:|:---------:|
 |5|7|8
 
@@ -79,11 +79,11 @@ A detailed session report is below.
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 10 mil   | 10 mil **(1)**, 2.3 mil **(2)** |
 | <span style="color:blue;">BLUE</span>   | 2.3 mil  | 1.5 mil **(1)**, 2.3 mil **(2)** |
-| <span style="color:yellow;">YELLOW</span> | 1.5 mil | 2.3 mil **(1)**, 1.5 mil **(2)** |
+| <span style="color:#e0bd02;">YELLOW</span> | 1.5 mil | 2.3 mil **(1)**, 1.5 mil **(2)** |
 
 **ANSWER: $240,000**
 
-| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:yellow;">YELLOW</span>   |
+| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:#e0bd02;">YELLOW</span>   |
 |:--------:|:------:|:---------:|
 |5|7|8
 
@@ -94,11 +94,11 @@ A detailed session report is below.
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 100      | 100  **(1)**, 45 **(2)** |
 | <span style="color:blue;">BLUE</span>   | 8       | 45 **(1)**, 8 **(2)** |
-| <span style="color:yellow;">YELLOW</span> | 45    | 45 **(1)**, 8 **(2)** |
+| <span style="color:#e0bd02;">YELLOW</span> | 45    | 45 **(1)**, 8 **(2)** |
 
 **ANSWER: 1427**
 
-| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:yellow;">YELLOW</span>   |
+| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:#e0bd02;">YELLOW</span>   |
 |:--------:|:------:|:---------:|
 |6|7|8
 
@@ -109,11 +109,11 @@ A detailed session report is below.
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 75%      | 75%  **(2)**, 70% **(1)** |
 | <span style="color:blue;">BLUE</span>   | 8%      | 8% **(2)**, 70% **(1)** |
-| <span style="color:yellow;">YELLOW</span> | 70%   | 8% **(1)**, 70% **(2)** |
+| <span style="color:#e0bd02;">YELLOW</span> | 70%   | 8% **(1)**, 70% **(2)** |
 
 **ANSWER: 48%**
 
-| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:yellow;">YELLOW</span>   |
+| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:#e0bd02;">YELLOW</span>   |
 |:--------:|:------:|:---------:|
 |6|9|9
 
@@ -126,14 +126,14 @@ A detailed session report is below.
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 10       | 10 **(8)** |
 | <span style="color:blue;">BLUE</span>   | 5       | 5 **(2)**, 10 **(1)** |
-| <span style="color:yellow;">YELLOW</span> | 225   | 5 **(1)**, 10 **(2)** |
+| <span style="color:#e0bd02;">YELLOW</span> | 225   | 5 **(1)**, 10 **(2)** |
 
 **ANSWER: 89**
 
 
 **FINAL SCORES**
 
-| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:yellow;">YELLOW</span>   |
+| <span style="color:red;">RED</span>  | <span style="color:blue;">BLUE</span>  | <span style="color:#e0bd02;">YELLOW</span>   |
 |:--------:|:------:|:---------:|
 |14|10|11
 
