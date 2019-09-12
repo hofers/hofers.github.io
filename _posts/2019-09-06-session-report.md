@@ -9,13 +9,13 @@ image: "/assets/images/witsnwagers.jpg"
 
 <!-- e -->
 
-We recently had our first boardgame lab in class, and for this inaugural session I played Wits & Wagers Party with four of my fellow classmates (AJ, Vanky, Tiffany, and Martin). Wits & Wagers can be played with 4-14 players, but the [BoardGameGeek](https://boardgamegeek.com/boardgame/123239/wits-wagers-party){:target='_blank' :rel='noreferrer'} page places the ideal number of players at around 5-6, so we chose a group of about that size. Wits & Wagers only listed game mechanic on BoardGameGeek is Betting/Wagering.
+We recently had our first boardgame lab in class, and for this inaugural session I played Wits & Wagers Party with four of my fellow classmates (AJ, Vanky, Tiffany, and Martin). Wits & Wagers can be played with 4-14 players, but the [BoardGameGeek](https://boardgamegeek.com/boardgame/123239/wits-wagers-party){:target='_blank' :rel='noreferrer'} page places the ideal number of players at around 5-6, so we chose a group of about that size. Wits & Wagers' only listed game mechanic on BoardGameGeek is Betting/Wagering.
 
 Wits & Wagers Party is a simplified version of Wits & Wagers in which the objective is to have the most chips at the end of the game. Chips are obtained by correctly wagering (1) and (2) point* tokens on proposed answers to trivia questions. The game plays out like so:
 
 1. Players divide into teams. In our game we played with 3 teams: <span style="color:red;">Red</span> (Martin and Tiffany), <span style="color:blue;">Blue</span> (me), and <span style="color:#e0bd02;">Yellow</span> (AJ and Vanky).
 2. One player volunteers to be the banker (handles chips) and another volunteers to read the questions. 
-3. Each team gets a answer board, dry-erase marker, and two wagering tokens - one worth (1) point and another worth (2). In the center of the table is the "1 (pays double)" answer card. 
+3. Each team gets an answer board, dry-erase marker, and two wagering tokens - one worth (1) point and another worth (2). In the center of the table is the "1 (pays double)" answer card. 
 4. For seven rounds, a question with a numerical answer is posed. Each team decides among themselves upon an approximate guess (or whatever they wish), writes it on their answer board, and places their answer board face down in the center of the table. 
 5. After everyone has submitted an answer, the answers are flipped face-up and ordered about the "1 (pays double)" card. (As shown above.)
 6. Each team then places bets on the available numbers with their point tokens, with the goal of choosing the closest number to the real answer without going over. 
@@ -30,7 +30,7 @@ A detailed session report is below.
 #### Turn 1:
 *What year was Babe Ruth traded to the Yankees?*
 
-| Color  | Guess  | Wager      |
+| Team | Guess  | Wager      |
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 1990   | 1 **(1)**, 1932 **(2)** |
 | <span style="color:blue;">BLUE</span>   | 1932   |1 **(2)**, 1932 **(1)** |
@@ -45,7 +45,7 @@ A detailed session report is below.
 #### Turn 2:
 *How long is the longest recorded beard?*
 
-| Color  | Guess  | Wager      |
+| Team | Guess  | Wager      |
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 10' 5"   | 10' 5" **(2)**, 12' 3" **(1)** |
 | <span style="color:blue;">BLUE</span>   | 12' 3"  | 10' 5" **(2)**, 12' 3" **(1)** |
@@ -60,7 +60,7 @@ A detailed session report is below.
 #### Turn 3:
 *What year did Cassius Clay change his name to Muhammad Ali?*
 
-| Color  | Guess  | Wager      |
+| Team | Guess  | Wager      |
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 1980   | 1968 **(2)**, 1 **(1)** |
 | <span style="color:blue;">BLUE</span>   | 1968  | 1968 **(2)**, 1 **(1)** |
@@ -75,7 +75,7 @@ A detailed session report is below.
 #### Turn 4:
 *How much did Luke Skywalker's lighsaber sell for at auction?*
 
-| Color  | Guess  | Wager      |
+| Team | Guess  | Wager      |
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 10 mil   | 10 mil **(1)**, 2.3 mil **(2)** |
 | <span style="color:blue;">BLUE</span>   | 2.3 mil  | 1.5 mil **(1)**, 2.3 mil **(2)** |
@@ -90,7 +90,7 @@ A detailed session report is below.
 #### Turn 5:
 *How many pages was the FBI's file on Albert Einstein?*
 
-| Color  | Guess  | Wager      |
+| Team | Guess  | Wager      |
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 100      | 100  **(1)**, 45 **(2)** |
 | <span style="color:blue;">BLUE</span>   | 8       | 45 **(1)**, 8 **(2)** |
@@ -105,7 +105,7 @@ A detailed session report is below.
 #### Turn 6:
 *What percentage of Americans believe in aliens?*
 
-| Color  | Guess  | Wager      |
+| Team | Guess  | Wager      |
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 75%      | 75%  **(2)**, 70% **(1)** |
 | <span style="color:blue;">BLUE</span>   | 8%      | 8% **(2)**, 70% **(1)** |
@@ -122,7 +122,7 @@ A detailed session report is below.
 
 *How many movies have Tarzan in the name?*
 
-| Color  | Guess  | Wager      |
+| Team | Guess  | Wager      |
 |--------|--------|------------|
 | <span style="color:red;">RED</span>    | 10       | 10 **(8)** |
 | <span style="color:blue;">BLUE</span>   | 5       | 5 **(2)**, 10 **(1)** |
