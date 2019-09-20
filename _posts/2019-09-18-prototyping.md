@@ -16,7 +16,7 @@ For our first in-class prototpying session, I worked with one of my classmates o
 
 Rules              |  Board 
 :-------------------------:|:-------------------------:
-![First Draft Rules](/assets/images/draft-1-rules.jpg)  |  ![First Draft Board](/assets/images/draft-1-board.jpg)
+![First Draft Rules](/assets/images/draft-1-rules.jpg){:width="100%"}  |  ![First Draft Board](/assets/images/draft-1-board.jpg){:width="100%"}
 
 After playing this version a couple times, I noted that gameplay felt slow and uneventful. Combat was infrequent and not particularly interesting, and winning felt arbitrary. The <span style="color:green;">General</span> mechanic also seemed thematically interesting but proved not to be in regards to gameplay or decision-making.
 
@@ -32,7 +32,7 @@ I rewrote the rules after this session; they're included below alongside an imag
 
 Rules              |  Board 
 :-------------------------:|:-------------------------:
-![Second Draft Rules](/assets/images/draft-2-rules.jpg)  |  ![Second Draft Board](/assets/images/game-board.jpg)
+![Second Draft Rules](/assets/images/draft-2-rules.jpg){:width="100%"}  |  ![Second Draft Board](/assets/images/game-board.jpg){:width="100%"}
 
 By the end of this session I had settled on a fairly simple battle <span style="color:#e0bd02;">augmentation</span> mechanic: the two spaces adjacent to both primary units in combat are available for either player to use as for <span style="color:#e0bd02;">augmentation</span>. During an attack, occupying an <span style="color:#e0bd02;">augmentation</span> space allows a player to draw cards for each allied unit in combat, rather than just one. 
 
