@@ -14,6 +14,9 @@ image: "/assets/images/game-pieces.jpg"
 
 **Duration**: 20 mins
 
+**Items Needed**: Hex Board; 11 <span style="color:blue;">Blue</span> units, 11 <span style="color:red;">Red</span> units, and 4 <span style="color:purple;">Purple</span> units; a standard deck of cards
+
+
 1. Each player starts with 7 units.  
 2. Arrange the board like so: ![Board Layout](/assets/images/game-board.jpg){:width="100%"}
 3. Play order is determined by card draw; whoever draws the higher card goes first. Reshuffle the deck after.
