@@ -49,6 +49,6 @@ My next attempt was to change the objective of the game from routing the enemy t
 
 After these attempts were unsuccessful, I took a classmate's suggestion and tried simply shrinking the board (in reality, we just ignored hexes on the board that we already hed). This suggestion proved to be the best one, as it cut down on a significant amount of travel time that was required to get combat going, and allowed for faster strategic adaptations. The board from this iteration is shown below.
 
-![Final Board](/assets/images/final-board.jpg) *Final Game Board*
+![Final Board](/assets/images/final-board.jpg){:width="100%"} *Final Game Board*
 
 The final rules can be found in my previous blog post, [Hexadecimate Rules](/blog/game-rules).
