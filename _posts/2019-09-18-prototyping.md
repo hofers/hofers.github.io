@@ -36,7 +36,7 @@ Rules              |  Board
 
 By the end of this session I had settled on a fairly simple battle <span style="color:#e0bd02;">augmentation</span> mechanic: the two spaces adjacent to both primary units in combat are available for either player to use as for <span style="color:#e0bd02;">augmentation</span>. During an attack, occupying an <span style="color:#e0bd02;">augmentation</span> space allows a player to draw cards for each allied unit in combat, rather than just one. 
 
-![Game Pieces](/assets/images/game-pieces.jpg)
+![Game Pieces](/assets/images/game-pieces.jpg){:width="100%"}
 *e.g. Each player has a unit in an <span style="color:#e0bd02;">augmentation space</span>. When <span style="color:red;">Red</span> attacks <span style="color:blue;">Blue</span>, they can each choose to use that unit to <span style="color:#e0bd02;">augment</span> their attack/defense. Attacking with additional units costs 1 move per additional unit used.*
 
 ***
