@@ -22,4 +22,4 @@ The challenge of the game comes from the mechanical skill test, not determinatio
 
 *QWOP* and *Canabalt* share some Aesthetics, which extend to similarities in Dynamics and Mechanics within each game. Specifically, both games appeal to Sensation and Challenge because of their mechanical nature (timed key presses) and explicit measurements of success (scores). While *Canabalt* is a one-button game, *QWOP* uses just 4, making them both mechanically simple. The challenge of each comes from the actual mechanical difficulty associated with their respective goals or obstacles. In *Canabalt*, you must react quickly to jump over things as they appear. In *QWOP*, you simply have to go forward as far as possible without falling over using awkward leg controls.
 
-These simple-to-understand but difficult-to-execute concepts form the core of the appeal these games. 
+These simple-to-understand but difficult-to-execute concepts form the core of the appeal of these games. 
