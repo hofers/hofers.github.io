@@ -1,10 +1,13 @@
+---
+title: Resume
+---
 <html>
 
 <head>
-  <title>Sean Hofer | Resume</title>
+  <title>{{ site.title }} | {{ page.title }}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Personal site of Sean Hofer, Front-End Web Developer in the San Francisco Bay Area">
+  <meta name="description" content="{{ site.description }}">
   <link rel="shortcut icon" href="assets\images\favicon.ico" type="image/x-icon" />
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
