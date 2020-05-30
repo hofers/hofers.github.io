@@ -28,6 +28,9 @@ github_username: hofers
 
 permalink: /class-blog/:title
 
+collections:
+  portfolio-items:
+
 # Build settings
 plugins:
   - jekyll-redirect-from
