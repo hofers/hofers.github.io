@@ -18,9 +18,9 @@ h2: Check out some examples of my past work
       and post movie reviews. It's my first project built using Ruby on Rails, and my first real introduction
       unit testing (in Minitest). The front-end is built using React and Bootstrap and I'm using <a
         href="https://www.themoviedb.org/documentation/api?language=en" target="_blank" rel="noreferrer">The
-        Movie DB</a>'s API for pulling movie information. A GitHub repo of its code can be found <a
+        Movie DB</a>'s API for pulling movie information. A repo of its code can be found <a
         href="https://github.com/hofers/tci-movie-db" target="_blank" rel="noreferrer">
-        here</a>.
+        on GitHub</a>.
     </p>
   </div>
   <div class="pf-img">
