@@ -30,6 +30,7 @@ permalink: /class-blog/:title
 
 collections:
   portfolio-items:
+  press-items:
 
 # Build settings
 plugins:
