@@ -3,7 +3,7 @@ layout: post
 categories: [class]
 title: "Mechanics, Dynamics, and Aesthetics - a Framework Study"
 subtitle: "Our first video game lab"
-image: "/assets/images/hatlight.png"
+image: "/assets/images/class-blog/hatlight.png"
 ---
 ## Video Game Lab #1
 

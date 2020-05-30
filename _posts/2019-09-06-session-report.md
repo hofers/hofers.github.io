@@ -3,7 +3,7 @@ layout: post
 categories: [class]
 title: "An Account of Wits & Wagers Party"
 subtitle: "A Session Report from our first Boardgame Lab"
-image: "/assets/images/witsnwagers.jpg"
+image: "/assets/images/class-blog/witsnwagers.jpg"
 ---
 ## Wits & Wagers Party
 

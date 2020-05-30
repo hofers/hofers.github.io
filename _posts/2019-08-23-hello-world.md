@@ -3,7 +3,7 @@ layout: post
 categories: [class]
 title: "He__o Wor_d!"
 subtitle: "I play Hangman on an emulator and blog about it"
-image: "/assets/images/hangman.png"
+image: "/assets/images/class-blog/hangman.png"
 ---
 ## An introductory post to my class blog
 

@@ -3,7 +3,7 @@ layout: post
 categories: [class]
 title: "First Game Prototype: Hexadecimate"
 subtitle: "The process for my first rough prototype"
-image: "/assets/images/game-pieces.jpg"
+image: "/assets/images/class-blog/game-pieces.jpg"
 ---
 ## *Hexadecimate*
 
@@ -16,7 +16,7 @@ For our first in-class prototpying session, I worked with one of my classmates o
 
 Rules              |  Board 
 :-------------------------:|:-------------------------:
-![First Draft Rules](/assets/images/draft-1-rules.jpg){:width="100%"}  |  ![First Draft Board](/assets/images/draft-1-board.jpg){:width="100%"}
+![First Draft Rules](/assets/images/class-blog/draft-1-rules.jpg){:width="100%"}  |  ![First Draft Board](/assets/images/class-blog/draft-1-board.jpg){:width="100%"}
 
 After playing this version a couple times, I noted that gameplay felt slow and uneventful. Combat was infrequent and not particularly interesting, and winning felt arbitrary. The <span style="color:green;">General</span> mechanic also seemed thematically interesting but proved not to be in regards to gameplay or decision-making.
 
@@ -32,11 +32,11 @@ I rewrote the rules after this session; they're included below alongside an imag
 
 Rules              |  Board 
 :-------------------------:|:-------------------------:
-![Second Draft Rules](/assets/images/draft-2-rules.jpg){:width="100%"}  |  ![Second Draft Board](/assets/images/game-board.jpg){:width="100%"}
+![Second Draft Rules](/assets/images/class-blog/draft-2-rules.jpg){:width="100%"}  |  ![Second Draft Board](/assets/images/class-blog/game-board.jpg){:width="100%"}
 
 By the end of this session I had settled on a fairly simple battle <span style="color:#e0bd02;">augmentation</span> mechanic: the two spaces adjacent to both primary units in combat are available for either player to use as for <span style="color:#e0bd02;">augmentation</span>. During an attack, occupying an <span style="color:#e0bd02;">augmentation</span> space allows a player to draw cards for each allied unit in combat, rather than just one. 
 
-![Game Pieces](/assets/images/game-pieces.jpg){:width="100%"}
+![Game Pieces](/assets/images/class-blog/game-pieces.jpg){:width="100%"}
 *e.g. Each player has a unit in an <span style="color:#e0bd02;">augmentation space</span>. When <span style="color:red;">Red</span> attacks <span style="color:blue;">Blue</span>, they can each choose to use that unit to <span style="color:#e0bd02;">augment</span> their attack/defense. Attacking with additional units costs 1 move per additional unit used.*
 
 ***
@@ -49,6 +49,6 @@ My next attempt was to change the objective of the game from routing the enemy t
 
 After these attempts were unsuccessful, I took a classmate's suggestion and tried simply shrinking the board (in reality, we just ignored hexes on the board that we already hed). This suggestion proved to be the best one, as it cut down on a significant amount of travel time that was required to get combat going, and allowed for faster strategic adaptations. The board from this iteration is shown below.
 
-![Final Board](/assets/images/final-board.jpg){:width="100%"} *Final Game Board*
+![Final Board](/assets/images/class-blog/final-board.jpg){:width="100%"} *Final Game Board*
 
-The final rules can be found in my previous blog post, [Hexadecimate Rules](/blog/game-rules).
+The final rules can be found in my previous blog post, [Hexadecimate Rules](/class-blog/game-rules).
