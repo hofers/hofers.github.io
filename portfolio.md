@@ -1,6 +1,5 @@
 ---
 layout: page
-permalink: /portfolio
 is-in-menu: true
 title: Portfolio
 h1: Sean's Portfolio

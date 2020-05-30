@@ -1,6 +1,5 @@
 ---
 layout: page
-permalink: /press
 is-in-menu: true
 title: Press
 h1: Press
