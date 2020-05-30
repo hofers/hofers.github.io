@@ -1,9 +1,9 @@
 ---
 layout: page
-is-in-menu: true
 title: Press
 h1: Press
 h2: News stories about some of my work
+is-in-menu: true
 ---
 <div>
   <ul>

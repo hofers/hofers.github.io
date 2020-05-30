@@ -1,10 +1,10 @@
 ---
 layout: page
-permalink: /
-is-in-menu: true
 title: About
 h1: Sean Hofer
 h2: Front-End Web Developer in the San Francisco Bay Area
+is-in-menu: true
+permalink: /
 ---
 <p style="margin-top: 20px;">&emsp; Hi! I'm Sean Hofer, an Email Developer / Growth Engineer at
   <a href="https://www.minted.com/" target="_blank" rel="noreferrer">Minted</a>, an online marketplace of

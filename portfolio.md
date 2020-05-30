@@ -1,9 +1,9 @@
 ---
 layout: page
-is-in-menu: true
 title: Portfolio
 h1: Sean's Portfolio
 h2: Check out some examples of my past work
+is-in-menu: true
 ---
 {% assign items = site.portfolio-items | reverse %}
 {% for item in items %}
