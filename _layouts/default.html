@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<title> Sean Hofer | Class Blog | {{ page.title }} </title>
+<title> Sean Hofer | {{ page.title }} </title>
 
 <head>
   <meta charset="UTF-8">
@@ -25,18 +25,17 @@
 
 <body class="body">
   <div style="max-width: 790px; margin: auto;">
-    <a href="/" class="button">About</a>
-    <a href="/portfolio" class="button">Portfolio</a>
-    <a href="/press" class="button">Press</a>
-    <a href="/blog" class="button active">Class Blog</a>
+    {% for opage in site.pages %}
+    {% if opage.title != "Class Blog" %}
+    <a href="{{ opage.permalink }}" class="button {{ opage.title == page.title ? 'active' : '' }}">{{ opage.title }}</a>
+    {% endif %}
+    {% endfor %}
   </div>
   <div id="main">
     <div id="about">
       <div class="glassBox">
         <div style="margin: auto">
-          <div>
-            {{ content }}
-          </div>
+          {{ content }}
           <div class="bar"></div>
           <div class="footer">
             <a href="mailto:me@seanhofer.com" class="icon" aria-label="Email" target="_blank" rel="noreferrer">
