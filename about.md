@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /
-isInMenu: true
+is-in-menu: true
 title: About
 h1: Sean Hofer
 h2: Front-End Web Developer in the San Francisco Bay Area

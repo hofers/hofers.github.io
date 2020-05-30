@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /portfolio
-isInMenu: true
+is-in-menu: true
 title: Portfolio
 h1: Sean's Portfolio
 h2: Check out some examples of my past work

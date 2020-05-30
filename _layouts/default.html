@@ -26,7 +26,7 @@
 <body class="body">
   <div class="nav{% if page.title == 'Portfolio' %} portfolio{% endif %}">
     {% for opage in site.pages %}
-    {% if opage.isInMenu %}
+    {% if opage.is-in-menu %}
     <a href="{{ opage.permalink }}"
       class="button{% if opage.title == page.title %} active{% endif %}">{{ opage.title }}</a>
     {% endif %}
