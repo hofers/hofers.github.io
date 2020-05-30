@@ -1,6 +1,7 @@
 ---
 layout: page
 permalink: /press
+isInMenu: true
 title: "Press"
 h1: "Press"
 h2: "News stories about some of my work"

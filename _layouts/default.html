@@ -2,12 +2,12 @@
 <html lang="en">
 
 
-<title> Sean Hofer | {{ page.title }} </title>
+<title> {{ site.title }} | {{ page.title }} </title>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Personal site of Sean Hofer, Front-End Web Developer in the San Francisco Bay Area">
+  <meta name="description" content="{{ site.description }}">
   <link rel="shortcut icon" href="..\assets\images\favicon.ico" type="image/x-icon" />
 
   <link rel="stylesheet" type="text/css" href="..\assets\css\stylish.css">
@@ -26,19 +26,20 @@
 <body class="body">
   <div style="max-width: 790px; margin: auto;">
     {% for opage in site.pages %}
-    {% if opage.title != "Class Blog" %}
-    <a href="{{ opage.permalink }}" class="button {{ opage.title == page.title ? 'active' : '' }}">{{ opage.title }}</a>
+    {% if opage.isInMenu %}
+    <a href="{{ opage.permalink }}"
+      class="button{% if opage.title == page.title %} active{% endif %}">{{ opage.title }}</a>
     {% endif %}
     {% endfor %}
   </div>
-  <div id="main">
+  <div id=" main">
     <div id="about">
       <div class="glassBox">
         <div style="margin: auto">
           {{ content }}
           <div class="bar"></div>
           <div class="footer">
-            <a href="mailto:me@seanhofer.com" class="icon" aria-label="Email" target="_blank" rel="noreferrer">
+            <a href="mailto:{{ site.email }}" class="icon" aria-label="Email" target="_blank" rel="noreferrer">
               <i class="fa fa-envelope-o fa-5x"></i>
             </a>
             <a href="/resume" target="_blank" rel="noreferrer" class="icon" aria-label="Resume">
