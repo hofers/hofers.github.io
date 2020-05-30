@@ -24,7 +24,7 @@
 
 
 <body class="body">
-  <div style="max-width: 790px; margin: auto;">
+  <div class="nav{% if page.title == 'Portfolio' %} portfolio{% endif %}">
     {% for opage in site.pages %}
     {% if opage.isInMenu %}
     <a href="{{ opage.permalink }}"
@@ -34,7 +34,7 @@
   </div>
   <div id=" main">
     <div id="about">
-      <div class="glassBox">
+      <div class="glassBox{% if page.title == 'Portfolio' %} portfolio{% endif %}">
         <div style="margin: auto">
           {{ content }}
           <div class="bar"></div>

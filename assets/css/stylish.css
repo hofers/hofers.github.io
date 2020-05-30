@@ -185,6 +185,19 @@ p {
   padding: 20px 0px 10px;
 }
 
+.nav {
+  max-width: 790px;
+  margin: auto;
+}
+
+.nav.portfolio {
+  max-width: 1050px;
+}
+
+.glassBox.portfolio {
+  max-width: 1000px;
+}
+
 @media(max-width: 740px) {
 
   .pf-item,
