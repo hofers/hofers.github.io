@@ -1,4 +1,4 @@
-permalink: /blog/:title
+permalink: /class-blog/:title
 
 plugins:
   - jekyll-redirect-from
