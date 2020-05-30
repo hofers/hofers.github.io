@@ -2,9 +2,9 @@
 layout: page
 permalink: /portfolio
 isInMenu: true
-title: "Portfolio"
-h1: "Sean's Portfolio"
-h2: "Check out some examples of my past work"
+title: Portfolio
+h1: Sean's Portfolio
+h2: Check out some examples of my past work
 ---
 <div class="pf-item" id="tci" style="margin-top: 20px;">
   <div class="pf-text">
