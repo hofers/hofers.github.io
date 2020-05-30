@@ -8,7 +8,7 @@ is-in-menu: true
 <ul>
 {% for item in site.press-items %}
   <li>
-    <a href="{{ item.link }}" target="_blank"
-      rel="noreferrer">{{ item.title }} | {{ item.source }}</a></li>
+    <a href="{{ item.link }}" target="_blank" rel="noreferrer">{{ item.title }} | {{ item.source }}</a>
+  </li>
 {% endfor %}
 </ul>
