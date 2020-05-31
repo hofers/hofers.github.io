@@ -12,9 +12,7 @@ wide: true
   <div class="pf-text">
     <h2 class="pf-item-title"><a href="{{ item.link }}" target="_blank" rel="noreferrer">{{ item.title }}</a></h2>
     <h3>{{ item.subtitle }}</h3>
-    <p>
     {{ item.content | markdownify }}
-    </p>
   </div>
   <div class="pf-img">
     <a href="{{ item.link }}" target="_blank" rel="noreferrer"><img
