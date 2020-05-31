@@ -25,10 +25,8 @@
 
 <body class="body">
   <div class="nav{% if page.wide %} wide{% endif %}">
-    {% for opage in site.pages %}
-    {% if opage.is-in-menu %}
-    <a href="{{ opage.url }}" class="button{% if opage.title == page.title %} active{% endif %}">{{ opage.title }}</a>
-    {% endif %}
+    {% for opage in site.pages | where:"is-in-menu", "true" %}
+      <a href="{{ opage.url }}" class="button{% if opage.title == page.title %} active{% endif %}">{{ opage.title }}</a>
     {% endfor %}
   </div>
   <div id="main">
