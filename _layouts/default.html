@@ -31,25 +31,23 @@
     {% endfor %}
   </div>
   <div id="main">
-    <div id="about">
-      <div class="glassBox{% if page.wide %} wide{% endif %}">
-        <div style="margin: auto">
-          {{ content }}
-          <div class="bar"></div>
-          <div class="footer">
-            <a href="mailto:{{ site.email }}" class="icon" aria-label="Email" target="_blank" rel="noreferrer">
-              <i class="fa fa-envelope-o fa-5x"></i>
-            </a>
-            <a href="/resume" target="_blank" rel="noreferrer" class="icon" aria-label="Resume">
-              <i class="fa fa-file-text-o fa-5x"></i>
-            </a>
-            <a href="/github" target="_blank" rel="noreferrer" class="icon" aria-label="GitHub">
-              <i class="fa fa-github fa-5x"></i>
-            </a>
-            <a href="/linkedin" target="_blank" rel="noreferrer" class="icon" aria-label="LinkedIn">
-              <i class="fa fa-linkedin fa-5x"></i>
-            </a>
-          </div>
+    <div class="glassBox{% if page.wide %} wide{% endif %}">
+      <div style="margin: auto">
+        {{ content }}
+        <div class="bar"></div>
+        <div class="footer">
+          <a href="mailto:{{ site.email }}" class="icon" aria-label="Email" target="_blank" rel="noreferrer">
+            <i class="fa fa-envelope-o fa-5x"></i>
+          </a>
+          <a href="/resume" target="_blank" rel="noreferrer" class="icon" aria-label="Resume">
+            <i class="fa fa-file-text-o fa-5x"></i>
+          </a>
+          <a href="/github" target="_blank" rel="noreferrer" class="icon" aria-label="GitHub">
+            <i class="fa fa-github fa-5x"></i>
+          </a>
+          <a href="/linkedin" target="_blank" rel="noreferrer" class="icon" aria-label="LinkedIn">
+            <i class="fa fa-linkedin fa-5x"></i>
+          </a>
         </div>
       </div>
     </div>
