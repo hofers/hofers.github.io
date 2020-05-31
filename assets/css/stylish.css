@@ -216,8 +216,8 @@ p {
 }
 
 @media(max-width: 550px) {
-  .fa-5x {
-    font-size: 4em !important;
+  .fa.fa-5x {
+    font-size: 4em;
   }
 
   .glassBox {
@@ -226,8 +226,8 @@ p {
 }
 
 @media(max-width: 450px) {
-  .fa-5x {
-    font-size: 3em !important;
+  .fa.fa-5x {
+    font-size: 3em;
   }
 }
 
