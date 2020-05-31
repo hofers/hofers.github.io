@@ -190,11 +190,11 @@ p {
   margin: auto;
 }
 
-.nav.portfolio {
+.nav.wide {
   max-width: 1050px;
 }
 
-.glassBox.portfolio {
+.glassBox.wide {
   max-width: 1000px;
 }
 

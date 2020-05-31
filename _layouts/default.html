@@ -24,7 +24,7 @@
 
 
 <body class="body">
-  <div class="nav{% if page.title == 'Portfolio' %} portfolio{% endif %}">
+  <div class="nav{% if page.wide %} wide{% endif %}">
     {% for opage in site.pages %}
     {% if opage.is-in-menu %}
     <a href="{{ opage.url }}" class="button{% if opage.title == page.title %} active{% endif %}">{{ opage.title }}</a>
@@ -33,7 +33,7 @@
   </div>
   <div id="main">
     <div id="about">
-      <div class="glassBox{% if page.title == 'Portfolio' %} portfolio{% endif %}">
+      <div class="glassBox{% if page.wide %} wide{% endif %}">
         <div style="margin: auto">
           {{ content }}
           <div class="bar"></div>
