@@ -30,6 +30,7 @@ permalink: /class-blog/:title
 
 collections:
   portfolio-items:
+    sort_by: date
   press-items:
 
 # Build settings
