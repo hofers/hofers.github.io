@@ -5,6 +5,7 @@ h1: Sean's Portfolio
 h2: Check out some examples of my past work
 is-in-menu: true
 wide: true
+css: portfolio
 ---
 {% assign items = site.portfolio-items | reverse %}
 {% for item in items %}

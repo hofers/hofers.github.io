@@ -11,6 +11,9 @@
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
 
   <link rel="stylesheet" type="text/css" href="/assets/css/stylish.css">
+  {% if page.css %}
+  <link rel="stylesheet" type="text/css" href="/assets/css/{{ page.css }}.css">
+  {% endif %}
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300" rel="stylesheet" type="text/css">
 
