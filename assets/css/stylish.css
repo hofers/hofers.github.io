@@ -22,19 +22,6 @@ a:active {
   color: rgb(109, 2, 12);
 }
 
-.icon:hover,
-.icon:focus,
-.icon:active {
-  color: #a8000e;
-}
-
-.main {
-  height: calc(100% - 110px);
-  position: relative;
-  background-color: inherit;
-  width: 100%;
-}
-
 h1 {
   display: inline-block;
   font-size: 3em;
@@ -78,6 +65,16 @@ p {
   font-weight: 100;
   letter-spacing: -0.7px;
   margin-top: 10px;
+}
+
+.icon:hover,
+.icon:focus,
+.icon:active {
+  color: #a8000e;
+}
+
+.main {
+  position: relative;
 }
 
 .footer {
