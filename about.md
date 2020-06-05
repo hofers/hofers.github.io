@@ -16,6 +16,6 @@ permalink: /
   &emsp;I'm quick to adapt to new languages and libraries, and I have a knack for coming up with creative solutions to technical problems. I'm also proficient with web technologies like HTML5/CSS3, React, jQuery, Python and Node.js, as well as mobile development platforms like React Native and&nbsp;Flutter.
 </p>
 <p>
-  &emsp;If you're interested in contacting me, drop me a line at <a href="mailto:{{ site.email }}" target="_blank" rel="noreferrer">{{ site.email }}</a> or hit me up on my <a href="/linkedin" target="_blank" rel="noreferrer">LinkedIn</a> page. You can also check out my <a href="/resume">resume</a> and my <a href="/portfolio">portfolio</a>. My current work is mostly front/back-end web development, but I'm always excited to pick up new&nbsp;skills.
+  &emsp;If you're interested in contacting me, drop me a line at <a href="mailto:{{ site.email }}" target="_blank" rel="noreferrer">{{ site.email }}</a> or hit me up on my <a href="/linkedin" target="_blank" rel="noreferrer">LinkedIn</a> page. You can also check out my <a href="/resume">resume</a> and my <a href="/portfolio">portfolio</a>. My current work is mostly front and back-end web development, but I'm always excited to pick up new&nbsp;skills.
 </p>
 <p>&emsp; And thanks for checking out my&nbsp;site!</p>
