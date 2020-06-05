@@ -21,7 +21,7 @@
 title: Sean Hofer
 email: me@seanhofer.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Personal site of Sean Hofer, Front-End Web Developer in the San Francisco Bay Area
+  Personal professional site of Sean Hofer, Front-End Web Developer in the San Francisco Bay Area
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://seanhofer.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: hofers
@@ -36,6 +36,7 @@ collections:
 # Build settings
 plugins:
   - jekyll-redirect-from
+  - jemoji
 
 # Exclude from processing.
 # The following items will not be processed, by default.

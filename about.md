@@ -7,7 +7,7 @@ is-in-menu: true
 permalink: /
 ---
 <p style="margin-top: 20px;">
-  &emsp; Hi! I'm Sean Hofer, an Email Developer / Growth Engineer at <a href="https://www.minted.com/" target="_blank" rel="noreferrer">Minted</a>, an online marketplace of independent artists and designers in San Francisco,&nbsp;CA.
+  :wave: Hi! I'm Sean Hofer, an Email Developer / Growth Engineer at <a href="https://www.minted.com/" target="_blank" rel="noreferrer">Minted</a>, an online marketplace of independent artists and designers in San Francisco,&nbsp;CA.
 </p>
 <p>
   &emsp;In my time at Minted so far I've led implementation of product recommendations into our triggered and transactional emails, and I've helped the marketing team with a number of A/B test implementations and UI updates and fixes as a flexible engineering resource. In my previous position at <a href="https://www.feedingchildreneverywhere.com/" target="_blank" rel="noreferrer">Feeding Children Everywhere</a>, I helped to build and launch Full Cart, a meal kit delivery application that has now grown to serve over 1000 households&nbsp;weekly.

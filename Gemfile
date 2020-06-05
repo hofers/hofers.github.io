@@ -15,6 +15,7 @@ gem "minima", "~> 2.5"
 # gem "github-pages", group: :jekyll_plugins
 # If you have any plugins, put them here!
 group :jekyll_plugins do
+  gem 'jemoji'
   gem "jekyll-redirect-from", "~> 0.16.0"
 end
 
