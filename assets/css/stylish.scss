@@ -6,16 +6,16 @@
 @import "background";
 
 .nav {
-  max-width: 39.5em;
+  max-width: 39.5rem;
   margin: auto;
 }
 
 .nav.wide {
-  max-width: 52.5em;
+  max-width: 52.5rem;
 }
 
 .container.wide {
-  max-width: 50em;
+  max-width: 50rem;
 }
 
 .main {
@@ -25,28 +25,28 @@
 .container {
   display: inline-block;
   height: 100%;
-  width: calc(100% - 2.5em);
-  max-height: calc(100% - 1.75em);
-  max-width: 37em;
-  margin: auto auto 4em;
-  padding: 0 1.25em;
+  width: calc(100% - 2.5rem);
+  max-height: calc(100% - 1.75rem);
+  max-width: 37rem;
+  margin: auto auto 4rem;
+  padding: 0 1.25rem;
   text-align: left;
   background-color: $off-white;
-  box-shadow: 0.05em 0.1em 0.25em $gray;
-  border-radius: 0.25em;
+  box-shadow: 0.05rem 0.1rem 0.25rem $gray;
+  border-radius: 0.25rem;
 }
 
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-bottom: 2.3em;
-  padding-top: 0.9em;
+  padding-bottom: 2.3rem;
+  padding-top: 0.9rem;
 }
 
 .icon {
   color: $off-black;
-  padding-right: 10px;
+  padding-right: 0.5rem;
 }
 
 .icon:hover,
@@ -57,20 +57,20 @@
 }
 
 .button {
-  font-size: 0.9em;
+  font-size: 0.9rem;
   color: inherit;
-  line-height: 1.39em;
+  line-height: 1.25rem;
   letter-spacing: normal;
-  padding: 0.167em 0.89em;
-  border: 0.167em $off-black;
+  padding: 0.15rem 0.8rem;
+  border: 0.15rem $off-black;
   background-color: $off-white;
-  box-shadow: 0.054em 0.111em 0.278em $gray;
-  border-radius: 0.4em 0.4em 0 0;
+  box-shadow: 0.05rem 0.1rem 0.25rem $gray;
+  border-radius: 0.333rem 0.333rem 0 0;
   cursor: pointer;
 }
 
 .button:first-of-type {
-  margin-left: 0.3em;
+  margin-left: 0.3rem;
 }
 
 .active {
@@ -78,22 +78,22 @@
 }
 
 .bar {
-  height: 0.05em;
+  height: 0.05rem;
   width: 100%;
-  max-width: 30em;
-  margin: 2.2em auto 1.3em;
+  max-width: 30rem;
+  margin: 2.2rem auto 1.3rem;
   background-color: $off-black;
 }
 
 .blog-img {
   width: 100%;
   margin: auto;
-  padding: 1em 0 0.5em;
+  padding: 1rem 0 0.5rem;
 }
 
 @media(max-width: 550px) {
   .fa.fa-5x {
-    font-size: 4em;
+    font-size: 4rem;
   }
 
   .container {
@@ -103,6 +103,6 @@
 
 @media(max-width: 450px) {
   .fa.fa-5x {
-    font-size: 3em;
+    font-size: 3rem;
   }
 }

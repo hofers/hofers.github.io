@@ -6,7 +6,7 @@
 .pf-item {
   display: flex;
   flex-direction: row;
-  padding: 1.4em 0.4em;
+  padding: 1.4rem 0.4rem;
 }
 
 .pf-item:nth-of-type(2n) {
@@ -15,17 +15,17 @@
 
 .pf-text {
   flex: 2;
-  padding: 0 0.9em 0 0;
+  padding: 0 0.9rem 0 0;
 }
 
 .pf-item:nth-of-type(2n) .pf-text {
-  padding: 0 0 0 0.9em;
+  padding: 0 0 0 0.9rem;
 }
 
 .pf-img {
   flex: 1.7;
   margin: auto 0;
-  max-width: 25em;
+  max-width: 25rem;
 }
 
 .pf-img img {
@@ -37,7 +37,7 @@
 .pf-item-title {
   color: $red;
   font-style: italic;
-  padding-top: 0.333em;
+  padding-top: 0.333rem;
 }
 
 

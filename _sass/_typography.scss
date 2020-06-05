@@ -1,8 +1,8 @@
 @import "colors";
 
-body {
-  font-size: 20px;
-  letter-spacing: -0.035em;
+html {
+  font-size: 20px; // Set base size in px
+  letter-spacing: -0.035em; // em needed to reference sibling font-size  
   font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -23,30 +23,30 @@ a:active {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 3rem;
   color: $red;
-  line-height: 0.867em;
-  margin-top: 0.167em;
-  padding: 0.167em 0;
-  text-shadow: 0.0165em 0.0165em 0.084em $light-gray;
+  line-height: 2.6rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  text-shadow: 0.05rem 0.05rem 0.25rem $light-gray;
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   color: $dark-gray;
-  line-height: 1.167em;
-  margin-top: 0.2em;
+  line-height: 1.75rem;
+  margin-top: 0.3rem;
 }
 
 h3 {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   color: $dark-gray;
-  line-height: 1.167em;
+  line-height: 1.4rem;
 }
 
 p {
-  line-height: 1.25em;
-  margin: 0.5em 0 1em;
+  line-height: 1.25rem;
+  margin: 0.5rem 0 1rem;
 }
 
 ul {
