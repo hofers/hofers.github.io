@@ -28,6 +28,9 @@ github_username: hofers
 
 permalink: /class-blog/:title
 
+sass:
+    sass_dir: _sass
+
 collections:
   portfolio-items:
     sort_by: date

@@ -1,0 +1,58 @@
+@import "colors";
+
+body {
+  font-size: 20px;
+  letter-spacing: -0.035em;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1,h2,h3,p {
+  margin: 0;
+  font-weight: 300;
+}
+
+a {
+  color: $red;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: $dark-red;
+}
+
+h1 {
+  font-size: 3em;
+  color: $red;
+  line-height: 0.867em;
+  margin-top: 0.167em;
+  padding: 0.167em 0;
+  text-shadow: 0.0165em 0.0165em 0.084em $light-gray;
+}
+
+h2 {
+  font-size: 1.5em;
+  color: $dark-gray;
+  line-height: 1.167em;
+  margin-top: 0.2em;
+}
+
+h3 {
+  font-size: 1.2em;
+  color: $dark-gray;
+  line-height: 1.167em;
+}
+
+p {
+  line-height: 1.25em;
+  margin: 0.5em 0 1em;
+}
+
+ul {
+  list-style-type: circle;
+}
+
+li {
+  font-family: inherit
+}

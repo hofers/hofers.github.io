@@ -1,0 +1,109 @@
+---
+# Sass
+--- 
+@import "colors";
+@import "typography";
+@import "background";
+@import "portfolio";
+
+.nav {
+  max-width: 39.5em;
+  margin: auto;
+}
+
+.nav.wide {
+  max-width: 52.5em;
+}
+
+.container.wide {
+  max-width: 50em;
+}
+
+.main {
+  text-align: center;
+}
+
+.container {
+  display: inline-block;
+  height: 100%;
+  width: calc(100% - 2.5em);
+  max-height: calc(100% - 1.75em);
+  max-width: 37em;
+  margin: auto auto 4em;
+  padding: 0 1.25em;
+  text-align: left;
+  background-color: $off-white;
+  box-shadow: 0.05em 0.1em 0.25em $gray;
+  border-radius: 0.25em;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 2.3em;
+  padding-top: 0.9em;
+}
+
+.icon {
+  color: $off-black;
+  padding-right: 10px;
+}
+
+.icon:hover,
+.icon:focus,
+.icon:active {
+  color: $red;
+  text-decoration: none;
+}
+
+.button {
+  font-size: 0.9em;
+  color: inherit;
+  line-height: 1.39em;
+  letter-spacing: normal;
+  padding: 0.167em 0.89em;
+  border: 0.167em $off-black;
+  background-color: $off-white;
+  box-shadow: 0.054em 0.111em 0.278em $gray;
+  border-radius: 0.4em 0.4em 0 0;
+  cursor: pointer;
+}
+
+.button:first-of-type {
+  margin-left: 0.3em;
+}
+
+.active {
+  color: $red;
+}
+
+.bar {
+  height: 0.05em;
+  width: 100%;
+  max-width: 30em;
+  margin: 2.2em auto 1.3em;
+  background-color: $off-black;
+}
+
+.blog-img {
+  width: 100%;
+  margin: auto;
+  padding: 1em 0 0.5em;
+}
+
+@media(max-width: 550px) {
+  .fa.fa-5x {
+    font-size: 4em;
+  }
+
+  .container {
+    margin: auto;
+  }
+}
+
+@media(max-width: 450px) {
+  .fa.fa-5x {
+    font-size: 3em;
+  }
+}

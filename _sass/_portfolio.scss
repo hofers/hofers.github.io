@@ -1,0 +1,56 @@
+@import "colors";
+
+.pf-item {
+  display: flex;
+  flex-direction: row;
+  padding: 1.4em 0.4em;
+}
+
+.pf-item:nth-of-type(2n) {
+  flex-direction: row-reverse;
+}
+
+.pf-text {
+  flex: 2;
+  padding: 0 0.9em 0 0;
+}
+
+.pf-item:nth-of-type(2n) .pf-text {
+  padding: 0 0 0 0.9em;
+}
+
+.pf-img {
+  flex: 1.7;
+  margin: auto 0;
+  max-width: 25em;
+}
+
+.pf-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pf-item-title {
+  color: $red;
+  font-style: italic;
+  padding-top: 0.333em;
+}
+
+
+@media(max-width: 740px) {
+
+  .pf-item,
+  .pf-item:nth-of-type(2n) {
+    flex-direction: column-reverse;
+  }
+
+  .pf-text,
+  .pf-item:nth-of-type(2n) .pf-text {
+    padding: 0;
+  }
+
+  .pf-img {
+    margin: auto;
+  }
+}
