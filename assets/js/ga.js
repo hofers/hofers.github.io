@@ -4,6 +4,7 @@ function gtag () {
   dataLayer.push(arguments)
 }
 
+// Set up Google Analytics
 gtag('js', new Date())
 
 gtag('config', 'UA-143817336-1', {
