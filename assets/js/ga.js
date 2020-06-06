@@ -16,14 +16,15 @@ var getOutboundLink = function (url) {
     event_label: url,
     transport_type: 'beacon',
     event_callback: function () {
-      document.location = url
+      window.open(url);
     }
   })
 }
 
 // Add outbound link click event to all outbound links
-document.addEventListener('DOMContentLoaded', function (event) {
-  document.querySelectorAll("a[target='_blank']").forEach((e) => {
-    e.setAttribute('onclick', "getOutboundLink('" + e.getAttribute('href') + "');")
-  })
-})
+document.querySelectorAll("a[target='_blank']").forEach((e) => {
+  e.addEventListener('click', (e) => { 
+    getOutboundLink(e.getAttribute('href'));
+    e.preventDefault();
+  });
+});
