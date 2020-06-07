@@ -40,4 +40,4 @@ jobs:
           git config --global user.name "hofers"
           git add .
           git commit -m "Built and deployed Jekyll"
-          git push origin master
+          git push origin HEAD:master
