@@ -22,18 +22,23 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with: 
           ruby-version: 2.6
-      - run: gem install bundler
-      - run: bundle install
+      - name: Install Gems
+        run: |
+          gem install bundler
+          bundle install
         
       # Build
       - run: bundle exec jekyll build
         
       # Replace directory with _site
-      - run: find . ! \( -iregex '^./_site.*' -or -iregex '^./.git.*' \) -delete
-      - run: ls
-      - run: rsync -r _site/ .
+      - name: Replace directory with _site
+        run: |
+          find . ! \( -iregex '^./_site.*' -or -iregex '^./.git.*' \) -delete
+          rsync -r _site/ .
 
       # Add, commit, and push
-      - run: git add .
-      - run: git commit -m "Built and deployed Jekyll"
-      - run: git push origin master
+      - name: Add, commit, and push
+        run: |
+          git add .
+          git commit -m "Built and deployed Jekyll"
+          git push origin master
