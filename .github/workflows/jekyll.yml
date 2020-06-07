@@ -39,7 +39,7 @@ jobs:
       # Replace directory with _site
       - name: Replace directory with _site
         run: |
-          find . ! \( -iregex '^./_site.*' -or -iregex '^./.git.*' \) -delete
+          find . ! \( -iregex '^./_site.*' -or -iregex '^./.git[^h].*' \) -delete
           rsync -r _site/ .
 
       # Add, commit, and push
