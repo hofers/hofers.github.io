@@ -43,7 +43,7 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-redirect-from (0.16.0)
       jekyll (>= 3.3, < 5.0)
-    jekyll-replace-last (1.0.0)
+    jekyll-replace-last (1.0.1)
     jekyll-sass-converter (2.1.0)
       sassc (> 2.0.1, < 3.0)
     jekyll-seo-tag (2.6.1)
@@ -99,7 +99,7 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 4.0.0)
   jekyll-redirect-from (~> 0.16.0)
-  jekyll-replace-last
+  jekyll-replace-last (~> 1.0.1)
   jemoji
   minima (~> 2.5)
   tzinfo (~> 1.2)
