@@ -17,6 +17,8 @@ jobs:
     steps:
       # Checkout the source from the `jekyll` branch.
       - uses: actions/checkout@v2
+      - run: bundle install
+      - run: bundle exec jekyll build
 
       # Invoke this action against the newly checked out source code.
       - run: git add ./_site
