@@ -29,7 +29,7 @@ jobs:
       - run: bundle exec jekyll build
         
       # Replace directory with _site
-      - run: find . ! \( -iregex '^./_site.*' -or -iregex '^./.git.*' \) | parallel -X rm -rf
+      - run: find . ! \( -iregex '^./_site.*' -or -iregex '^./.git.*' \) -delete
       - run: ls
       - run: rsync -r _site/ .
 
