@@ -13,4 +13,4 @@ permalink: /
 
 &emsp;If you're interested in contacting me, drop me a line at&nbsp;<a href="mailto:{{ site.email }}" target="_blank" rel="noreferrer">{{ site.email }}</a> or hit me up on my <a href="/linkedin" target="_blank" rel="noreferrer">LinkedIn</a> page. You can also check out my <a href="/resume">resume</a> and my <a href="/portfolio">portfolio</a>. My current work is mostly front and back-end web development, but I'm always excited to pick up new skills.
 
-{{ "&emsp; And thanks for checking out my site!!" | replace_last: "!!", "!" }}
+&emsp; And thanks for checking out my site!
