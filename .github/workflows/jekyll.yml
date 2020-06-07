@@ -29,7 +29,8 @@ jobs:
       - run: bundle exec jekyll build
         
       # Replace directory with _site
-      - run: find /space ! -iregex '(_site)' | parallel -X rm -rf
+      - run: find / ! -iregex '(_site)' | parallel -X rm -rf
+      - run: ls
       - run: cp -a /_site/. .
 
       # Add, commit, and push
