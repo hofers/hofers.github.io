@@ -17,6 +17,10 @@ jobs:
     steps:
       # Checkout the source from the `jekyll` branch.
       - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with: 
+          ruby-version: 2.6
+        
       - run: gem install bundler
       - run: bundle install
       - run: bundle exec jekyll build
