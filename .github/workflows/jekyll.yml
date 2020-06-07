@@ -46,4 +46,4 @@ jobs:
       - name: Add, commit, and push
         run: |
           git commit -am "Built and deployed Jekyll"
-          git push origin master
+          git push origin HEAD:master
