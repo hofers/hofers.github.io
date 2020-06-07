@@ -48,6 +48,7 @@ collections:
 # Build settings
 plugins:
   - jekyll-redirect-from
+  - jekyll-replace-last
   - jemoji
 
 # Exclude from processing.

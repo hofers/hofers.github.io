@@ -16,6 +16,7 @@ gem "minima", "~> 2.5"
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem 'jemoji'
+  gem 'jekyll-replace-last'
   gem "jekyll-redirect-from", "~> 0.16.0"
 end
 
