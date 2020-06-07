@@ -43,7 +43,10 @@ jobs:
           rsync -r _site/ .
 
       # Add, commit, and push
-      - run: git commit -am "Built and deployed Jekyll"
+      - name: Add and commit
+        run: |
+          git add --all
+          git commit -m "Built and deployed Jekyll"
       - uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.JEKYLL_PAT }}
