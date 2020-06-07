@@ -17,15 +17,22 @@ jobs:
     steps:
       # Checkout the source from the `jekyll` branch.
       - uses: actions/checkout@v2
+      
+      # Ruby / bundle setup
       - uses: ruby/setup-ruby@v1
         with: 
           ruby-version: 2.6
-        
       - run: gem install bundler
       - run: bundle install
+        
+      # Build
       - run: bundle exec jekyll build
+        
+      # Replace directory with _site
+      - run: rm -r !(_site)
+      - run: cp -a /_site/. .
 
-      # Invoke this action against the newly checked out source code.
-      - run: git add ./_site
+      # Add, commit, and push
+      - run: git add .
       - run: git commit -m "Built and deployed Jekyll"
       - run: git push origin master
