@@ -22,10 +22,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with: 
           ruby-version: 2.6
-      - name: Install Gems
-        run: |
-          gem install bundler
-          bundle install
+      - run: bundle install
         
       # Build
       - run: bundle exec jekyll build
@@ -39,6 +36,8 @@ jobs:
       # Add, commit, and push
       - name: Add, commit, and push
         run: |
+          git config --global user.email "me@seanhofer.com"
+          git config --global user.name "hofers"
           git add .
           git commit -m "Built and deployed Jekyll"
           git push origin master
