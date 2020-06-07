@@ -1,9 +1,8 @@
 ---
-layout: page
 title: About
 h1: Sean Hofer
 h2: Front-End Web Developer in the San Francisco Bay Area
-is-in-menu: true
+tags: is-in-menu
 permalink: /
 ---
 :wave: Hi! I'm Sean Hofer, an Email Developer / Growth Engineer at <a href="https://www.minted.com/" target="_blank" rel="noreferrer">Minted</a>, an online marketplace of independent artists and designers in San Francisco, CA.

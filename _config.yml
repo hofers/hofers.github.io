@@ -26,6 +26,15 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://seanhofer.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: hofers
 
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "pages" # previously `post` in Jekyll 2.2.
+    values:
+      layout: "page"
+
+# This sets the default permalink for blog posts
 permalink: /class-blog/:title
 
 sass:

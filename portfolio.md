@@ -1,10 +1,8 @@
 ---
-layout: page
 title: Portfolio
 h1: Sean's Portfolio
 h2: Check out some examples of my past work
-is-in-menu: true
-wide: true
+tags: is-in-menu wide
 css: portfolio
 ---
 {% assign items = site.portfolio-items | reverse %}
