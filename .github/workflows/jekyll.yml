@@ -39,5 +39,6 @@ jobs:
           git config --global user.email "me@seanhofer.com"
           git config --global user.name "hofers"
           git add .
+          git pull origin master
           git commit -m "Built and deployed Jekyll"
-          git push origin HEAD:master
+          git push origin master
