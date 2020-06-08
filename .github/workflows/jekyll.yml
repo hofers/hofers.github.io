@@ -40,7 +40,7 @@ jobs:
       - name: Replace directory with _site
         id: replace
         run: |
-          find . ! \( -iregex '^./_site.*' -or -iregex '^./.git' -or -iregex '^./.git/.*' \) -delete
+          find . ! \( -iregex '^./_site.*' -or -iregex '^./.git' -or -iregex '^./.git[^h].*' \) -delete
           rsync -r _site/ .
           echo "::set-output name=diff::$(git diff)"
 
