@@ -29,12 +29,6 @@ jobs:
         
       # Build
       - run: bundle exec jekyll build
-
-      - name: Set up Git
-        run: |
-          git config --global user.email "me@seanhofer.com"
-          git config --global user.name "hofers"
-          git pull origin master
         
       # Replace directory with _site
       - name: Replace directory with _site
@@ -48,10 +42,13 @@ jobs:
       - name: Add and commit
         if: steps.replace.outputs.diff != ''
         run: |
+          git config --global user.email "me@seanhofer.com"
+          git config --global user.name "hofers"
           git add --all
           git commit -m "Built and deployed Jekyll"
       - uses: ad-m/github-push-action@master
         if: steps.replace.outputs.diff != ''
         with:
           github_token: ${{ secrets.JEKYLL_PAT }}
+          force: true
 
