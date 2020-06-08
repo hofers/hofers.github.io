@@ -11,10 +11,8 @@ module Jekyll
       link = input_split[0].strip
       text = input_split[1].strip
   
-      # Write the output HTML string
       output =  "<a href=\"#{link}\">#{text}</a>"
   
-      # Render it on the page by returning it
       return output;
     end
   

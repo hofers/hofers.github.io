@@ -6,13 +6,10 @@ module Jekyll
     end
   
     def render(context)
-      # Split the input variable (omitting error checking)
       email = context[@input.strip]
   
-      # Write the output HTML string
       output =  "<a href=\"mailto:#{email}\" target=\"_blank\" rel=\"noreferrer\">#{email}</a>"
   
-      # Render it on the page by returning it
       return output;
     end
   end
