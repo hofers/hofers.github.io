@@ -38,16 +38,20 @@ jobs:
         
       # Replace directory with _site
       - name: Replace directory with _site
+        id: replace
         run: |
           find . ! \( -iregex '^./_site.*' -or -iregex '^./.git.*' \) -delete
           rsync -r _site/ .
+          echo "::set-output name=diff::$(git diff)"
 
       # Add, commit, and push
       - name: Add and commit
+        if: steps.replace.outputs.diff != ''
         run: |
           git add --all
           git commit -m "Built and deployed Jekyll"
       - uses: ad-m/github-push-action@master
+        if: steps.replace.outputs.diff != ''
         with:
           github_token: ${{ secrets.JEKYLL_PAT }}
 
