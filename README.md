@@ -1,4 +1,4 @@
-# seanhofer.com
+# [seanhofer.com](https://seanhofer.com)
 
 ![seanhofer.com](/assets/images/mysite.jpg)
 
