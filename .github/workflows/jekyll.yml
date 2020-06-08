@@ -36,23 +36,14 @@ jobs:
           find . ! \( -iregex '^./_site.*' -or -iregex '^./.git' -or -iregex '^./.git[^h].*' \) -delete
           rsync -r _site/ .
 
-      - name: Git setup
-        id: git
+      # Add, commit, and push
+      - name: Add and commit
         run: |
           git config --global user.email "me@seanhofer.com"
           git config --global user.name "hofers"
-          git pull origin master
-          echo "::set-output name=diff::$(git diff)"
-
-      # Add, commit, and push
-      - name: Add and commit
-        if: steps.git.outputs.diff != ''
-        run: |
           git add --all
           git commit -m "Built and deployed Jekyll"
       - uses: ad-m/github-push-action@master
-        if: steps.git.outputs.diff != ''
         with:
           github_token: ${{ secrets.JEKYLL_PAT }}
           force: true
-
