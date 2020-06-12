@@ -2,13 +2,13 @@
 layout: default
 ---
 <h1>{{ page.h1 }}</h1>
-				<h2>{{ page.h2 | replace_last: " ", "&nbsp;" }}</h2>
+				<h2>{{ page.h2 | kill_runts }}</h2>
 
 				{% assign cont = content | newline_to_br | split: '<br />' %}
 				{% for line in cont %}
 				{% assign fc = line | lstrip | rstrip | slice: 1 %}
 				{% if fc == "p" %}
-				{{ line | replace_last: " ", "&nbsp;" }}
+				{{ line | kill_runts }}
 				{% else %}
 				{{ line }}
 				{% endif %}

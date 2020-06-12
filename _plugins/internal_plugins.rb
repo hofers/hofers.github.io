@@ -1,3 +1,5 @@
+require 'jekyll-replace-last'
+
 module Jekyll
   class EmailTag < Liquid::Tag
     def initialize(tag_name, input, tokens)
@@ -55,8 +57,15 @@ module Jekyll
       params.split("|")
     end
   end
+
+  module KillRuntsFilter
+    def kill_runts(input)
+      "#{replace_last(input, " ", "&nbsp;")}"
+    end
+  end
 end
 
 Liquid::Template.register_tag('email', Jekyll::EmailTag)
 Liquid::Template.register_tag('inbound_link', Jekyll::InboundLinkTag)
 Liquid::Template.register_tag('outbound_link', Jekyll::OutboundLinkTag)
+Liquid::Template.register_filter(Jekyll::KillRuntsFilter)
