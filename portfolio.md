@@ -10,7 +10,7 @@ css: portfolio
 <div class="pf-item" id="{{ item.id | remove: '/portfolio-items/' }}">
   <div class="pf-text">
     <h2 class="pf-item-title"><a href="{{ item.link }}" target="_blank" rel="noreferrer">{{ item.title }}</a></h2>
-    <h3>{{ item.source }} | {{ item.date | date: '%B %Y' }}</h3>
+    <h3>{{ item.source }} | {{ item.date | date: '%B %Y' | kill_runts }}</h3>
     {{ item.content | markdownify }}
   </div>
   <div class="pf-img">
