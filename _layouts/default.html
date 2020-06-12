@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <title> {{ site.title }} | {{ page.title }} </title>
 
 <head>
@@ -13,24 +12,20 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/stylish.css">
   {% if page.css %}
   <link rel="stylesheet" type="text/css" href="/assets/css/{{ page.css }}.css">
-  {% endif %}
+  {%- endif -%}
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143817336-1"></script>
   <script src="/assets/js/ga.js" type="text/javascript"></script>
-
-
 </head>
-
-
 <body>
   <div class="nav{% if page.tags contains 'wide' %} wide{% endif %}">
-    {% assign pages = site.pages | where_exp: "i", "i.tags contains 'is-in-menu'" %}
+    {%- assign pages = site.pages | where_exp: "i", "i.tags contains 'is-in-menu'" -%}
     {% for p in pages %}
     <a href="{{ p.url }}" class="button{% if p.title == page.title %} active{% endif %}">{{ p.title }}</a>
-    {% endfor %}
+    {%- endfor -%}
   </div>
   <div class="main">
     <div class="container{% if page.tags contains 'wide' %} wide{% endif %}">
@@ -53,5 +48,4 @@
     </div>
   </div>
 </body>
-
 </html>
