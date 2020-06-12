@@ -1,17 +1,20 @@
 require 'jekyll-replace-last'
+require 'yaml'
 
 module Jekyll
   class EmailTag < Liquid::Tag
     def initialize(tag_name, input, tokens)
       super
-      @input = input
+      @email = ""
+      config_path = "./_config.yml"
+      if File.exist?("../_config.yml")
+        config_path = "../_config.yml"
+      end
+      File.foreach(config_path) { |line| if line[0..4] == "email" then @email = line[7..-2] end }
     end
   
     def render(context)
-      email = context[@input.strip]
-  
-      output =  "<a href=\"mailto:#{email}\" target=\"_blank\" rel=\"noreferrer\">#{email}</a>"
-  
+      output =  "<a href=\"mailto:#{@email}\" target=\"_blank\" rel=\"noreferrer\">#{@email}</a>"
       return output;
     end
   end
@@ -65,7 +68,7 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('email', Jekyll::EmailTag)
+Liquid::Template.register_tag('my_email', Jekyll::EmailTag)
 Liquid::Template.register_tag('inbound_link', Jekyll::InboundLinkTag)
 Liquid::Template.register_tag('outbound_link', Jekyll::OutboundLinkTag)
 Liquid::Template.register_filter(Jekyll::KillRuntsFilter)
