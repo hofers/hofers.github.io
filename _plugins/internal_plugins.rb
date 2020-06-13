@@ -2,6 +2,8 @@ require 'jekyll-replace-last'
 require 'yaml'
 
 module Jekyll
+  # {% my_email %}
+  # creates a mailto: link to the address specified at `site.email` in `_config.yml`
   class EmailTag < Liquid::Tag
     def initialize(tag_name, input, tokens)
       super
@@ -19,7 +21,10 @@ module Jekyll
     end
   end
 
-  class InboundLinkTag < Liquid::Tag
+  # {% link URL | TEXT %}
+  # creates a link tag for URLs directed to `URL` with `TEXT` as the link text
+  # automatically formats outbound links with `target="_blank"` and `rel="noreferrer"`
+  class LinkTag < Liquid::Tag
     def initialize(tag_name, input, tokens)
       super
       @input = input
@@ -29,8 +34,12 @@ module Jekyll
       input_split = split_params(@input)
       link = input_split[0].strip
       text = input_split[1].strip
-  
-      output =  "<a href=\"#{link}\">#{text}</a>"
+
+      if link[0] == "/" || link[0] == "#"
+        output =  "<a href=\"#{link}\">#{text}</a>"
+      else 
+        output =  "<a href=\"#{link}\" target=\"_blank\" rel=\"noreferrer\">#{text}</a>"
+      end
   
       return output;
     end
@@ -40,27 +49,9 @@ module Jekyll
     end
   end
 
-  class OutboundLinkTag < Liquid::Tag
-    def initialize(tag_name, input, tokens)
-      super
-      @input = input
-    end
-  
-    def render(context)
-      input_split = split_params(@input)
-      link = input_split[0].strip
-      text = input_split[1].strip
-  
-      output =  "<a href=\"#{link}\" target=\"_blank\" rel=\"noreferrer\">#{text}</a>"
-  
-      return output;
-    end
-  
-    def split_params(params)
-      params.split("|")
-    end
-  end
-
+  # {% CONTENT | kill_runts %}
+  # replaces the last space in `CONTENT` with a non-breaking space
+  # used to prevent runts in text
   module KillRuntsFilter
     def kill_runts(input)
       "#{replace_last(input, " ", "&nbsp;")}"
@@ -69,6 +60,5 @@ module Jekyll
 end
 
 Liquid::Template.register_tag('my_email', Jekyll::EmailTag)
-Liquid::Template.register_tag('inbound_link', Jekyll::InboundLinkTag)
-Liquid::Template.register_tag('outbound_link', Jekyll::OutboundLinkTag)
+Liquid::Template.register_tag('link', Jekyll::LinkTag)
 Liquid::Template.register_filter(Jekyll::KillRuntsFilter)
