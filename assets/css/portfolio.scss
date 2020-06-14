@@ -11,35 +11,31 @@
 
 .pf-item:nth-of-type(2n) {
   flex-direction: row-reverse;
+  .pf-text {
+    padding: 0 0 0 0.9rem;
+  }
 }
 
 .pf-text {
   flex: 2;
   padding: 0 0.9rem 0 0;
-}
-
-.pf-item:nth-of-type(2n) .pf-text {
-  padding: 0 0 0 0.9rem;
+  & > h2 {
+    color: $red;
+    font-style: italic;
+    padding-top: 0.333rem;
+  }
 }
 
 .pf-img {
   flex: 1.7;
   margin: auto 0;
   max-width: 25rem;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
-
-.pf-img img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.pf-item-title {
-  color: $red;
-  font-style: italic;
-  padding-top: 0.333rem;
-}
-
 
 @media(max-width: 740px) {
 

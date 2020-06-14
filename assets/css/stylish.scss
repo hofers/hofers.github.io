@@ -8,14 +8,9 @@
 .nav {
   max-width: 39.5rem;
   margin: auto;
-}
-
-.nav.wide {
-  max-width: 52.5rem;
-}
-
-.container.wide {
-  max-width: 50rem;
+  &.wide {
+    max-width: 52.5rem;
+  }
 }
 
 .main {
@@ -34,6 +29,9 @@
   background-color: $off-white;
   box-shadow: 0.05rem 0.1rem 0.25rem $gray;
   border-radius: 0.25rem;
+  &.wide {
+    max-width: 50rem;
+  }
   & > h2 {
     margin-bottom: 1rem;
   }
@@ -50,16 +48,15 @@
 .icon {
   color: $off-black;
   padding-right: 0.5rem;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $red;
+    text-decoration: none;
+  }
 }
 
-.icon:hover,
-.icon:focus,
-.icon:active {
-  color: $red;
-  text-decoration: none;
-}
-
-.button {
+.nav > a {
   font-size: 0.9rem;
   color: inherit;
   line-height: 1.25rem;
@@ -70,14 +67,12 @@
   box-shadow: 0.05rem 0.1rem 0.25rem $gray;
   border-radius: 0.333rem 0.333rem 0 0;
   cursor: pointer;
-}
-
-.button:first-of-type {
-  margin-left: 0.3rem;
-}
-
-.active {
-  color: $red;
+  &:first-of-type {
+    margin-left: 0.3rem;
+  }
+  &.active {
+    color: $red;
+  }
 }
 
 .bar {

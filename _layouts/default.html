@@ -24,7 +24,7 @@
   <div class="nav{% if page.tags contains 'wide' %} wide{% endif %}">
     {%- assign pages = site.pages | where_exp: "i", "i.tags contains 'is-in-menu'" -%}
     {% for p in pages %}
-    <a href="{{ p.url }}" class="button{% if p.title == page.title %} active{% endif %}">{{ p.title }}</a>
+    <a href="{{ p.url }}"{% if p.title == page.title %} class="active"{% endif %}>{{ p.title }}</a>
     {%- endfor -%}
   </div>
   <div class="main">
