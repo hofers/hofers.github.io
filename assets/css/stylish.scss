@@ -5,31 +5,12 @@
 @import "typography";
 @import "background";
 
-.nav {
-  max-width: 39.5rem;
-  margin: auto;
-}
-
-.wide {
-  .nav{
-    max-width: 52.5rem;
-  }
-  .container {
-    max-width: 50rem;
-  }
-}
-
 .main {
   text-align: center;
 }
 
 .container {
   display: inline-block;
-  height: 100%;
-  width: calc(100% - 2.5rem);
-  max-height: calc(100% - 1.75rem);
-  max-width: 37rem;
-  margin: auto auto 4rem;
   padding: 0 1.25rem;
   text-align: left;
   background-color: $off-white;
@@ -40,41 +21,42 @@
   }
 }
 
+.nav {
+  a {
+    font-size: 0.9rem;
+    color: inherit;
+    line-height: 1.25rem;
+    letter-spacing: normal;
+    padding: 0.15rem 0.8rem;
+    border: 0.15rem $off-black;
+    background-color: $off-white;
+    box-shadow: 0.05rem 0.1rem 0.25rem $gray;
+    border-radius: 0.333rem 0.333rem 0 0;
+    cursor: pointer;
+    &:first-of-type {
+      margin-left: 0.3rem;
+    }
+    &.active {
+      color: $red;
+    }
+  }
+}
+
 .footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding-bottom: 2.3rem;
   padding-top: 0.9rem;
-}
-
-.icon {
-  color: $off-black;
-  padding-right: 0.5rem;
-  &:hover,
-  &:focus,
-  &:active {
-    color: $red;
-    text-decoration: none;
-  }
-}
-
-.nav > a {
-  font-size: 0.9rem;
-  color: inherit;
-  line-height: 1.25rem;
-  letter-spacing: normal;
-  padding: 0.15rem 0.8rem;
-  border: 0.15rem $off-black;
-  background-color: $off-white;
-  box-shadow: 0.05rem 0.1rem 0.25rem $gray;
-  border-radius: 0.333rem 0.333rem 0 0;
-  cursor: pointer;
-  &:first-of-type {
-    margin-left: 0.3rem;
-  }
-  &.active {
-    color: $red;
+  a {
+    color: $off-black;
+    padding-right: 0.5rem;
+    &:hover,
+    &:focus,
+    &:active {
+      color: $red;
+      text-decoration: none;
+    }
   }
 }
 
@@ -92,18 +74,34 @@
   padding: 1rem 0 0.5rem;
 }
 
-@media(max-width: 550px) {
-  .fa.fa-5x {
+@media(min-width: 450px) {
+  .fa.fa-3x {
     font-size: 4rem;
-  }
-
-  .container {
-    margin: auto;
   }
 }
 
-@media(max-width: 450px) {
-  .fa.fa-5x {
-    font-size: 3rem;
+@media(min-width: 550px) {
+  body > div {
+    max-width: 39.5rem;
+    margin: auto;
+  }
+
+  .container {
+    width: calc(100% - 2.5rem);
+    max-width: 37rem;
+    margin: auto auto 4rem;
+  }
+  
+  .wide {
+    > div {
+      max-width: 52.5rem;
+    }
+    .container {
+      max-width: 50rem;
+    }
+  }
+
+  .fa.fa-3x {
+    font-size: 5rem;
   }
 }

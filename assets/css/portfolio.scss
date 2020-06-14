@@ -5,20 +5,11 @@
 
 .pf-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   margin: 1.4rem 0.4rem;
 }
 
-.pf-item:nth-of-type(2n) {
-  flex-direction: row-reverse;
-  .pf-text {
-    padding: 0 0 0 0.9rem;
-  }
-}
-
 .pf-text {
-  flex: 2;
-  padding: 0 0.9rem 0 0;
   & > h2 {
     color: $red;
     font-style: italic;
@@ -27,29 +18,32 @@
 }
 
 .pf-img {
-  flex: 1.7;
-  margin: auto 0;
-  max-width: 25rem;
   img {
-    display: block;
     width: 100%;
-    height: auto;
   }
 }
 
-@media(max-width: 740px) {
-
-  .pf-item,
-  .pf-item:nth-of-type(2n) {
-    flex-direction: column-reverse;
-  }
-
-  .pf-text,
-  .pf-item:nth-of-type(2n) .pf-text {
-    padding: 0;
+@media(min-width: 740px) {
+  .pf-text{
+    flex: 2;
   }
 
   .pf-img {
-    margin: auto;
+    flex: 1.7;
+    margin: auto 0;
+  }
+
+  .pf-item:nth-of-type(2n-1) {
+    flex-direction: row-reverse;
+    .pf-text {
+      padding-right: 0.9rem;
+    }
+  }
+
+  .pf-item:nth-of-type(2n) {
+    flex-direction: row;
+    .pf-text {
+      padding-left: 0.9rem;
+    }
   }
 }
