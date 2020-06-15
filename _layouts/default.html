@@ -22,7 +22,7 @@
 </head>
 <body{% if page.tags contains 'wide' %} class="wide"{% endif %}>
   <div class="nav">
-    {%- assign pages = site.pages | where_exp: "i", "i.tags contains 'is-in-menu'" -%}
+    {%- assign pages = site.pages | where_exp: "i", "i.place-in-menu" | sort: "place-in-menu" -%}
     {% for p in pages %}
     <a href="{{ p.url }}"{% if p.title == page.title %} class="active"{% endif %}>{{ p.title }}</a>
     {%- endfor -%}

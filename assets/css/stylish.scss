@@ -11,6 +11,7 @@
 
 .container {
   display: inline-block;
+  min-width: calc(100% - 2.5rem);
   padding: 0 1.25rem;
   text-align: left;
   background-color: $off-white;
@@ -87,8 +88,6 @@
   }
 
   .container {
-    width: calc(100% - 2.5rem);
-    max-width: 37rem;
     margin: auto auto 4rem;
   }
   
