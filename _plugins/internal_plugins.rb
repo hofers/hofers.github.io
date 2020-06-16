@@ -21,9 +21,10 @@ module Jekyll
     end
   end
 
-  # {% link URL | TEXT %}
+  # {% link URL | TEXT | download? %}
   # creates a link tag for URLs directed to `URL` with `TEXT` as the link text
   # automatically formats outbound links with `target="_blank"` and `rel="noreferrer"`
+  # include `| download` to create a download link
   class LinkTag < Liquid::Tag
     def initialize(tag_name, input, tokens)
       super
