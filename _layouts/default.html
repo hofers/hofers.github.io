@@ -10,15 +10,17 @@
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
 
   <link rel="stylesheet" type="text/css" href="/assets/css/stylish.css">
-  {% if page.css %}
-  <link rel="stylesheet" type="text/css" href="/assets/css/{{ page.css }}.css">
-  {% endif %}
+  {% if page.tags contains 'css' %}<link rel="stylesheet" type="text/css" href="/assets/css/{{ page.name | replace: ".md", "" }}.css">{% endif %}
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
 
+  <link rel="preload" as="image" href="https://docs.google.com/viewer?url={{ site.address | append: site.resume.pdf | url_encode }}&embedded=true">
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143817336-1"></script>
-  <script src="/assets/js/ga.js" type="text/javascript"></script>
+  <script type="text/javascript" src="/assets/js/ga.js"></script>
+  {% if page.tags contains 'js' %}
+  <script type="text/javascript" src="/assets/js/{{ page.name | replace: '.md', '' }}.js"></script>{% endif %}
 </head>
 <body{% if page.tags contains 'wide' %} class="wide"{% endif %}>
   <div class="nav">
