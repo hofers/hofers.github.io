@@ -11,7 +11,7 @@ gtag('config', 'UA-143817336-1', {
   link_attribution: true
 })
 
-var getOutboundLink = function (url) {
+var trackClickEvent = function (url) {
   gtag('event', 'click', {
     event_category: 'outbound',
     event_label: url,
@@ -22,10 +22,25 @@ var getOutboundLink = function (url) {
   })
 }
 
+var trackDownloadEvent = function (url) {
+  gtag('event', 'download ', {
+    event_category: 'download',
+    event_label: url,
+    transport_type: 'beacon',
+  })
+}
+
 // Add outbound link click event to all outbound links
 document.querySelectorAll("a[target='_blank']").forEach((e) => {
   e.addEventListener('click', (e) => { 
-    getOutboundLink(e.getAttribute('href'));
+    trackClickEvent(e.getAttribute('href'));
     e.preventDefault();
+  });
+});
+
+// Add download event to download links
+document.querySelectorAll("a[download]").forEach((e) => {
+  e.addEventListener('click', (e) => { 
+    trackDownloadEvent(e.getAttribute('href'));
   });
 });

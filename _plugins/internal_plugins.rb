@@ -35,7 +35,9 @@ module Jekyll
       link = input_split[0].strip
       text = input_split[1].strip
 
-      if link[0] == "/" || link[0] == "#"
+      if input_split[2] && input_split[2].strip == "download"
+        output =  "<a href=\"#{context[link]}\" download>#{text}</a>"
+      elsif link[0] == "/" || link[0] == "#"
         output =  "<a href=\"#{link}\">#{text}</a>"
       else 
         output =  "<a href=\"#{link}\" target=\"_blank\" rel=\"noreferrer\">#{text}</a>"

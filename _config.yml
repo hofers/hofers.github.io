@@ -24,7 +24,11 @@ description: >- # this means to ignore newlines until "baseurl:"
   Personal professional site of Sean Hofer, Front-End Web Developer in the San Francisco Bay Area
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://seanhofer.com" # the base hostname & protocol for your site, e.g. http://example.com
+address: "https://seanhofer.com"
 github_username: hofers
+resume:
+  pdf: /assets/Sean Hofer - Resume.pdf
+  docx: /assets/Sean Hofer - Resume.docx
 
 defaults:
   -
