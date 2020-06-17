@@ -6,4 +6,6 @@ This is the repo for my personal professional site, available at https://seanhof
 
 It's made with Jekyll and Sass, and it uses [jekyll-replace-last](https://github.com/hofers/jekyll-replace-last), a simple Jekyll plugin I made to mimic Liquid's `replace-first` filter for the last occurrence of a substring within a string. I use this to automatically prevent [runts](https://indesignsecrets.com/3-ways-to-fix-runts-in-your-text.php) in some text tags by replacing the final space with a non-breaking space.
 
+I use Mozilla's [PDF.js](https://mozilla.github.io/pdf.js/) for PDF embedding.
+
 My Jekyll source code can be found on the [`jekyll`](https://github.com/hofers/hofers.github.io/tree/jekyll) branch, and my compiled static site can be found on the [`master`](https://github.com/hofers/hofers.github.io/tree/master) branch.
