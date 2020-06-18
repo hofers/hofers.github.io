@@ -13,4 +13,4 @@ permalink: /
 
 &emsp;If you're interested in contacting me, drop me a line at&nbsp;{% my_email %} or hit me up on my {% link /linkedin | LinkedIn %} page. You can also check out my {% link /resume | resume %} and my {% link /portfolio | portfolio %}. My current work is mostly front and back-end web development, but I'm always excited to pick up new skills.
 
-&emsp; And thanks for checking out my site!
+&emsp;And thanks for checking out my site!

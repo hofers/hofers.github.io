@@ -16,8 +16,7 @@ module Jekyll
     end
   
     def render(context)
-      output =  "<a href=\"mailto:#{@email}\" target=\"_blank\" rel=\"noreferrer\">#{@email}</a>"
-      return output;
+      return "<a href=\"mailto:#{@email}\" target=\"_blank\" rel=\"noreferrer\">#{@email}</a>"
     end
   end
 
@@ -32,23 +31,37 @@ module Jekyll
     end
   
     def render(context)
-      input_split = split_params(@input)
-      link = input_split[0].strip
-      text = input_split[1].strip
+      input_split = @input.split("|")
+      link = context[input_split[0].strip] || input_split[0].strip
+      text = context[input_split[1].strip] || input_split[1].strip
 
       if input_split[2] && input_split[2].strip == "download"
-        output =  "<a href=\"#{context[link]}\" download>#{text}</a>"
+        output = "<a href=\"#{link}\" download>#{text}</a>"
       elsif link[0] == "/" || link[0] == "#"
-        output =  "<a href=\"#{link}\">#{text}</a>"
+        output = "<a href=\"#{link}\">#{text}</a>"
       else 
-        output =  "<a href=\"#{link}\" target=\"_blank\" rel=\"noreferrer\">#{text}</a>"
+        output = "<a href=\"#{link}\" target=\"_blank\" rel=\"noreferrer\">#{text}</a>"
       end
   
       return output;
     end
+  end
+
+  # {% pdf TITLE | FILE %}
+  # creates an iframe with title `TITLE` for displaying a PDF located at `FILE`
+  # uses PDF.js for rendering PDFs
+  class PDFTag < Liquid::Tag
+    def initialize(tag_name, input, tokens)
+      super
+      @input = input
+    end
   
-    def split_params(params)
-      params.split("|")
+    def render(context)
+      input_split = @input.split("|")
+      title = context[input_split[0].strip] || input_split[0].strip
+      file = context[input_split[1].strip] || input_split[1].strip
+
+      return "<iframe title=\"#{title}\" src=\"/assets/js/pdf.js/web/viewer.html?file=#{file}\"></iframe>"
     end
   end
 
@@ -64,4 +77,5 @@ end
 
 Liquid::Template.register_tag('my_email', Jekyll::EmailTag)
 Liquid::Template.register_tag('link', Jekyll::LinkTag)
+Liquid::Template.register_tag('pdf', Jekyll::PDFTag)
 Liquid::Template.register_filter(Jekyll::KillRuntsFilter)
