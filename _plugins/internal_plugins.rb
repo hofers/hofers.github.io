@@ -33,7 +33,11 @@ module Jekyll
     def render(context)
       input_split = @input.split("|")
       link = context[input_split[0].strip] || input_split[0].strip
-      text = context[input_split[1].strip] || input_split[1].strip
+      if input_split.size == 1
+        text = link
+      else
+        text = context[input_split[1].strip] || input_split[1].strip
+      end
 
       if input_split[2] && input_split[2].strip == "download"
         output = "<a href=\"#{link}\" download>#{text}</a>"
@@ -58,8 +62,12 @@ module Jekyll
   
     def render(context)
       input_split = @input.split("|")
-      title = context[input_split[0].strip] || input_split[0].strip
-      file = context[input_split[1].strip] || input_split[1].strip
+      file = context[input_split[0].strip] || input_split[0].strip
+      if input_split.size == 1
+        title = file
+      else
+        title = context[input_split[1].strip] || input_split[1].strip
+      end
 
       return "<iframe title=\"#{title}\" src=\"/assets/js/pdf.js/web/viewer.html?file=#{file}\"></iframe>"
     end
