@@ -35,6 +35,9 @@
   <script>
     {% include scripts/{{ page.name | replace: '.md', '' }}.js %}
   </script>{% endif %}
+
+  <!-- try to prefetch resume on all pages -->
+  <source rel="prefetch" src="/lib/pdf.js/web/viewer.html?file={{ site.resume.pdf }}">
 </head>
 <body{% if page.tags contains 'wide' %} class="wide"{% endif %}>
   <div class="nav">
