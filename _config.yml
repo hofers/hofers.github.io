@@ -52,6 +52,7 @@ collections:
 
 # Build settings
 plugins:
+  - jekyll-brotli
   - jekyll-redirect-from
   - jekyll-replace-last
   - jemoji
