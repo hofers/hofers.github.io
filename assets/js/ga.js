@@ -30,17 +30,19 @@ var trackDownloadEvent = function (url) {
   })
 }
 
-// Add outbound link click event to all outbound links
-document.querySelectorAll("a[target='_blank']").forEach((e) => {
-  e.addEventListener('click', (e) => { 
-    trackClickEvent(e.getAttribute('href'));
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', function () {
+  // Add outbound link click event to all outbound links
+  document.querySelectorAll("a[target='_blank']").forEach((e) => {
+    e.addEventListener('click', (e) => { 
+      trackClickEvent(e.getAttribute('href'));
+      e.preventDefault();
+    });
   });
-});
 
-// Add download event to download links
-document.querySelectorAll("a[download]").forEach((e) => {
-  e.addEventListener('click', (e) => { 
-    trackDownloadEvent(e.getAttribute('href'));
+  // Add download event to download links
+  document.querySelectorAll("a[download]").forEach((e) => {
+    e.addEventListener('click', (e) => { 
+      trackDownloadEvent(e.getAttribute('href'));
+    });
   });
 });
