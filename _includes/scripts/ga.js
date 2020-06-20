@@ -45,4 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
       trackDownloadEvent(e.getAttribute('href'));
     });
   });
+
+  var tag = document.getElementById("ga");
+  tag.parentNode.removeChild(tag);
 });

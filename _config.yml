@@ -42,7 +42,8 @@ defaults:
 permalink: /class-blog/:title
 
 sass:
-    sass_dir: _sass
+  sass_dir: _sass
+  style: compressed
 
 collections:
   portfolio-items:

@@ -9,16 +9,32 @@
   <meta name="description" content="{{ site.description }}">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
 
-  <link rel="stylesheet" type="text/css" href="/assets/css/stylish.css">
-  {% if page.tags contains 'css' %}<link rel="stylesheet" type="text/css" href="/assets/css/{{ page.name | replace: ".md", "" }}.css">{% endif %}
+  {%- capture styles -%}
+  {%- include styles/stylish.scss -%}
+  {% endcapture %}
+  <style>
+    {{ styles | scssify }}
+  </style>
+  {%- if page.tags contains 'css' -%}
+  {%- capture extra_styles -%}
+  {%- include styles/{{ page.name | replace: ".md", "" }}.scss -%}
+  {% endcapture %}
+  <style>
+    {{ extra_styles | scssify }}
+  </style>
+  {%- endif -%}
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" type="text/css">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143817336-1"></script>
-  <script type="text/javascript" src="/assets/js/ga.js"></script>
+  <script id="ga">
+    {% include scripts/ga.js %}
+  </script>
   {% if page.tags contains 'js' %}
-  <script type="text/javascript" src="/assets/js/{{ page.name | replace: '.md', '' }}.js"></script>{% endif %}
+  <script>
+    {% include scripts/{{ page.name | replace: '.md', '' }}.js %}
+  </script>{% endif %}
 </head>
 <body{% if page.tags contains 'wide' %} class="wide"{% endif %}>
   <div class="nav">

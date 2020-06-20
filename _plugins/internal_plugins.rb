@@ -69,7 +69,7 @@ module Jekyll
         title = context[input_split[1].strip] || input_split[1].strip
       end
 
-      return "<iframe title=\"#{title}\" src=\"/assets/js/pdf.js/web/viewer.html?file=#{file}\"></iframe>"
+      return "<iframe title=\"#{title}\" src=\"/lib/pdf.js/web/viewer.html?file=#{file}\"></iframe>"
     end
   end
 
