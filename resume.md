@@ -6,4 +6,4 @@ place-in-menu: 3
 tags: css
 ---
 {% pdf site.resume.pdf | page.h1 %}
-Or download a copy as {% link site.resume.pdf | a PDF | download %} or {% link site.resume.docx | Word doc | download %}.
+Or download a copy as [a PDF]({{ site.resume.pdf }}){% download %} or [Word doc]({{ site.resume.docx }}){% download %}.

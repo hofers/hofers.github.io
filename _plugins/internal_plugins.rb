@@ -20,34 +20,19 @@ module Jekyll
     end
   end
 
-  # {% link URL | TEXT | download? %}
-  # creates a link tag for URLs directed to `URL` with `TEXT` as the link text
-  # automatically formats outbound links with `target="_blank"` and `rel="noreferrer"`
-  # include `| download` to create a download link
-  class LinkTag < Liquid::Tag
-    def initialize(tag_name, input, tokens)
-      super
-      @input = input
-    end
-  
+  # {% download %}
+  # appends download attribute
+  class DownloadTag < Liquid::Tag
     def render(context)
-      input_split = @input.split("|")
-      link = context[input_split[0].strip] || input_split[0].strip
-      if input_split.size == 1
-        text = link
-      else
-        text = context[input_split[1].strip] || input_split[1].strip
-      end
+      return "{:download=''}"
+    end
+  end
 
-      if input_split[2] && input_split[2].strip == "download"
-        output = "<a href=\"#{link}\" download>#{text}</a>"
-      elsif link[0] == "/" || link[0] == "#"
-        output = "<a href=\"#{link}\">#{text}</a>"
-      else 
-        output = "<a href=\"#{link}\" target=\"_blank\" rel=\"noreferrer\">#{text}</a>"
-      end
-  
-      return output;
+  # {% out %}
+  # appends outbound link attributes
+  class OutboundTag < Liquid::Tag
+    def render(context)
+      return "{:target='_blank' rel='noreferrer'}"
     end
   end
 
@@ -84,6 +69,7 @@ module Jekyll
 end
 
 Liquid::Template.register_tag('my_email', Jekyll::EmailTag)
-Liquid::Template.register_tag('link', Jekyll::LinkTag)
+Liquid::Template.register_tag('download', Jekyll::DownloadTag)
+Liquid::Template.register_tag('out', Jekyll::OutboundTag)
 Liquid::Template.register_tag('pdf', Jekyll::PDFTag)
 Liquid::Template.register_filter(Jekyll::KillRuntsFilter)
