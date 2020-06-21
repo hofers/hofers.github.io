@@ -1,7 +1,9 @@
 @font-face{
   font-family:'FontAwesome';
-  src: url('../assets/fonts/fontawesome/fontawesome-webfont.ttf') format('truetype');
-  font-display: fallback;
+  src: 
+      url('../assets/fonts/fontawesome/fontawesome-webfont.woff') format('woff'),
+      url('../assets/fonts/fontawesome/fontawesome-webfont.ttf') format('truetype');
+  font-display: swap;
 }
 .fa {
   display:inline-block;
