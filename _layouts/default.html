@@ -9,9 +9,9 @@
   <meta name="description" content="{{ site.description }}">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
 
-  <link rel="preload" href="../assets/fonts/SourceSansPro-Light.ttf.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="../assets/fonts/SourceSansPro-LightIt.ttf.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="../assets/fonts/fontawesome/fontawesome-webfont.woff" as="font" crossorigin="anonymous">
+  <style>
+    {% include font %}
+  </style>
 
   {%- capture styles -%}
   {%- include styles/stylish.scss -%}
