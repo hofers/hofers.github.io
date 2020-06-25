@@ -3,7 +3,7 @@ title: Portfolio
 h1: Sean's Portfolio
 h2: Check out some examples of my past work
 place-in-menu: 2
-tags: wide css
+tags: wide css has-italics
 ---
 {%- assign items = site.portfolio-items | reverse -%}
 {%- for item in items -%}

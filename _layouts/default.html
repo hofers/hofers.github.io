@@ -9,9 +9,21 @@
   <meta name="description" content="{{ site.description }}">
   <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
 
-  <link rel="preload" href="../assets/fonts/SourceSansPro-Light.ttf.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="../assets/fonts/SourceSansPro-LightIt.ttf.woff2" as="font" crossorigin="anonymous">
-  <link rel="preload" href="../assets/fonts/fontawesome/fontawesome-webfont.woff2" as="font" crossorigin="anonymous">
+  {%- capture fontfaces -%}
+  {%- include styles/inline-fonts.scss -%}
+  {% endcapture %}
+  <style>
+    {{ fontfaces | scssify }}
+  </style>
+
+  {% if page.tags contains 'has-italics' %}
+  {%- capture italics -%}
+  {%- include styles/italic-fonts.scss -%}
+  {% endcapture %}
+  <style>
+    {{ italics | scssify }}
+  </style>
+  {% endif %}
 
   {%- capture styles -%}
   {%- include styles/stylish.scss -%}
