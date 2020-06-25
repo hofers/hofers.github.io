@@ -9,7 +9,7 @@ image: "/assets/images/class-blog/witsnwagers.jpg"
 
 <!-- e -->
 
-We recently had our first boardgame lab in class, and for this inaugural session I played Wits & Wagers Party with four of my fellow classmates (AJ, Vanky, Tiffany, and Martin). Wits & Wagers can be played with 4-14 players, but the [BoardGameGeek](https://boardgamegeek.com/boardgame/123239/wits-wagers-party){:target='_blank' :rel='noreferrer'} page places the ideal number of players at around 5-6, so we chose a group of about that size. Wits & Wagers' only listed game mechanic on BoardGameGeek is Betting/Wagering.
+We recently had our first boardgame lab in class, and for this inaugural session I played Wits & Wagers Party with four of my fellow classmates (AJ, Vanky, Tiffany, and Martin). Wits & Wagers can be played with 4-14 players, but the [BoardGameGeek](https://boardgamegeek.com/boardgame/123239/wits-wagers-party){% out %} page places the ideal number of players at around 5-6, so we chose a group of about that size. Wits & Wagers' only listed game mechanic on BoardGameGeek is Betting/Wagering.
 
 Wits & Wagers Party is a simplified version of Wits & Wagers in which the objective is to have the most chips at the end of the game. Chips are obtained by correctly wagering (1) and (2) point* tokens on proposed answers to trivia questions. The game plays out like so:
 

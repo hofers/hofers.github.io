@@ -9,7 +9,7 @@ image: "/assets/images/class-blog/hangman.png"
 
 <!-- e -->
 
-For the first post to my class blog, I sat down to play a game I found on archive.org's internet arcade called [Hangman](https://archive.org/details/arcade_hangman){:target='_blank' :rel='noreferrer'}. It's the classic pen-and-paper game we all probably know well, only in an arcade cabinet (or in this case, a browser). 
+For the first post to my class blog, I sat down to play a game I found on archive.org's internet arcade called [Hangman](https://archive.org/details/arcade_hangman){% out %}. It's the classic pen-and-paper game we all probably know well, only in an arcade cabinet (or in this case, a browser). 
 
 Video games and paper games have a couple different advantages (as mentioned in class). Notably in this case, scoring was handled in a way that was not immediately clear to me. Because video games self-enforce rules, unclear rulesets can lead to frustrating experiences.
 

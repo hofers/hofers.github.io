@@ -10,7 +10,7 @@ image: "/assets/images/class-blog/hatlight.png"
 <!-- e -->
 ***
 
-For our first video game lab, I played 6 games with Tiffany: [*This is the only level*](http://armorgames.com/play/4309/this-is-the-only-level){:target='_blank' :rel='noreferrer'}, [*Magical Maiden Madison*](http://scoutshonour.com/madison/){:target='_blank' :rel='noreferrer'}, [*A Dance of Fire and Ice*](https://www.kongregate.com/games/fizzd/a-dance-of-fire-and-ice){:target='_blank' :rel='noreferrer'}, [*QWOP*](http://www.foddy.net/Athletics.html){:target='_blank' :rel='noreferrer'} , [*Canabalt*](http://www.kongregate.com/games/AdamAtomic/canabalt){:target='_blank' :rel='noreferrer'}, and [*Hatlight*](https://w.itch.io/hatlight){:target='_blank' :rel='noreferrer'}. For each of these, we took turns playing and watching each other play and compared our experiences. 
+For our first video game lab, I played 6 games with Tiffany: [*This is the only level*](http://armorgames.com/play/4309/this-is-the-only-level){% out %}, [*Magical Maiden Madison*](http://scoutshonour.com/madison/){% out %}, [*A Dance of Fire and Ice*](https://www.kongregate.com/games/fizzd/a-dance-of-fire-and-ice){% out %}, [*QWOP*](http://www.foddy.net/Athletics.html){% out %} , [*Canabalt*](http://www.kongregate.com/games/AdamAtomic/canabalt){% out %}, and [*Hatlight*](https://w.itch.io/hatlight){% out %}. For each of these, we took turns playing and watching each other play and compared our experiences. 
 
 ### Differences between Play and Observation
 
