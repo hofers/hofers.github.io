@@ -10,7 +10,7 @@
       local('SourceSansPro-Light'),
       url('data:font\/woff2\;base64,{{ source }}') format('woff2'),
       url('../assets/fonts/SourceSansPro-Light.ttf') format('truetype');
-  font-display: fallback;
+  font-display: swap;
 }
 {%- capture fa -%}
 {%- include fonts/fontawesome-webfont.woff2.b64 -%}
@@ -20,5 +20,5 @@
   src: 
       url('data:font\/woff2\;base64,{{ fa }}') format('woff2'),
       url('../assets/fonts/fontawesome/fontawesome-webfont.ttf') format('truetype');
-  font-display: fallback;
+  font-display: swap;
 }
