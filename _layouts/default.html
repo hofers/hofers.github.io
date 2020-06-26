@@ -62,7 +62,7 @@
       {{ content }}
       <div class="bar"></div>
       <div class="footer">
-        <a href="mailto:{{ site.email }}" target="_blank" rel="noreferrer" aria-label="Email">
+        <a href="/cdn-cgi/l/email-protection#{{ site.encoded_email }}" target="_blank" rel="noreferrer" aria-label="Email">
           <i class="fa fa-envelope-o fa-3x"></i>
         </a>
         <a href="/resume" aria-label="Resume">
@@ -77,5 +77,8 @@
       </div>
     </div>
   </div>
+  <script>
+    {% include scripts/cloudflare-email-decode.js %}
+  </script>
 </body>
 </html>

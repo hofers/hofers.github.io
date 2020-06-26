@@ -7,16 +7,16 @@ module Jekyll
   class EmailTag < Liquid::Tag
     def initialize(tag_name, input, tokens)
       super
-      @email = ""
+      @encoded_email = ""
       config_path = "./_config.yml"
       if File.exist?("../_config.yml")
         config_path = "../_config.yml"
       end
-      File.foreach(config_path) { |line| if line[0..4] == "email" then @email = line[7..-2] end }
+      File.foreach(config_path) { |line| if line[0..12] == "encoded_email" then @encoded_email = line[15..-2] end }
     end
   
     def render(context)
-      return "<a href=\"mailto:#{@email}\" target=\"_blank\" rel=\"noreferrer\">#{@email}</a>"
+      return "<a href=\"/cdn-cgi/l/email-protection\##{@encoded_email}\" target=\"_blank\" rel=\"noreferrer\"><span class=\"__cf_email__\" data-cfemail=\"#{@encoded_email}\">[email&#160;protected]</span></a>"
     end
   end
 
