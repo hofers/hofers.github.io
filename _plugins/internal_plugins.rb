@@ -2,17 +2,34 @@ require 'jekyll-replace-last'
 require 'yaml'
 
 module Jekyll
+  # {% CONTENT | encode %}
+  # encodes a given email for Cloudflare's email obfuscator
+  module EncodeEmailFilter
+    def encode(email)
+      key = rand(255).to_s(16)
+      hex_key = key.hex
+      result = hex_key.to_s(16)
+      email.split('').each do |n|
+        char = n.to_s().sum.to_i()
+        result += (char ^ hex_key).to_s(16)
+      end
+      return result
+    end
+  end
+
   # {% my_email %}
   # creates a mailto: link to the address specified at `site.email` in `_config.yml`
   class EmailTag < Liquid::Tag
+    include EncodeEmailFilter
     def initialize(tag_name, input, tokens)
       super
-      @encoded_email = ""
+      @email = ""
       config_path = "./_config.yml"
       if File.exist?("../_config.yml")
         config_path = "../_config.yml"
       end
-      File.foreach(config_path) { |line| if line[0..12] == "encoded_email" then @encoded_email = line[15..-2] end }
+      File.foreach(config_path) { |line| if line[0..4] == "email" then @email = line[7..-2] end }
+      @encoded_email = encode(@email)
     end
   
     def render(context)
@@ -73,3 +90,4 @@ Liquid::Template.register_tag('download', Jekyll::DownloadTag)
 Liquid::Template.register_tag('out', Jekyll::OutboundTag)
 Liquid::Template.register_tag('pdf', Jekyll::PDFTag)
 Liquid::Template.register_filter(Jekyll::KillRuntsFilter)
+Liquid::Template.register_filter(Jekyll::EncodeEmailFilter)

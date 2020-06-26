@@ -20,7 +20,6 @@
 
 title: Sean Hofer
 email: me@seanhofer.com
-encoded_email: 5f323a1f2c3a3e313730393a2d713c3032
 description: >- # this means to ignore newlines until "baseurl:"
   Personal professional site of Sean Hofer, Front-End Web Developer in the San Francisco Bay Area
 baseurl: "" # the subpath of your site, e.g. /blog
