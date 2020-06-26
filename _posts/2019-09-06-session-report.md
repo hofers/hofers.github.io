@@ -1,9 +1,9 @@
 ---
-layout: post
 categories: [class]
 title: "An Account of Wits & Wagers Party"
 subtitle: "A Session Report from our first Boardgame Lab"
 image: "/assets/images/class-blog/witsnwagers.jpg"
+tags: has-italics
 ---
 ## Wits & Wagers Party
 

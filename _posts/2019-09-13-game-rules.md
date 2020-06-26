@@ -1,9 +1,9 @@
 ---
-layout: post
 categories: [class]
 title: "Hexadecimate Rules"
 subtitle: "An overview of the rules of my first board game"
 image: "/assets/images/class-blog/game-pieces.jpg"
+tags: has-italics
 ---
 ## *Hexadecimate* Final Rules 
 

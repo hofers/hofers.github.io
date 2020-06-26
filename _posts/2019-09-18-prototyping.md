@@ -1,9 +1,9 @@
 ---
-layout: post
 categories: [class]
 title: "First Game Prototype: Hexadecimate"
 subtitle: "The process for my first rough prototype"
 image: "/assets/images/class-blog/game-pieces.jpg"
+tags: has-italics
 ---
 ## *Hexadecimate*
 
