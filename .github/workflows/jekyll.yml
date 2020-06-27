@@ -20,11 +20,6 @@ jobs:
         with:
           persist-credentials: false 
           fetch-depth: 0
-
-      # Set up Node
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
       
       # Ruby / bundle setup
       - uses: ruby/setup-ruby@v1
@@ -32,10 +27,9 @@ jobs:
           ruby-version: 2.6
       - run: bundle install
 
+      # Minify JS
       - name: Minify JS
-        run: |
-          npm install -g babel-minify --save-dev
-          minify _includes/scripts/ga.js > _includes/scripts/ga.min.js
+        run: bundle exec jekyll minify
         
       # Build
       - run: JEKYLL_ENV=production bundle exec jekyll build

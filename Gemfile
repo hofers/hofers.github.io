@@ -6,6 +6,7 @@ gem "jekyll-brotli"
 
 group :jekyll_plugins do
   gem 'jemoji'
+  gem 'jekyll-minify', :path => 'lib/jekyll-minify'
   gem 'jekyll-replace-last', "~> 1.0.1"
   gem "jekyll-redirect-from", "~> 0.16.0"
 end
