@@ -39,16 +39,15 @@
     {{ extra_styles | scssify }}
   </style>
   {%- endif -%}
-
+  {% if page.tags contains 'js' %}
+  <script>
+    {% include scripts/{{ page.name | replace: '.md', '' }}.js %}
+  </script>{% endif %}
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143817336-1"></script>
   <script>
     {% include scripts/ga.js %}
   </script>
-  {% if page.tags contains 'js' %}
-  <script>
-    {% include scripts/{{ page.name | replace: '.md', '' }}.js %}
-  </script>{% endif %}
 </head>
 <body{% if page.tags contains 'wide' %} class="wide"{% endif %}>
   <div class="nav">
