@@ -46,6 +46,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  var tag = document.getElementById("ga");
+  var tag = document.currentScript || document.scripts[document.scripts.length - 1];
   tag.parentNode.removeChild(tag);
 });
