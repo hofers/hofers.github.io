@@ -6,7 +6,7 @@ module Jekyll
   # encodes a given email for Cloudflare's email obfuscator
   module EncodeEmailFilter
     def encode(email)
-      key = rand(255).to_s(16)
+      key = 20.to_s(16)
       hex_key = key.hex
       result = hex_key.to_s(16)
       email.split('').each do |n|
