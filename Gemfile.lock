@@ -1,5 +1,5 @@
 PATH
-  remote: lib/jekyll-minify
+  remote: _plugins/jekyll-minify
   specs:
     jekyll-minify (0.1.0)
       uglifier
