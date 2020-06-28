@@ -23,13 +23,7 @@ module Jekyll
     include EncodeEmailFilter
     def initialize(tag_name, input, tokens)
       super
-      @email = ""
-      config_path = "./_config.yml"
-      if File.exist?("../_config.yml")
-        config_path = "../_config.yml"
-      end
-      File.foreach(config_path) { |line| if line[0..4] == "email" then @email = line[7..-2] end }
-      @encoded_email = encode(@email)
+      @encoded_email = encode(Jekyll.configuration()["email"])
     end
   
     def render(context)
