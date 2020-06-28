@@ -24,10 +24,16 @@ module Jekyll
     def initialize(tag_name, input, tokens)
       super
       @encoded_email = encode(Jekyll.configuration()["email"])
+      unless input.nil? || input == ""
+        @text = input.strip
+      end
     end
   
     def render(context)
-      return "<a href=\"/cdn-cgi/l/email-protection\##{@encoded_email}\" target=\"_blank\" rel=\"noreferrer\"><span class=\"__cf_email__\" data-cfemail=\"#{@encoded_email}\">[email&#160;protected]</span></a>"
+      unless @text.nil?
+        @text = context[@text] || @text
+      end
+      return "<a href=\"/cdn-cgi/l/email-protection\##{@encoded_email}\" target=\"_blank\" rel=\"noreferrer\">" + (@text.nil? ? "<span class=\"__cf_email__\" data-cfemail=\"#{@encoded_email}\">[email&#160;protected]</span></a>" : "#{@text}</a>")
     end
   end
 
