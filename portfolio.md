@@ -7,6 +7,7 @@ tags: wide css has-italics
 ---
 {%- assign items = site.portfolio-items | reverse -%}
 {%- for item in items -%}
+{% unless item.tags contains 'retired' %}
 <div class="pf-item" id="{{ item.id | remove: '/portfolio-items/' }}">
   <div class="pf-img">
     <a href="{{ item.link }}" target="_blank" rel="noreferrer">
@@ -23,4 +24,5 @@ tags: wide css has-italics
     {{ item.content | markdownify }}
   </div>
 </div>
+{% endunless %}
 {%- endfor -%}
