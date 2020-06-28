@@ -27,9 +27,9 @@ jobs:
           ruby-version: 2.6
       - run: bundle install
 
-      # Minify JS
-      - name: Minify JS
-        run: bundle exec jekyll minify
+      # Uglify JS
+      - name: Uglify JS
+        run: bundle exec jekyll uglify /_includes/scripts/
         
       # Build
       - run: JEKYLL_ENV=production bundle exec jekyll build
