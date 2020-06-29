@@ -23,7 +23,7 @@ var c = function (url) {
 }
 
 var d = function (url) {
-  gtag('event', 'download ', {
+  gtag('event', 'download', {
     event_category: 'download',
     event_label: url,
     transport_type: 'beacon',
@@ -41,9 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Add download event to download links
   document.querySelectorAll("a[download]").forEach(a => {
-    a.addEventListener('click', () => { 
-      d(a.getAttribute('href'));
-    });
+    a.addEventListener('click', () => d(a.getAttribute('href')));
   });
 
   var tag = document.currentScript || document.scripts[document.scripts.length - 1];
