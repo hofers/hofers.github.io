@@ -4,7 +4,7 @@
 
 This is the repo for my personal professional site, available at https://seanhofer.com. It's hosted on GitHub Pages, but built and deployed via a custom GitHub Action that allows me to include custom plugins disallowed by GitHub Pages. My DNS services are handled by Cloudflare and my domain is from Google Domains.
 
-It's made with Jekyll and Sass, and it uses [jekyll-replace-last](https://github.com/hofers/jekyll-replace-last), a simple Jekyll plugin I made to mimic Liquid's `replace-first` filter for the last occurrence of a substring within a string. I use this to automatically prevent [runts](https://indesignsecrets.com/3-ways-to-fix-runts-in-your-text.php) in some text tags by replacing the final space with a non-breaking space.
+It's made with Jekyll and Sass, and it uses [jekyll-replace-last](https://github.com/hofers/jekyll-replace-last) and [jekyll-uglify](https://github.com/hofers/jekyll-uglify), two fairly simple Jekyll plugins I made to wrap Ruby functionality for use in my site and publishing process. Check out their repositories to learn more about each.
 
 I use Mozilla's [PDF.js](https://mozilla.github.io/pdf.js/) for PDF embedding.
 
