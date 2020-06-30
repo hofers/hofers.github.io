@@ -6,9 +6,9 @@
   font-style: normal;
   font-weight: 300;
   src: 
+      url('data:font\/woff2\;base64,{{ source }}') format('woff2'),
       local('Source Sans Pro Light'),
       local('SourceSansPro-Light'),
-      url('data:font\/woff2\;base64,{{ source }}') format('woff2'),
       url('../assets/fonts/SourceSansPro-Light.ttf') format('truetype');
   font-display: swap;
 }
