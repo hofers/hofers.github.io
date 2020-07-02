@@ -1,0 +1,19 @@
+---
+label: Page
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: text
+  name: h1
+  label: h1
+- type: text
+  name: h2
+  label: h2
+- type: number
+  name: place-in-menu
+  label: place-in-menu
+- type: text
+  name: tags
+  label: tags
