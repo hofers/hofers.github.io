@@ -17,3 +17,8 @@ fields:
 - type: text
   name: tags
   label: tags
+- name: permalink
+  type: text
+  config:
+    required: false
+  label: permalink
