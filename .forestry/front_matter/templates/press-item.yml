@@ -1,0 +1,13 @@
+---
+label: Press Item
+hide_body: true
+fields:
+- type: text
+  name: link
+  label: link
+- type: text
+  name: title
+  label: title
+- type: text
+  name: source
+  label: source
