@@ -7,19 +7,25 @@ sections:
 - type: jekyll-pages
   label: Pages
   create: all
+  templates:
+  - page
 - type: jekyll-posts
   label: Posts
   create: all
 - type: directory
   path: _press-items
-  label: Press items
+  label: Press Items
   create: all
   match: "**/*"
+  templates:
+  - press-item
 - type: directory
   path: _portfolio-items
-  label: Portfolio items
+  label: Portfolio Items
   create: all
   match: "**/*"
+  templates:
+  - portfolio-item
 upload_dir: assets/images
 public_path: "/assets/images"
 front_matter_path: ''
