@@ -16,9 +16,6 @@ var c = function (url) {
     event_category: 'outbound',
     event_label: url,
     transport_type: 'beacon',
-    event_callback: function () {
-      window.open(url);
-    }
   })
 }
 
@@ -33,10 +30,7 @@ var d = function (url) {
 document.addEventListener('DOMContentLoaded', function () {
   // Add outbound link click event to all outbound links
   document.querySelectorAll("a[target='_blank']").forEach(a => {
-    a.addEventListener('click', e => { 
-      c(a.getAttribute('href'));
-      e.preventDefault();
-    });
+    a.addEventListener('click', () => c(a.getAttribute('href')));
   });
 
   // Add download event to download links
