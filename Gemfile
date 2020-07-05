@@ -6,7 +6,7 @@ gem "jekyll-brotli"
 
 group :jekyll_plugins do
   gem 'jemoji'
-  gem 'jekyll-uglify', "~> 1.1.0"
+  gem 'jekyll-uglify', "~> 1.1.2"
   gem 'jekyll-replace-last', "~> 1.0.1"
   gem "jekyll-redirect-from", "~> 0.16.0"
 end
