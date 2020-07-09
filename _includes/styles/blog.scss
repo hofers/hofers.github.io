@@ -1,0 +1,19 @@
+.post-nav {
+  margin-bottom: 0.5rem;
+  height: 1rem;
+  .post{
+    font-size: 0.8rem;
+    &.next {
+      float: right;
+      &::after {
+        content: ' >>'
+      }
+    }
+
+    &.prev {
+      &::before {
+        content: '<< '
+      }
+    }
+  }
+}

@@ -39,6 +39,14 @@
     {{ extra_styles | scssify }}
   </style>
   {%- endif -%}
+  {%- if page.layout == "post" -%}
+  {%- capture layout_styles -%}
+  {%- include styles/blog.scss -%}
+  {% endcapture %}
+  <style>
+    {{ layout_styles | scssify }}
+  </style>
+  {%- endif -%}
   {% if page.tags contains 'js' %}
   <script>
     {% include scripts/{{ page.name | replace: '.md', '' }}.js %}
