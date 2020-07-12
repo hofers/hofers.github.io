@@ -1,2 +1,0 @@
-This file is overwritten with an updated sitemap during the build process on production.
-To exclude a page or post from this sitemap, assign it the `sitemap-exclude` tag.

@@ -6,9 +6,10 @@ gem "jekyll-brotli"
 
 group :jekyll_plugins do
   gem 'jemoji'
-  gem 'jekyll-uglify', "~> 1.1.2"
+  gem 'jekyll-make-sitemap', "~> 1.0.1"
   gem 'jekyll-replace-last', "~> 1.0.1"
   gem "jekyll-redirect-from", "~> 0.16.0"
+  gem 'jekyll-uglify', "~> 1.1.2"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
