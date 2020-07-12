@@ -63,6 +63,9 @@
     {% for p in pages %}
     <a href="{{ p.url }}"{% if p.title == page.title %} class="active"{% endif %}>{{ p.title }}</a>
     {%- endfor -%}
+    {% if page.categories contains 'class' %}
+    <a href="/class-blog" class="active">Class&nbsp;Blog</a>
+    {%- endif -%}
   </div>
   <div>
     <div class="container">
