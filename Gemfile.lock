@@ -109,7 +109,7 @@ PLATFORMS
 DEPENDENCIES
   jekyll (~> 4.0.0)
   jekyll-brotli
-  jekyll-make-sitemap (~> 1.1.0)
+  jekyll-make-sitemap (~> 1.1.1)
   jekyll-redirect-from (~> 0.16.0)
   jekyll-replace-last (~> 1.0.1)
   jekyll-uglify (~> 1.1.2)
