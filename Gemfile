@@ -1,7 +1,6 @@
 source "https://rubygems.org"
 
 gem "jekyll", "~> 4.0.0"
-gem "minima", "~> 2.5"
 gem "jekyll-brotli"
 
 group :jekyll_plugins do
