@@ -15,7 +15,6 @@
   <style>
     {{ fontfaces | scssify }}
   </style>
-
   {% if page.tags contains 'has-italics' %}
   {%- capture italics -%}
   {%- include styles/italic-fonts.scss -%}
@@ -43,6 +42,7 @@
   {%- capture layout_styles -%}
   {%- include styles/blog.scss -%}
   {% endcapture %}
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
   <style>
     {{ layout_styles | scssify }}
   </style>
