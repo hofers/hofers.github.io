@@ -1,0 +1,325 @@
+/** Light */
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 200;
+  src: url("../assets/fonts/SFMono-Light.otf");
+}
+
+/** Light Italic */
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 200;
+  font-style: italic;
+  src: url("../assets/fonts/SFMono-LightItalic.otf");
+}
+
+/** Regular */
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 400;
+  src: url("../assets/fonts/SFMono-Regular.otf");
+}
+
+/** Regular Italic */
+@font-face {
+  font-family: "SF Mono";
+  font-weight: 400;
+  font-style: italic;
+  src: url("../assets/fonts/SFMono-RegularItalic.otf");
+}
+
+pre {
+  &.highlight{
+		padding: 0.8rem;
+		overflow: auto;
+		line-height: 1.45;
+		margin-bottom: 0;
+    word-break: normal;
+  }
+}
+
+code {
+  background-color: rgba(27,31,35,.05);
+  padding: 0.136rem 0.272rem;
+  border-radius: 0.3rem;
+}
+
+pre,
+code {
+	margin: 0;
+  font-family: 'SF Mono', monospace;
+	font-size: 0.85rem;
+}
+
+.highlight {
+	& * {
+		font-weight: 200;
+	}
+	table {
+		td {
+			padding: 0.25rem;
+		}
+		pre {
+			margin: 0;
+		}
+	}
+	.cm {
+		color: #999988;
+		font-style: italic;
+	}
+	.cp {
+		color: #999999;
+		font-weight: 400;
+	}
+	.c1 {
+		color: #999988;
+		font-style: italic;
+	}
+	.cs {
+		color: #999999;
+		font-weight: 400;
+		font-style: italic;
+	}
+	.c {
+		color: #999988;
+		font-style: italic;
+	}
+	.ch {
+		color: #999988;
+		font-style: italic;
+	}
+	.cd {
+		color: #999988;
+		font-style: italic;
+	}
+	.cpf {
+		color: #999988;
+		font-style: italic;
+	}
+	.err {
+		color: #a61717;
+		background-color: #e3d2d2;
+	}
+	.gd {
+		color: #000000;
+		background-color: #ffdddd;
+	}
+	.ge {
+		color: #000000;
+		font-style: italic;
+	}
+	.gr {
+		color: #aa0000;
+	}
+	.gh {
+		color: #999999;
+	}
+	.gi {
+		color: #000000;
+		background-color: #ddffdd;
+	}
+	.go {
+		color: #888888;
+	}
+	.gp {
+		color: #555555;
+	}
+	.gs {
+		font-weight: 400;
+	}
+	.gu {
+		color: #aaaaaa;
+	}
+	.gt {
+		color: #aa0000;
+	}
+	.kc {
+		color: #000000;
+		font-weight: 400;
+	}
+	.kd {
+		color: #000000;
+		font-weight: 400;
+	}
+	.kn {
+		color: #000000;
+		font-weight: 400;
+	}
+	.kp {
+		color: #000000;
+		font-weight: 400;
+	}
+	.kr {
+		color: #000000;
+		font-weight: 400;
+	}
+	.kt {
+		color: #445588;
+		font-weight: 400;
+	}
+	.k {
+		color: #000000;
+		font-weight: 400;
+	}
+	.kv {
+		color: #000000;
+		font-weight: 400;
+	}
+	.mf {
+		color: #009999;
+	}
+	.mh {
+		color: #009999;
+	}
+	.il {
+		color: #009999;
+	}
+	.mi {
+		color: #009999;
+	}
+	.mo {
+		color: #009999;
+	}
+	.m {
+		color: #009999;
+	}
+	.mb {
+		color: #009999;
+	}
+	.mx {
+		color: #009999;
+	}
+	.sb {
+		color: #d14;
+	}
+	.sc {
+		color: #d14;
+	}
+	.sd {
+		color: #d14;
+	}
+	.s2 {
+		color: #d14;
+	}
+	.se {
+		color: #d14;
+	}
+	.sh {
+		color: #d14;
+	}
+	.si {
+		color: #d14;
+	}
+	.sx {
+		color: #d14;
+	}
+	.sr {
+		color: #009926;
+	}
+	.s1 {
+		color: #d14;
+	}
+	.ss {
+		color: #990073;
+	}
+	.s {
+		color: #d14;
+	}
+	.sa {
+		color: #d14;
+	}
+	.dl {
+		color: #d14;
+	}
+	.na {
+		color: #008080;
+	}
+	.bp {
+		color: #999999;
+	}
+	.nb {
+		color: #0086B3;
+	}
+	.nc {
+		color: #445588;
+		font-weight: 400;
+	}
+	.no {
+		color: #008080;
+	}
+	.nd {
+		color: #3c5d5d;
+		font-weight: 400;
+	}
+	.ni {
+		color: #800080;
+	}
+	.ne {
+		color: #990000;
+		font-weight: 400;
+	}
+	.nf {
+		color: #990000;
+		font-weight: 400;
+	}
+	.fm {
+		color: #990000;
+		font-weight: 400;
+	}
+	.nl {
+		color: #990000;
+		font-weight: 400;
+	}
+	.nn {
+		color: #555555;
+	}
+	.nt {
+		color: #000080;
+	}
+	.vc {
+		color: #008080;
+	}
+	.vg {
+		color: #008080;
+	}
+	.vi {
+		color: #008080;
+	}
+	.nv {
+		color: #008080;
+	}
+	.vm {
+		color: #008080;
+	}
+	.ow {
+		color: #000000;
+		font-weight: 400;
+	}
+	.o {
+		color: #000000;
+		font-weight: 400;
+	}
+	.w {
+		color: #bbbbbb;
+	}
+	max-width: calc(100vw - 3.3rem);
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 0.3rem;
+	margin-bottom: 0.8rem;
+	code {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: unset;
+  }
+}
+
+@media(min-width: 550px) {
+	.highlight {
+		max-width: 37rem;
+	}
+
+	.wide {
+		.highlight {
+			max-width: 50rem;
+		}
+	}
+}
