@@ -1,8 +1,8 @@
 ---
 categories: [class]
-title: "Hexadecimate Rules"
-subtitle: "An overview of the rules of my first board game"
-image: "/assets/images/class-blog/game-pieces.jpg"
+title: Hexadecimate Rules
+subtitle: An overview of the rules of my first board game
+image: class-blog/game-pieces
 tags: has-italics
 ---
 ## *Hexadecimate* Final Rules 

@@ -1,8 +1,8 @@
 ---
 categories: [class]
-title: "He__o Wor_d!"
-subtitle: "I play Hangman on an emulator and blog about it"
-image: "/assets/images/class-blog/hangman.png"
+title: He__o Wor_d!
+subtitle: I play Hangman on an emulator and blog about it
+image: class-blog/hangman
 ---
 ## An introductory post to my class blog
 

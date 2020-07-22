@@ -4,11 +4,23 @@ excerpt_separator: <!-- e -->
 ---
 <h1>{{ page.title }}</h1>
 <h2>{{ page.subtitle }}</h2>
-<img alt="{{ page.title }}" src="{{ page.image }}" class="blog-img">
+<picture>
+  <source type="image/webp" srcset="/assets/images/{{ page.image }}.webp">
+  <source type="image/jpeg" srcset="/assets/images/{{ page.image }}.jpg">
+  <img src="/assets/images/{{ page.image }}.jpg" alt="{{ page.title }}" class="blog-img">
+</picture>
 <h3>By Sean Hofer&ensp; |&ensp; {{ page.date | date: '%B %d, %Y'}}</h3>
 <div style="width:100%; height:20px;"></div>
 
-{{ content }}
+{%- assign cont = content | newline_to_br | split: '<br />' -%}
+{%- for line in cont -%}
+{%- assign fc = line | lstrip | rstrip | slice: 1,2 -%}
+{%- if fc == "p>" -%}
+{{ line | kill_runts }}
+{%- else -%}
+{{ line }}
+{%- endif -%}
+{%- endfor -%}
 
 {%- for cat in page.categories -%}
   {%- for post in site.categories[cat] -%}

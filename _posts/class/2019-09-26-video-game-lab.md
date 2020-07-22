@@ -1,8 +1,8 @@
 ---
 categories: [class]
-title: "Mechanics, Dynamics, and Aesthetics - a Framework Study"
-subtitle: "Our first video game lab"
-image: "/assets/images/class-blog/hatlight.png"
+title: Mechanics, Dynamics, and Aesthetics - a Framework Study
+subtitle: Our first video game lab
+image: class-blog/hatlight
 tags: has-italics
 ---
 ## Video Game Lab #1
