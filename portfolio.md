@@ -11,11 +11,7 @@ tags: wide css has-italics
 <div class="pf-item" id="{{ item.id | remove: '/portfolio-items/' }}">
   <div class="pf-img">
     <a href="{{ item.link }}" target="_blank" rel="noreferrer">
-      <picture>
-        <source type="image/webp" srcset="/assets/images/{{ item.image }}.webp">
-        <source type="image/jpeg" srcset="/assets/images/{{ item.image }}.jpg">
-        <img src="/assets/images/{{ item.image }}.jpg" alt="{{ item.title }}">
-      </picture>
+      {% include modules/image image=item.image title=item.title %}
     </a>
   </div>
   <div class="pf-text">

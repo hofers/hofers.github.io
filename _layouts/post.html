@@ -4,11 +4,7 @@ excerpt_separator: <!-- e -->
 ---
 <h1>{{ page.title }}</h1>
 <h2>{{ page.subtitle }}</h2>
-<picture>
-  <source type="image/webp" srcset="/assets/images/{{ page.image }}.webp">
-  <source type="image/jpeg" srcset="/assets/images/{{ page.image }}.jpg">
-  <img src="/assets/images/{{ page.image }}.jpg" alt="{{ page.title }}" class="blog-img">
-</picture>
+{% include modules/image image=page.image title=page.title class="blog-img"%}
 <h3>By Sean Hofer&ensp; |&ensp; {{ page.date | date: '%B %d, %Y'}}</h3>
 <div style="width:100%; height:20px;"></div>
 
