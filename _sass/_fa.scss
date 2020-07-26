@@ -4,10 +4,7 @@
   font-size:inherit;
   text-rendering:auto;
   -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale
-}
-.fa-3x {
-  font-size: 3rem;
+  -moz-osx-font-smoothing:grayscale;
 }
 .fa-envelope-o:before {
   content:"\f003"
@@ -20,4 +17,7 @@
 }
 .fa-linkedin:before {
   content:"\f0e1"
+}
+.fa-rubygems:before {
+  content:"\e900"
 }
