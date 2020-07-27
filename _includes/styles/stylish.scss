@@ -62,8 +62,8 @@
   }
 }
 
-.fa.x2 {
-  font-size: 2rem;
+.fa.prog-125 {
+  font-size: 12.5vw;
 }
 
 .bar {
@@ -78,24 +78,6 @@
   width: 100%;
   margin: auto;
   padding: 1rem 0 0.5rem;
-}
-
-@media(min-width: 28.5em) {
-  .fa.x2 {
-    font-size: 3rem;
-  }
-}
-
-@media(min-width: 36em) {
-  .fa.x2 {
-    font-size: 4rem;
-  }
-}
-
-@media(min-width: 50.375em) {
-  .fa.x2 {
-    font-size: 5rem;
-  }
 }
 
 @media(min-width: 34.37em) {
@@ -115,5 +97,11 @@
     .container {
       max-width: 50rem;
     }
+  }
+}
+
+@media(min-width: 50.375em) {
+  .fa.prog-125 {
+    font-size: 5rem;
   }
 }
