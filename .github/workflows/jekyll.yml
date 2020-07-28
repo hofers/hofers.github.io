@@ -30,6 +30,14 @@ jobs:
       # Uglify JS
       - name: Uglify JS
         run: bundle exec jekyll uglify _includes/scripts
+
+      # Create webp images
+      - name: Create webp images
+        run: |
+          cd assets/images/
+          ../../bin/cwebp-dir.sh
+          cd class-blog
+          ../../../bin/cwebp-dir.sh
         
       # Build
       - run: JEKYLL_ENV=production bundle exec jekyll build
