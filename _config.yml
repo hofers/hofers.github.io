@@ -48,7 +48,7 @@ defaults:
 permalink: /class-blog/:title
 
 sass:
-  sass_dir: _sass
+  sass_dir: _includes/styles/_sass # Store all styles together
   style: compressed
 
 collections:
