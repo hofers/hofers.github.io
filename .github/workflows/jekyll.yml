@@ -1,18 +1,13 @@
-# Name of your GitHub Actions workflow.
 name: Publish to GitHub Pages
 
-# Specifies to run this workflow whenever a push is made (commits are
-# added) to the branch named `jekyll`.
 on:
   push:
     branches:
-      # Change this to the branch where you keep your Jekyll code.
       - jekyll
 
-# Define a job named `build-and-publish` in your workflow.
 jobs:
   build-and-publish:
-    runs-on: ubuntu-latest # This job uses a GitHub-hosted runner.
+    runs-on: ubuntu-latest 
 
     steps:
       # Checkout the source from the `jekyll` branch.
@@ -34,7 +29,13 @@ jobs:
       # Create webp images
       - name: Create webp images
         run: |
-          cd assets/images/
+          sudo apt-get install libjpeg-dev libpng-dev libtiff-dev libgif-dev
+          tar xvzf bin/libwebp-1.1.0.tar.gz
+          cd bin/libwebp-1.1.0
+          ./configure
+          make
+          sudo make install
+          cd ../../assets/images/
           ../../bin/cwebp-dir.sh
           cd class-blog
           ../../../bin/cwebp-dir.sh
