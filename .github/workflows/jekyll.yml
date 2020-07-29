@@ -25,22 +25,6 @@ jobs:
       # Uglify JS
       - name: Uglify JS
         run: bundle exec jekyll uglify _includes/scripts
-
-      # Create webp images
-      - name: Create webp images
-        run: |
-          sudo apt-get install libjpeg-dev libpng-dev libtiff-dev libgif-dev
-          cd bin
-          tar xvzf libwebp-1.1.0.tar.gz
-          cd libwebp-1.1.0
-          ./configure
-          make
-          sudo make install
-          cd ../../assets/images/
-          ../../bin/cwebp-dir.sh
-          cd class-blog
-          ../../../bin/cwebp-dir.sh
-          cd ../../..
         
       # Build
       - run: JEKYLL_ENV=production bundle exec jekyll build
