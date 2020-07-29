@@ -30,8 +30,9 @@ jobs:
       - name: Create webp images
         run: |
           sudo apt-get install libjpeg-dev libpng-dev libtiff-dev libgif-dev
-          tar xvzf bin/libwebp-1.1.0.tar.gz
-          cd bin/libwebp-1.1.0
+          cd bin
+          tar xvzf libwebp-1.1.0.tar.gz
+          cd libwebp-1.1.0
           ./configure
           make
           sudo make install
