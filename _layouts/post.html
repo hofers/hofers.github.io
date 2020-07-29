@@ -4,11 +4,11 @@ excerpt_separator: <!-- e -->
 ---
 <h1>{{ page.title }}</h1>
 <h2>{{ page.subtitle }}</h2>
-{% include modules/image image=page.image title=page.title class="blog-img"%}
+{% include modules/image.html image=page.image title=page.title class="blog-img"%}
 <h3>By Sean Hofer&ensp; |&ensp; {{ page.date | date: '%B %d, %Y'}}</h3>
 <div style="width:100%; height:20px;"></div>
 
-{% include modules/kill_runts content=content %}
+{% include modules/kill_runts.html content=content %}
 
 {%- for cat in page.categories -%}
   {%- for post in site.categories[cat] -%}

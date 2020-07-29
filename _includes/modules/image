@@ -1,5 +1,0 @@
-<picture>
-  <source type="image/webp" srcset="/assets/images/{{ include.image }}.webp">
-  <source type="image/jpeg" srcset="/assets/images/{{ include.image }}.jpg">
-  <img src="/assets/images/{{ include.image }}.jpg" alt="{{ include.title }}" {% if include.class %}class="{{ include.class }}"{% endif %}>
-</picture>

@@ -11,7 +11,7 @@ tags: wide css has-italics
 <div class="pf-item" id="{{ item.id | remove: '/portfolio-items/' }}">
   <div class="pf-img">
     <a href="{{ item.link }}" target="_blank" rel="noreferrer">
-      {% include modules/image image=item.image title=item.title %}
+      {% include modules/image.html image=item.image title=item.title %}
     </a>
   </div>
   <div class="pf-text">
