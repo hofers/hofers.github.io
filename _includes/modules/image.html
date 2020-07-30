@@ -1,20 +1,20 @@
 {% assign ai = '/assets/images/' %}
 <picture>
-  <source type="image/webp" media="(min-width:1024px)" srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1280w.webp 2x">
-  <source type="image/webp" media="(min-width:960px)" srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1024w.webp 2x">
-  <source type="image/webp" media="(min-width:740px)" srcset="{{ ai }}{{ include.image }}-480w.webp 1x, {{ ai }}{{ include.image }}-960w.webp 2x">
-  <source type="image/webp" media="(min-width:640px)" srcset="{{ ai }}{{ include.image }}-786w.webp 1x, {{ ai }}{{ include.image }}-1440w.webp 2x">
-  <source type="image/webp" media="(min-width:512px)" srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1280w.webp 2x">
-  <source type="image/webp" media="(min-width:480px)" srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1024w.webp 2x">
-  <source type="image/webp" media="(min-width:320px)" srcset="{{ ai }}{{ include.image }}-480w.webp 1x, {{ ai }}{{ include.image }}-960w.webp 2x">
-  <source type="image/webp" media="(min-width:0px)" srcset="{{ ai }}{{ include.image }}-320w.webp">
-  <source type="image/jpeg" media="(min-width:1024px)" srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1280w.jpg 2x">
-  <source type="image/jpeg" media="(min-width:960px)" srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1024w.jpg 2x">
-  <source type="image/jpeg" media="(min-width:740px)" srcset="{{ ai }}{{ include.image }}-480w.jpg 1x, {{ ai }}{{ include.image }}-960w.jpg 2x">
-  <source type="image/webp" media="(min-width:640px)" srcset="{{ ai }}{{ include.image }}-786w.jpg 1x, {{ ai }}{{ include.image }}-1440w.jpg 2x">
-  <source type="image/jpeg" media="(min-width:512px)" srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1280w.jpg 2x">
-  <source type="image/jpeg" media="(min-width:480px)" srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1024w.jpg 2x">
-  <source type="image/jpeg" media="(min-width:320px)" srcset="{{ ai }}{{ include.image }}-480w.jpg 1x, {{ ai }}{{ include.image }}-960w.jpg 2x">
-  <source type="image/jpeg" media="(min-width:0px)" srcset="{{ ai }}{{ include.image }}-320w.jpg">
-  <img src="{{ ai }}{{ include.image }}.jpg" alt="{{ include.title }}" class="lazy{% if include.class %} {{ include.class }}{% endif %}">
+  <source type="image/webp" media="(min-width:1024px)" data-srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1280w.webp 2x">
+  <source type="image/webp" media="(min-width:960px)" data-srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1024w.webp 2x">
+  <source type="image/webp" media="(min-width:740px)" data-srcset="{{ ai }}{{ include.image }}-480w.webp 1x, {{ ai }}{{ include.image }}-960w.webp 2x">
+  <source type="image/webp" media="(min-width:640px)" data-srcset="{{ ai }}{{ include.image }}-786w.webp 1x, {{ ai }}{{ include.image }}-1440w.webp 2x">
+  <source type="image/webp" media="(min-width:512px)" data-srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1280w.webp 2x">
+  <source type="image/webp" media="(min-width:480px)" data-srcset="{{ ai }}{{ include.image }}-640w.webp 1x, {{ ai }}{{ include.image }}-1024w.webp 2x">
+  <source type="image/webp" media="(min-width:320px)" data-srcset="{{ ai }}{{ include.image }}-480w.webp 1x, {{ ai }}{{ include.image }}-960w.webp 2x">
+  <source type="image/webp" media="(min-width:0px)" data-srcset="{{ ai }}{{ include.image }}-320w.webp">
+  <source type="image/jpeg" media="(min-width:1024px)" data-srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1280w.jpg 2x">
+  <source type="image/jpeg" media="(min-width:960px)" data-srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1024w.jpg 2x">
+  <source type="image/jpeg" media="(min-width:740px)" data-srcset="{{ ai }}{{ include.image }}-480w.jpg 1x, {{ ai }}{{ include.image }}-960w.jpg 2x">
+  <source type="image/webp" media="(min-width:640px)" data-srcset="{{ ai }}{{ include.image }}-786w.jpg 1x, {{ ai }}{{ include.image }}-1440w.jpg 2x">
+  <source type="image/jpeg" media="(min-width:512px)" data-srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1280w.jpg 2x">
+  <source type="image/jpeg" media="(min-width:480px)" data-srcset="{{ ai }}{{ include.image }}-640w.jpg 1x, {{ ai }}{{ include.image }}-1024w.jpg 2x">
+  <source type="image/jpeg" media="(min-width:320px)" data-srcset="{{ ai }}{{ include.image }}-480w.jpg 1x, {{ ai }}{{ include.image }}-960w.jpg 2x">
+  <source type="image/jpeg" media="(min-width:0px)" data-srcset="{{ ai }}{{ include.image }}-320w.jpg">
+  <img data-src="{{ ai }}{{ include.image }}.jpg" alt="{{ include.title }}" class="lazy{% if include.class %} {{ include.class }}{% endif %}">
 </picture>

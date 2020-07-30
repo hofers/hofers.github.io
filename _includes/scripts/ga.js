@@ -38,6 +38,6 @@ document.addEventListener('DOMContentLoaded', function () {
     a.addEventListener('click', () => d(a.getAttribute('href')));
   });
 
-  var tag = document.currentScript || document.scripts[document.scripts.length - 1];
+  var tag = document.currentScript || document.scripts[1];
   tag.parentNode.removeChild(tag);
 });
