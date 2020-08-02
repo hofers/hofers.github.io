@@ -30,19 +30,21 @@ resume:
   pdf: /assets/Sean Hofer - Resume.pdf
   docx: /assets/Sean Hofer - Resume.docx
 
+permalink: :title
+
 defaults:
   -
     scope:
       path: "" 
-      type: "pages" 
+      type: pages
     values:
-      layout: "page"
+      layout: page
   -
     scope:
       path: "" 
-      type: "posts" 
+      type: posts
     values:
-      layout: "post"
+      layout: post
       permalink: /blog/:title
   - 
     scope:
