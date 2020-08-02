@@ -3,7 +3,6 @@ categories: [class]
 title: 'First Game Prototype: Hexadecimate'
 subtitle: The process for my first rough prototype
 image: class-blog/game-pieces
-tags: has-italics
 ---
 ## *Hexadecimate*
 

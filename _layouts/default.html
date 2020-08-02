@@ -18,15 +18,6 @@
   <style>
     {{ fontfaces | scssify }}
   </style>
-  {% if page.tags contains 'has-italics' %}
-  {%- capture italics -%}
-  {%- include styles/italic-fonts.scss -%}
-  {% endcapture %}
-  <style>
-    {{ italics | scssify }}
-  </style>
-  {% endif %}
-
   {%- capture styles -%}
   {%- include styles/stylish.scss -%}
   {% endcapture %}

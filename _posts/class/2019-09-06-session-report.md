@@ -3,7 +3,6 @@ categories: [class]
 title: An Account of Wits & Wagers Party
 subtitle: A Session Report from our first Boardgame Lab
 image: class-blog/witsnwagers
-tags: has-italics
 ---
 ## Wits & Wagers Party
 
