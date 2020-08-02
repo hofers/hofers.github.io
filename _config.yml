@@ -43,9 +43,13 @@ defaults:
       type: "posts" 
     values:
       layout: "post"
-
-# This sets the default permalink for blog posts
-permalink: /class-blog/:title
+      permalink: /blog/:title
+  - 
+    scope:
+      path: "_posts/class/**"
+      type: "posts"
+    values:
+      permalink: /class-blog/:title
 
 sass:
   sass_dir: _includes/styles/_sass # Store all styles together
