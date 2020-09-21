@@ -8,4 +8,4 @@ It's made with Jekyll and Sass, and it uses a few simple Jekyll plugins I made t
 
 I use Mozilla's [PDF.js](https://mozilla.github.io/pdf.js/) for PDF embedding.
 
-My Jekyll source code can be found on the [`jekyll`](https://github.com/hofers/hofers.github.io/tree/jekyll) branch, and my compiled static site can be found on the [`master`](https://github.com/hofers/hofers.github.io/tree/master) branch.
+My Jekyll source code can be found on the [`jekyll`](https://github.com/hofers/hofers.github.io/tree/jekyll) branch, and my compiled static site can be found on the [`main`](https://github.com/hofers/hofers.github.io/tree/main) branch.
