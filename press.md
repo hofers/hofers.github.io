@@ -2,7 +2,6 @@
 title: Press
 h1: Press
 h2: News stories about some of my work
-place-in-menu: 4
 ---
 <ul>
   {%- for item in site.press-items -%}

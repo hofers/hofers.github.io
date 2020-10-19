@@ -1,0 +1,54 @@
+// Contact Form Styles
+
+@import "colors";
+
+form {
+  display: flex;
+  flex-direction: column;
+  & div {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    & * {
+      width: 100%;
+      -ms-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box; 
+      box-sizing: border-box;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    & input[type=text],
+    & input[type=email],
+    & input[type=submit],
+    & textarea {
+      font-family: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 0.8rem;
+      border: 0.05rem solid $off-black;
+      border-radius: 0.1rem;
+      padding: 0.2rem 0.3rem;
+    }
+    & input[type=submit] {
+      font-size: 1.2rem;
+      background-color: $red;
+      color: $off-white;
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
+      border: 1px solid $off-black;
+      transition: background-color 0.2s ease;
+      cursor: pointer;
+      &:hover {
+        background-color: adjust-color($color: $red,  $lightness: -8%);
+      }
+    }
+    & input[type=file] {
+      cursor: pointer;
+    }
+    & label {
+      margin: 0;
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: $dark-gray;
+      line-height: 1.4rem;
+    }
+  }
+}
