@@ -26,7 +26,7 @@ async function sendRequest() {
     searchParams.append("attachments", [attachments])
   }
 
-  xhr.open("POST", "https://us-west2-coherent-coder-193013.cloudfunctions.net/contact-form", true)
+  xhr.open("POST", "https://us-central1-coherent-coder-193013.cloudfunctions.net/contact-form ", true)
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 
   xhr.onload = function() {
