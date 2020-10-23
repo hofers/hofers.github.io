@@ -68,11 +68,11 @@ form {
 }
 
 .loader {
-  border: 0.17rem solid $light-gray; 
-  border-top: 0.17rem solid $red; 
+  border: 0.37rem solid $light-gray; 
+  border-top: 0.37rem solid $red; 
   border-radius: 50%;
-  width: 1rem;
-  height: 1rem;
+  width: 1.6rem;
+  height: 1.6rem;
   animation: spin 2s linear infinite;
   padding: unset;
   position: absolute;
