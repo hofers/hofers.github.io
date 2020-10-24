@@ -34,13 +34,17 @@ async function sendRequest() {
     if (xhr.status == 200) {
       succeed()
     } else {
-      fail()
+      youFailed()
     }
   }
 
   xhr.onerror = function() {
     finishLoading()
-    fail()
+    if (xhr.status == 400) {
+      youFailed()
+    } else {
+      iFailed()
+    }
   }
 
   xhr.send(searchParams.toString())
@@ -59,12 +63,19 @@ function finishLoading() {
 
 function succeed() {
   document.getElementById("main").classList.add("hidden")
-  document.getElementById("failure").classList.add("hidden")
+  document.getElementById("400e").classList.add("hidden")
+  document.getElementById("500e").classList.add("hidden")
   document.getElementById("success").classList.remove("hidden")
 }
 
-function fail() {
-  document.getElementById("failure").classList.remove("hidden")
+function youFailed() {
+  document.getElementById("400e").classList.remove("hidden")
+  document.getElementById("500e").classList.add("hidden")
+}
+
+function iFailed() {
+  document.getElementById("500e").classList.remove("hidden")
+  document.getElementById("400e").classList.add("hidden")
 }
 
 function readFileAsync(file) {

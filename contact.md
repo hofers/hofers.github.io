@@ -31,8 +31,11 @@ tags: css js
       <div id="loader" class="loader hidden"></div>
     </fieldset>
   </form>
-  <div id="failure" class="hidden">
-    <p class="error">Oops! It looks like there was a problem submitting this message. Please try again.</p>
+  <div id="400e" class="hidden">
+    <p class="error">Oops! It looks like there's a problem with your contact request. Make sure you've included your name, email, and message and try again.</p>
+  </div>
+  <div id="500e" class="hidden">
+    <p class="error">Oops! It looks like there was a problem submitting this message. Please try again later.</p>
   </div>
   <p>Or email me directly at {% my_email %}. </p>
 </div>
