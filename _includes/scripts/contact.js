@@ -38,6 +38,11 @@ async function sendRequest() {
     }
   }
 
+  xhr.onerror = function() {
+    finishLoading()
+    fail()
+  }
+
   xhr.send(searchParams.toString())
   startLoading()
 }
