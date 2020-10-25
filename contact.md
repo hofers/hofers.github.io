@@ -3,7 +3,6 @@ title: Contact
 h1: Contact Sean
 h2: Drop me a line via this form
 place-in-menu: 4
-permalink: /contact
 tags: css js
 ---
 <div id="main">
