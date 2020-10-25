@@ -11,6 +11,6 @@ permalink: /
 
 &emsp;In my previous position at [Feeding Children Everywhere](https://www.feedingchildreneverywhere.com){% out %}, I helped to build and launch Full Cart, a meal kit delivery application that's grown to serve over 1000 households weekly. I'm quick to adapt to new languages and libraries, and I have a knack for coming up with creative solutions to technical problems. I'm also proficient with web technologies like HTML5/CSS3, JS/jQuery, React, Python, Jekyll and Ruby, as well as mobile development platforms like React Native and Flutter and query languages like SQL.
 
-&emsp;If you're interested in contacting me, drop me a line via my [contact](/contact) page, or reach out to me directly at {% my_email %} or on my [LinkedIn](/linkedin){% out %}. You can also check out my [resume](/resume) and my [portfolio](/portfolio). My current work is mostly full-stack web development, but I'm always excited to pick up new skills. 
+&emsp;If you're interested in contacting me, drop me a line via my [contact](/contact) page, or reach out to me directly at {% my_email %} or on my [LinkedIn](/linkedin){% out %}. You can also check out my [resume](/resume) and my [portfolio](/portfolio) to learn more about some of my previous work. My current work is mostly full-stack web development, but I'm always excited to pick up new skills. 
 
 &emsp;And thanks for checking out my site!
