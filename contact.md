@@ -3,6 +3,7 @@ title: Contact
 h1: Contact Sean
 h2: Drop me a line via this form
 place-in-menu: 4
+description: Get in touch with Sean. Drop him a line here, or email him directly. 
 tags: css js
 ---
 <div id="main">
