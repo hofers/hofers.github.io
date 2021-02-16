@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
   
     xhr.onload = function() {
-      finishLoading()
+      finishLoading(xhr.response)
       if (xhr.status == 200) {
         succeed()
       } else {
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   
     xhr.onerror = function() {
-      finishLoading()
+      finishLoading(xhr.response)
       if (xhr.status == 400) {
         youFailed()
       } else {
@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("loader").classList.remove("hidden")
   }
   
-  function finishLoading() {
+  function finishLoading(response) {
+    e(response)
     document.getElementById("form-fields").disabled = false
     document.getElementById("loader").classList.add("hidden")
   }

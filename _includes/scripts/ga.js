@@ -13,7 +13,7 @@ gtag('config', 'UA-143817336-1', {
 
 var c = function (url) {
   gtag('event', 'click', {
-    event_category: 'outbound',
+    event_category: 'outbound_click',
     event_label: url,
     transport_type: 'beacon',
   })
@@ -23,6 +23,14 @@ var d = function (url) {
   gtag('event', 'download', {
     event_category: 'download',
     event_label: url,
+    transport_type: 'beacon',
+  })
+}
+
+var e = function (response) {
+  gtag('event', 'contact_submission', {
+    event_category: 'contact_submission',
+    event_label: response,
     transport_type: 'beacon',
   })
 }
