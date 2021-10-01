@@ -13,12 +13,12 @@
   font-display: swap;
 }
 {%- capture fa -%}
-{%- include fonts/fontawesome-webfont.woff2.b64 -%}
+{%- include fonts/SFSymbols-webfont.woff2.b64 -%}
 {% endcapture %}
 @font-face{
   font-family:'FontAwesome';
   src: 
       url('data:font\/woff2\;base64,{{ fa }}') format('woff2'),
-      url('../assets/fonts/fontawesome/fontawesome-webfont.ttf') format('truetype');
+      url('../assets/fonts/SFSymbols/SFSymbols-webfont.ttf') format('truetype');
   font-display: swap;
 }
