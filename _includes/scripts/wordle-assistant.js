@@ -105,7 +105,7 @@ function clearGuesses() {
 }
 
 function updateDisplayedWordList() {
-  document.getElementById('remaining').innerHTML = '<p style="text-align: center;">Valid Words Remaining: ' + currentWordList.length + '</p>';
+  document.getElementById('remaining').innerHTML = 'Valid Words Remaining: ' + currentWordList.length;
   var wordListDiv = document.getElementById("word-list");
   wordListDiv.innerHTML = '';
   for (const word of currentWordList) {
