@@ -117,7 +117,8 @@ document.addEventListener("DOMContentLoaded", function() {
   document.addEventListener('keydown', (event) => {
     var allTiles = Array.from(document.getElementsByClassName('tile'));
     var tiles = allTiles.filter(tile => tile.dataset.guessStatus === '1');
-    var tileToUpdate = tiles.find(e => e.innerHTML === '') ?? allTiles.find(e => e.innerHTML === '');
+    var tileToUpdate = tiles.find(e => e.innerHTML === '');
+    if (!tileToUpdate) tileToUpdate = allTiles.find(e => e.innerHTML === '');
     if (event.key.length == 1 && event.key.match(/[a-z]/i)) {
       if (tileToUpdate.dataset.guessStatus === '1') {
         tileToUpdate.innerHTML = event.key;
