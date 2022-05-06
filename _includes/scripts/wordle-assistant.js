@@ -148,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   for (const el of document.getElementsByClassName('tile')) {
     el.addEventListener('click', () => {
+      document.getElementById('dummy').focus();
       if (el.classList.length !== 1) {
         if (el.className.includes('not-in-word')) {
           el.className = 'tile elsewhere-in-word';

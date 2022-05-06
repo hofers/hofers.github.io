@@ -39,5 +39,7 @@ tags: css js
   <div class="tile" id="65"></div>
 </div>
 
+<input type="text" class="dummy" id="dummy">
+
 <p id="remaining"></p>
 <div class="word-list" id="word-list"></div>

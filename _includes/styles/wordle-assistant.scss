@@ -66,3 +66,12 @@
   background-color: #5a5a5a;
   margin: 2px 2px 1px;
 }
+
+.dummy {
+  position: absolute;
+  top: 16rem;
+  z-index: -1;
+  width: 80%;
+  font-size: 2rem;
+  caret-color: transparent;
+}
