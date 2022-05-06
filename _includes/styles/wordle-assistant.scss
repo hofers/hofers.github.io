@@ -1,0 +1,68 @@
+.grid {
+  display: grid;
+  background-color: #121213;
+  width: 100%;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+  max-width: 500px;
+  margin: auto;
+  border-radius: 0.25rem;
+}
+
+.tile {
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: bold;
+  vertical-align: middle;
+  box-sizing: border-box;
+  color: #ffffff;
+  text-transform: uppercase;
+  user-select: none;
+  border: 2px solid #3a3a3c;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    padding-bottom: 100%;
+  }
+}
+
+.not-in-word {
+  background-color: #3a3a3c;
+}
+
+.elsewhere-in-word {
+  border: 2px solid #b59f3b;
+  background-color: #b59f3b;
+}
+
+.correctly-placed {
+  border: 2px solid #538d4e;
+  background-color: #538d4e;
+}
+
+.word-list {
+  max-width: 500px;
+  margin: auto;
+  max-height: 400px;
+  overflow: scroll;
+  border: 2px solid #121213;
+  border-radius: 0.25rem;
+}
+
+.word {
+  font-size: 2rem;
+  text-align: center;
+  padding: 4px;
+  border: 2px solid #121213;
+  border-radius: 0.25rem;
+  background-color: #5a5a5a;
+  margin: 2px 2px 1px;
+}
