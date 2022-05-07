@@ -116,8 +116,8 @@ function updateDisplayedWordList() {
 document.addEventListener("DOMContentLoaded", function() {
   document.addEventListener('keydown', (event) => {
     var allTiles = Array.from(document.getElementsByClassName('tile'));
-    var tiles = allTiles.filter(tile => tile.dataset.guessStatus === '1');
-    var tileToUpdate = tiles.find(e => e.innerHTML === '');
+    var activeGuessTiles = allTiles.filter(tile => tile.dataset.guessStatus === '1');
+    var tileToUpdate = activeGuessTiles.find(e => e.innerHTML === '');
     if (!tileToUpdate) tileToUpdate = allTiles.find(e => e.innerHTML === '');
     if (event.key.length == 1 && event.key.match(/[a-z]/i)) {
       if (tileToUpdate.dataset.guessStatus === '1') {
@@ -126,17 +126,17 @@ document.addEventListener("DOMContentLoaded", function() {
         tileToUpdate.dataset.locationValue = 'b';
       }
     } else if (event.key === 'Backspace') {
-      tileToUpdate = tiles[allTiles.indexOf(tileToUpdate) - 1];
+      tileToUpdate = activeGuessTiles[allTiles.indexOf(tileToUpdate) - 1];
       if (!tileToUpdate) return;
       tileToUpdate.innerHTML = '';
       tileToUpdate.className = 'tile';
       tileToUpdate.dataset.locationValue = '';
     } else if (event.key === 'Enter') {
-      var guess = tiles.reduce((p, c) => p += c.innerText, '').toLowerCase();
+      var guess = activeGuessTiles.reduce((p, c) => p += c.innerText, '').toLowerCase();
       if (guess.length < 5) return;
-      var response = tiles.reduce((p, c) => p += c.dataset.locationValue, '');
+      var response = activeGuessTiles.reduce((p, c) => p += c.dataset.locationValue, '');
       applyNewGuess(guess, response);
-      for (const tile of tiles) {
+      for (const tile of activeGuessTiles) {
         tile.dataset.guessStatus = '2';
       }
       var newTiles = allTiles.filter(tile => tile.dataset.guessStatus !== '2').slice(0, 5);
