@@ -149,11 +149,11 @@ document.addEventListener("DOMContentLoaded", function() {
   for (const el of document.getElementsByClassName('tile')) {
     el.addEventListener('click', () => {
       document.getElementById('dummy').focus();
-      if (el.classList.length !== 1) {
-        if (el.className.includes('not-in-word')) {
+      if (el.classList.length !== 1 && el.dataset.guessStatus === '1') {
+        if (el.dataset.locationValue === 'b') {
           el.className = 'tile elsewhere-in-word';
           el.dataset.locationValue = 'y';
-        } else if (el.className.includes('elsewhere-in-word')) {
+        } else if (el.dataset.locationValue === 'y') {
           el.className = 'tile correctly-placed';
           el.dataset.locationValue = 'g';
         } else {
