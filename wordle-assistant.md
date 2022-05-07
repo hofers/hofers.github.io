@@ -34,11 +34,6 @@ Enter a guess and tap a tile to change its color. Hit enter/return to apply the 
   <div class="tile"></div>
   <div class="tile"></div>
   <div class="tile"></div>
-  <div class="tile"></div>
-  <div class="tile"></div>
-  <div class="tile"></div>
-  <div class="tile"></div>
-  <div class="tile"></div>
 </div>
 
 <input type="text" class="dummy" id="dummy">
