@@ -9,36 +9,36 @@ tags: css js
 Enter a guess and tap a tile to change its color. Hit enter/return to apply the guess and move to the next line.
 
 <div class="grid">
-  <div class="tile" data-guess-status="1" id="11"></div>
-  <div class="tile" data-guess-status="1" id="12"></div>
-  <div class="tile" data-guess-status="1" id="13"></div>
-  <div class="tile" data-guess-status="1" id="14"></div>
-  <div class="tile" data-guess-status="1" id="15"></div>
-  <div class="tile" id="21"></div>
-  <div class="tile" id="22"></div>
-  <div class="tile" id="23"></div>
-  <div class="tile" id="24"></div>
-  <div class="tile" id="25"></div>
-  <div class="tile" id="31"></div>
-  <div class="tile" id="32"></div>
-  <div class="tile" id="33"></div>
-  <div class="tile" id="34"></div>
-  <div class="tile" id="35"></div>
-  <div class="tile" id="41"></div>
-  <div class="tile" id="42"></div>
-  <div class="tile" id="43"></div>
-  <div class="tile" id="44"></div>
-  <div class="tile" id="45"></div>
-  <div class="tile" id="51"></div>
-  <div class="tile" id="52"></div>
-  <div class="tile" id="53"></div>
-  <div class="tile" id="54"></div>
-  <div class="tile" id="55"></div>
-  <div class="tile" id="61"></div>
-  <div class="tile" id="62"></div>
-  <div class="tile" id="63"></div>
-  <div class="tile" id="64"></div>
-  <div class="tile" id="65"></div>
+  <div class="tile" data-guess-status="1"></div>
+  <div class="tile" data-guess-status="1"></div>
+  <div class="tile" data-guess-status="1"></div>
+  <div class="tile" data-guess-status="1"></div>
+  <div class="tile" data-guess-status="1"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
+  <div class="tile"></div>
 </div>
 
 <input type="text" class="dummy" id="dummy">

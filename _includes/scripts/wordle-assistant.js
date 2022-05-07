@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
         tileToUpdate.dataset.locationValue = 'b';
       }
     } else if (event.key === 'Backspace') {
-      tileToUpdate = activeGuessTiles[(allTiles.indexOf(tileToUpdate) % 5) - 1];
+      tileToUpdate = activeGuessTiles[(allTiles.indexOf(tileToUpdate) - 1) % 5];
       if (!tileToUpdate) return;
       tileToUpdate.innerHTML = '';
       tileToUpdate.className = 'tile';
