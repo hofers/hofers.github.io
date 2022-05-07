@@ -73,7 +73,7 @@ function updateRegex() {
         substring += inclusionRule.letter;
       }
       regexString += '[^' + substring + ']';
-      unplacedLetters.push(substring);
+      unplacedLetters.push(...substring);
       substring = '';
     } else {
       regexString += '.';
