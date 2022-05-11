@@ -64,7 +64,11 @@
   border: 2px solid #121213;
   border-radius: 0.25rem;
   background-color: #5a5a5a;
-  margin: 2px 2px 1px;
+  margin: 2px;
+}
+
+.guess {
+  background-color: #538d4e;
 }
 
 .dummy {
@@ -75,4 +79,28 @@
   font-size: 2rem;
   caret-color: transparent;
   max-width: 37rem;
+}
+
+.button-container {
+  text-align: center;
+}
+
+button {
+  appearance: none;
+  cursor: pointer;
+  color: unset;
+  width: 80%;
+  max-width: 400px;
+  appearance: none;
+  border: 2px solid #121213;
+  border-radius: 0.25rem;
+  background-color: #538d4e;
+  font-size: 1.5rem;
+  padding: 5px;
+  margin-bottom: 1rem;
+  margin-top: 6px;
+}
+
+.thinking {
+  text-align: center;
 }
