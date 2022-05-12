@@ -23,8 +23,10 @@ function applyNewGuess(guess, response) {
   [...response].forEach((letter, index) => {
     switch (letter) {
       case 'b':
-        currentRules.excludes.push(guess[index])
-        currentRules.excludes = [...new Set(currentRules.excludes)]
+        if (!currentRules.includes.find(e => e.letter === guess[index])) {
+          currentRules.excludes.push(guess[index])
+          currentRules.excludes = [...new Set(currentRules.excludes)]
+        }
         break;
       case 'y':
         if (currentRules.includes.find(e => e.letter === guess[index])) {
