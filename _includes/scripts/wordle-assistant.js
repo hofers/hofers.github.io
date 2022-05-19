@@ -9,7 +9,7 @@ var currentRules = {
 };
 var currentRuleRegex = /\b.....\b/g;
 var scoredGuesses = [];
-var solver = new Worker('assets/scripts/wordle-solver.js');
+const SOLVER = new Worker('assets/scripts/wordle-solver.js');
 
 function startLoading() {
   document.getElementById('thinking').className = 'thinking';
@@ -20,32 +20,45 @@ function stopLoading() {
 }
 
 function applyNewGuess(guess, response) {
+  let occurrences = [...guess].reduce((a, c) => {
+    a[c] ? a[c]++ : a[c] = 1;
+    return a;
+  }, {});
   [...response].forEach((letter, index) => {
+    let currentLetterIncludes = currentRules.includes.find(e => e.letter === guess[index]);
     switch (letter) {
       case 'b':
-        if (!currentRules.includes.find(e => e.letter === guess[index])) {
+        if (!currentLetterIncludes) {
           currentRules.excludes.push(guess[index])
           currentRules.excludes = [...new Set(currentRules.excludes)]
         }
         break;
       case 'y':
-        if (currentRules.includes.find(e => e.letter === guess[index])) {
+        if (currentLetterIncludes) {
           currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'n';
+          currentRules.includes.find(e => e.letter === guess[index]).occurrences = (
+            Math.max(currentLetterIncludes.occurrences, occurrences[guess[index]])
+          );
         } else {
           currentRules.includes.push({
             letter: guess[index],
-            location: ['u', 'u', 'u', 'u', 'u']
+            location: ['u', 'u', 'u', 'u', 'u'],
+            occurrences: occurrences[guess[index]]
           })
           currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'n';
         }
         break;
       case 'g':
-        if (currentRules.includes.find(e => e.letter === guess[index])) {
+        if (currentLetterIncludes) {
           currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'y';
+          currentRules.includes.find(e => e.letter === guess[index]).occurrences = (
+            Math.max(currentLetterIncludes.occurrences, occurrences[guess[index]])
+          );
         } else {
           currentRules.includes.push({
             letter: guess[index],
-            location: ['u', 'u', 'u', 'u', 'u']
+            location: ['u', 'u', 'u', 'u', 'u'],
+            occurrences: occurrences[guess[index]]
           })
           currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'y';
         }
@@ -56,11 +69,11 @@ function applyNewGuess(guess, response) {
 }
 
 function updateRegex() {
-  var regexString = '';
-  var substring = '';
-  var unplacedLetters = [];
+  let regexString = '';
+  let substring = '';
+  let unplacedLetters = [];
 
-  for (var i = 0; i < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     if (currentRules.includes.find(e => e.location[i] === 'y')) {
       regexString += currentRules.includes.find(e => e.location[i] === 'y').letter;
       if (currentRules.includes.find(e => e.location[i] === 'n')) {
@@ -86,7 +99,8 @@ function updateRegex() {
     regexString = regexString.replace(/\./g, '[^' + currentRules.excludes.join('') + ']');
   }
   for (const letter of unplacedLetters) {
-    regexString = '(?=[a-z]*' + letter + ')' + regexString;
+    let occurrences = currentRules.includes.find(e => e.letter === letter).occurrences;
+    regexString = '(?=[a-z]*' + letter + '{' + occurrences + ',})' + regexString;
   }
   currentRuleRegex = RegExp('\\b' + regexString + '\\b', 'g');
   applyRegex();
@@ -99,7 +113,7 @@ function applyRegex() {
 
 function requestNewGuesses() {
   startLoading();
-  solver.postMessage({
+  SOLVER.postMessage({
     allGuesses: ALL_GUESSES.split(" "),
     currentSolutionList: currentSolutionList,
   })
@@ -117,22 +131,22 @@ function clearGuesses() {
 
 function updateDisplayedSolutionList() {
   document.getElementById('remaining').innerHTML = 'Valid Words Remaining: ' + currentSolutionList.length;
-  var solutionListDiv = document.getElementById("solution-list");
-  var result = '';
+  let solutionListDiv = document.getElementById("solution-list");
+  let result = '';
   solutionListDiv.innerHTML = '';
   for (const word of currentSolutionList) {
     result += '<div class="word">' + word + '</div>'
   }
   solutionListDiv.innerHTML = result;
 
-  var guessListDiv = document.getElementById("guess-list");
+  let guessListDiv = document.getElementById("guess-list");
   guessListDiv.innerHTML = '';
 }
 
 function updateDisplayedGuessList() {
-  var guess = '';
-  var result = '';
-  var guessListDiv = document.getElementById("guess-list");
+  let guess = '';
+  let result = '';
+  let guessListDiv = document.getElementById("guess-list");
   guessListDiv.innerHTML = '';
   for (const word of scoredGuesses) {
     guess = word.maxGroupLength === scoredGuesses[0].maxGroupLength ? word.guess + " ☑️" : word.guess;
@@ -144,9 +158,9 @@ function updateDisplayedGuessList() {
 
 document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener('keydown', (event) => {
-    var allTiles = Array.from(document.getElementsByClassName('tile'));
-    var activeGuessTiles = allTiles.filter(tile => tile.dataset.guessStatus === '1');
-    var tileToUpdate = activeGuessTiles.find(e => e.innerHTML === '');
+    let allTiles = Array.from(document.getElementsByClassName('tile'));
+    let activeGuessTiles = allTiles.filter(tile => tile.dataset.guessStatus === '1');
+    let tileToUpdate = activeGuessTiles.find(e => e.innerHTML === '');
     if (!tileToUpdate)
       tileToUpdate = allTiles.find(e => e.innerHTML === '');
     if (event.key.length == 1 && event.key.match(/[a-z]/i)) {
@@ -165,15 +179,15 @@ document.addEventListener("DOMContentLoaded", function () {
       tileToUpdate.className = 'tile';
       tileToUpdate.dataset.locationValue = '';
     } else if (event.key === 'Enter') {
-      var guess = activeGuessTiles.reduce((p, c) => p + c.innerText, '').toLowerCase();
+      let guess = activeGuessTiles.reduce((p, c) => p + c.innerText, '').toLowerCase();
       if (guess.length < 5)
         return;
-      var response = activeGuessTiles.reduce((p, c) => p + c.dataset.locationValue, '');
+      let response = activeGuessTiles.reduce((p, c) => p + c.dataset.locationValue, '');
       applyNewGuess(guess, response);
       for (const tile of activeGuessTiles) {
         tile.dataset.guessStatus = '2';
       }
-      var newTiles = allTiles.filter(tile => tile.dataset.guessStatus !== '2').slice(0, 5);
+      let newTiles = allTiles.filter(tile => tile.dataset.guessStatus !== '2').slice(0, 5);
       for (const tile of newTiles) {
         tile.dataset.guessStatus = '1';
       }
@@ -198,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   }
 
-  solver.onmessage = function(e) {
+  SOLVER.onmessage = function(e) {
     scoredGuesses = e.data;
     updateDisplayedGuessList();
   }
