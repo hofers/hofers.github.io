@@ -20,17 +20,21 @@ function stopLoading() {
 }
 
 function applyNewGuess(guess, response) {
-  let occurrences = [...guess].reduce((a, c) => {
-    a[c] ? a[c]++ : a[c] = 1;
+  let occurrences = [...guess].reduce((a, c, i) => {
+    if (response[i] !== 'b') {
+      a[c] ? a[c]++ : a[c] = 1;
+    }
     return a;
   }, {});
   [...response].forEach((letter, index) => {
     let currentLetterIncludes = currentRules.includes.find(e => e.letter === guess[index]);
     switch (letter) {
       case 'b':
-        if (!currentLetterIncludes) {
-          currentRules.excludes.push(guess[index])
-          currentRules.excludes = [...new Set(currentRules.excludes)]
+        if (currentLetterIncludes) {
+          currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'n';
+        } else {
+          currentRules.excludes.push(guess[index]);
+          currentRules.excludes = [...new Set(currentRules.excludes)];
         }
         break;
       case 'y':
