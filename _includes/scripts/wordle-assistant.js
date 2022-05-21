@@ -104,7 +104,11 @@ function updateRegex() {
   }
   for (const letter of unplacedLetters) {
     let occurrences = currentRules.includes.find(e => e.letter === letter).occurrences;
-    regexString = '(?=[a-z]*' + letter + '{' + occurrences + ',})' + regexString;
+    let partialString = '(?=';
+    for (let i = 0; i < occurrences; i++) {
+      partialString += '[a-z]*' + letter + '{1,}';
+    }
+    regexString = partialString + ')' + regexString;
   }
   currentRuleRegex = RegExp('\\b' + regexString + '\\b', 'g');
   applyRegex();
