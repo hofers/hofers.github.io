@@ -106,9 +106,9 @@ function updateRegex() {
     let occurrences = currentRules.includes.find(e => e.letter === letter).occurrences;
     let partialString = '(?=';
     for (let i = 0; i < occurrences; i++) {
-      partialString += '[a-z]*' + letter + '{1}';
+      partialString += '[^' + letter + ' ]*' + letter + '{1}';
     }
-    regexString = partialString + ')' + regexString;
+    regexString = partialString + '[^' + letter + ' ]*\\b)' + regexString;
   }
   currentRuleRegex = RegExp('\\b' + regexString + '\\b', 'g');
   applyRegex();
