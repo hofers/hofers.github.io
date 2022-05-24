@@ -2,7 +2,7 @@
 title: Wordle Assistant
 h1: Wordle Assistant
 h2: Check what valid words remain based on your guesses
-tags: css js
+tags: css min-js
 ---
 [WordleBot](https://www.nytimes.com/interactive/2022/upshot/wordle-bot.html){% out %} uses the word pool to determine valid guesses so this must not be cheating!
 

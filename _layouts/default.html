@@ -49,7 +49,10 @@
   <script>
     {% include scripts/ga.js %}
   </script>
-  {% if page.tags contains 'js' %}
+  {% if page.tags contains 'min-js' %}
+  <script>
+    {% include scripts/{{ page.name | replace: '.md', '' }}.min.js %}
+  </script>{% elsif page.tags contains 'js' %}
   <script>
     {% include scripts/{{ page.name | replace: '.md', '' }}.js %}
   </script>{% endif %}
