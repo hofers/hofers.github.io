@@ -156,9 +156,9 @@ function updateDisplayedGuessList() {
   let guessListDiv = document.getElementById("guess-list");
   guessListDiv.innerHTML = '';
   for (const word of scoredGuesses) {
-    guess = word.maxGroupLength === scoredGuesses[0].maxGroupLength
-     && word.numGroups === scoredGuesses[0].numGroups
-     ? word.guess + " ☑️" : word.guess;
+    guess = word.maxGroupLength === scoredGuesses[0].maxGroupLength &&
+      word.numGroups === scoredGuesses[0].numGroups ?
+      word.guess + " ☑️" : word.guess;
     result += '<div class="word guess">' + guess + '</div>'
   }
   guessListDiv.innerHTML = result;
@@ -168,7 +168,9 @@ function updateDisplayedGuessList() {
 document.addEventListener("DOMContentLoaded", function () {
   workerBlob = new Blob([
     document.getElementById('worker').textContent
-  ], { type: "text/javascript" })
+  ], {
+    type: "text/javascript"
+  })
   solver = new Worker(window.URL.createObjectURL(workerBlob));
   document.addEventListener('keydown', (event) => {
     let allTiles = Array.from(document.getElementsByClassName('tile'));
@@ -225,13 +227,12 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   }
 
-  solver.onmessage = function(e) {
+  solver.onmessage = function (e) {
     scoredGuesses = e.data;
     updateDisplayedGuessList();
   }
-});
-</script>
-<script id="worker" type="javascript/worker">
+}); 
+{%- include snippets/wordle-script-tags.html -%}
 {%- include snippets/wordle-guesses.js -%}
 // include ALL_GUESSES and ALL_SOLUTIONS
 onmessage = function(e) {
