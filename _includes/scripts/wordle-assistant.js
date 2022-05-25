@@ -9,11 +9,13 @@ var workerBlob = null;
 var solver = null;
 
 function startLoading() {
-  document.getElementById('thinking').className = 'thinking';
+  document.getElementById('thinking').className = 'center-text';
+  document.getElementById('footnotes').className = 'center-text small-text hidden';
 }
 
 function stopLoading() {
-  document.getElementById('thinking').className = 'thinking hidden';
+  document.getElementById('thinking').className = 'center-text hidden';
+  document.getElementById('footnotes').className = 'center-text small-text'
 }
 
 function applyNewGuess(guess, response) {
@@ -156,7 +158,14 @@ function updateDisplayedGuessList() {
     guess = word.maxGroupLength === scoredGuesses[0].maxGroupLength &&
       word.numGroups === scoredGuesses[0].numGroups ?
       word.guess + " ☑️" : word.guess;
-    result += '<div class="word guess">' + guess + '</div>'
+    result += '<div class="word guess">' 
+      + guess 
+      + (
+        currentSolutionList.includes(word.guess) 
+          ? ' ✨'
+          : ('') 
+      )
+      + '</div>'
   }
   guessListDiv.innerHTML = result;
   stopLoading();
