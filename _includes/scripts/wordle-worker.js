@@ -1,5 +1,5 @@
 onmessage = function(e) {
-  var scoredGuesses = [];
+  let scoredGuesses = [];
   if (e.data.currentSolutionList.length === 2309) {
     scoredGuesses = [{
       guess: 'crane',
@@ -17,22 +17,25 @@ onmessage = function(e) {
     return;
   }
   scoredGuesses = ALL_GUESSES.split(" ").map(guess => {
-    var groupCounts = Object.values(
+    let groupCounts = Object.values(
       e.data.currentSolutionList.map(
-        word => [...guess].map((letter, index) => {
-          if (word[index] === letter) {
-            return 'g';
-          } else if (word.includes(letter)) {
-            return 'y';
-          } else {
-            return 'b';
-          }
-        })
-          .join('')
-      )
-        .reduce(function (acc, curr) {
-          return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
-        }, {})
+        word => {
+          let tempWord = word;
+          return [...guess].map((letter, index) => {
+            if (tempWord[index] === letter) {
+              tempWord = tempWord.replace(letter, '.');
+              return 'g';
+            } else if (tempWord.includes(letter)) {
+              tempWord = tempWord.replace(letter, '.');
+              return 'y';
+            } else {
+              return 'b';
+            }
+          }).join('')
+        }
+      ).reduce(function (acc, curr) {
+        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+      }, {})
     );
     return {
       guess: guess,

@@ -105,7 +105,7 @@ function updateRegex() {
     for (let i = 0; i < occurrences; i++) {
       partialString += '[^' + letter + ' ]*' + letter;
     }
-    regexString = partialString + '[^' + letter + ' ]*\\b)' + regexString;
+    regexString = partialString + '[^ ]*\\b)' + regexString;
   }
   currentRuleRegex = RegExp('\\b' + regexString + '\\b', 'g');
   applyRegex();
