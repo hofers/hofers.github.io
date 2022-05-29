@@ -4,10 +4,10 @@
   width: 100%;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  grid-gap: 5px;
-  padding: 10px;
+  grid-gap: 0.25rem;
+  padding: 0.5rem;
   box-sizing: border-box;
-  max-width: 500px;
+  max-width: 25rem;
   margin: auto;
   border-radius: 0.25rem;
 }
@@ -25,7 +25,7 @@
   color: #ffffff;
   text-transform: uppercase;
   user-select: none;
-  border: 2px solid #3a3a3c;
+  border: 0.1rem solid #3a3a3c;
 
   &::before {
     content: '';
@@ -39,36 +39,45 @@
 }
 
 .elsewhere-in-word {
-  border: 2px solid #b59f3b;
+  border: 0.1rem solid #b59f3b;
   background-color: #b59f3b;
 }
 
 .correctly-placed {
-  border: 2px solid #538d4e;
+  border: 0.1rem solid #538d4e;
   background-color: #538d4e;
 }
 
 .word-list {
-  max-width: 500px;
+  max-width: 25rem;
   margin: auto;
-  max-height: 400px;
+  max-height: 20rem;
   overflow: scroll;
-  border: 2px solid #121213;
+  border: 0.1rem solid #121213;
   border-radius: 0.25rem;
 }
 
 .word {
   font-size: 2rem;
   text-align: center;
-  padding: 4px;
-  border: 2px solid #121213;
+  padding: 0.2rem;
+  border: 0.1rem solid #121213;
   border-radius: 0.25rem;
   background-color: #5a5a5a;
-  margin: 2px;
+  margin: 0.1rem;
 }
 
 .guess {
   background-color: #538d4e;
+  display: grid;
+  grid-gap: 0.25rem;
+  grid-template-columns: 1fr 1fr 3fr 1fr 1fr 1fr;
+  & > div {
+    text-align: center;
+  }
+  & > p {
+    font-weight: unset;
+  }
 }
 
 .dummy {
@@ -90,15 +99,15 @@ button {
   cursor: pointer;
   color: unset;
   width: 80%;
-  max-width: 400px;
+  max-width: 20rem;
   appearance: none;
-  border: 2px solid #121213;
+  border: 0.1rem solid #121213;
   border-radius: 0.25rem;
   background-color: #538d4e;
   font-size: 1.5rem;
-  padding: 5px;
+  padding: 0.25rem;
   margin-bottom: 1rem;
-  margin-top: 6px;
+  margin-top: 0.3rem;
 }
 
 .center-text {
@@ -112,5 +121,31 @@ button {
   }
   & > p:last-child {
     margin-bottom: 1rem;
+  }
+}
+
+.smallish-text {
+  font-size: 0.85rem;
+  margin: auto;
+}
+
+.guess-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr 1fr 1fr 1fr;
+  grid-gap: 0.25rem;
+  padding: 0 0.5rem 0.2rem;
+  max-width: 24.2rem;
+  margin: auto;
+  & > div {
+    text-align: center;
+    margin: auto;
+    font-size: 1.5rem;
+    &.smallish-text {
+      font-size: 0.7rem;
+      line-height: 0.8rem;
+    }
+  }
+  &.hidden {
+    display: none;
   }
 }

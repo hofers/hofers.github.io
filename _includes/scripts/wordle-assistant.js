@@ -16,6 +16,7 @@ function startLoading() {
 function stopLoading() {
   document.getElementById('thinking').className = 'center-text hidden';
   document.getElementById('footnotes').className = 'center-text small-text'
+  document.getElementById('guess-header').className = 'guess-header';
 }
 
 function applyNewGuess(guess, response) {
@@ -155,16 +156,14 @@ function updateDisplayedGuessList() {
   let guessListDiv = document.getElementById("guess-list");
   guessListDiv.innerHTML = '';
   for (const word of scoredGuesses) {
-    guess = word.maxGroupLength === scoredGuesses[0].maxGroupLength &&
-      word.numGroups === scoredGuesses[0].numGroups ?
-      word.guess + " ☑️" : word.guess;
-    result += '<div class="word guess">' 
-      + guess 
-      + (
-        currentSolutionList.includes(word.guess) 
-          ? ' ✨'
-          : ('') 
-      )
+    guess = word.bits === scoredGuesses[0].bits ? word.guess + " ☑️" : word.guess;
+    result += '<div class="word guess">'
+      + '<div>' + (currentSolutionList.includes(word.guess) ? "✨" : "") + '</div>'
+      + '<div>' + (word.bits === scoredGuesses[0].bits ? "☑️" : "") + '</div>'
+      + '<div>' + word.guess + '</div>'
+      + '<p class="smallish-text">' + word.bits + '</p>'
+      + '<p class="smallish-text">' + word.numGroups + '</p>'
+      + '<p class="smallish-text">' + word.maxGroupLength + '</p>'
       + '</div>'
   }
   guessListDiv.innerHTML = result;

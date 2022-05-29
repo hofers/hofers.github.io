@@ -48,6 +48,14 @@ Press <span style="color:#538d4e;">**Get Guesses**</span> for a selection of the
   <p>Guesses with &nbsp;✨&nbsp; are possible solutions.</p>
 </div>
 <div id="thinking" class="center-text hidden"><p>Thinking...</p></div>
+<div id="guess-header" class="guess-header hidden">
+  <div>✨</div>
+  <div>☑️</div>
+  <div>Guess</div>
+  <div class="smallish-text">Bits</div>
+  <div class="smallish-text"># Groups</div>
+  <div class="smallish-text">Max Group Size</div>
+</div>
 <div class="word-list" id="guess-list"></div>
 
 <p id="remaining" style="text-align: center; margin-top: 1rem;">Valid Solutions Remaining: 2309</p>
