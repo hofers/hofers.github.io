@@ -159,7 +159,7 @@ function updateDisplayedGuessList() {
     guess = word.bits === scoredGuesses[0].bits ? word.guess + " ☑️" : word.guess;
     result += '<div class="word guess">'
       + '<div>' + (currentSolutionList.includes(word.guess) ? "✨" : "") + '</div>'
-      + '<div>' + (word.bits === scoredGuesses[0].bits ? "☑️" : "") + '</div>'
+      + '<div>' + (word.bits === scoredGuesses[0].bits || word.checked ? "☑️" : "") + '</div>'
       + '<div>' + word.guess + '</div>'
       + '<p class="smallish-text">' + word.bits + '</p>'
       + '<p class="smallish-text">' + word.numGroups + '</p>'

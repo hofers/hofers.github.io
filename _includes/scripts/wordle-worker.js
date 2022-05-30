@@ -1,18 +1,19 @@
 onmessage = function(e) {
   let scoredGuesses = [];
   let solutions = e.data.currentSolutionList;
+  let solveWeight = 1 + (1 / solutions.length);
   if (solutions.length === 2309) {
     scoredGuesses = [
-      {guess: 'crane', bits: '5.74', numGroups: 142, maxGroupLength: 263},
-      {guess: 'slate', bits: '5.86', numGroups: 146, maxGroupLength: 221},
-      {guess: 'crate', bits: '5.84', numGroups: 148, maxGroupLength: 246},
-      {guess: 'slant', bits: '5.49', numGroups: 131, maxGroupLength: 316},
-      {guess: 'trace', bits: '5.83', numGroups: 150, maxGroupLength: 246},
-      {guess: 'reast', bits: '5.87', numGroups: 147, maxGroupLength: 226},
+      {guess: 'crate', bits: '5.84', numGroups: 148, maxGroupLength: 246, checked: 1},
+      {guess: 'trace', bits: '5.83', numGroups: 150, maxGroupLength: 246, checked: 1},
+      {guess: 'slate', bits: '5.86', numGroups: 146, maxGroupLength: 221, checked: 1},
+      {guess: 'saine', bits: '5.76', numGroups: 136, maxGroupLength: 207, checked: 1},
+      {guess: 'crane', bits: '5.74', numGroups: 142, maxGroupLength: 263, checked: 1},
       {guess: 'salet', bits: '5.84', numGroups: 148, maxGroupLength: 221},
-      {guess: 'soare', bits: '5.89', numGroups: 127, maxGroupLength: 182},
-      {guess: 'raise', bits: '5.88', numGroups: 132, maxGroupLength: 167},
-      {guess: 'irate', bits: '5.83', numGroups: 124, maxGroupLength: 193}
+      {guess: 'saice', bits: '5.69', numGroups: 124, maxGroupLength: 211},
+      {guess: 'slane', bits: '5.77', numGroups: 133, maxGroupLength: 225},
+      {guess: 'zaire', bits: '5.04', numGroups: 86, maxGroupLength: 261},
+      {guess: 'craze', bits: '4.94', numGroups: 90, maxGroupLength: 369}
     ];
     postMessage(scoredGuesses);
     return;
@@ -49,7 +50,6 @@ onmessage = function(e) {
       maxGroupLength: Math.max(...groupCounts)
     };
   })
-  let solveWeight = 1 + (1 / solutions.length);
   scoredGuesses.sort((a, b) => 
     solutions.includes(a.guess) 
       ? solutions.includes(b.guess) 
