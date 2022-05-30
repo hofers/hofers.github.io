@@ -3,15 +3,15 @@ onmessage = function(e) {
   let solutions = e.data.currentSolutionList;
   if (solutions.length === 2309) {
     scoredGuesses = [
-      {guess: 'soare', bits: '5.89', numGroups: 127, maxGroupLength: 182},
-      {guess: 'raise', bits: '5.88', numGroups: 132, maxGroupLength: 167},
-      {guess: 'roate', bits: '5.88', numGroups: 126, maxGroupLength: 194},
-      {guess: 'reast', bits: '5.87', numGroups: 147, maxGroupLength: 226},
-      {guess: 'raile', bits: '5.87', numGroups: 128, maxGroupLength: 173},
+      {guess: 'crane', bits: '5.74', numGroups: 142, maxGroupLength: 263},
       {guess: 'slate', bits: '5.86', numGroups: 146, maxGroupLength: 221},
       {guess: 'crate', bits: '5.84', numGroups: 148, maxGroupLength: 246},
-      {guess: 'salet', bits: '5.84', numGroups: 148, maxGroupLength: 221},
+      {guess: 'slant', bits: '5.49', numGroups: 131, maxGroupLength: 316},
       {guess: 'trace', bits: '5.83', numGroups: 150, maxGroupLength: 246},
+      {guess: 'reast', bits: '5.87', numGroups: 147, maxGroupLength: 226},
+      {guess: 'salet', bits: '5.84', numGroups: 148, maxGroupLength: 221},
+      {guess: 'soare', bits: '5.89', numGroups: 127, maxGroupLength: 182},
+      {guess: 'raise', bits: '5.88', numGroups: 132, maxGroupLength: 167},
       {guess: 'irate', bits: '5.83', numGroups: 124, maxGroupLength: 193}
     ];
     postMessage(scoredGuesses);
@@ -49,14 +49,14 @@ onmessage = function(e) {
       maxGroupLength: Math.max(...groupCounts)
     };
   })
+  let solveWeight = 1 + (1 / solutions.length);
   scoredGuesses.sort((a, b) => 
     solutions.includes(a.guess) 
       ? solutions.includes(b.guess) 
-        ? ((b.bits * (1 + (1 / solutions.length))) 
-          - (a.bits * (1 + (1 / solutions.length))))
-        : b.bits - (a.bits * (1 + (1 / solutions.length)))
+        ? (b.bits * solveWeight) - (a.bits * solveWeight)
+        : b.bits - (a.bits * solveWeight)
       : solutions.includes(b.guess) 
-        ? (b.bits * (1 + (1 / solutions.length))) - a.bits
+        ? (b.bits * solveWeight) - a.bits
         : b.bits - a.bits
   );
   if (solutions.every(
