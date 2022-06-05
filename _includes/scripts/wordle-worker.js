@@ -1,7 +1,7 @@
 onmessage = function(e) {
   let scoredGuesses = [];
   let solutions = e.data.currentSolutionList;
-  let solveWeight = 1 + (1 / solutions.length);
+  let solveWeight = 1 + ((1 / solutions.length) * 0.75);
   if (solutions.length === 2309) {
     scoredGuesses = [
       {guess: 'crate', bits: '5.84', numGroups: 148, maxGroupLength: 246, checked: 1},
