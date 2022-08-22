@@ -27,21 +27,24 @@ function applyNewGuess(guess, response) {
     return a;
   }, {});
   [...response].forEach((letter, index) => {
-    let currentLetterIncludes = currentRules.includes.find(e => e.letter === guess[index]);
+    let currentLetter = currentRules.includes.find(e => e.letter === guess[index]);
     switch (letter) {
       case 'b':
-        if (currentLetterIncludes) {
+        if (currentLetter) {
           currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'n';
+          currentRules.includes.find(e => e.letter === guess[index]).maxOccurrences = (
+            Math.max(currentLetter.occurrences, occurrences[guess[index]])
+          );
         } else {
           currentRules.excludes.push(guess[index]);
           currentRules.excludes = [...new Set(currentRules.excludes)];
         }
         break;
       case 'y':
-        if (currentLetterIncludes) {
+        if (currentLetter) {
           currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'n';
           currentRules.includes.find(e => e.letter === guess[index]).occurrences = (
-            Math.max(currentLetterIncludes.occurrences, occurrences[guess[index]])
+            Math.max(currentLetter.occurrences, occurrences[guess[index]])
           );
         } else {
           currentRules.includes.push({
@@ -53,10 +56,10 @@ function applyNewGuess(guess, response) {
         }
         break;
       case 'g':
-        if (currentLetterIncludes) {
+        if (currentLetter) {
           currentRules.includes.find(e => e.letter === guess[index]).location[index] = 'y';
           currentRules.includes.find(e => e.letter === guess[index]).occurrences = (
-            Math.max(currentLetterIncludes.occurrences, occurrences[guess[index]])
+            Math.max(currentLetter.occurrences, occurrences[guess[index]])
           );
         } else {
           currentRules.includes.push({
@@ -104,11 +107,12 @@ function updateRegex() {
   }
   for (const letter of unplacedLetters) {
     let occurrences = currentRules.includes.find(e => e.letter === letter).occurrences;
+    let maxOccurrences = currentRules.includes.find(e => e.letter === letter).maxOccurrences ?? 5;
     let partialString = '(?=';
     for (let i = 0; i < occurrences; i++) {
       partialString += '[^' + letter + ' ]*' + letter;
     }
-    regexString = partialString + '[^ ]*\\b)' + regexString;
+    regexString = partialString + '[^' + (maxOccurrences === occurrences ? letter : '') + ' ]*\\b)' + regexString;
   }
   currentRuleRegex = RegExp('\\b' + regexString + '\\b', 'g');
   applyRegex();
