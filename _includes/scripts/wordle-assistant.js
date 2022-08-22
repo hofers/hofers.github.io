@@ -107,7 +107,7 @@ function updateRegex() {
   }
   for (const letter of unplacedLetters) {
     let occurrences = currentRules.includes.find(e => e.letter === letter).occurrences;
-    let maxOccurrences = currentRules.includes.find(e => e.letter === letter).maxOccurrences ?? 5;
+    let maxOccurrences = currentRules.includes.find(e => e.letter === letter).maxOccurrences || 5;
     let partialString = '(?=';
     for (let i = 0; i < occurrences; i++) {
       partialString += '[^' + letter + ' ]*' + letter;
