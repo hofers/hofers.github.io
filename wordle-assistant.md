@@ -10,6 +10,8 @@ Enter a guess and tap a tile to change its color. Hit enter/return to apply the 
 
 Press <span style="color:#538d4e;">**Get Guesses**</span> for a selection of the best possible guesses (note: doing this probably *is* cheating 😉).
 
+Note: this tool is not actively maintained may no longer provide the best guesses possible.
+
 <div class="grid">
   <div class="tile" data-guess-status="1"></div>
   <div class="tile" data-guess-status="1"></div>

@@ -61,10 +61,10 @@
   <div class="nav">
     {%- assign pages = site.pages | where_exp: "i", "i.place-in-menu" | sort: "place-in-menu" -%}
     {% for p in pages %}
-    <a href="{{ p.url }}"{% if p.title == page.title %} class="active"{% endif %}>{{ p.title }}</a>
+    <a href="{{ p.url }}"{% if p.title == page.title %} class="active"{% endif %}><span>{{ p.title }}</span></a>
     {%- endfor -%}
     {% if page.categories contains 'class' %}
-    <a href="/class-blog" class="active">Class&nbsp;Blog</a>
+    <a href="/class-blog" class="active"><span>Class&nbsp;Blog</span></a>
     {%- endif -%}
   </div>
   <div>
