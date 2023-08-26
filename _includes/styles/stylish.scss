@@ -1,8 +1,23 @@
 // Standard Styles
 
 @import "typography";
-@import "background";
 @import "fa";
+@import "colors";
+
+@keyframes rotation {
+  0% {
+    --angle: 0deg;
+    filter: blur(10px);
+  }
+  100% {
+    --angle: 360deg;
+    filter: blur(10px);
+  }
+}
+
+body {
+  background-color: black;
+}
 
 .hidden {
   display: none;
@@ -14,7 +29,8 @@
 
 .container {
   background-color: $colorBackgroundPrimary;
-  box-shadow: 0.05rem 0.1rem 0.25rem $gray;
+  box-shadow: 0.05rem 0 0.25rem $gray;
+  outline: transparent 2px inset;
   border-bottom-left-radius: 2.566665rem;
   border-bottom-right-radius: 2.566665rem;
   border-top-left-radius: 0.25rem;
@@ -22,10 +38,29 @@
   display: inline-block;
   min-width: calc(100% - 2.5rem);
   padding: 0 1.25rem;
+  position: relative;
   text-align: left;
   & > h2 {
     margin-bottom: 1rem;
   }
+
+  &:before {
+    --angle: 0deg;
+    background: conic-gradient(from var(--angle), #27faf8, #2767fa, #7227fa, #e227fa, #fa2799, #fab027, #e6fa27, #48fa27, #27faf8);
+    border-bottom-left-radius: 2.566665rem;
+    border-bottom-right-radius: 2.566665rem;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    content:"";
+    filter: blur(10px);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    animation: rotation 15s linear infinite;
+    z-index: -1;
+  }
+  
 }
 
 .nav {

@@ -20,6 +20,11 @@
   {%- include styles/inline-fonts.scss -%}
   {% endcapture %}
   <style>
+    @property --angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
     {{ fontfaces | scssify }}
   </style>
   {%- capture styles -%}
