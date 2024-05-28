@@ -2,18 +2,18 @@ onmessage = function(e) {
   let scoredGuesses = [];
   let solutions = e.data.currentSolutionList;
   let solveWeight = 1 + ((1 / solutions.length) * 0.75);
-  if (solutions.length === 2309) {
+  if (solutions.length === 3189) {
     scoredGuesses = [
-      {guess: 'crate', bits: '5.84', numGroups: 148, maxGroupLength: 246, checked: 1},
-      {guess: 'trace', bits: '5.83', numGroups: 150, maxGroupLength: 246, checked: 1},
-      {guess: 'slate', bits: '5.86', numGroups: 146, maxGroupLength: 221, checked: 1},
-      {guess: 'saine', bits: '5.76', numGroups: 136, maxGroupLength: 207, checked: 1},
-      {guess: 'crane', bits: '5.74', numGroups: 142, maxGroupLength: 263, checked: 1},
-      {guess: 'salet', bits: '5.84', numGroups: 148, maxGroupLength: 221},
-      {guess: 'saice', bits: '5.69', numGroups: 124, maxGroupLength: 211},
-      {guess: 'slane', bits: '5.77', numGroups: 133, maxGroupLength: 225},
-      {guess: 'zaire', bits: '5.04', numGroups: 86, maxGroupLength: 261},
-      {guess: 'craze', bits: '4.94', numGroups: 90, maxGroupLength: 369}
+      {guess: "tarse", bits: "5.89", numGroups: 158, maxGroupLength: 321, checked: 1},
+      {guess: "tiare", bits: "5.86", numGroups: 150, maxGroupLength: 276},
+      {guess: "sater", bits: "5.85", numGroups: 151, maxGroupLength: 321},
+      {guess: "roate", bits: "5.84", numGroups: 133, maxGroupLength: 253},
+      {guess: "raise", bits: "5.83", numGroups: 137, maxGroupLength: 243},
+      {guess: "soare", bits: "5.82", numGroups: 134, maxGroupLength: 238},
+      {guess: "raile", bits: "5.82", numGroups: 134, maxGroupLength: 253},
+      {guess: "taler", bits: "5.81", numGroups: 145, maxGroupLength: 288},
+      {guess: "caret", bits: "5.80", numGroups: 156, maxGroupLength: 343},
+      {guess: "salet", bits: "5.80", numGroups: 161, maxGroupLength: 314},
     ];
     postMessage(scoredGuesses);
     return;
