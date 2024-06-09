@@ -4,6 +4,7 @@ var currentRules = {
   excludes: [],
 };
 var currentRuleRegex = /\b.....\b/g;
+var currentHardModeRegex = /\b.....\b/g;
 var scoredGuesses = [];
 var workerBlob = null;
 var solver = null;
@@ -77,12 +78,14 @@ function applyNewGuess(guess, response) {
 
 function updateRegex() {
   let regexString = '';
+  let hardModeRegexString = '';
   let substring = '';
   let unplacedLetters = [];
 
   for (let i = 0; i < 5; i++) {
     if (currentRules.includes.find(e => e.location[i] === 'y')) {
       regexString += currentRules.includes.find(e => e.location[i] === 'y').letter;
+      hardModeRegexString += currentRules.includes.find(e => e.location[i] === 'y').letter;
       if (currentRules.includes.find(e => e.location[i] === 'n')) {
         for (const inclusionRule of currentRules.includes.filter(e => e.location[i] === 'n')) {
           substring += inclusionRule.letter;
@@ -95,10 +98,12 @@ function updateRegex() {
         substring += inclusionRule.letter;
       }
       regexString += '[^' + substring + ']';
+      hardModeRegexString += '.';
       unplacedLetters.push(...substring);
       substring = '';
     } else {
       regexString += '.';
+      hardModeRegexString += '.';
     }
   }
   if (currentRules.excludes.length > 0) {
@@ -113,8 +118,10 @@ function updateRegex() {
       partialString += '[^' + letter + ' ]*' + letter;
     }
     regexString = partialString + '[^' + (maxOccurrences === occurrences ? letter : '') + ' ]*\\b)' + regexString;
+    hardModeRegexString = '(?=[a-z]*' + letter + ')' + hardModeRegexString;
   }
   currentRuleRegex = RegExp('\\b' + regexString + '\\b', 'g');
+  currentHardModeRegex = RegExp('\\b' + hardModeRegexString + '\\b', 'g');
   applyRegex();
 }
 
@@ -126,6 +133,7 @@ function applyRegex() {
 function requestNewGuesses() {
   startLoading();
   solver.postMessage({
+    allValidGuesses: [...ALL_GUESSES.matchAll(currentHardModeRegex)].map(word => word[0]),
     currentSolutionList: currentSolutionList,
     hardMode: document.getElementById('hardMode').checked,
   })

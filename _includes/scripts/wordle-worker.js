@@ -1,7 +1,6 @@
 onmessage = function(e) {
   let scoredGuesses = [];
   const solutions = e.data.currentSolutionList;
-  const hardMode = e.data.hardMode;
   const solveWeight = 1 + ((1 / solutions.length) * 0.25);
   /**
    * Return a pre-calculated response for the first 
@@ -87,18 +86,22 @@ onmessage = function(e) {
   );
   /**
    * If every remaining solution has a guess score that's tied with
-   * the best guess, or if the user is playing in Hard Mode,
-   * only return remaining solutions as guesses, up to 10.
+   * the best guess, only return remaining solutions as guesses, up to 10.
+   * 
+   * Otherwise, if the user has toggled Hard Mode on, only return the top ten
+   * remaining guesses that are valid in Hard Mode.
    * 
    * Otherwise, simply return the top 10 guesses.
    */
-  if (hardMode || solutions.every(
+  if (solutions.every(
     w => scoredGuesses.find(
       g => g.guess === w 
       && g.bits === scoredGuesses[0].bits
     )
   )) {
-    scoredGuesses = scoredGuesses.filter(word => solutions.includes(word.guess)).slice(0, 10);
+    scoredGuesses = scoredGuesses.filter(word => solutions.includes(word.guess));
+  } else if (e.data.hardMode) {
+    scoredGuesses = scoredGuesses.filter(word => e.data.allValidGuesses.includes(word.guess)).slice(0, 10);
   } else {
     scoredGuesses = scoredGuesses.slice(0, 10);
   }
