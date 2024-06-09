@@ -127,6 +127,7 @@ function requestNewGuesses() {
   startLoading();
   solver.postMessage({
     currentSolutionList: currentSolutionList,
+    hardMode: document.getElementById('hardMode').checked,
   })
 }
 

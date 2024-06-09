@@ -8,7 +8,7 @@ tags: css min-js
 
 Enter a guess and tap a tile to change its color. Hit enter/return to apply the guess, move to the next line and print the remaining solutions below.
 
-Press <span style="color:#538d4e;">**Get Guesses**</span> for a selection of the best possible guesses (note: doing this probably *is* cheating 😉).
+Press <span style="color:#538d4e;">**Get Guesses**</span> for a selection of the best possible guesses (note: doing this probably *is* cheating 😉). Toggle on **Hard Mode** to receive only guesses that are valid in Hard Mode.
 
 <div class="grid">
   <div class="tile" data-guess-status="1"></div>
@@ -40,6 +40,10 @@ Press <span style="color:#538d4e;">**Get Guesses**</span> for a selection of the
 
 <input type="text" class="dummy" id="dummy">
 
+<div class="checkbox-container">
+  <input type="checkbox" id="hardMode" name="hardMode" />
+  <label for="hardMode">Hard Mode?</label>
+</div>
 <div class="button-container">
   <button onclick="requestNewGuesses()">Get Guesses</button>
 </div>
