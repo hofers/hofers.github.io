@@ -19,7 +19,7 @@ jobs:
       # Ruby / bundle setup
       - uses: ruby/setup-ruby@v1
         with: 
-          ruby-version: 2.6
+          ruby-version: 3.1.4
       - run: bundle install
 
       # Uglify JS
