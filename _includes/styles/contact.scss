@@ -1,6 +1,7 @@
 // Contact Form Styles
 
-@import "colors";
+@use "colors";
+@use "sass:color";
 
 form {
   display: flex;
@@ -28,25 +29,25 @@ form {
       & textarea {
         font-family: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
         font-size: 0.8rem;
-        border: 0.05rem solid $colorBackgroundTertiary;
+        border: 0.05rem solid colors.$colorBackgroundTertiary;
         border-radius: 0.1rem;
         padding: 0.2rem 0.3rem;
       }
       & input[type=submit] {
         font-size: 1.2rem;
-        background-color: $deep-teal;
-        color: $off-white;
+        background-color: colors.$deep-teal;
+        color: colors.$off-white;
         padding-top: 0.3rem;
         padding-bottom: 0.3rem;
-        border: 1px solid $off-black;
+        border: 1px solid colors.$off-black;
         transition: background-color 0.2s ease;
         cursor: pointer;
         &:hover {
-          background-color: adjust-color($color: $deep-teal,  $lightness: -8%);
+          background-color: color.adjust(colors.$deep-teal, $lightness: -8%);
         }
         &:disabled {
-          background-color: adjust-color($color: $deep-teal,  $lightness: -8%);
-          color: adjust-color($color: $off-white,  $lightness: -8%);;
+          background-color: color.adjust(colors.$deep-teal, $lightness: -8%);
+          color: color.adjust(colors.$off-white, $lightness: -8%);
         }
       }
       & input[type=file] {
@@ -56,7 +57,7 @@ form {
         margin: 0;
         font-weight: 300;
         font-size: 1.2rem;
-        color: $colorHeadingTertiary;
+        color: colors.$colorHeadingTertiary;
         line-height: 1.4rem;
       }
     }
@@ -64,12 +65,12 @@ form {
 }
 
 .error {
-  color: $red;
+  color: colors.$red;
 }
 
 .loader {
-  border: 0.37rem solid $light-gray; 
-  border-top: 0.37rem solid $teal; 
+  border: 0.37rem solid colors.$light-gray; 
+  border-top: 0.37rem solid colors.$teal; 
   border-radius: 50%;
   width: 1.6rem;
   height: 1.6rem;

@@ -1,10 +1,10 @@
 // Resume Styles
 
-@import "colors";
+@use "colors";
 
 iframe {
   width: 100%;
   max-height: 47.9rem;
   height: calc(calc(100vw - 3.3rem)*1.293);
-  border: 1px solid $off-black;
+  border: 1px solid colors.$off-black;
 }

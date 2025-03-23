@@ -1,4 +1,4 @@
-@import "colors";
+@use "colors";
 
 .grid {
   display: grid;
@@ -100,7 +100,7 @@
 
 .checkbox-container {
   align-items: center;
-  color: $colorBodyPrimary;
+  color: colors.$colorBodyPrimary;
   display: flex;
   font-weight: 300;
   gap: 0.2rem;
@@ -180,7 +180,7 @@ button {
     text-align: center;
     margin: auto;
     font-size: 1.5rem;
-    color: $colorBodyPrimary;
+    color: colors.$colorBodyPrimary;
     font-weight: 300;
 
     &.smallish-text {

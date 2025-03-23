@@ -1,8 +1,9 @@
-@import "colors";
-@import "source";
+@use "colors";
+@forward "colors";
+@use "source";
 
-$boxShadowUnderline: $white 0px -1px 0px 0px inset;
-$boxShadowHighlight: inset 0 -.5em 0 0 $deep-teal;
+$boxShadowUnderline: colors.$white 0px -1px 0px 0px inset;
+$boxShadowHighlight: inset 0 -.5em 0 0 colors.$deep-teal;
 
 html {
   font-size: 20px; // Set base size in px
@@ -17,7 +18,7 @@ h1,h2,h3,p,li,th {
 
 a {
   box-shadow: $boxShadowUnderline;
-  color: $colorHeadingPrimary;
+  color: colors.$colorHeadingPrimary;
   font-weight: 300;
   text-decoration: none;
 }
@@ -30,7 +31,7 @@ a:active {
 
 h1 {
   font-size: 3rem;
-  color: $colorHeadingPrimary;
+  color: colors.$colorHeadingPrimary;
   line-height: 2.6rem;
   margin-top: 0.5rem;
   padding: 0.5rem 0;
@@ -39,19 +40,19 @@ h1 {
 
 h2 {
   font-size: 1.5rem;
-  color: $colorHeadingSecondary;
+  color: colors.$colorHeadingSecondary;
   line-height: 1.75rem;
   margin-top: 0.3rem;
 }
 
 h3 {
   font-size: 1.2rem;
-  color: $colorHeadingTertiary;
+  color: colors.$colorHeadingTertiary;
   line-height: 1.4rem;
 }
 
 p {
-  color: $colorBodyPrimary;
+  color: colors.$colorBodyPrimary;
   line-height: 1.25rem;
   margin: 0.5rem 0 1rem;
 }
@@ -62,7 +63,7 @@ ul {
 
 li,
 th {
-  color: $colorBodyPrimary;
+  color: colors.$colorBodyPrimary;
   line-height: 1.25rem;
 }
 

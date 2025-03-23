@@ -1,8 +1,7 @@
 // Standard Styles
 
-@import "typography";
-@import "fa";
-@import "colors";
+@use "typography";
+@use "fa";
 
 @keyframes rotation {
   0% {
@@ -28,8 +27,8 @@ body {
 }
 
 .container {
-  background-color: $colorBackgroundPrimary;
-  box-shadow: 0.05rem 0 0.25rem $gray;
+  background-color: typography.$colorBackgroundPrimary;
+  box-shadow: 0.05rem 0 0.25rem typography.$gray;
   outline: transparent 2px inset;
   border-bottom-left-radius: 2.566665rem;
   border-bottom-right-radius: 2.566665rem;
@@ -68,13 +67,13 @@ body {
 
   a {
     font-size: 0.9rem;
-    color: $colorHeadingSecondary;
+    color: typography.$colorHeadingSecondary;
     line-height: 1.25rem;
     letter-spacing: normal;
     padding: 0.15rem 0.8rem;
-    border: 0.15rem $off-white;
-    background-color: $colorBackgroundPrimary;
-    box-shadow: 0.05rem 0.1rem 0.25rem $gray;
+    border: 0.15rem typography.$off-white;
+    background-color: typography.$colorBackgroundPrimary;
+    box-shadow: 0.05rem 0.1rem 0.25rem typography.$gray;
     border-radius: 0.333rem 0.333rem 0 0;
     cursor: pointer;
 
@@ -83,20 +82,20 @@ body {
     }
 
     &.active {
-      color: $colorHeadingPrimary;
+      color: typography.$colorHeadingPrimary;
 
       span {
-        box-shadow: $boxShadowUnderline;
+        box-shadow: typography.$boxShadowUnderline;
       }
     }
 
     &:active,
     &:hover,
     &:focus {
-      color: $colorHeadingPrimary;
+      color: typography.$colorHeadingPrimary;
       
       span {
-        box-shadow: $boxShadowHighlight;
+        box-shadow: typography.$boxShadowHighlight;
       }
     }
   }
@@ -110,14 +109,14 @@ body {
   padding-top: 0.9rem;
   a {
     box-shadow: none; 
-    color: $colorBodyPrimary;
+    color: typography.$colorBodyPrimary;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     &:hover,
     &:focus,
     &:active {
-      box-shadow: $boxShadowHighlight;
-      color: $colorHeadingPrimary;
+      box-shadow: typography.$boxShadowHighlight;
+      color: typography.$colorHeadingPrimary;
       text-decoration: none;
     }
   }
@@ -132,7 +131,7 @@ body {
   width: 100%;
   max-width: 30rem;
   margin: 2.2rem auto 1.3rem;
-  background-color: $colorBackgroundTertiary;
+  background-color: typography.$colorBackgroundTertiary;
 }
 
 .blog-img {

@@ -1,6 +1,6 @@
 // Portfolio Styles
 
-@import "colors";
+@use "colors";
 
 .pf-item {
   display: flex;
@@ -10,7 +10,7 @@
 
 .pf-text {
   & > h2 {
-    color: $colorHeadingPrimary;
+    color: colors.$colorHeadingPrimary;
     font-style: italic;
     padding-top: 0.333rem;
   }
