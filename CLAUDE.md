@@ -164,6 +164,23 @@ had their say, so its lookahead names the glyph that will actually be drawn.
   and a swash can never follow a swash ("Atlantic" loses the arm on its `t` because the `A`
   turned into `A.swsh` first). Lookahead has the opposite problem: a letter qualifies on the
   right only if *every* form still open to it clears the arm.
+- **An arm needs a short letter under it** (`Geometry.obstructs`, `ARC_HEADROOM`). Clearance
+  is not the whole question. `l.swsh` clears a preceding `t` by 32 units and a preceding `H`
+  by 21, which passes `PROTRUSION_LIMIT` -- but the arm runs level along the top of that
+  extender for 22 columns, and two near-parallel strokes a fiftieth of an em apart read as
+  one tangled stroke rather than an arc. This is what "Atlantic" and "Zarathustra" were
+  doing: the `l` and the `h` each swung a 270-unit arm back over the `t` in front of it,
+  threading between its ascender and the cap line. What separates the pairs that work is not
+  how much room is left but what is beneath the arm, and this face leaves a clean band to cut
+  in -- x-height letters top out at 366 and the next thing up is `t` at 435, capitals at 445,
+  ascenders at 504. So an arm's own columns must find nothing taller than
+  `x_top + ARC_HEADROOM`, and an under-sweep nothing deeper than `x_bottom - ARC_HEADROOM`.
+  The band is measured off the outlines because OS/2 cannot be trusted here: Sunday Club
+  reports `sxHeight` 500, nearer its ascender than the top of any x-height letter it draws.
+  Asked of `arm_ink` only -- the innermost columns of an overhang hold the variant's own
+  body, and the letter it replaced stood beside that same extender quite happily. It costs
+  almost nothing in density: the long arms keep every x-height neighbour they had, including
+  the tight ones (`t.swsh` over `v` at 22 units), and overall decoration falls 59% to 58%.
 - **`Geometry.covers` keeps an arm inside the one letter it arcs over**, to within
   `COVER_SLACK`, which is one column -- the resolution the envelope is measured at, and no
   more. At 40 units of slack an arm reaches far enough past its neighbour to land on the
@@ -233,11 +250,14 @@ a letter that already earned a swash keeps it:
 #### Auditing
 
 `bin/font-audit.py` is what verifies all of this, and is worth re-running after any change
-to the rules. It shapes a word list with the *built* font and re-applies the protrusion test
-to every glyph an arm passes over, which is the only way to see the difference between what
-the rules assumed and what the shaper draws. On a 5,000-word sample the current rules leave
-0.2% of words with a graze, all of them at two positions' distance and none worse than 34
-units, for 59% of glyphs carrying a variant. Anything above 1% fails the run.
+to the rules. It shapes a word list with the *built* font and re-applies both fit tests to
+every glyph an arm passes over, which is the only way to see the difference between what the
+rules assumed and what the shaper draws. On a 5,000-word sample the current rules leave 0.2%
+of words with a graze, all of them at two positions' distance, for 58% of glyphs carrying a
+variant. Anything above 1% fails the run. Every remaining failure is an arm that cleared its
+neighbour and landed on the extender of the letter beyond -- the one thing a single position
+of backtrack cannot see. For scale, the same audit against the build before `ARC_HEADROOM`
+reports 10.9%, nearly all of it one position away.
 
 `font-feature-settings` on `h1,h2,h3,p,li,th` must name `"calt"` explicitly: the site sets
 `letter-spacing` on `html`, and Chrome drops contextual alternates when letter-spacing is

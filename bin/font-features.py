@@ -124,6 +124,31 @@ COVER_SLACK = COLUMN
 # the engulf test threw the pairing out. The same margin MIN_OVERHANG uses to decide what
 # counts as an overhang at all decides here where the arm starts.
 ARM_MARGIN = MIN_OVERHANG
+# How far past the x-height band a letter may reach and still be something an arm can
+# arc over (units/em=1000).
+#
+# Clearance is not the whole question. Sunday Club's l.swsh clears a preceding t by 32
+# units and a preceding H by 21, which passes PROTRUSION_LIMIT -- but the arm runs level
+# along the top of that ascender for 22 columns, and two near-parallel strokes a fiftieth
+# of an em apart read as one tangled stroke, not as an arc. This is what "Atlantic" and
+# "Zarathustra" were doing: the l and the h each swung a 270-unit arm back over the t in
+# front of them, threading between its ascender and the cap line.
+#
+# What distinguishes the pairs that work is not how much room is left but what is under
+# the arm. This face draws its x-height letters to 366 and everything taller to 435 (t),
+# 445 (capitals) or 504 (ascenders), so there is a 69-unit band with nothing in it: an arm
+# either has a short letter beneath it, with the whole gap from x-height to its own stroke
+# to breathe in, or it has an extender beneath it and no room at all. 40 sits in that band
+# with margin on both sides, and is the same allowance MIN_OVERHANG uses for "ink that is
+# really there" elsewhere.
+#
+# Applied to under-sweeps as well, against the foot of the band rather than its top: a
+# descender in the way of a tail is the same situation upside down.
+ARC_HEADROOM = 40
+# Letters whose ink defines the x-height band. Measured from the outlines because OS/2
+# cannot be trusted here -- this face reports sxHeight 500, which is nearer its ascender
+# (504) than the top of any x-height letter it draws (366).
+XHEIGHT_LETTERS = "oxescanumrzvw"
 # Extra ink a variant adds *inside* its own advance box, below the plain glyph's floor or
 # past its right edge, that counts as a terminal flourish (units/em=1000).
 #
@@ -328,6 +353,20 @@ class Geometry:
         self.kern = Kerning(font)
         self.xheight = getattr(font["OS/2"], "sxHeight", 500) or 500
         self._cache: dict[tuple[str, int], dict[int, list[float]]] = {}
+        self.x_top, self.x_bottom = self._xheight_band()
+
+    def _xheight_band(self) -> tuple[float, float]:
+        """The top and floor of this face's x-height letters, from their outlines."""
+        tops, bottoms = [], []
+        for g in XHEIGHT_LETTERS:
+            cols = self.columns(g) if g in self.hmtx.metrics else None
+            if not cols:
+                continue
+            tops.append(max(v[1] for v in cols.values()))
+            bottoms.append(min(v[0] for v in cols.values()))
+        if not tops:
+            return self.xheight, 0.0
+        return max(tops), min(bottoms)
 
     def advance(self, name: str) -> int:
         return self.hmtx[name][0]
@@ -414,11 +453,7 @@ class Geometry:
         # columns. The clearance measurement stays on the full overhang: every unit of
         # ink outside the box has a neighbour under it and has to fit.
         arm = self.arm_ink(variant, side, base)
-        if side == "R":
-            offset = self.advance(variant) + self.kern(variant, neighbour)
-        else:
-            offset = -(self.advance(neighbour) + self.kern(neighbour, variant))
-        cols = self.columns(neighbour, offset)
+        cols = self.columns(neighbour, self.offset(variant, neighbour, side))
         facing = self.orientation(variant, side, base)
         worst = float("-inf")
         for k, (amin, amax) in ink.items():
@@ -438,6 +473,41 @@ class Geometry:
                 worst = max(worst, amin - bmin)
         return worst
 
+    def offset(self, variant: str, neighbour: str, side: str) -> float:
+        """Where the neighbour's origin sits in the variant's own coordinate frame."""
+        if side == "R":
+            return self.advance(variant) + self.kern(variant, neighbour)
+        return -(self.advance(neighbour) + self.kern(neighbour, variant))
+
+    def obstructs(self, variant: str, neighbour: str, side: str,
+                  base: str | None = None) -> bool:
+        """Whether the neighbour is too tall (or too deep) for the arm to arc over it.
+
+        A different question from protrusion, which asks whether the two outlines clear
+        each other and answers it in units. This asks whether there was ever room for the
+        arm to be there: an arm passing over an ascender has the 138 units between
+        x-height and ascender taken away from it before it starts, and what is left is a
+        gap too fine to read as one stroke arcing over another. See ARC_HEADROOM.
+
+        Asked of the arm's own columns only. The innermost columns of an overhang hold the
+        variant's own body, and the letter it replaced stood next to that same extender
+        quite happily.
+        """
+        arm = self.arm_ink(variant, side, base)
+        if not arm:
+            return False
+        cols = self.columns(neighbour, self.offset(variant, neighbour, side))
+        over = self.orientation(variant, side, base) > 0
+        for k in arm:
+            span = cols.get(k)
+            if span is None:
+                continue
+            if over and span[1] > self.x_top + ARC_HEADROOM:
+                return True
+            if not over and span[0] < self.x_bottom - ARC_HEADROOM:
+                return True
+        return False
+
     def band(self, name: str, side: str, base: str | None = None):
         """Vertical extent of an arm, or None if the glyph has none on that side."""
         ink = self.arm_ink(name, side, base)
@@ -447,6 +517,8 @@ class Geometry:
 
     def tucks(self, variant: str, neighbour: str, side: str,
               base: str | None = None) -> bool:
+        if self.obstructs(variant, neighbour, side, base):
+            return False
         return self.protrusion(variant, neighbour, side, base) <= PROTRUSION_LIMIT
 
     def covers(self, variant: str, neighbour: str, side: str) -> bool:
@@ -1327,8 +1399,10 @@ def main() -> int:
             scored = sorted((geom.protrusion(args.debug, n, side, dbase), n)
                             for n in neighbours)
             for g, n in scored:
-                mark = "ok " if g <= PROTRUSION_LIMIT else "   "
-                print(f"    {mark}{n:12s} {g:9.1f}")
+                tall = geom.obstructs(args.debug, n, side, dbase)
+                mark = "   " if tall or g > PROTRUSION_LIMIT else "ok "
+                why = "  no headroom" if tall else ""
+                print(f"    {mark}{n:12s} {g:9.1f}{why}")
         return 0
 
     rules, cast = derive_rules(geom, variants, neighbours,

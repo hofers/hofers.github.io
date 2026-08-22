@@ -90,6 +90,10 @@ def clashes(shaper: Shaper, run):
             # but not "is this swallowing its neighbour".
             arm = geom.arm_ink(name, side, base)
             facing = geom.orientation(name, side, base)
+            # Same two tests the derivation applies, in the same order: an arm needs a
+            # short letter under it before the question of clearance is worth asking.
+            ceiling = geom.x_top + ff.ARC_HEADROOM
+            floor = geom.x_bottom - ff.ARC_HEADROOM
             for j, (other, ox) in enumerate(run):
                 if j == idx or other == "space":
                     continue
@@ -110,9 +114,15 @@ def clashes(shaper: Shaper, run):
                         if k in arm and amin < bmin - ff.ENGULF_SLACK:
                             worst = float("inf")
                             break
+                        if k in arm and bmax > ceiling:
+                            worst = float("inf")
+                            break
                         worst = max(worst, bmax - amax)
                     else:
                         if k in arm and amax > bmax + ff.ENGULF_SLACK:
+                            worst = float("inf")
+                            break
+                        if k in arm and bmin < floor:
                             worst = float("inf")
                             break
                         worst = max(worst, amin - bmin)
