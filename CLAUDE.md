@@ -237,15 +237,19 @@ a letter that already earned a swash keeps it:
   lookahead class cannot match the end of a run, and `@wordchar` includes variant and
   ligature glyphs because `arms` may already have replaced the following letter. It runs
   *before* `nubs` so that the nubs' lookahead can name the flourished glyph outright.
-- `restyle` -- unconditional, for `ALWAYS_VARIANTS`. Holds two glyphs, for two reasons.
-  `e.swsh` is not a flourish: same advance and silhouette as plain `e` to within 1 unit/em,
-  but with the bar detached from the bowl so the aperture opens. It is simply the e the site
-  uses, and the column envelope is a silhouette test that cannot see interior differences
-  like this one. `C.swsh` is the opposite -- unmistakably a decorated letter, its spiral
-  terminal drawn wholly inside the advance, so the fit test scores it 0 on every measure and
-  has nothing to say about where it belongs. A capital in a heading is about one per word and
-  almost always leads it, which is the classic place for a swash, so it is used everywhere.
-  Note `eacute` and friends have no such variant and keep the closed bowl.
+- `restyle` -- unconditional, for `ALWAYS_VARIANTS`. Holds three glyphs, for two reasons.
+  `e.swsh` and `i.salt` are not flourishes. `e.swsh` has the same advance and silhouette as
+  plain `e` to within 1 unit/em, but with the bar detached from the bowl so the aperture
+  opens; `i.salt` is closer still -- same advance, same bounding box to the unit, differing
+  only in that the tittle joins the stem into one contour instead of floating free. Both are
+  simply the letterforms the site wants, and the column envelope is a silhouette test that
+  cannot see interior differences like these. `C.swsh` is the opposite -- unmistakably a
+  decorated letter, its spiral terminal drawn wholly inside the advance, so the fit test
+  scores it 0 on every measure and has nothing to say about where it belongs. A capital in a
+  heading is about one per word and almost always leads it, which is the classic place for a
+  swash, so it is used everywhere. In every case the vendor's kern classes already cover the
+  variant, so spacing is unaffected. Note `eacute` and friends have no such variant and keep
+  the closed bowl.
 
 #### Auditing
 
@@ -253,7 +257,7 @@ a letter that already earned a swash keeps it:
 to the rules. It shapes a word list with the *built* font and re-applies both fit tests to
 every glyph an arm passes over, which is the only way to see the difference between what the
 rules assumed and what the shaper draws. On a 5,000-word sample the current rules leave 0.2%
-of words with a graze, all of them at two positions' distance, for 58% of glyphs carrying a
+of words with a graze, all of them at two positions' distance, for 67% of glyphs carrying a
 variant. Anything above 1% fails the run. Every remaining failure is an arm that cleared its
 neighbour and landed on the extender of the letter beyond -- the one thing a single position
 of backtrack cannot see. For scale, the same audit against the build before `ARC_HEADROOM`

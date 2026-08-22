@@ -480,5 +480,7 @@ feature calt {
         sub C by C.swsh;
         # e -> e.swsh (swsh, unconditional)
         sub e by e.swsh;
+        # i -> i.salt (salt, unconditional)
+        sub i by i.salt;
     } restyle;
 } calt;

@@ -197,7 +197,14 @@ FINAL_VARIANTS: set[str] = set()
 # a heading is about one per word and almost always leads it, which is the classic place
 # for a swash and the placement the reference setting uses. There is no context to derive,
 # so it is a choice, and the choice is to use it.
-ALWAYS_VARIANTS: set[str] = {"e.swsh", "C.swsh"}
+# i.salt is e.swsh's case exactly, and even less visible to the fit test. Same advance
+# (217), same bounding box to the unit, so the column envelope cannot tell the two apart
+# at all -- the difference is that the tittle joins the stem, one continuous contour from
+# baseline to 504 instead of a stem and a detached dot, which moves 1.8% of the ink and
+# nothing else. The vendor puts i and i.salt in the same kern class on both sides, so
+# spacing is untouched. Nothing to derive, so it is a choice: the joined i is the one the
+# site uses.
+ALWAYS_VARIANTS: set[str] = {"e.swsh", "C.swsh", "i.salt"}
 
 # Escape hatches for dropping a variant out of the automatic set (each stays reachable
 # through the .salt/.swsh/.titl CSS classes). All empty: everything the font draws is a
