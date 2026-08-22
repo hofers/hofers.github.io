@@ -34,6 +34,9 @@ jobs:
         run: |
           find . ! \( -iregex '^./_site.*' -or -iregex '^./.git' -or -iregex '^./.git[^h].*' \) -delete
           rsync -r _site/ .
+          # main holds already-compiled output; stop GitHub's legacy Pages
+          # builder from running Jekyll over it a second time.
+          touch .nojekyll
 
       # Add, commit, and push
       - name: Add and commit

@@ -85,6 +85,10 @@ jekyll-uglify:
 #
 exclude:
   - bin/
+  - README.md
+  - CLAUDE.md
+  - .claude/
+  - .vscode/
 #   - .sass-cache/
 #   - .jekyll-cache/
 #   - gemfiles/
