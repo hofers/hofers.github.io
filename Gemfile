@@ -2,10 +2,13 @@ source "https://rubygems.org"
 
 gem "jekyll", "~> 4.3.1"
 gem "jekyll-brotli"
+gem "csv"
+gem "logger"
+gem "base64"
 
 group :jekyll_plugins do
   gem 'jemoji'
-  gem 'jekyll-make-sitemap', "~> 1.2.1"
+  gem 'jekyll-make-sitemap', "~> 1.3.0"
   gem 'jekyll-replace-last', "~> 1.0.1"
   gem "jekyll-redirect-from", "~> 0.16.0"
   gem 'jekyll-uglify', "~> 1.1.2"

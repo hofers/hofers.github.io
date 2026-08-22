@@ -1,7 +1,7 @@
 ---
 title: About
-h1: Sean Hofer
-h2: Software Engineer in the San Francisco Bay Area
+h1: Sean <span class="swsh">H</span>o<span class="swsh">f</span>er
+h2: Software Engineer in the San Diego, CA Area
 place-in-menu: 1
 permalink: /
 ---

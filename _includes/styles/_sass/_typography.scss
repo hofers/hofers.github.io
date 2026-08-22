@@ -14,6 +14,7 @@ html {
 h1,h2,h3,p,li,th {
   margin: 0;
   font-weight: 300;
+  font-feature-settings: "liga";
 }
 
 a {
@@ -30,7 +31,8 @@ a:active {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 5rem;
+  font-family: 'Sunday Club';
   color: colors.$colorHeadingPrimary;
   line-height: 2.6rem;
   margin-top: 0.5rem;
@@ -39,7 +41,8 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-family: 'Sunday Club';
   color: colors.$colorHeadingSecondary;
   line-height: 1.75rem;
   margin-top: 0.3rem;
@@ -69,4 +72,16 @@ th {
 
 strong {
   font-weight: 400;
+}
+
+.salt {
+  font-feature-settings: "salt";
+}
+
+.swsh {
+  font-feature-settings: "swsh";
+}
+
+.titl {
+  font-feature-settings: "titl";
 }
