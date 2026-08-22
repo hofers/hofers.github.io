@@ -24,6 +24,10 @@ bundle exec jekyll serve
 ```bash
 # Generate responsive images and WebP conversions
 ./bin/make-images.sh
+
+# Rebuild Sunday Club's contextual alternates (see "Swashes" below)
+bin/font-features.py            # full build
+bin/font-features.py --report   # show the derived rules, write nothing
 ```
 
 ## Project Structure
@@ -87,6 +91,30 @@ Create markdown files in `_posts/class/` following Jekyll naming conventions (YY
 - Main styles in `_includes/styles/stylish.scss`
 - Page-specific styles can be added by setting `tags: css` in frontmatter
 - SCSS compilation happens inline during build
+
+### Swashes (Sunday Club)
+`h1`/`h2` use Sunday Club, which carries swash, titling and stylistic alternates.
+`swsh` and `titl` are *single* substitutions and `salt` has one alternate per glyph,
+so CSS can only apply them to a whole element -- there is no way to swash one letter
+without wrapping it in a `<span>`, which also breaks ligature and `calt` shaping across
+the element boundary.
+
+`bin/font-features.py` avoids that by generating contextual (`calt`) rules and compiling
+them into the font, so browsers pick the right variant automatically with no markup. It
+measures each variant's overhanging ink column by column and only uses it where the
+neighbouring letters tuck inside its silhouette. Source of truth is the pristine vendor
+`assets/fonts/SundayClub-Bold.woff`; the script regenerates the `.subset.woff2`/`.woff`
+and the inlined base64. The generated rules land in `bin/sundayclub.fea` for inspection,
+and can be hand-edited then recompiled with `--fea-in`.
+
+Density is controlled by `AUTO_BASES` in the script, since `calt` matches positions and
+cannot count swashes per word. Defaults to capitals plus `f g j k t x y z`.
+
+`font-feature-settings` on `h1,h2,h3,p,li,th` must name `"calt"` explicitly: the site sets
+`letter-spacing` on `html`, and Chrome drops contextual alternates when letter-spacing is
+non-zero unless the feature is requested by name.
+
+The `.salt`, `.swsh` and `.titl` classes remain for deliberate one-off overrides.
 
 ### Images
 - Place source images in `assets/images/`
