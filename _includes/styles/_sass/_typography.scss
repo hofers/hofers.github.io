@@ -14,7 +14,7 @@ html {
 h1,h2,h3,p,li,th {
   margin: 0;
   font-weight: 300;
-  font-feature-settings: "liga";
+  font-feature-settings: "liga", "calt";
 }
 
 a {
@@ -74,14 +74,17 @@ strong {
   font-weight: 400;
 }
 
+// Deliberate one-off overrides. font-feature-settings replaces the inherited value
+// rather than adding to it, so these have to restate "liga" and "calt" or applying one
+// to a whole heading would silently switch the automatic alternates back off.
 .salt {
-  font-feature-settings: "salt";
+  font-feature-settings: "liga", "calt", "salt";
 }
 
 .swsh {
-  font-feature-settings: "swsh";
+  font-feature-settings: "liga", "calt", "swsh";
 }
 
 .titl {
-  font-feature-settings: "titl";
+  font-feature-settings: "liga", "calt", "titl";
 }
