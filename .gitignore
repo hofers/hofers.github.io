@@ -5,3 +5,5 @@ _site
 .vscode
 vendor
 **/.DS_Store
+__pycache__
+.playwright-mcp

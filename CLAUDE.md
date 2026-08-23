@@ -29,6 +29,10 @@ bundle exec jekyll serve
 bin/font-features.py            # full build
 bin/font-features.py --report   # show the derived rules, write nothing
 bin/font-audit.py               # shape a word list and check for colliding swashes
+
+# Re-prune the inlined Source Sans Pro Light (see "Inlined fonts" below)
+bin/subset-sourcesans.py            # rebuild
+bin/subset-sourcesans.py --report   # measure, write nothing
 ```
 
 ## Project Structure
@@ -72,7 +76,6 @@ The site uses several custom Jekyll plugins (both internal and external):
 - Custom email obfuscation for Cloudflare
 - PDF.js integration for document embedding
 - Lazy loading for images and assets
-- Google Analytics integration
 - Font Awesome icons
 
 ### Deployment
@@ -92,6 +95,37 @@ Create markdown files in `_posts/class/` following Jekyll naming conventions (YY
 - Main styles in `_includes/styles/stylish.scss`
 - Page-specific styles can be added by setting `tags: css` in frontmatter
 - SCSS compilation happens inline during build
+
+### Inlined fonts
+
+`_includes/styles/inline-fonts.scss` inlines three faces as base64 in the critical CSS,
+so text paints without a font request and without layout shift. That is 87% of a typical
+page's compressed weight, which makes these the only assets on the site where a wasted
+kilobyte is worth chasing.
+
+Base64 is close to free once brotli has run -- the inflation is about 1% against the raw
+woff2 -- so the cost is the *font*, not the encoding. Both inlined text faces are built by
+a script from a pristine vendor source, never from the previous output, since subsetting an
+already-subset font ratchets its coverage down a little on every run:
+
+| face | source of truth | built by |
+| --- | --- | --- |
+| Sunday Club Bold | `assets/fonts/SundayClub-Bold.woff` | `bin/font-features.py` |
+| Source Sans Pro Light | `assets/fonts/SourceSansPro-Light.vendor.woff2` | `bin/subset-sourcesans.py` |
+| SFSymbols (icons) | `assets/fonts/SFSymbols/` | hand-built, 5 glyphs, already minimal |
+
+Source Sans Pro's vendor build shipped a `GPOS` three times the size of its outlines --
+42.6KB against 14.1KB of `glyf` -- holding the `size` feature, which is an optical-size
+record no browser consults, and kern pairs for glyphs the subset does not contain. Pruning
+`GPOS` to the shipped glyphs takes it to 4.8KB and the file from 14.5KB to 9.1KB. Kerning is
+kept, and so is hinting: 1.9KB for legibility at the site's 20px base on Windows. The script
+fails the build if coverage regresses against the vendor file, and pins `head.modified` so an
+unchanged rebuild does not churn the base64 blob in git.
+
+Sunday Club's coverage is set by `SUBSET_RANGES` in `bin/font-features.py`, and it is the
+expensive knob on this site: every base glyph drags in up to seven swash variants *and* the
+`calt` rules that place them, so a codepoint costs several times what it would in a text
+face. It is scoped to what headings actually use.
 
 ### Swashes (Sunday Club)
 `h1`/`h2` use Sunday Club, which carries swash, titling and stylistic alternates.
