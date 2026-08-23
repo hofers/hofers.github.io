@@ -8,7 +8,7 @@ $boxShadowHighlight: inset 0 -.5em 0 0 colors.$deep-teal;
 html {
   font-size: 20px; // Set base size in px
   letter-spacing: -0.035em; // em needed to reference sibling font-size  
-  font-family: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-family: 'Source Sans Pro', 'Source Sans Fallback', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
 h1,h2,h3,p,li,th {
@@ -31,7 +31,7 @@ a:active {
 
 h1 {
   font-size: 5rem;
-  font-family: 'Sunday Club';
+  font-family: 'Sunday Club', 'Sunday Club Fallback';
   font-feature-settings: "liga", "calt";
   color: colors.$colorHeadingPrimary;
   letter-spacing: normal;
@@ -43,7 +43,7 @@ h1 {
 
 h2 {
   font-size: 2rem;
-  font-family: 'Sunday Club';
+  font-family: 'Sunday Club', 'Sunday Club Fallback';
   font-feature-settings: "liga", "calt";
   color: colors.$colorHeadingSecondary;
   letter-spacing: normal;
