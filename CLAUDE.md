@@ -33,6 +33,7 @@ bin/font-audit.py               # shape a word list and check for colliding swas
 # Re-prune the inlined Source Sans Pro Light (see "Inlined fonts" below)
 bin/subset-sourcesans.py            # rebuild
 bin/subset-sourcesans.py --report   # measure, write nothing
+
 ```
 
 ## Project Structure
@@ -103,7 +104,7 @@ Create markdown files in `_posts/class/` following Jekyll naming conventions (YY
 ### Inlined fonts
 
 `_includes/styles/inline-fonts.scss` inlines three faces as base64 in the critical CSS,
-so text paints without a font request and without layout shift. That is 87% of a typical
+so text paints without a font request. That is 87% of a typical
 page's compressed weight, which makes these the only assets on the site where a wasted
 kilobyte is worth chasing.
 
@@ -125,6 +126,46 @@ record no browser consults, and kern pairs for glyphs the subset does not contai
 kept, and so is hinting: 1.9KB for legibility at the site's 20px base on Windows. The script
 fails the build if coverage regresses against the vendor file, and pins `head.modified` so an
 unchanged rebuild does not churn the base64 blob in git.
+
+### font-display, and why there are no fallback @font-face rules
+
+Inlining the faces removes the *fetch*, but not the two-pass layout. Chrome routes even a
+`data:` URL through its remote-font pipeline: it lays the page out once using whatever
+local face the stack names, finishes decoding the webfont about 12ms later, and lays out
+again. Both passes happen before first paint here -- fonts land around 53ms, FCP is at
+97ms -- so no user sees a flash or a jump.
+
+All three faces use `font-display: block` rather than `swap`. There is no network to wait
+on, so the block period costs nothing measurable (FCP/LCP are unchanged at 0.9s/1.2s), and
+it makes "the real face is the one that paints" a guarantee instead of a race. `swap`
+renders immediately in a local face and reflows on arrival; `optional` is worse than
+either, since a miss pins the whole load to the fallback.
+
+**Do not add metric-matched fallback `@font-face` rules (`size-adjust`, `ascent-override`
+…) to go with this.** It was built, measured and reverted. Because `block` means the
+fallback is never painted, matching its metrics only changes the geometry of a layout
+nobody ever sees. It cost 146 bytes brotli'd on every page view and bought a human nothing.
+This changes if the faces ever stop being inlined -- over the network the block period can
+genuinely expire, the fallback really paints, and metric matching becomes a user-facing fix.
+
+#### Reading a CLS number here
+
+Worth knowing before chasing one. Lighthouse derives CLS from `LayoutShift` **trace**
+events, which include pre-paint ones; the `layout-shift` PerformanceObserver -- what field
+and CrUX CLS are built from -- correctly ignores them. Instrumented both on the same loads:
+the observer reported 0 on 8 of 8, while trace events fired on 5 of 8 at 0.183, every one
+of them before FCP. So a page can read 0.186 in the lab with a perfectly clean field score,
+and since ranking uses CrUX rather than Lighthouse, a lab-only CLS number is not worth
+spending bytes on.
+
+It is also a race, so the same build scores 0 on one run and 0.186 on the next with no
+change in between. Never conclude a fix worked from a single run; take the worst of six.
+There is no lighthouse CLI installed -- use `npx lighthouse@13` with `CHROME_PATH` pointed
+at system Chrome, and note the playwright browsers are not installed either, so scripted
+runs need `chromium.launch({ channel: 'chrome' })`.
+
+The remaining CLS on `/portfolio` and `/kindag` is *not* fonts -- it is lazy-loaded images
+with no intrinsic size, which is a separate fix.
 
 Sunday Club's coverage is set by `SUBSET_RANGES` in `bin/font-features.py`, and it is the
 expensive knob on this site: every base glyph drags in up to seven swash variants *and* the
