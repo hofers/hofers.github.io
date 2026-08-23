@@ -1,5 +1,7 @@
 require 'jekyll-replace-last'
 require 'yaml'
+require 'strscan'
+require 'gemoji'
 
 module Jekyll
   # {% CONTENT | encode %}
@@ -75,6 +77,63 @@ module Jekyll
     end
   end
 
+  # replaces every `:shortcode:` in rendered HTML with the Unicode emoji it names,
+  # e.g. `:wave:` -> 👋. Stands in for jemoji, which substituted a 20px PNG served
+  # from github.githubassets.com -- same authoring syntax, no request, no image.
+  module UnicodeEmoji
+    # tags whose contents are markup or code samples, and must be left alone
+    SKIP_TAGS = %w[code pre tt script style].freeze
+
+    # mirrors jemoji: only pages/documents that are written out as HTML
+    def self.emojiable?(doc)
+      return false unless doc.is_a?(Jekyll::Page) || doc.write?
+      doc.output_ext == ".html" || doc.permalink.to_s.end_with?("/")
+    end
+
+    # walks the rendered HTML, substituting in text nodes only, so that neither
+    # tag attributes nor the contents of SKIP_TAGS are touched
+    def self.emojify(html)
+      return html unless html.include?(":")
+
+      scanner = StringScanner.new(html)
+      out = +""
+      skipping = nil
+
+      until scanner.eos?
+        if (tag = scanner.scan(/<[^>]*>/m))
+          out << tag
+          if skipping
+            skipping = nil if tag.downcase.start_with?("</#{skipping}")
+          elsif (name = tag[/\A<([a-zA-Z0-9]+)/, 1]&.downcase)
+            skipping = name if SKIP_TAGS.include?(name) && !tag.end_with?("/>")
+          end
+        else
+          text = scanner.scan(/[^<]+/m) || scanner.getch
+          out << (skipping ? text : substitute(text))
+        end
+      end
+
+      out
+    end
+
+    def self.substitute(text)
+      text.gsub(shortcode_pattern) do
+        ::Emoji.find_by_alias(Regexp.last_match(1)).raw
+      end
+    end
+
+    # matches known aliases only, longest first, so that neither an unrecognised
+    # shortcode nor incidental colons (`3:4:5`, `a:hover`) are ever rewritten
+    def self.shortcode_pattern
+      @shortcode_pattern ||= begin
+        aliases = ::Emoji.all.flat_map(&:aliases)
+                          .sort_by { |name| -name.length }
+                          .map { |name| Regexp.escape(name) }
+        Regexp.new(":(#{aliases.join("|")}):")
+      end
+    end
+  end
+
   # {% CONTENT | kill_runts %}
   # replaces the last space in `CONTENT` with a non-breaking space
   # used to prevent runts in text
@@ -91,3 +150,8 @@ Liquid::Template.register_tag('out', Jekyll::OutboundTag)
 Liquid::Template.register_tag('pdf', Jekyll::PDFTag)
 Liquid::Template.register_filter(Jekyll::KillRuntsFilter)
 Liquid::Template.register_filter(Jekyll::EncodeEmailFilter)
+
+Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
+  next unless Jekyll::UnicodeEmoji.emojiable?(doc)
+  doc.output = Jekyll::UnicodeEmoji.emojify(doc.output)
+end

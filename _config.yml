@@ -67,7 +67,6 @@ plugins:
   - jekyll-brotli
   - jekyll-redirect-from
   - jekyll-replace-last
-  - jemoji
 
 # Serve settings
 host: 0.0.0.0

@@ -56,6 +56,10 @@ The site uses several custom Jekyll plugins (both internal and external):
   - PDF embedding with PDF.js
   - Custom Liquid tags for downloads and outbound links
   - Typography filter to prevent runts
+  - Emoji shortcodes (`:wave:`) substituted as Unicode characters, replacing `jemoji`
+    (which served a PNG per emoji from github.githubassets.com). Aliases come from the
+    `gemoji` gem, so the syntax and the full alias set are unchanged; `<code>`, `<pre>`,
+    `<tt>`, `<script>` and `<style>` contents are left alone, as are tag attributes.
 - External plugins:
   - `jekyll-replace-last` - Replace last occurrence of strings
   - `jekyll-uglify` - JavaScript minification

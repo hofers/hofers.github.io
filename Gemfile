@@ -5,9 +5,10 @@ gem "jekyll-brotli"
 gem "csv"
 gem "logger"
 gem "base64"
+# emoji shortcode -> Unicode data, used by Jekyll::UnicodeEmoji in _plugins
+gem "gemoji", "~> 4.1"
 
 group :jekyll_plugins do
-  gem 'jemoji'
   gem 'jekyll-make-sitemap', "~> 1.3.0"
   gem 'jekyll-replace-last', "~> 1.0.1"
   gem "jekyll-redirect-from", "~> 0.16.0"
