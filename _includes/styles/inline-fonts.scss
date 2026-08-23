@@ -23,6 +23,5 @@
   font-style: normal;
   font-display: swap;
   src: 
-      url('data:font/woff2;base64,{% include fonts/SundayClub-Bold.woff2.b64 %}') format('woff2'),
-      url('../assets/fonts/SundayClub-Bold.subset.woff') format('woff');
+      url('data:font/woff2;base64,{% include fonts/SundayClub-Bold.woff2.b64 %}') format('woff2');
 }

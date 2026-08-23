@@ -85,6 +85,12 @@ jekyll-uglify:
 #
 exclude:
   - bin/
+  # Sunday Club is licensed; only the inlined base64 subset ships (see
+  # _includes/styles/inline-fonts.scss). Keep the font files out of _site.
+  - assets/fonts/SundayClub-Bold.woff
+  - assets/fonts/SundayClub-Bold.woff2
+  - assets/fonts/SundayClub-Bold.subset.woff
+  - assets/fonts/SundayClub-Bold.subset.woff2
   - README.md
   - CLAUDE.md
   - .claude/
