@@ -103,10 +103,30 @@ Create markdown files in `_posts/class/` following Jekyll naming conventions (YY
 
 ### Inlined fonts
 
-`_includes/styles/inline-fonts.scss` inlines three faces as base64 in the critical CSS,
-so text paints without a font request. That is 87% of a typical
-page's compressed weight, which makes these the only assets on the site where a wasted
-kilobyte is worth chasing.
+`_includes/styles/inline-fonts.scss` carries three faces as base64, so text paints without
+a font request. That is 87% of a typical page's compressed weight, which makes these the
+only assets on the site where a wasted kilobyte is worth chasing.
+
+They are *base64 in a stylesheet*, but that stylesheet is no longer inlined into the HTML.
+`assets/css/fonts.scss` builds it to `/assets/css/fonts.css` and `_layouts/default.html`
+links it render-blocking as the first element in `<head>`. See "Why a separate file"
+below for the measurements; the short version is that inlining made every page view
+re-download 40KB the visitor already had.
+
+**The href carries no cache-buster, and must not grow one.** It is a bare
+`/assets/css/fonts.css`, because Cloudflare replays a *static* `Link` header for it as a
+103 Early Hint (see "Early Hints" below) and a dashboard rule cannot read a build-time
+digest. A `?v=` that drifts from that hardcoded header costs a double download. Freshness
+is handled at the edge instead, by `stale-while-revalidate` on the response.
+
+This replaced a `FontCacheKey` generator that stamped `?v=<digest>` onto the href. If the
+Early Hints rules are ever removed, that is the scheme to restore -- hash the *inputs*
+(`inline-fonts.scss` plus `_includes/fonts/*.b64`) rather than the rendered output, since
+the layout needs the value while rendering, before any page output exists to hash.
+
+Note the `.ttf` fallback `url()`s in `inline-fonts.scss` are **root-relative**. They used
+to be `../assets/...`, which resolved against the HTML document; from
+`/assets/css/fonts.css` that same string resolves to `/assets/assets/...` and 404s.
 
 Base64 is close to free once brotli has run -- the inflation is about 1% against the raw
 woff2 -- so the cost is the *font*, not the encoding. Both inlined text faces are built by
@@ -127,9 +147,90 @@ kept, and so is hinting: 1.9KB for legibility at the site's 20px base on Windows
 fails the build if coverage regresses against the vendor file, and pins `head.modified` so an
 unchanged rebuild does not churn the base64 blob in git.
 
+### Why a separate file, and what it costs
+
+Moving the faces out of the HTML trades one round trip on a visitor's *first* page for
+40KB on every page after it. Measured on the built site over brotli, with production cache
+headers (`max-age=600` HTML, `max-age=172800` assets), median FCP of 7-9 runs:
+
+| profile | cold (first page) | warm (next page) | warm transfer |
+| --- | --- | --- | --- |
+| Fast 4G (85ms/9Mbps) | 176 -> 268ms (+92) | 180 -> 140ms (-40) | 48.9KB -> 8.6KB |
+| Slow 4G (150ms/1.6Mbps) | 428 -> 580ms (+152) | 412 -> 228ms (-184) | 48.9KB -> 8.6KB |
+| 3G (300ms/750Kbps) | 836 -> 1120ms (+284) | 820 -> 404ms (-416) | 48.9KB -> 8.6KB |
+
+The cold penalty is exactly one RTT and nothing more -- it is the request itself, not the
+bytes, since the payload is unchanged (45,573 -> 45,607 bytes total). Break-even is two
+pages per session, and the warm saving grows as the connection gets worse while the cold
+penalty does not. Real-world cold is milder than this table: Cloudflare serves the site
+with `cf-cache-status: DYNAMIC` on HTML, so the document costs a full trip to the GitHub
+origin (TTFB 310-540ms measured) while `fonts.css` is edge-cacheable (~110ms).
+
+That cold RTT is what the Early Hints setup below removes.
+
+**This does not change what paints.** A `<link rel=stylesheet>` in `<head>` is
+render-blocking, so the `@font-face` rules are in the CSSOM before first paint; the faces
+are `data:` URLs, so there is no second fetch to wait on. Verified by CDP screencast on
+`/`, `/resume`, `/portfolio` and a post: FCP lands 40-60ms after `fonts.css` finishes, and
+the first frame containing any text is pixel-identical to the fully-loaded render -- byte
+for byte the same as the inline build's first text frame. No frame ever paints a fallback
+face. Both builds do show one earlier frame with layout but no glyphs, which is
+`font-display: block` working as intended and is not new.
+
+Keep `stylish.scss` inline. It is 4.5KB, it changes far more often than the fonts, and
+folding it into `fonts.css` would bust the font cache on every style tweak.
+
+### Early Hints
+
+The cold-start RTT above is dead air, not bandwidth: the HTML is `cf-cache-status: DYNAMIC`,
+so every page view is a full trip to the GitHub Pages origin (TTFB 310-540ms) while
+`fonts.css` sits edge-cacheable at ~110ms. A `103 Early Hints` response lets the browser
+start that download *during* origin think-time. Measured against a real HTTP/2 server
+emitting a real `103` (cold first page, origin 400ms / edge 110ms, median of 7-9 runs):
+
+| | inline (before) | external, no hint | **+ 103** |
+| --- | --- | --- | --- |
+| unthrottled | 484ms | 584ms | **484ms** |
+| 1.6 Mbps | 676ms | 796ms | **488ms** |
+| 0.8 Mbps | 924ms | 1040ms | **520ms** |
+
+On a constrained connection it does not merely cancel the cold-start cost -- it beats the
+old inline build by 188-404ms, because the 40KB downloads in parallel with origin
+think-time. Inlining can never do that; those bytes are trapped inside the slow response.
+
+It is entirely dashboard configuration, in three parts:
+
+1. **Speed -> Optimization -> Content Optimization -> Early Hints**: on.
+2. **Rule A**, Transform Rules -> Modify Response Header, when
+   `http.request.uri.path eq "/assets/css/fonts.css"`, set static `Cache-Control` to
+   `max-age=86400, stale-while-revalidate=604800`. Note a zone-level Browser Cache TTL is
+   also in play (it rewrites GitHub Pages' native `600` to `172800`); if it wins, set it to
+   "Respect Existing Headers" or scope a Cache Rule to this path.
+3. **Rule B**, Modify Response Header on HTML responses
+   (`http.response.content_type.media_type eq "text/html"`), set static `Link` to
+   `</assets/css/fonts.css>; rel=preload; as=style`. Cloudflare harvests this from the
+   response and replays it as the `103` on subsequent requests.
+
+**This couples the repo to the dashboard.** The URL in Rule B is a literal string, so
+`fonts.css` must keep a stable, unversioned href -- reintroducing a cache-buster without
+editing Rule B causes a double download (measured 2.00 fetches/load, zero benefit).
+
+Accepted trade-offs, chosen rather than incidental: a font change takes up to a day to
+reach returning visitors, and Safari ignores `stale-while-revalidate`
+([WebKit #201461](https://bugs.webkit.org/show_bug.cgi?id=201461)) so a returning Safari
+visitor pays one blocking ~110ms edge revalidation per day. Safari 17 supports only
+`preconnect` in `103`, not `preload`, so it gets none of the upside -- a real asymmetry,
+a small Safari cost for a Chrome/Firefox/Edge benefit.
+
+Two traps if this is ever re-measured: Chrome silently ignores Early Hints over a
+connection with certificate errors, and CDP `Network.setCacheDisabled` breaks preload
+reuse, which shows up as a phantom 2x download.
+
+To roll back, delete both rules and restore the `FontCacheKey` digest scheme.
+
 ### font-display, and why there are no fallback @font-face rules
 
-Inlining the faces removes the *fetch*, but not the two-pass layout. Chrome routes even a
+Serving the faces as `data:` URLs removes the *font* fetch, but not the two-pass layout. Chrome routes even a
 `data:` URL through its remote-font pipeline: it lays the page out once using whatever
 local face the stack names, finishes decoding the webfont about 12ms later, and lays out
 again. Both passes happen before first paint here -- fonts land around 53ms, FCP is at

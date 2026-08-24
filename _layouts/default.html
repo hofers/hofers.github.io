@@ -5,6 +5,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="/assets/css/fonts.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% if page.description %}
   <meta name="description" content="{{ page.description }}">
@@ -17,16 +18,12 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
   <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
 
-  {%- capture fontfaces -%}
-  {%- include styles/inline-fonts.scss -%}
-  {% endcapture %}
   <style>
     @property --angle {
       syntax: "<angle>";
       inherits: false;
       initial-value: 0deg;
     }
-    {{ fontfaces | scssify }}
   </style>
   {%- capture styles -%}
   {%- include styles/stylish.scss -%}
