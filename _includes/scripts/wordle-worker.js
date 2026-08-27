@@ -39,36 +39,67 @@ onmessage = function(e) {
    * over the size of the current group. The bits of information
    * corresponding to each guess can be considered its "score".
    */
-  scoredGuesses = ALL_GUESSES.split(" ").map(guess => {
-    const groupCounts = Object.values(
-      solutions.map(
-        solution => {
-          let tempWord = solution;
-          return [...guess].map((letter, index) => {
-            if (tempWord[index] === letter) {
-              tempWord = tempWord.replace(letter, '.');
-              return 'g';
-            } else if (tempWord.includes(letter) && !(guess[tempWord.indexOf(letter)] === letter)) {
-              tempWord = tempWord.replace(letter, '.');
-              return 'y';
-            } else {
-              return 'b';
-            }
-          }).join('');
+  const guesses = ALL_GUESSES.split(" ");
+  const numSolutions = solutions.length;
+  const solutionCodes = new Uint8Array(numSolutions * 5);
+  for (let i = 0; i < numSolutions; i++) {
+    for (let j = 0; j < 5; j++) {
+      solutionCodes[i * 5 + j] = solutions[i].charCodeAt(j) - 97;
+    }
+  }
+  const guessCodes = new Uint8Array(5);
+  const marks = new Uint8Array(5);
+  const unspent = new Uint8Array(26);
+  const counts = new Int32Array(243);
+  const seenPatterns = new Uint8Array(243);
+  scoredGuesses = guesses.map(guess => {
+    for (let j = 0; j < 5; j++) {
+      guessCodes[j] = guess.charCodeAt(j) - 97;
+    }
+    let numGroups = 0;
+    for (let i = 0; i < numSolutions; i++) {
+      const base = i * 5;
+      for (let j = 0; j < 5; j++) {
+        const solutionCode = solutionCodes[base + j];
+        if (guessCodes[j] === solutionCode) {
+          marks[j] = 2;
+        } else {
+          marks[j] = 0;
+          unspent[solutionCode]++;
         }
-      ).reduce(function (acc, curr) {
-        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
-      }, {})
-    );
-    const bits = groupCounts.reduce(
-      (a, c) => a += (Math.log2(solutions.length / c) * c),
-      0
-    ) / solutions.length;
+      }
+      let pattern = 0;
+      for (let j = 0; j < 5; j++) {
+        let mark = marks[j];
+        if (mark === 0 && unspent[guessCodes[j]] > 0) {
+          unspent[guessCodes[j]]--;
+          mark = 1;
+        }
+        pattern = pattern * 3 + mark;
+      }
+      for (let j = 0; j < 5; j++) {
+        unspent[solutionCodes[base + j]] = 0;
+      }
+      if (counts[pattern] === 0) {
+        seenPatterns[numGroups++] = pattern;
+      }
+      counts[pattern]++;
+    }
+    let total = 0;
+    let maxGroupLength = 0;
+    for (let i = 0; i < numGroups; i++) {
+      const groupCount = counts[seenPatterns[i]];
+      total += (Math.log2(numSolutions / groupCount) * groupCount);
+      if (groupCount > maxGroupLength) {
+        maxGroupLength = groupCount;
+      }
+      counts[seenPatterns[i]] = 0;
+    }
     return {
       guess: guess,
-      bits: bits.toFixed(2),
-      numGroups: groupCounts.length,
-      maxGroupLength: Math.max(...groupCounts)
+      bits: (total / numSolutions).toFixed(2),
+      numGroups: numGroups,
+      maxGroupLength: maxGroupLength
     };
   })
   /**
