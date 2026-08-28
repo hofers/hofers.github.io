@@ -9,12 +9,33 @@
 //
 // See docs/chromatic-aberration.md before changing this file. It records why the layers
 // derive from currentColor, why the base layer is a text-fill rather than a `color`, why
-// this is not an SVG filter, and what every condition on the P3 branch at the bottom is
-// load-bearing for.
+// this is not an SVG filter, why the bleed is a shadow rather than a box, and what every
+// condition on the P3 branch at the bottom is load-bearing for.
 
 @use "sass:list";
 @use "sass:math";
 @use "sass:string";
+
+// The three values the hover variant animates. Registered so they interpolate: that is
+// what lets one transition on the element drive both layers, instead of four of them
+// racing. A length-percentage because the `aberrate` filter accepts either.
+@property --ca-active-shift {
+  syntax: "<length-percentage>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --ca-active-drift {
+  syntax: "<length-percentage>";
+  initial-value: 0px;
+  inherits: true;
+}
+
+@property --ca-active-alpha {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
 
 // 0 = three neutral greys and no visible fringe; 1 = saturated primaries.
 $ca-strength: 0.65 !default;
@@ -49,6 +70,11 @@ $ca-own: 1 - 2 * $ca-share;
   // it without out-specifying an inline --ca-shift from the filter.
   --ca-active-shift: var(--ca-shift);
   --ca-active-drift: var(--ca-drift);
+  --ca-active-alpha: 1;
+  // How far outside its own box a layer may paint: Safari clips the blend to that
+  // bound, and glyph ink leaves the box routinely -- swashes, descenders under a tight
+  // line-height. An em is more than a face can use, and costs nothing. See the docs.
+  --ca-bleed: 1em;
 
   // inline-block: the layers are absolutely positioned against this box, and an inline
   // span split across two lines has fragment geometry inset: 0 cannot follow.
@@ -65,14 +91,16 @@ $ca-own: 1 - 2 * $ca-share;
     position: absolute;
     inset: 0;
     padding: inherit; // inset: 0 is the padding box, so the layers need the same one
+    // Widens the paint bounds by --ca-bleed, so Safari stops cutting the ink off at the
+    // box. Transparent adds nothing under plus-lighter, and a shadow is not layout: an
+    // actually bigger box gives the page a horizontal scrollbar. Don't swap it for one.
+    box-shadow: 0 0 0 var(--ca-bleed) transparent;
     mix-blend-mode: plus-lighter;
     pointer-events: none; // never let a layer swallow a click meant for the link
     text-shadow: none;
-    transition: transform 180ms ease-out, opacity 180ms ease-out;
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
+    // Every animated quantity is read from the element, never transitioned here. Two
+    // layers transitioning for themselves is two animations that can drift apart.
+    opacity: var(--ca-active-alpha);
   }
 
   // The `/ ""` is alt text: it stops screen readers announcing the duplicated string.
@@ -99,19 +127,24 @@ $ca-own: 1 - 2 * $ca-share;
 // On hover the fill and the layers swap in step on the same duration and easing, so the
 // total stays on colour throughout. See the docs.
 .aberrate--hover {
-  --ca-active-shift: 0;
-  --ca-active-drift: 0;
+  // 0px, not 0: ::before negates these in a calc, and `calc(0 * -1)` is a number, not a
+  // length, which invalidates its whole transform declaration.
+  --ca-active-shift: 0px;
+  --ca-active-drift: 0px;
+  --ca-active-alpha: 0;
 
   -webkit-text-fill-color: currentColor;
-  transition: -webkit-text-fill-color 180ms ease-out;
+  // All four on one element, one duration, one easing. The layers derive their position
+  // and their opacity from the first three, so they cannot come apart mid-transition --
+  // and the fill runs with them, which is what holds the sum on colour throughout.
+  transition:
+    --ca-active-shift 180ms ease-out,
+    --ca-active-drift 180ms ease-out,
+    --ca-active-alpha 180ms ease-out,
+    -webkit-text-fill-color 180ms ease-out;
 
   @media (prefers-reduced-motion: reduce) {
     transition: none;
-  }
-
-  &::before,
-  &::after {
-    opacity: 0;
   }
 
   // Follow an enclosing link's state so the whole link separates, not just the fragment
@@ -123,12 +156,8 @@ $ca-own: 1 - 2 * $ca-share;
   &:focus-visible {
     --ca-active-shift: var(--ca-shift);
     --ca-active-drift: var(--ca-drift);
+    --ca-active-alpha: 1;
     -webkit-text-fill-color: ca-layer("g");
-
-    &::before,
-    &::after {
-      opacity: 1;
-    }
   }
 }
 

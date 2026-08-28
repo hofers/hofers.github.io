@@ -117,6 +117,51 @@ composites in sRGB and reports the narrower gamut from the same profile that dec
 an engine ever changes sides, the branch fails toward the 13% lift on desktop rather than
 toward green text on a phone.
 
+## The bleed, and why it is a shadow
+
+Safari clips each blended layer to its paint bounds, and glyph ink leaves that box all the
+time. The layer box is the element's, which is a stack of line boxes; anything outside it --
+a Sunday Club swash reaching back under the letter before it, a descender under this site's
+tight display line-heights -- is cut off at a hard vertical or horizontal edge. Chrome paints
+the same markup uncut, which is why this survived to a phone: it does not reproduce in a
+Chromium lab at any width, zoom or DPR.
+
+`--ca-bleed` fixes it by widening the layer's paint bounds with a transparent spread shadow.
+Three properties do that, and the difference between them is the whole point:
+
+| how                                          | fixes the clip | cost                                        |
+| ---                                          | ---            | ---                                         |
+| `inset: -1em` + `border: 1em` transparent    | yes            | a real box: adds scrollable overflow        |
+| `outline: 1em solid transparent`             | yes            | forced-colors mode paints it                |
+| `box-shadow: 0 0 0 1em transparent`          | yes            | none found                                  |
+
+All three render identically in WebKit -- 0 pixels apart from each other over the h1 -- so
+the choice is made entirely on what else they do.
+
+The border version is the honest one, and it is the one to reach for first: it grows the
+layer's border box and hands the em back as a transparent border, so `padding: inherit`
+still lands the text on the same origin at the same wrapping width. But an absolutely
+positioned box contributes to its ancestors' scrollable overflow, and a box an em wider than
+a full-bleed heading puts a horizontal scrollbar on the page -- measured at 768px, where the
+document went 802px wide, and vertically too. A shadow is paint, not layout: measured across
+six widths and eight pages in both engines, `scrollWidth` and `scrollHeight` are unchanged.
+
+`outline` has the same property and is the more idiomatic "paint outside the box", but in
+forced-colors mode `outline-color` is forced to a system colour, and a 1em transparent
+outline would become a 1em visible ring around every heading. `box-shadow` is forced to
+`none` there instead, which degrades to the Safari clip -- the bug, not a new one.
+
+An em is not measured from the headings that ship. Glyph ink is drawn inside the em square,
+the box is already at least a line box tall, and the shadow costs nothing that would reward
+tuning it down, so the value is set past what any face can use rather than to what this
+site's faces do use. Raise it per element via `--ca-bleed` if some future face proves that
+wrong.
+
+Both the shadow and the transparent colour are load-bearing. `plus-lighter` sums what it is
+given, and transparent sums to nothing, so the shadow is invisible in the blend -- verified
+pixel-identical to Chrome's uncut rendering. A shadow with a colour would paint a slab of it
+under all three layers.
+
 ## The hover variant
 
 At rest this is not a dimmed version of the effect, it is ordinary text: the layers are faded
@@ -133,6 +178,56 @@ in between -- the text separates without ever changing brightness. This is the i
 requires the fringes to be fixed to `color` rather than derived from the fill that is
 animating.
 
+### One animation, not four
+
+The obvious way to write the transition is the way this started: each layer transitions its
+own `transform` and its own `opacity`, and the element transitions its fill. That is four
+animations of the same 180ms, and nothing but the engine's good manners keeps them together.
+Safari's manners were not good -- for roughly the first tenth of a second of every hover the
+red layer stood further out than the blue one, then the two settled. On a footer icon, where
+the whole glyph is one shape, it reads as a flinch.
+
+The same staggering broke the colour invariant, and that one had a name before it had a
+cause: a green flash on hover. The fill moves from the text colour to the green third and the
+other two layers fade in to make the difference up; the sum only holds if those halves are
+exactly in step. When the fill got there first there was nothing yet adding red and blue back,
+so the glyph showed the green third of its colour until the layers caught up.
+
+Two separate things were wrong, and the first is worth knowing about on its own:
+
+- The rest value was `0`, unitless, and `::before` *negates* it. `translate()` takes a
+  `<length-percentage>` and `calc(0 * -1)` is a number, so `::before`'s whole `transform`
+  declaration was invalid at computed-value time and fell back to `none`, while `::after`,
+  which uses the variable directly, kept a valid `translate(0, 0)`. Both engines report
+  exactly that: `none` against `matrix(1, 0, 0, 1, 0, 0)`. The layers sit in the same place
+  either way, so nothing looks wrong at rest -- but the two then *start* the transition from
+  different kinds of value, `::after` matrix to matrix and `::before` out of `none`, which is
+  a different code path. Hence `0px`, and keep it.
+- That alone did not fix it, because four animations can drift apart for reasons that are not
+  in the stylesheet at all -- when each layer gets promoted to a composited layer, how a
+  blended layer is scheduled.
+
+So the layers no longer animate. `--ca-active-shift`, `--ca-active-drift` and
+`--ca-active-alpha` are registered with `@property` so they interpolate, and the *element*
+transitions all three alongside its fill. The layers read them and paint: position from the
+first two, `opacity` from the third, no `transition` of their own. There is now one clock.
+Two layers cannot come apart when neither is animating -- the mirroring is arithmetic, done
+fresh from a single interpolated number every frame.
+
+`@property` needs Safari 16.4, Chrome 85, Firefox 128; relative colour syntax, which the
+layers are already gated on, needs Safari 16.4, Chrome 119, Firefox 128. The second is the
+stricter requirement in every engine, so anything that has the layers at all can animate them
+and no new `@supports` is needed.
+
+The cost is that a transition driving `transform` through a custom property is recomputed in
+style rather than run on the compositor. For a heading or an icon that is nothing, and it is
+the same property that removes the promotion race.
+
+Verified in both engines: sampled every frame of the hover, the two transforms are exact
+mirrors at every sample and the opacities equal; the rest state is 0 pixels of 95400 from the
+layers switched off entirely, and the settled hover state 0 pixels from the same values
+applied statically with no transition at all.
+
 The state selectors are descendant (`a:hover &`) rather than child, because a footer icon's
 wrapper sits inside the `<i>`, not directly under the `<a>`. `:focus-visible` carries the
 effect to the keyboard, where a hover-only effect is otherwise invisible.
@@ -147,7 +242,8 @@ effect to the keyboard, where a hover-only effect is otherwise invisible.
 - **`--ca-drift`** -- without vertical drift the horizontal strokes get no fringe at all; the
   channels stay perfectly stacked there and it reads as print misregistration, not a lens.
 - **`--ca-active-shift` / `--ca-active-drift`** -- indirected so the hover variant can gate
-  the displacement without having to out-specify an inline `--ca-shift` from the filter.
+  the displacement without having to out-specify an inline `--ca-shift` from the filter, and
+  registered so that gate can be a transition rather than a jump. See "One animation".
 - **`content: attr(data-text) / ""`** -- the `/ ""` is alt text, and stops screen readers
   announcing the duplicated string. The element's own text is the green layer, so there is no
   extra text node and the accessible name stays single.
