@@ -1,0 +1,180 @@
+// Chromatic aberration for light text on a dark ground.
+//
+// Splits the text into red, green and blue layers and displaces the outer two, the way a
+// lens does. RGB is additive, so on a dark ground the three layers must *sum* to the text
+// colour -- that is the whole constraint, and `ca-layer()` enforces it. Whatever
+// $strength is set to, the overlap stays exactly $ca-color and only the fringes change.
+// (The same effect on a light ground is the subtractive dual: cyan/magenta/yellow inks
+// under `multiply`, each taking one channel out of the white behind the glyph.)
+//
+// Three layers rather than two on purpose. Two would put a red fringe on one side and a
+// blue one on the other and leave the text itself alone, which is simpler and steadier at
+// small sizes -- but the middle layer is what produces the yellow, cyan and magenta bands
+// where pairs of layers overlap, and those bands are most of the effect.
+//
+// Deliberately not an SVG filter. A filter rasterises its input and caches the result;
+// iOS Safari re-uses that cache when you pinch-zoom rather than re-rendering from the
+// outlines, so the text goes soft and stays soft. Painting three real text layers keeps
+// glyphs as glyphs at every scale. Note desktop Chrome renders the filter and this
+// pixel-identically -- verified at DPR 1 and 2, under zoom, transform and page-scale --
+// so the regression this avoids is not reproducible in a desktop lab.
+//
+// One cost to know about, because it decides where this class belongs. `plus-lighter`
+// sums *alpha* as well as colour, so three copies of a partially-covered edge pixel
+// accumulate to three times the coverage and antialiased edges composite too dark. On a
+// 100px display face the strokes are solid and it is invisible. On 20px body text most of
+// the stroke *is* edge, and the text renders visibly thin and tinted toward green. So the
+// always-on class is for headings; for anything at body size use the hover variant below,
+// which is ordinary text until it is asked for.
+
+@use "sass:color";
+@use "sass:list";
+@use "sass:math";
+@use "colors";
+
+// The colour the three layers add back up to.
+$ca-color: colors.$colorHeadingPrimary !default;
+// 0 = three neutral greys and no visible fringe; 1 = saturated primaries.
+$ca-strength: 0.65 !default;
+
+// Re-derives the layers for a given text colour. The layers sum to whatever is passed
+// here, so this has to match the colour of the element the class lands on or the effect
+// silently recolours it -- an h2 is $colorHeadingSecondary, and left on the default it
+// came out at $colorHeadingPrimary, about 10% brighter than the h2s around it.
+@mixin ca-color($color, $strength: $ca-strength) {
+  --ca-r: #{ca-layer($color, "red", $strength)};
+  --ca-g: #{ca-layer($color, "green", $strength)};
+  --ca-b: #{ca-layer($color, "blue", $strength)};
+}
+
+// One channel-separated layer of $color. The three layers returned for red/green/blue
+// sum back to $color exactly, so the core of the glyph keeps the text colour.
+// $channel is a quoted string, as color.channel() requires.
+@function ca-layer($color, $channel, $strength) {
+  $out: ();
+
+  @each $name in ("red", "green", "blue") {
+    $value: color.channel($color, $name, $space: rgb);
+    // The neutral third each of the two *other* layers contributes to this component.
+    $share: math.round(math.div((1 - $strength) * $value, 3));
+    // The layer that owns this component takes whatever is left, so the three always
+    // sum to exactly $value. Rounding each layer independently instead drifts by a
+    // unit per channel and can push a component past 255, where it clips and the core
+    // stops matching the text colour.
+    $out: list.append(
+      $out,
+      if($name == $channel, math.max($value - 2 * $share, 0), $share)
+    );
+  }
+
+  @return rgb(list.nth($out, 1), list.nth($out, 2), list.nth($out, 3));
+}
+
+.aberrate {
+  @include ca-color($ca-color);
+  // em, so one value serves every size the class lands on, from an h1 to body copy.
+  // The `aberrate` filter can override this per use via an inline --ca-shift.
+  --ca-shift: 0.03em;
+  // Without vertical drift the horizontal strokes get no fringe at all -- the channels
+  // stay perfectly stacked there, and it reads as print misregistration, not a lens.
+  --ca-drift: 0.01em;
+  // What the layers are actually displaced by. Indirected so the hover variant below
+  // can gate it without having to out-specify an inline --ca-shift from the filter.
+  --ca-active-shift: var(--ca-shift);
+  --ca-active-drift: var(--ca-drift);
+
+  // inline-block, because the layers are absolutely positioned against this box: an
+  // inline span split across two lines has fragment geometry that inset: 0 cannot
+  // follow. The box still wraps internally, and the layers re-wrap identically since
+  // they inherit the same width, font and features.
+  display: inline-block;
+  position: relative;
+  isolation: isolate; // blend the layers with each other, never with the page behind
+  color: var(--ca-g); // the element's own text *is* the green layer, so there is no
+                      // duplicate text node and the accessible name stays single
+  text-shadow: none;  // a glow underneath three stacked copies reads as mud
+
+  &::before,
+  &::after {
+    position: absolute;
+    inset: 0;
+    padding: inherit; // inset: 0 is the padding box, so the layers need the same one
+    mix-blend-mode: plus-lighter;
+    pointer-events: none; // never let a layer swallow a click meant for the link
+    text-shadow: none;
+    transition: transform 180ms ease-out, opacity 180ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // The `/ ""` is alt text: it stops screen readers announcing the duplicated string.
+  // font-feature-settings is inherited, so all three layers shape identically and the
+  // contextual swashes line up -- worth knowing, since a mismatch would misregister
+  // every alternate glyph in the heading.
+  &::before {
+    content: attr(data-text) / "";
+    color: var(--ca-r);
+    transform: translate(calc(var(--ca-active-shift) * -1), calc(var(--ca-active-drift) * -1));
+  }
+
+  &::after {
+    content: attr(data-text) / "";
+    color: var(--ca-b);
+    transform: translate(var(--ca-active-shift), var(--ca-active-drift));
+  }
+}
+
+// Gated variant, for links and anything else that should only separate on interaction.
+//
+// At rest this is not a dimmed version of the effect, it is ordinary text: the layers are
+// faded out and the element carries its own inherited colour rather than the green third
+// of it. That matters because at zero displacement the three layers still paint, and
+// three coincident copies land straight on the alpha problem above -- which is the state
+// a link spends nearly all of its life in. Measured against untouched text at the same
+// glyph origin, the rest state here differs by 0 pixels of 8500.
+//
+// The two swap in step on hover: the text goes from its full colour to the green layer
+// while the other two fade from nothing to full. Because the three sum to $ca-color, and
+// both halves run on the same duration and easing, the total stays $ca-color at every
+// point in between -- the text separates without ever changing brightness.
+.aberrate--hover {
+  --ca-active-shift: 0;
+  --ca-active-drift: 0;
+
+  color: inherit;
+  transition: color 180ms ease-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &::before,
+  &::after {
+    opacity: 0;
+  }
+
+  // Follow an enclosing link's state, so the whole link separates when any part of it is
+  // hovered rather than just the fragment under the pointer. :focus-visible carries it to
+  // the keyboard, where a hover-only effect is otherwise invisible. Descendant rather
+  // than child: a footer icon's wrapper sits inside the <i>, not directly under the <a>.
+  a:hover &,
+  a:focus-visible &,
+  &:hover,
+  &:focus-visible {
+    --ca-active-shift: var(--ca-shift);
+    --ca-active-drift: var(--ca-drift);
+    color: var(--ca-g);
+
+    &::before,
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+// h2 is a shade darker than h1, so its layers have to be too.
+h2 .aberrate {
+  @include ca-color(colors.$colorHeadingSecondary);
+}

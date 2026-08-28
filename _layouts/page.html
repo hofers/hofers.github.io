@@ -1,6 +1,11 @@
 ---
 layout: default
 ---
-<h1>{{ page.h1 }}</h1>
-<h2>{{ page.h2 | kill_runts }}</h2>
+{%- comment -%}
+  Headings aberrate by default; a page opts out with `aberrate: false` in its front
+  matter. `unless == false` rather than `if`, because an absent key is nil, and Liquid
+  holds nil and false apart -- so only an explicit false turns it off.
+{%- endcomment -%}
+<h1>{% unless page.aberrate == false %}{{ page.h1 | aberrate }}{% else %}{{ page.h1 }}{% endunless %}</h1>
+<h2>{% unless page.aberrate == false %}{{ page.h2 | kill_runts | aberrate }}{% else %}{{ page.h2 | kill_runts }}{% endunless %}</h2>
 {% include modules/kill_runts.html content=content %}
