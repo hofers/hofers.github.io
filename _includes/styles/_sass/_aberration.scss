@@ -161,10 +161,14 @@ $ca-own: 1 - 2 * $ca-share;
   }
 }
 
-// macOS Safari composites in the display's colour space, so there the layers have to be
-// split in Display P3 instead. Every one of these conditions is load-bearing, and getting
-// it wrong on iOS turns the heading pale green -- read the docs before touching any.
-@supports #{"(background: -webkit-named-image(i)) and (not (-webkit-touch-callout: none))"} {
+// A desktop compositor on a wide-gamut display adds the layers up in the display's colour
+// space, so there they have to be split in Display P3 instead. This is a property of the
+// platform, not of the engine -- Chrome used to composite in sRGB on the same Mac where
+// Safari did not, and stopped. iOS is the exception that both conditions below exclude,
+// and getting it wrong there turns the heading pale green. Read the docs before touching
+// either: `-webkit-touch-callout` is the iOS-family test, hover/pointer catches an iPad
+// on a trackpad, and neither is redundant.
+@supports #{"not (-webkit-touch-callout: none)"} {
   @media (color-gamut: p3) and (hover: hover) and (pointer: fine) {
     .aberrate {
       --ca-space: display-p3;

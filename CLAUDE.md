@@ -60,7 +60,7 @@ So, when a feature needs real explanation:
 example -- a 103-line header became 13 lines plus a doc.
 
 What is already split out this way: `docs/fonts.md`, `docs/early-hints.md`,
-`docs/swashes.md`, `docs/chromatic-aberration.md`.
+`docs/html-edge-cache.md`, `docs/swashes.md`, `docs/chromatic-aberration.md`.
 
 ## Project Structure
 
@@ -152,6 +152,11 @@ Full notes:
 - [docs/early-hints.md](docs/early-hints.md) -- the `103` setup, the three Cloudflare
   dashboard settings it needs, and how to roll it back. **This couples the repo to the
   dashboard**; read it before touching the href above.
+- [docs/html-edge-cache.md](docs/html-edge-cache.md) -- the Cache Rule that makes HTML a
+  Cloudflare `HIT` rather than `DYNAMIC`, which cut origin think-time from a 112ms median
+  (381ms tail) to 5ms. Also dashboard-coupled, and it means **HTML can be up to 10 minutes
+  stale after a deploy**. Measure with the bare `/` URL: query strings are still in the
+  cache key, so a `?cb=` buster silently measures the old uncached path.
 - [docs/swashes.md](docs/swashes.md) -- how `bin/font-features.py` derives Sunday Club's
   contextual alternates, the six `calt` lookups and their order, and what keeps the arms
   from colliding.

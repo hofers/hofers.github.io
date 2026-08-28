@@ -73,49 +73,95 @@ the heading as ordinary text, which is the right failure.
 
 ## The blending colour space, and the branch that picks one
 
-`plus-lighter` adds whatever numbers the compositor is holding, and the three engines hold
-three different things. Measured by sampling the triple overlap of a solid block beside a
-swatch of the target colour, for the h2 colour `#e2e9ea` (226 233 234):
+`plus-lighter` adds whatever numbers the compositor is holding, and that is not the same
+thing everywhere. Measured by sampling the triple overlap of a solid block beside a swatch of
+the target colour, for the h2 colour `#e2e9ea` (226 233 234):
 
-| engine       | composites in             | split in sRGB  | split in P3    |
-| ---          | ---                       | ---            | ---            |
-| Chrome       | sRGB, layers gamut-mapped | 226 233 234 ok | 216 209 197    |
-| Safari macOS | Display P3, encoded       | 255 246 255    | 227 232 233 ok |
-| Safari iOS   | extended sRGB, unclamped  | 227 232 234 ok | 133 190 154    |
+| engine                     | composites in             | split in sRGB  | split in P3    |
+| ---                        | ---                       | ---            | ---            |
+| Chrome macOS, P3 display   | Display P3, encoded       | 255 247 255    | 226 233 233 ok |
+| Chrome macOS, sRGB display | sRGB, layers gamut-mapped | 226 233 234 ok | 216 209 197    |
+| Safari macOS               | Display P3, encoded       | 255 246 255    | 227 232 233 ok |
+| Safari iOS                 | extended sRGB, unclamped  | 227 232 234 ok | 133 190 154    |
 
 So the layers are split in the space the compositor will add them in: `--ca-space`, srgb by
-default, display-p3 only where the compositor is macOS's. The layers are all derived through
-one custom property so that branch is a single declaration rather than a second copy of every
-layer.
+default, display-p3 wherever the compositor is the desktop one on a wide-gamut display. The
+layers are all derived through one custom property so that branch is a single declaration
+rather than a second copy of every layer.
 
-The macOS Safari error is a magenta lift, about 13% in red: the two channels a layer does
-*not* own convert upward into P3 by more than the owned one converts down, and three layers
-accumulate that three times over. It shows on h2 and not h1 for a dull reason -- `#fbfeff`'s
-layers overflow and clip to white, which is about where they were headed anyway, while
-`#e2e9ea`'s land just past the top of red and blue.
+The sRGB-split error on a P3 compositor is a magenta lift, about 13% in red: the two
+channels a layer does *not* own convert upward into P3 by more than the owned one converts
+down, and three layers accumulate that three times over. It shows on h2 and not h1 for a
+dull reason -- `#fbfeff`'s layers overflow and clip to white, which is about where they were
+headed anyway, while `#e2e9ea`'s land just past the top of red and blue.
+
+### Chrome changed sides, and that is the lesson
+
+The first two rows used to be one row. Chrome composited in sRGB on the very Mac where Safari
+did not, and the branch was gated on a WebKit-only feature query for exactly that reason. As
+of Chrome 152 (measured on macOS 26.7, P3 display) it composites in the display's space like
+every other app on the machine, and the sRGB split it used to need now blows the h2 out to
+255 247 255 -- within a point of the number macOS Safari produced from the same mistake, which
+is how you can tell it is the same mistake and not a new one. The h1 `#fbfeff` clips to a flat
+255 255 255.
+
+The branch is no longer gated on the engine, because the engine was never what determined the
+answer -- the platform's compositor was, and engines migrate onto it. What the conditions now
+describe is a machine, not a browser: a desktop-class compositor and a wide-gamut display,
+minus iOS. Anything that ships a colour-managed compositor on a P3 display lands on the P3
+side by default, which is the direction the whole ecosystem has been moving.
 
 ### Why the gate is shaped the way it is
 
-The two failure directions are not symmetric, and that is what the conditions are for. Losing
-the branch on macOS costs the 13% lift, which is what shipped for months before anyone
-noticed. Gaining it on iOS drops the heading to 133 190 154 -- a pale green, against a target
-of 226 233 234. Converting a P3 layer to sRGB primaries sends two of its three channels
-negative (the green layer is -84 182 -42), extended sRGB keeps the negatives rather than
-clamping them, and the three layers partly cancel instead of adding. Both numbers above are
-measurements, one taken by shipping it to a phone.
+The two failure directions are not symmetric, and that is what the conditions are for. Being
+wrong on a desktop costs a cast: the 13% magenta lift going one way, the dull 216 209 197
+going the other. The first of those shipped for months before anyone noticed, and is the
+better guide to how loud either is. Gaining the branch on iOS drops the heading to
+133 190 154 -- a pale green, against a target of 226 233 234. Converting a P3 layer to sRGB
+primaries sends two of its three channels negative
+(the green layer is -84 182 -42), extended sRGB keeps the negatives rather than clamping them,
+and the three layers partly cancel instead of adding. All of these are measurements, one taken
+by shipping it to a phone.
 
-So iOS is excluded twice over, by two independent facts, and the branch needs both:
+So the only thing worth spending conditions on is keeping iOS out, and it is excluded twice
+over, by two independent facts. The branch needs both:
 
-- `-webkit-touch-callout` is iOS-family WebKit only: measured true on an iPhone and false on
-  macOS Safari, and it is that second half that would be dangerous to assume.
+- `not (-webkit-touch-callout: none)`. The property is iOS-family WebKit only: measured true
+  on an iPhone, false on macOS Safari and false in Chrome 152, and it is those second two
+  halves that would be dangerous to assume. Verified rather than assumed for Chrome, because
+  the whole branch now hangs on it -- a Chromium that supported the property would silently
+  switch the P3 split back off.
 - `(hover: hover) and (pointer: fine)`, false on the same iPhone. It also catches an iPad
   running with a trackpad, where touch-callout is true but the compositor is iOS's.
 
-`-webkit-named-image` is the WebKit half -- a real feature no Chromium has, not a version
-sniff -- and `(color-gamut: p3)` is the display half, since a Mac on an sRGB display
-composites in sRGB and reports the narrower gamut from the same profile that decides it. If
-an engine ever changes sides, the branch fails toward the 13% lift on desktop rather than
-toward green text on a phone.
+`(color-gamut: p3)` is the display half, since a machine on an sRGB display composites in sRGB
+and reports the narrower gamut from the same profile that decides it.
+
+What is deliberately *not* in the gate any more is an engine test. `-webkit-named-image` used
+to be there, as the WebKit half -- a real feature no Chromium had, not a version sniff. It was
+an honest reading of the measurements at the time and it still went stale the moment Chrome's
+compositor moved, in the direction that produces the loudest error. A detector for the other
+side was considered and rejected: `paint()`, the obvious Chromium-only feature, reports
+unsupported in Chrome 152 (`CSS.supports('background: paint(id)')` is false), and the
+remaining candidates are all one release away from the same fate. Naming engines is what
+failed; the gate describes the hardware instead.
+
+### What is measured and what is inferred
+
+Measured, on macOS 26.7 with a P3 display: Safari 27 and Chrome 152 both need the P3 split.
+Measured on an iPhone: iOS Safari needs sRGB. Everything else the gate now admits -- Firefox
+anywhere, Chromium on Windows or Linux driving a wide-gamut monitor -- is an inference from
+"the platform compositor decides", not a reading.
+
+That is a deliberate bet in the milder direction. If one of those turns out to composite in
+sRGB after all, it gets 216 209 197: a heading about 7% dim and slightly warm, the error that
+went unnoticed for months. The reverse default would give it 255 247 255, the blown magenta
+that got noticed within a day. When the space is unknown, P3 is the cheaper thing to be wrong
+about.
+
+To check one of them, load a heading on that machine, screenshot it, and sample the solid core
+of a glyph: it should read the heading colour (`#fbfeff` on an h1, `#e2e9ea` on an h2) to
+within a point or two. Sample the core, not an edge -- the fringes are supposed to differ.
 
 ## The bleed, and why it is a shadow
 
