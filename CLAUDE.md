@@ -25,16 +25,42 @@ bundle exec jekyll serve
 # Generate responsive images and WebP conversions
 ./bin/make-images.sh
 
-# Rebuild Sunday Club's contextual alternates (see "Swashes" below)
+# Rebuild Sunday Club's contextual alternates (see docs/swashes.md)
 bin/font-features.py            # full build
 bin/font-features.py --report   # show the derived rules, write nothing
 bin/font-audit.py               # shape a word list and check for colliding swashes
 
-# Re-prune the inlined Source Sans Pro Light (see "Inlined fonts" below)
+# Re-prune the inlined Source Sans Pro Light (see docs/fonts.md)
 bin/subset-sourcesans.py            # rebuild
 bin/subset-sourcesans.py --report   # measure, write nothing
 
 ```
+
+## Where design rationale goes
+
+Long-form "why" belongs in `docs/<feature>.md`, not in a file header comment. `docs/` is in
+`_config.yml`'s `exclude`, so nothing there is published.
+
+A comment is read by someone editing the line beside it, and it should answer one question:
+*can I change this, and what breaks if I do.* The record of what was tried, what was measured
+and what was rejected has a different reader and belongs in its own document. Folding the
+second into the first makes the code unreadable and the rationale unfindable.
+
+So, when a feature needs real explanation:
+
+- **In the file**, a short header -- what it does, the invariant that holds it together, and
+  a line pointing at the doc. Roughly a dozen lines, not a screenful.
+- **Inline**, one or two sentences on any line someone would otherwise be tempted to
+  simplify away, plus the load-bearing warnings ("every one of these conditions matters").
+- **In `docs/<feature>.md`**, everything else: alternatives considered and why they lost,
+  measurement tables, browser- or platform-specific findings, the failure modes you only
+  learn about by shipping.
+
+`docs/chromatic-aberration.md` and `_includes/styles/_sass/_aberration.scss` are the worked
+example -- a 103-line header became 13 lines plus a doc.
+
+What is already split out this way: `docs/fonts.md`, `docs/early-hints.md`,
+`docs/swashes.md`, `docs/chromatic-aberration.md`.
 
 ## Project Structure
 
@@ -101,353 +127,43 @@ Create markdown files in `_posts/class/` following Jekyll naming conventions (YY
 - Page-specific styles can be added by setting `tags: css` in frontmatter
 - SCSS compilation happens inline during build
 
-### Inlined fonts
+### Fonts
 
-`_includes/styles/inline-fonts.scss` carries three faces as base64, so text paints without
-a font request. That is 87% of a typical page's compressed weight, which makes these the
-only assets on the site where a wasted kilobyte is worth chasing.
+Three faces ship as base64 inside `/assets/css/fonts.css`, which `_layouts/default.html`
+links render-blocking. Two hard rules, because both have already broken once:
 
-They are *base64 in a stylesheet*, but that stylesheet is no longer inlined into the HTML.
-`assets/css/fonts.scss` builds it to `/assets/css/fonts.css` and `_layouts/default.html`
-links it render-blocking as the first element in `<head>`. See "Why a separate file"
-below for the measurements; the short version is that inlining made every page view
-re-download 40KB the visitor already had.
+- **The href must stay a bare `/assets/css/fonts.css`, with no cache-buster.** A Cloudflare
+  rule replays a static `Link` header for that exact string as a 103 Early Hint; a `?v=`
+  that drifts from it costs a double download.
+- **Build each face from its pristine vendor source, never from the previous output.**
+  Subsetting an already-subset font ratchets its coverage down on every run.
 
-**The href carries no cache-buster, and must not grow one.** It is a bare
-`/assets/css/fonts.css`, because Cloudflare replays a *static* `Link` header for it as a
-103 Early Hint (see "Early Hints" below) and a dashboard rule cannot read a build-time
-digest. A `?v=` that drifts from that hardcoded header costs a double download. Freshness
-is handled at the edge instead, by `stale-while-revalidate` on the response.
+```bash
+bin/font-features.py     # Sunday Club (add --report to write nothing)
+bin/font-audit.py        # check the derived swash rules for collisions
+bin/subset-sourcesans.py # Source Sans Pro Light (add --report to write nothing)
+```
 
-This replaced a `FontCacheKey` generator that stamped `?v=<digest>` onto the href. If the
-Early Hints rules are ever removed, that is the scheme to restore -- hash the *inputs*
-(`inline-fonts.scss` plus `_includes/fonts/*.b64`) rather than the rendered output, since
-the layout needs the value while rendering, before any page output exists to hash.
+Full notes:
 
-Note the `.ttf` fallback `url()`s in `inline-fonts.scss` are **root-relative**. They used
-to be `../assets/...`, which resolved against the HTML document; from
-`/assets/css/fonts.css` that same string resolves to `/assets/assets/...` and 404s.
+- [docs/fonts.md](docs/fonts.md) -- what is inlined and why, the separate-file trade-off
+  with measurements, `font-display: block`, why there are no metric-matched fallback
+  `@font-face` rules, and how to read a CLS number on this site.
+- [docs/early-hints.md](docs/early-hints.md) -- the `103` setup, the three Cloudflare
+  dashboard settings it needs, and how to roll it back. **This couples the repo to the
+  dashboard**; read it before touching the href above.
+- [docs/swashes.md](docs/swashes.md) -- how `bin/font-features.py` derives Sunday Club's
+  contextual alternates, the six `calt` lookups and their order, and what keeps the arms
+  from colliding.
 
-Base64 is close to free once brotli has run -- the inflation is about 1% against the raw
-woff2 -- so the cost is the *font*, not the encoding. Both inlined text faces are built by
-a script from a pristine vendor source, never from the previous output, since subsetting an
-already-subset font ratchets its coverage down a little on every run:
+Note `font-feature-settings` on `h1,h2,h3,p,li,th` must name `"calt"` explicitly: the site
+sets `letter-spacing` on `html`, and Chrome drops contextual alternates when letter-spacing
+is non-zero unless the feature is requested by name.
 
-| face | source of truth | built by |
-| --- | --- | --- |
-| Sunday Club Bold | `assets/fonts/SundayClub-Bold.woff` | `bin/font-features.py` |
-| Source Sans Pro Light | `assets/fonts/SourceSansPro-Light.vendor.woff2` | `bin/subset-sourcesans.py` |
-| SFSymbols (icons) | `assets/fonts/SFSymbols/` | hand-built, 5 glyphs, already minimal |
+### Chromatic aberration
 
-Source Sans Pro's vendor build shipped a `GPOS` three times the size of its outlines --
-42.6KB against 14.1KB of `glyf` -- holding the `size` feature, which is an optical-size
-record no browser consults, and kern pairs for glyphs the subset does not contain. Pruning
-`GPOS` to the shipped glyphs takes it to 4.8KB and the file from 14.5KB to 9.1KB. Kerning is
-kept, and so is hinting: 1.9KB for legibility at the site's 20px base on Windows. The script
-fails the build if coverage regresses against the vendor file, and pins `head.modified` so an
-unchanged rebuild does not churn the base64 blob in git.
-
-### Why a separate file, and what it costs
-
-Moving the faces out of the HTML trades one round trip on a visitor's *first* page for
-40KB on every page after it. Measured on the built site over brotli, with production cache
-headers (`max-age=600` HTML, `max-age=172800` assets), median FCP of 7-9 runs:
-
-| profile | cold (first page) | warm (next page) | warm transfer |
-| --- | --- | --- | --- |
-| Fast 4G (85ms/9Mbps) | 176 -> 268ms (+92) | 180 -> 140ms (-40) | 48.9KB -> 8.6KB |
-| Slow 4G (150ms/1.6Mbps) | 428 -> 580ms (+152) | 412 -> 228ms (-184) | 48.9KB -> 8.6KB |
-| 3G (300ms/750Kbps) | 836 -> 1120ms (+284) | 820 -> 404ms (-416) | 48.9KB -> 8.6KB |
-
-The cold penalty is exactly one RTT and nothing more -- it is the request itself, not the
-bytes, since the payload is unchanged (45,573 -> 45,607 bytes total). Break-even is two
-pages per session, and the warm saving grows as the connection gets worse while the cold
-penalty does not. Real-world cold is milder than this table: Cloudflare serves the site
-with `cf-cache-status: DYNAMIC` on HTML, so the document costs a full trip to the GitHub
-origin (TTFB 310-540ms measured) while `fonts.css` is edge-cacheable (~110ms).
-
-That cold RTT is what the Early Hints setup below removes.
-
-**This does not change what paints.** A `<link rel=stylesheet>` in `<head>` is
-render-blocking, so the `@font-face` rules are in the CSSOM before first paint; the faces
-are `data:` URLs, so there is no second fetch to wait on. Verified by CDP screencast on
-`/`, `/resume`, `/portfolio` and a post: FCP lands 40-60ms after `fonts.css` finishes, and
-the first frame containing any text is pixel-identical to the fully-loaded render -- byte
-for byte the same as the inline build's first text frame. No frame ever paints a fallback
-face. Both builds do show one earlier frame with layout but no glyphs, which is
-`font-display: block` working as intended and is not new.
-
-Keep `stylish.scss` inline. It is 4.5KB, it changes far more often than the fonts, and
-folding it into `fonts.css` would bust the font cache on every style tweak.
-
-### Early Hints
-
-The cold-start RTT above is dead air, not bandwidth: the HTML is `cf-cache-status: DYNAMIC`,
-so every page view is a full trip to the GitHub Pages origin (TTFB 310-540ms) while
-`fonts.css` sits edge-cacheable at ~110ms. A `103 Early Hints` response lets the browser
-start that download *during* origin think-time. Measured against a real HTTP/2 server
-emitting a real `103` (cold first page, origin 400ms / edge 110ms, median of 7-9 runs):
-
-| | inline (before) | external, no hint | **+ 103** |
-| --- | --- | --- | --- |
-| unthrottled | 484ms | 584ms | **484ms** |
-| 1.6 Mbps | 676ms | 796ms | **488ms** |
-| 0.8 Mbps | 924ms | 1040ms | **520ms** |
-
-On a constrained connection it does not merely cancel the cold-start cost -- it beats the
-old inline build by 188-404ms, because the 40KB downloads in parallel with origin
-think-time. Inlining can never do that; those bytes are trapped inside the slow response.
-
-It is entirely dashboard configuration, in three parts:
-
-1. **Speed -> Optimization -> Content Optimization -> Early Hints**: on.
-2. **Rule A**, Transform Rules -> Modify Response Header, when
-   `http.request.uri.path eq "/assets/css/fonts.css"`, set static `Cache-Control` to
-   `max-age=86400, stale-while-revalidate=604800`. Note a zone-level Browser Cache TTL is
-   also in play (it rewrites GitHub Pages' native `600` to `172800`); if it wins, set it to
-   "Respect Existing Headers" or scope a Cache Rule to this path.
-3. **Rule B**, Modify Response Header on HTML responses
-   (`http.response.content_type.media_type eq "text/html"`), set static `Link` to
-   `</assets/css/fonts.css>; rel=preload; as=style`. Cloudflare harvests this from the
-   response and replays it as the `103` on subsequent requests.
-
-**This couples the repo to the dashboard.** The URL in Rule B is a literal string, so
-`fonts.css` must keep a stable, unversioned href -- reintroducing a cache-buster without
-editing Rule B causes a double download (measured 2.00 fetches/load, zero benefit).
-
-Accepted trade-offs, chosen rather than incidental: a font change takes up to a day to
-reach returning visitors, and Safari ignores `stale-while-revalidate`
-([WebKit #201461](https://bugs.webkit.org/show_bug.cgi?id=201461)) so a returning Safari
-visitor pays one blocking ~110ms edge revalidation per day. Safari 17 supports only
-`preconnect` in `103`, not `preload`, so it gets none of the upside -- a real asymmetry,
-a small Safari cost for a Chrome/Firefox/Edge benefit.
-
-Two traps if this is ever re-measured: Chrome silently ignores Early Hints over a
-connection with certificate errors, and CDP `Network.setCacheDisabled` breaks preload
-reuse, which shows up as a phantom 2x download.
-
-To roll back, delete both rules and restore the `FontCacheKey` digest scheme.
-
-### font-display, and why there are no fallback @font-face rules
-
-Serving the faces as `data:` URLs removes the *font* fetch, but not the two-pass layout. Chrome routes even a
-`data:` URL through its remote-font pipeline: it lays the page out once using whatever
-local face the stack names, finishes decoding the webfont about 12ms later, and lays out
-again. Both passes happen before first paint here -- fonts land around 53ms, FCP is at
-97ms -- so no user sees a flash or a jump.
-
-All three faces use `font-display: block` rather than `swap`. There is no network to wait
-on, so the block period costs nothing measurable (FCP/LCP are unchanged at 0.9s/1.2s), and
-it makes "the real face is the one that paints" a guarantee instead of a race. `swap`
-renders immediately in a local face and reflows on arrival; `optional` is worse than
-either, since a miss pins the whole load to the fallback.
-
-**Do not add metric-matched fallback `@font-face` rules (`size-adjust`, `ascent-override`
-…) to go with this.** It was built, measured and reverted. Because `block` means the
-fallback is never painted, matching its metrics only changes the geometry of a layout
-nobody ever sees. It cost 146 bytes brotli'd on every page view and bought a human nothing.
-This changes if the faces ever stop being inlined -- over the network the block period can
-genuinely expire, the fallback really paints, and metric matching becomes a user-facing fix.
-
-#### Reading a CLS number here
-
-Worth knowing before chasing one. Lighthouse derives CLS from `LayoutShift` **trace**
-events, which include pre-paint ones; the `layout-shift` PerformanceObserver -- what field
-and CrUX CLS are built from -- correctly ignores them. Instrumented both on the same loads:
-the observer reported 0 on 8 of 8, while trace events fired on 5 of 8 at 0.183, every one
-of them before FCP. So a page can read 0.186 in the lab with a perfectly clean field score,
-and since ranking uses CrUX rather than Lighthouse, a lab-only CLS number is not worth
-spending bytes on.
-
-It is also a race, so the same build scores 0 on one run and 0.186 on the next with no
-change in between. Never conclude a fix worked from a single run; take the worst of six.
-There is no lighthouse CLI installed -- use `npx lighthouse@13` with `CHROME_PATH` pointed
-at system Chrome, and note the playwright browsers are not installed either, so scripted
-runs need `chromium.launch({ channel: 'chrome' })`.
-
-The remaining CLS on `/portfolio` and `/kindag` is *not* fonts -- it is lazy-loaded images
-with no intrinsic size, which is a separate fix.
-
-Sunday Club's coverage is set by `SUBSET_RANGES` in `bin/font-features.py`, and it is the
-expensive knob on this site: every base glyph drags in up to seven swash variants *and* the
-`calt` rules that place them, so a codepoint costs several times what it would in a text
-face. It is scoped to what headings actually use.
-
-### Swashes (Sunday Club)
-`h1`/`h2` use Sunday Club, which carries swash, titling and stylistic alternates.
-`swsh` and `titl` are *single* substitutions and `salt` has one alternate per glyph,
-so CSS can only apply them to a whole element -- there is no way to swash one letter
-without wrapping it in a `<span>`, which also breaks ligature and `calt` shaping across
-the element boundary.
-
-`bin/font-features.py` avoids that by generating contextual (`calt`) rules and compiling
-them into the font, so browsers pick the right variant automatically with no markup. It
-measures each variant's overhanging ink column by column and only uses it where the
-neighbouring letter tucks inside its silhouette. Source of truth is the pristine vendor
-`assets/fonts/SundayClub-Bold.woff`; the script regenerates the `.subset.woff2`/`.woff`
-and the inlined base64. The generated rules land in `bin/sundayclub.fea` for inspection,
-and can be hand-edited then recompiled with `--fea-in`.
-
-Density is controlled by `AUTO_BASES` in the script, since `calt` matches positions and
-cannot count swashes per word. It is now empty, meaning every letter is eligible; run with
-`--sparse` for the restrained set (capitals plus `f g j k t x y z`).
-
-Every feature the font ships is a candidate (`EXCLUDE_FEATURES` is empty). That matters
-because `ss01`-`ss04` are where Sunday Club keeps its intermediate arms: `t` has seven
-forms, five reaching left (`alt3` 156, `alt2` 192, `titl` 204, `alt1` 300, `swsh` 340) and
-two reaching right (`alt4` 303, `salt` 335). Rules are emitted longest-arm-first and `calt`
-is first-match-wins, so each letter gets a ladder -- the longest arm its neighbour can take,
-down to the plain glyph. A rule whose context is wholly contained in a higher-priority one
-can never fire and is dropped; `t.alt4` goes this way, since `t.salt` clears every
-neighbour it does and clears them by more.
-
-#### Six lookups, in order
-
-The rules are split across six `calt` lookups, and the order is the design. Each one sees
-what the ones before it drew, so its classes can be written in terms of those glyphs
-rather than in terms of what was typed.
-
-| lookup | what it places |
-| --- | --- |
-| `initial` | a word-initial swash on the first letter of the run |
-| `arms` | every variant reaching left -- the long decoration |
-| `tails` | word-final flourishes drawn inside their own advance |
-| `nubs` | variants reaching only right -- the short ones |
-| `fallback` | the vendor's own defensive `calt` rules |
-| `restyle` | `ALWAYS_VARIANTS` |
-
-`initial` exists because a backtrack class cannot match what is not there. Every other
-position has a glyph before it to name -- including a word after a space, which is why
-"Film Festival" used to swash its second `F` and not its first. It is stated as
-`ignore sub @anyglyph F';` followed by the unguarded rule, so it fires only where nothing
-precedes, and it runs first so the leading letter gets the most decorative form it can
-take rather than whatever a one-sided rule offers. Word-initial placement is otherwise
-gated on `WORD_INITIAL_MAX_REACH` and on the arm arcing overhead, and the word space
-before it is widened by exactly what the arm consumes (`add_word_space_kerns`).
-
-**Arms before nubs** is the substantive ordering. In "Atlantic" the second `t` swings a
-340-unit arm back over the `n`, and the price is a plain `a` and a plain `n`, because a
-right nub on the `a` would be arcing over that same `n` from the other side. Deriving
-everything in one pass made that a race the nub won by sitting earlier in the word;
-deriving arms first makes it a decision, and 340 units of swash beats 86.
-
-The split pays again in precision. A rule's lookahead cannot see lookups that have not run
-yet, so a single pass has to assume the letter ahead may still take any shape it has --
-which is why plain `a` was refused after `Z.swsh` on account of `a.titl`, a form that only
-ever appears at the end of a word. By the time `nubs` runs, `arms` and `tails` have both
-had their say, so its lookahead names the glyph that will actually be drawn.
-
-#### What keeps arms from colliding
-
-- **Both sides are tested against what will actually be drawn.** `calt` walks the run once,
-  left to right, so a backtrack class must name variant glyphs -- write it in plain letters
-  and a swash can never follow a swash ("Atlantic" loses the arm on its `t` because the `A`
-  turned into `A.swsh` first). Lookahead has the opposite problem: a letter qualifies on the
-  right only if *every* form still open to it clears the arm.
-- **An arm needs a short letter under it** (`Geometry.obstructs`, `ARC_HEADROOM`). Clearance
-  is not the whole question. `l.swsh` clears a preceding `t` by 32 units and a preceding `H`
-  by 21, which passes `PROTRUSION_LIMIT` -- but the arm runs level along the top of that
-  extender for 22 columns, and two near-parallel strokes a fiftieth of an em apart read as
-  one tangled stroke rather than an arc. This is what "Atlantic" and "Zarathustra" were
-  doing: the `l` and the `h` each swung a 270-unit arm back over the `t` in front of it,
-  threading between its ascender and the cap line. What separates the pairs that work is not
-  how much room is left but what is beneath the arm, and this face leaves a clean band to cut
-  in -- x-height letters top out at 366 and the next thing up is `t` at 435, capitals at 445,
-  ascenders at 504. So an arm's own columns must find nothing taller than
-  `x_top + ARC_HEADROOM`, and an under-sweep nothing deeper than `x_bottom - ARC_HEADROOM`.
-  The band is measured off the outlines because OS/2 cannot be trusted here: Sunday Club
-  reports `sxHeight` 500, nearer its ascender than the top of any x-height letter it draws.
-  Asked of `arm_ink` only -- the innermost columns of an overhang hold the variant's own
-  body, and the letter it replaced stood beside that same extender quite happily. It costs
-  almost nothing in density: the long arms keep every x-height neighbour they had, including
-  the tight ones (`t.swsh` over `v` at 22 units), and overall decoration falls 59% to 58%.
-- **`Geometry.covers` keeps an arm inside the one letter it arcs over**, to within
-  `COVER_SLACK`, which is one column -- the resolution the envelope is measured at, and no
-  more. At 40 units of slack an arm reaches far enough past its neighbour to land on the
-  ascender of the letter after it, which was this script's largest source of collisions.
-- **A letter under an arm keeps the shape the arm was measured against** (`reshape_guards`).
-  An arm and a variant in the letter beside it normally cannot collide -- `covers` puts the
-  arm inside that letter's box and the variant's decoration outside it. What breaks that is
-  a variant which changes the box: `r.swsh` trades 150 units of advance for its arm, so an
-  `r` already arced over by a following `t.swsh` shrinks under it, dragging the `t` left and
-  running its arm off the far side into the letter beyond. Every long-range collision the
-  audit found came from this. It cuts both ways -- `a.swsh` is 20 units narrower than `a`,
-  enough to slide the `a` out from under `Z.swsh`'s tail. Stated as an `ignore` in the later
-  lookup rather than by striking those letters out of the arms' classes, because the arm is
-  the decoration worth keeping.
-- **A letter may be arced over from one side only** (`one_side_guards`) -- a right arm from
-  two positions back meeting a left arm from here, inside the letter between them. Neither
-  rule can see the other, so it is stated separately over two positions of backtrack. Not as
-  a blanket ban, though: the two arms are compared as vertical extents and only the pairs
-  that actually meet are suppressed. In "Zarathustra" the `u` drops a tail below the baseline
-  under the `s` while the `t` swings an arm over the top of it, and reading that as a
-  collision cost two swashes. `@rightarm` is defined by geometry, not by the rule set, so it
-  also catches `f`, which is simply drawn with its hook 67 units past its advance.
-- **An `ignore` rather than a narrower class on each rule**, because a two-position class
-  cannot match where only one glyph precedes -- the second letter of a heading -- and would
-  drop the swash there.
-
-Two measurements underpin all of this and are worth knowing:
-
-- `Geometry.arm_ink` is the overhang with its innermost `ARM_MARGIN` dropped. Right at the
-  advance the column envelope stops telling arm from letter: a variant drawn narrower than
-  the letter it replaces pushes its own body past the cut, and `Z.swsh`'s bar terminal ends
-  up sharing one column with a swash diving 133 below the baseline. Read as an arm, that
-  column says `Z.swsh` swallows its neighbour whole. Everything asking *where the arm points*
-  works from `arm_ink`; the clearance measurement still uses the full overhang, since every
-  unit of ink outside the box has a neighbour under it.
-- `Geometry.orientation` is judged at the tip, over the outer third of the arm's columns.
-  The columns nearest the stem hold the letter itself, so averaging over the whole arm reads
-  `A.swsh` -- whose curl sits at 300 but whose own left leg shares its columns -- as sweeping
-  under, which cost it every neighbour it had and the word-initial placement the face draws
-  it for.
-
-#### Variants with nothing to overhang
-
-Variants whose flourish stays inside the advance box have no neighbour to clear, so the
-overhang test discards them. Two later lookups pick those up, both running after the arms so
-a letter that already earned a swash keeps it:
-
-- `tails` -- word-final only, for variants that decorate inside their own advance, via
-  `MIN_FLOURISH`, plus anything named in `FINAL_VARIANTS`. Two qualify: `s.swsh`, a tail
-  dropping 64 below the baseline, and `a.titl`, a terminal sweep 164 past plain `a`'s right
-  edge with the advance widened 152 to hold it. Neither overhangs anything, so neither has a
-  context to derive; the end of a word is the one placement the geometry cannot argue with,
-  and it fires at most once per word. "No letter follows" is stated as an `ignore`, since a
-  lookahead class cannot match the end of a run, and `@wordchar` includes variant and
-  ligature glyphs because `arms` may already have replaced the following letter. It runs
-  *before* `nubs` so that the nubs' lookahead can name the flourished glyph outright.
-- `restyle` -- unconditional, for `ALWAYS_VARIANTS`. Holds three glyphs, for two reasons.
-  `e.swsh` and `i.salt` are not flourishes. `e.swsh` has the same advance and silhouette as
-  plain `e` to within 1 unit/em, but with the bar detached from the bowl so the aperture
-  opens; `i.salt` is closer still -- same advance, same bounding box to the unit, differing
-  only in that the tittle joins the stem into one contour instead of floating free. Both are
-  simply the letterforms the site wants, and the column envelope is a silhouette test that
-  cannot see interior differences like these. `C.swsh` is the opposite -- unmistakably a
-  decorated letter, its spiral terminal drawn wholly inside the advance, so the fit test
-  scores it 0 on every measure and has nothing to say about where it belongs. A capital in a
-  heading is about one per word and almost always leads it, which is the classic place for a
-  swash, so it is used everywhere. In every case the vendor's kern classes already cover the
-  variant, so spacing is unaffected. Note `eacute` and friends have no such variant and keep
-  the closed bowl.
-
-#### Auditing
-
-`bin/font-audit.py` is what verifies all of this, and is worth re-running after any change
-to the rules. It shapes a word list with the *built* font and re-applies both fit tests to
-every glyph an arm passes over, which is the only way to see the difference between what the
-rules assumed and what the shaper draws. On a 5,000-word sample the current rules leave 0.2%
-of words with a graze, all of them at two positions' distance, for 67% of glyphs carrying a
-variant. Anything above 1% fails the run. Every remaining failure is an arm that cleared its
-neighbour and landed on the extender of the letter beyond -- the one thing a single position
-of backtrack cannot see. For scale, the same audit against the build before `ARC_HEADROOM`
-reports 10.9%, nearly all of it one position away.
-
-`font-feature-settings` on `h1,h2,h3,p,li,th` must name `"calt"` explicitly: the site sets
-`letter-spacing` on `html`, and Chrome drops contextual alternates when letter-spacing is
-non-zero unless the feature is requested by name.
-
-The `.salt`, `.swsh` and `.titl` classes remain for deliberate one-off overrides.
+`.aberrate` / `.aberrate--hover` in `_includes/styles/_sass/_aberration.scss` split heading
+text into RGB layers. See [docs/chromatic-aberration.md](docs/chromatic-aberration.md).
 
 ### Images
 - Place source images in `assets/images/`

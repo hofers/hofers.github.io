@@ -175,7 +175,9 @@ module Jekyll
   #
   # wraps CONTENT in the markup the `.aberrate` styles need: the class, and a
   # `data-text` copy of the string that the two pseudo-element layers draw via
-  # `content: attr(data-text)`. See _includes/styles/_sass/_aberration.scss.
+  # `content: attr(data-text)`. See _includes/styles/_sass/_aberration.scss. The layers
+  # are derived from the wrapped text's own colour, so this can go anywhere without
+  # having to say what colour it lands on.
   #
   # The filter only writes the wrapper; `data-text` is filled in afterwards by the
   # post_render hook at the bottom of this file. It has to be, because the three layers

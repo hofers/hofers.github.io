@@ -93,6 +93,7 @@ exclude:
   - assets/fonts/SundayClub-Bold.subset.woff2
   - README.md
   - CLAUDE.md
+  - docs/
   - .claude/
   - .vscode/
 #   - .sass-cache/
