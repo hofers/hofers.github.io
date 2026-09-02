@@ -1,8 +1,8 @@
 // Chromatic aberration for light text on a dark ground.
 //
 // Splits the text into red, green and blue layers and displaces the outer two. The three
-// layers must sum to the text colour -- `ca-layer()` enforces that, so any $ca-strength
-// keeps the overlap on colour and changes only the fringes.
+// layers must sum to the text color -- `ca-layer()` enforces that, so any $ca-strength
+// keeps the overlap on color and changes only the fringes.
 //
 // `plus-lighter` sums alpha too, so antialiased edges composite too dark: `.aberrate` is
 // for display sizes, `.aberrate--hover` for anything at body size.
@@ -45,7 +45,7 @@ $ca-strength: 0.65 !default;
 $ca-share: math.div(math.round(math.div(1 - $ca-strength, 3) * 100000), 100000);
 $ca-own: 1 - 2 * $ca-share;
 
-// One channel-separated layer of the current text colour, as a relative colour. $channel
+// One channel-separated layer of the current text color, as a relative color. $channel
 // is "r", "g" or "b" -- the component this layer owns and keeps nearly all of. The space
 // is read from --ca-space at use time, so the branch at the bottom is one declaration.
 @function ca-layer($channel) {
@@ -104,8 +104,8 @@ $ca-own: 1 - 2 * $ca-share;
   }
 
   // The `/ ""` is alt text: it stops screen readers announcing the duplicated string.
-  // Gated on relative colour syntax -- without it the copies would paint the full text
-  // colour and three of those under plus-lighter blow out to white.
+  // Gated on relative color syntax -- without it the copies would paint the full text
+  // color and three of those under plus-lighter blow out to white.
   @supports (color: #{"color(from currentColor srgb r g b)"}) {
     &::before {
       content: attr(data-text) / "";
@@ -123,9 +123,9 @@ $ca-own: 1 - 2 * $ca-share;
 
 // Gated variant, for links and anything else that should only separate on interaction.
 // At rest it is ordinary text, not a dimmed effect: the layers are faded out and the
-// element paints its own colour, because three coincident copies hit the alpha problem.
+// element paints its own color, because three coincident copies hit the alpha problem.
 // On hover the fill and the layers swap in step on the same duration and easing, so the
-// total stays on colour throughout. See the docs.
+// total stays on color throughout. See the docs.
 .aberrate--hover {
   // 0px, not 0: ::before negates these in a calc, and `calc(0 * -1)` is a number, not a
   // length, which invalidates its whole transform declaration.
@@ -136,7 +136,7 @@ $ca-own: 1 - 2 * $ca-share;
   -webkit-text-fill-color: currentColor;
   // All four on one element, one duration, one easing. The layers derive their position
   // and their opacity from the first three, so they cannot come apart mid-transition --
-  // and the fill runs with them, which is what holds the sum on colour throughout.
+  // and the fill runs with them, which is what holds the sum on color throughout.
   transition:
     --ca-active-shift 180ms ease-out,
     --ca-active-drift 180ms ease-out,
@@ -161,13 +161,17 @@ $ca-own: 1 - 2 * $ca-share;
   }
 }
 
-// A desktop compositor on a wide-gamut display adds the layers up in the display's colour
+// A desktop compositor on a wide-gamut display adds the layers up in the display's color
 // space, so there they have to be split in Display P3 instead. This is a property of the
 // platform, not of the engine -- Chrome used to composite in sRGB on the same Mac where
 // Safari did not, and stopped. iOS is the exception that both conditions below exclude,
 // and getting it wrong there turns the heading pale green. Read the docs before touching
 // either: `-webkit-touch-callout` is the iOS-family test, hover/pointer catches an iPad
 // on a trackpad, and neither is redundant.
+//
+// _colors.scss branches on the same media feature for an unrelated reason -- it widens the
+// palette into P3 there. This one is a blend correction, that one is a gamut. Changing one
+// to match the other breaks whichever you moved; see docs/color.md.
 @supports #{"not (-webkit-touch-callout: none)"} {
   @media (color-gamut: p3) and (hover: hover) and (pointer: fine) {
     .aberrate {

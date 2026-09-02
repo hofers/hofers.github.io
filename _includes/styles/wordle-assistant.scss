@@ -1,5 +1,3 @@
-@use "colors";
-
 .grid {
   display: grid;
   background-color: #121213;
@@ -65,7 +63,7 @@
   padding: 0.2rem;
   border: 0.1rem solid #121213;
   border-radius: 0.25rem;
-  background-color: #5a5a5a;
+  background-color: var(--color-gray);
   margin: 0.1rem;
 }
 
@@ -100,7 +98,7 @@
 
 .checkbox-container {
   align-items: center;
-  color: colors.$colorBodyPrimary;
+  color: var(--color-body-primary);
   display: flex;
   font-weight: 300;
   gap: 0.2rem;
@@ -180,7 +178,7 @@ button {
     text-align: center;
     margin: auto;
     font-size: 1.5rem;
-    color: colors.$colorBodyPrimary;
+    color: var(--color-body-primary);
     font-weight: 300;
 
     &.smallish-text {

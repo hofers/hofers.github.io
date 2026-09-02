@@ -1,22 +1,137 @@
-$red: #a8000e;
-$dark-red: #6d020c;
-$white: #fbfeff;
-$off-white: #f6f6f6;
-$light-gray: #adadad;
-$gray: #5a5a5a;
-$dark-gray: #4e4e4e;
-$off-black: #333;
-$teal: #13ffc8;
-$deep-teal: #0e9878;
+// Colors
+// See docs/color.md for more
 
-$colorBackgroundPrimary: $off-black;
-$colorBackgroundSecondary: $gray;
-$colorBackgroundTertiary: $off-white;
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
 
-$colorHeadingPrimary: $white;
-$colorHeadingSecondary: #e2e9ea;
-$colorHeadingTertiary: #dee5e6;
+@function _round($n, $places) {
+  $f: math.pow(10, $places);
+  @return math.div(math.round($n * $f), $f);
+}
 
-$colorBodyPrimary: #c4c9ca;
-$colorBodySecondary: $light-gray;
-$colorBodyTertiary: $dark-gray;
+// Snap to 8-bit channels.
+@function _snap($color) {
+  @return rgb(
+    math.round(color.channel($color, "red", $space: rgb)),
+    math.round(color.channel($color, "green", $space: rgb)),
+    math.round(color.channel($color, "blue", $space: rgb))
+  );
+}
+
+$palette: (
+  "page": #000,
+  "red": #a8000e,
+  "dark-red": #6d020c,
+  "white": #fbfeff,
+  "off-white": #f6f6f6,
+  "light-gray": #adadad,
+  "gray": #5a5a5a,
+  "dark-gray": #4e4e4e,
+  "off-black": #333,
+  "teal": #13ffc8,
+  "deep-teal": #0e9878,
+
+  "heading-secondary": #e2e9ea,
+  "heading-tertiary": #dee5e6,
+  "body-primary": #c4c9ca,
+
+  "h1-glow": #a2d8e0,
+  "halo-1": #27faf8,
+  "halo-2": #2767fa,
+  "halo-3": #7227fa,
+  "halo-4": #e227fa,
+  "halo-5": #fa2799,
+  "halo-6": #fab027,
+  "halo-7": #e6fa27,
+  "halo-8": #48fa27,
+);
+
+$palette: map.set($palette, "deep-teal-shade", _snap(color.adjust(map.get($palette, "deep-teal"), $lightness: -8%)));
+$palette: map.set($palette, "off-white-shade", _snap(color.adjust(map.get($palette, "off-white"), $lightness: -8%)));
+
+$aliases: (
+  "background-primary": "off-black",
+  "background-secondary": "gray",
+  "background-tertiary": "off-white",
+  "heading-primary": "white",
+  "body-secondary": "light-gray",
+  "body-tertiary": "dark-gray",
+);
+
+// How much of the available P3 headroom to take.
+$p3-boost: 1 !default;
+
+// Below this chroma a color is being used as a neutral and is therefore exempted. 
+// See docs/color.md.
+$p3-min-chroma: 0.02 !default;
+
+// Iterations of the chroma bisection below.
+$p3-steps: 18 !default;
+
+// The largest chroma $space can hold at this lightness and hue.
+@function _max-chroma($l, $h, $space) {
+  $lo: 0;
+  $hi: 0.5;
+
+  @for $i from 1 through $p3-steps {
+    $mid: math.div($lo + $hi, 2);
+
+    @if color.is-in-gamut(oklch($l $mid $h), $space) {
+      $lo: $mid;
+    } @else {
+      $hi: $mid;
+    }
+  }
+
+  @return $lo;
+}
+
+// $color re-expressed with the chroma it would have had if it had been authored against
+// P3's boundary instead of sRGB's. Returns null for anything that should not move, which
+// is how the caller knows to emit nothing.
+@function _widen($color) {
+  $l: color.channel($color, "lightness", $space: oklch);
+  $c: color.channel($color, "chroma", $space: oklch);
+  $h: color.channel($color, "hue", $space: oklch);
+
+  @if $c < $p3-min-chroma {
+    @return null;
+  }
+
+  $srgb-max: _max-chroma($l, $h, srgb);
+
+  // Black and white have no hue to widen along, and would divide by zero.
+  @if $srgb-max == 0 {
+    @return null;
+  }
+
+  $widened: $c + $p3-boost * ($c * math.div(_max-chroma($l, $h, display-p3), $srgb-max) - $c);
+  @return oklch(_round($l, 2) _round($widened, 4) _round($h, 1));
+}
+
+@mixin declare {
+  :root {
+    @each $name, $value in $palette {
+      --color-#{$name}: #{$value};
+    }
+
+    @each $name, $target in $aliases {
+      --color-#{$name}: var(--color-#{$target});
+    }
+  }
+
+  @supports (color: oklch(0 0 0)) {
+    @media (color-gamut: p3) {
+      :root {
+        @each $name, $value in $palette {
+          $wide: _widen($value);
+
+          @if $wide {
+            --color-#{$name}: #{$wide};
+          }
+        }
+      }
+    }
+  }
+}

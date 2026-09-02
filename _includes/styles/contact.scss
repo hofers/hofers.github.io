@@ -1,8 +1,5 @@
 // Contact Form Styles
 
-@use "colors";
-@use "sass:color";
-
 form {
   display: flex;
   flex-direction: column;
@@ -29,25 +26,25 @@ form {
       & textarea {
         font-family: 'Source Sans Pro', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
         font-size: 0.8rem;
-        border: 0.05rem solid colors.$colorBackgroundTertiary;
+        border: 0.05rem solid var(--color-background-tertiary);
         border-radius: 0.1rem;
         padding: 0.2rem 0.3rem;
       }
       & input[type=submit] {
         font-size: 1.2rem;
-        background-color: colors.$deep-teal;
-        color: colors.$off-white;
+        background-color: var(--color-deep-teal);
+        color: var(--color-off-white);
         padding-top: 0.3rem;
         padding-bottom: 0.3rem;
-        border: 1px solid colors.$off-black;
+        border: 1px solid var(--color-off-black);
         transition: background-color 0.2s ease;
         cursor: pointer;
         &:hover {
-          background-color: color.adjust(colors.$deep-teal, $lightness: -8%);
+          background-color: var(--color-deep-teal-shade);
         }
         &:disabled {
-          background-color: color.adjust(colors.$deep-teal, $lightness: -8%);
-          color: color.adjust(colors.$off-white, $lightness: -8%);
+          background-color: var(--color-deep-teal-shade);
+          color: var(--color-off-white-shade);
         }
       }
       & input[type=file] {
@@ -57,7 +54,7 @@ form {
         margin: 0;
         font-weight: 300;
         font-size: 1.2rem;
-        color: colors.$colorHeadingTertiary;
+        color: var(--color-heading-tertiary);
         line-height: 1.4rem;
       }
     }
@@ -65,12 +62,12 @@ form {
 }
 
 .error {
-  color: colors.$red;
+  color: var(--color-red);
 }
 
 .loader {
-  border: 0.37rem solid colors.$light-gray; 
-  border-top: 0.37rem solid colors.$teal; 
+  border: 0.37rem solid var(--color-light-gray); 
+  border-top: 0.37rem solid var(--color-teal); 
   border-radius: 50%;
   width: 1.6rem;
   height: 1.6rem;

@@ -7,9 +7,9 @@ of the things that were tried and rejected.
 ## What it does
 
 Splits the text into red, green and blue layers and displaces the outer two, the way a lens
-does. RGB is additive, so on a dark ground the three layers must *sum* to the text colour --
+does. RGB is additive, so on a dark ground the three layers must *sum* to the text color --
 that is the whole constraint, and `ca-layer()` enforces it. Whatever `$ca-strength` is set
-to, the overlap stays exactly the text colour and only the fringes change.
+to, the overlap stays exactly the text color and only the fringes change.
 
 The same effect on a light ground would be the subtractive dual: cyan/magenta/yellow inks
 under `multiply`, each taking one channel out of the white behind the glyph. Not built.
@@ -21,13 +21,13 @@ itself alone -- simpler, and steadier at small sizes. But the middle layer is wh
 the yellow, cyan and magenta bands where pairs of layers overlap, and those bands are most
 of the effect.
 
-### Derived from `currentColor`, not from a compiled colour
+### Derived from `currentColor`, not from a compiled color
 
 Not a convenience, a correctness condition. An `h1` is `$colorHeadingPrimary`, a subtitle
 `h2` is `$colorHeadingSecondary`, and a portfolio item's title is a `$colorHeadingPrimary`
-link *inside* an `h2` -- three different colours, and a layer set that sums to the wrong one
-silently recolours the heading. (The `h2` rule this replaced left portfolio titles about 10%
-dim.) It also means the effect follows a colour that changes under it, a link's `:hover`
+link *inside* an `h2` -- three different colors, and a layer set that sums to the wrong one
+silently recolors the heading. (The `h2` rule this replaced left portfolio titles about 10%
+dim.) It also means the effect follows a color that changes under it, a link's `:hover`
 among them, with no rule of its own.
 
 ### Not an SVG filter
@@ -42,7 +42,7 @@ a desktop lab.
 
 ### Why headings only
 
-`plus-lighter` sums *alpha* as well as colour, so three copies of a partially-covered edge
+`plus-lighter` sums *alpha* as well as color, so three copies of a partially-covered edge
 pixel accumulate to three times the coverage and antialiased edges composite too dark. On a
 100px display face the strokes are solid and it is invisible. On 20px body text most of the
 stroke *is* edge, and the text renders visibly thin and tinted toward green. Hence the
@@ -51,31 +51,31 @@ always-on class for headings and the hover variant for anything at body size.
 ## Why the base layer is painted with `-webkit-text-fill-color`
 
 `color: rgb(from currentColor ...)` does work -- inside the `color` property itself
-`currentColor` means the *inherited* colour, so it is not circular, and it is the obvious way
+`currentColor` means the *inherited* color, so it is not circular, and it is the obvious way
 to write this. The trouble is what it leaves behind: the element's computed `color` would
 then hold the green third, which is what the two pseudo layers inherit and would have to
 scale back up to recover the original.
 
-The hover variant cannot afford that, because there the base colour is mid-transition for
+The hover variant cannot afford that, because there the base color is mid-transition for
 180ms: the fringes would be derived from a moving origin through a ~6.6x channel gain, clip,
 and flare white on the way in. Painting the base layer as a *fill* leaves `color` holding the
-real text colour, so all three layers read one unchanging origin and the sum holds at every
+real text color, so all three layers read one unchanging origin and the sum holds at every
 point of the transition. It keeps text-decoration and every other `currentColor` consumer on
-the true colour too, rather than on a third of it.
+the true color too, rather than on a third of it.
 
 ## The `@supports` gate on the pseudo layers
 
-Relative colour syntax is the hard requirement (Chrome 119, Safari 16.4, Firefox 128), and
+Relative color syntax is the hard requirement (Chrome 119, Safari 16.4, Firefox 128), and
 its absence is not benign: every `color(from ...)` would be dropped, the pseudo layers would
-paint the *full* text colour, and three of those under `plus-lighter` blow out to white. So
+paint the *full* text color, and three of those under `plus-lighter` blow out to white. So
 the copies are gated on `@supports` and simply never materialise. A browser that old renders
 the heading as ordinary text, which is the right failure.
 
-## The blending colour space, and the branch that picks one
+## The blending color space, and the branch that picks one
 
 `plus-lighter` adds whatever numbers the compositor is holding, and that is not the same
 thing everywhere. Measured by sampling the triple overlap of a solid block beside a swatch of
-the target colour, for the h2 colour `#e2e9ea` (226 233 234):
+the target color, for the h2 color `#e2e9ea` (226 233 234):
 
 | engine                     | composites in             | split in sRGB  | split in P3    |
 | ---                        | ---                       | ---            | ---            |
@@ -108,7 +108,7 @@ is how you can tell it is the same mistake and not a new one. The h1 `#fbfeff` c
 The branch is no longer gated on the engine, because the engine was never what determined the
 answer -- the platform's compositor was, and engines migrate onto it. What the conditions now
 describe is a machine, not a browser: a desktop-class compositor and a wide-gamut display,
-minus iOS. Anything that ships a colour-managed compositor on a P3 display lands on the P3
+minus iOS. Anything that ships a color-managed compositor on a P3 display lands on the P3
 side by default, which is the direction the whole ecosystem has been moving.
 
 ### Why the gate is shaped the way it is
@@ -160,7 +160,7 @@ that got noticed within a day. When the space is unknown, P3 is the cheaper thin
 about.
 
 To check one of them, load a heading on that machine, screenshot it, and sample the solid core
-of a glyph: it should read the heading colour (`#fbfeff` on an h1, `#e2e9ea` on an h2) to
+of a glyph: it should read the heading color (`#fbfeff` on an h1, `#e2e9ea` on an h2) to
 within a point or two. Sample the core, not an edge -- the fringes are supposed to differ.
 
 ## The bleed, and why it is a shadow
@@ -193,7 +193,7 @@ document went 802px wide, and vertically too. A shadow is paint, not layout: mea
 six widths and eight pages in both engines, `scrollWidth` and `scrollHeight` are unchanged.
 
 `outline` has the same property and is the more idiomatic "paint outside the box", but in
-forced-colors mode `outline-color` is forced to a system colour, and a 1em transparent
+forced-colors mode `outline-color` is forced to a system color, and a 1em transparent
 outline would become a 1em visible ring around every heading. `box-shadow` is forced to
 `none` there instead, which degrades to the Safari clip -- the bug, not a new one.
 
@@ -203,23 +203,23 @@ tuning it down, so the value is set past what any face can use rather than to wh
 site's faces do use. Raise it per element via `--ca-bleed` if some future face proves that
 wrong.
 
-Both the shadow and the transparent colour are load-bearing. `plus-lighter` sums what it is
+Both the shadow and the transparent color are load-bearing. `plus-lighter` sums what it is
 given, and transparent sums to nothing, so the shadow is invisible in the blend -- verified
-pixel-identical to Chrome's uncut rendering. A shadow with a colour would paint a slab of it
+pixel-identical to Chrome's uncut rendering. A shadow with a color would paint a slab of it
 under all three layers.
 
 ## The hover variant
 
 At rest this is not a dimmed version of the effect, it is ordinary text: the layers are faded
-out and the element paints its own colour rather than the green third of it. That matters
+out and the element paints its own color rather than the green third of it. That matters
 because at zero displacement the three layers still paint, and three coincident copies land
 straight on the alpha problem above -- which is the state a link spends nearly all of its
 life in. Measured against untouched text at the same glyph origin, the rest state differs by
 0 pixels of 8500.
 
-The two halves swap in step on hover: the text goes from its full colour to the green layer
-while the other two fade from nothing to full. Because the three sum to the text colour, and
-both halves run on the same duration and easing, the total stays that colour at every point
+The two halves swap in step on hover: the text goes from its full color to the green layer
+while the other two fade from nothing to full. Because the three sum to the text color, and
+both halves run on the same duration and easing, the total stays that color at every point
 in between -- the text separates without ever changing brightness. This is the invariant that
 requires the fringes to be fixed to `color` rather than derived from the fill that is
 animating.
@@ -233,11 +233,11 @@ Safari's manners were not good -- for roughly the first tenth of a second of eve
 red layer stood further out than the blue one, then the two settled. On a footer icon, where
 the whole glyph is one shape, it reads as a flinch.
 
-The same staggering broke the colour invariant, and that one had a name before it had a
-cause: a green flash on hover. The fill moves from the text colour to the green third and the
+The same staggering broke the color invariant, and that one had a name before it had a
+cause: a green flash on hover. The fill moves from the text color to the green third and the
 other two layers fade in to make the difference up; the sum only holds if those halves are
 exactly in step. When the fill got there first there was nothing yet adding red and blue back,
-so the glyph showed the green third of its colour until the layers caught up.
+so the glyph showed the green third of its color until the layers caught up.
 
 Two separate things were wrong, and the first is worth knowing about on its own:
 
@@ -260,7 +260,7 @@ first two, `opacity` from the third, no `transition` of their own. There is now 
 Two layers cannot come apart when neither is animating -- the mirroring is arithmetic, done
 fresh from a single interpolated number every frame.
 
-`@property` needs Safari 16.4, Chrome 85, Firefox 128; relative colour syntax, which the
+`@property` needs Safari 16.4, Chrome 85, Firefox 128; relative color syntax, which the
 layers are already gated on, needs Safari 16.4, Chrome 119, Firefox 128. The second is the
 stricter requirement in every engine, so anything that has the layers at all can animate them
 and no new `@supports` is needed.
@@ -297,4 +297,4 @@ effect to the keyboard, where a hover-only effect is otherwise invisible.
 - **`font-feature-settings` is inherited**, so all three layers shape identically and the
   contextual swashes line up. A mismatch would misregister every alternate glyph.
 - **`$ca-share` is rounded before `$ca-own` is derived from it**, so the three scales sum to
-  exactly 1 and the core of the glyph keeps the text colour to the bit.
+  exactly 1 and the core of the glyph keeps the text color to the bit.

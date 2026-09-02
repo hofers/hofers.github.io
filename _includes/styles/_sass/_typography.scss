@@ -1,9 +1,7 @@
-@use "colors";
-@forward "colors";
 @use "source";
 
-$boxShadowUnderline: colors.$white 0px -1px 0px 0px inset;
-$boxShadowHighlight: inset 0 -.5em 0 0 colors.$deep-teal;
+$boxShadowUnderline: var(--color-white) 0px -1px 0px 0px inset;
+$boxShadowHighlight: inset 0 -.5em 0 0 var(--color-deep-teal);
 
 html {
   font-size: 20px; // Set base size in px
@@ -18,7 +16,7 @@ h1,h2,h3,p,li,th {
 
 a {
   box-shadow: $boxShadowUnderline;
-  color: colors.$colorHeadingPrimary;
+  color: var(--color-heading-primary);
   font-weight: 300;
   text-decoration: none;
 }
@@ -33,19 +31,19 @@ h1 {
   font-size: 5rem;
   font-family: 'Sunday Club';
   font-feature-settings: "liga", "calt";
-  color: colors.$colorHeadingPrimary;
+  color: var(--color-heading-primary);
   letter-spacing: normal;
   line-height: 2.6rem;
   margin-top: 0.5rem;
   padding: 0.5rem 0;
-  text-shadow: 0.05rem 0.05rem 0.25rem #a2d8e0;
+  text-shadow: 0.05rem 0.05rem 0.25rem var(--color-h1-glow);
 }
 
 h2 {
   font-size: 2rem;
   font-family: 'Sunday Club';
   font-feature-settings: "liga", "calt";
-  color: colors.$colorHeadingSecondary;
+  color: var(--color-heading-secondary);
   letter-spacing: normal;
   line-height: 1.75rem;
   margin-top: 0.3rem;
@@ -53,12 +51,12 @@ h2 {
 
 h3 {
   font-size: 1.2rem;
-  color: colors.$colorHeadingTertiary;
+  color: var(--color-heading-tertiary);
   line-height: 1.4rem;
 }
 
 p {
-  color: colors.$colorBodyPrimary;
+  color: var(--color-body-primary);
   line-height: 1.25rem;
   margin: 0.5rem 0 1rem;
 }
@@ -69,7 +67,7 @@ ul {
 
 li,
 th {
-  color: colors.$colorBodyPrimary;
+  color: var(--color-body-primary);
   line-height: 1.25rem;
 }
 

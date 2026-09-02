@@ -1,8 +1,12 @@
 // Standard Styles
 
+@use "colors";
 @use "typography";
 @use "fa";
 @use "aberration";
+
+// Emit the color palette once here so it's present everywhere
+@include colors.declare();
 
 @keyframes rotation {
   0% {
@@ -16,7 +20,7 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--color-page);
 }
 
 .hidden {
@@ -28,8 +32,8 @@ body {
 }
 
 .container {
-  background-color: typography.$colorBackgroundPrimary;
-  box-shadow: 0.05rem 0 0.25rem typography.$gray;
+  background-color: var(--color-background-primary);
+  box-shadow: 0.05rem 0 0.25rem var(--color-gray);
   outline: transparent 2px inset;
   border-bottom-left-radius: 2.566665rem;
   border-bottom-right-radius: 2.566665rem;
@@ -46,7 +50,11 @@ body {
 
   &:before {
     --angle: 0deg;
-    background: conic-gradient(from var(--angle), #27faf8, #2767fa, #7227fa, #e227fa, #fa2799, #fab027, #e6fa27, #48fa27, #27faf8);
+    // Eight stops, then the first again so the sweep closes seamlessly.
+    background: conic-gradient(from var(--angle),
+      var(--color-halo-1), var(--color-halo-2), var(--color-halo-3), var(--color-halo-4),
+      var(--color-halo-5), var(--color-halo-6), var(--color-halo-7), var(--color-halo-8),
+      var(--color-halo-1));
     border-bottom-left-radius: 2.566665rem;
     border-bottom-right-radius: 2.566665rem;
     border-top-left-radius: 0.25rem;
@@ -68,13 +76,13 @@ body {
 
   a {
     font-size: 0.9rem;
-    color: typography.$colorHeadingSecondary;
+    color: var(--color-heading-secondary);
     line-height: 1.25rem;
     letter-spacing: normal;
     padding: 0.15rem 0.8rem;
-    border: 0.15rem typography.$off-white;
-    background-color: typography.$colorBackgroundPrimary;
-    box-shadow: 0.05rem 0.1rem 0.25rem typography.$gray;
+    border: 0.15rem var(--color-off-white);
+    background-color: var(--color-background-primary);
+    box-shadow: 0.05rem 0.1rem 0.25rem var(--color-gray);
     border-radius: 0.333rem 0.333rem 0 0;
     cursor: pointer;
 
@@ -83,7 +91,7 @@ body {
     }
 
     &.active {
-      color: typography.$colorHeadingPrimary;
+      color: var(--color-heading-primary);
 
       span {
         box-shadow: typography.$boxShadowUnderline;
@@ -93,7 +101,7 @@ body {
     &:active,
     &:hover,
     &:focus {
-      color: typography.$colorHeadingPrimary;
+      color: var(--color-heading-primary);
       
       span {
         box-shadow: typography.$boxShadowHighlight;
@@ -110,14 +118,14 @@ body {
   padding-top: 0.9rem;
   a {
     box-shadow: none; 
-    color: typography.$colorBodyPrimary;
+    color: var(--color-body-primary);
     padding-left: 0.2rem;
     padding-right: 0.2rem;
     &:hover,
     &:focus,
     &:active {
       box-shadow: typography.$boxShadowHighlight;
-      color: typography.$colorHeadingPrimary;
+      color: var(--color-heading-primary);
       text-decoration: none;
     }
   }
@@ -132,7 +140,7 @@ body {
   width: 100%;
   max-width: 30rem;
   margin: 2.2rem auto 1.3rem;
-  background-color: typography.$colorBackgroundTertiary;
+  background-color: var(--color-background-tertiary);
 }
 
 .blog-img {

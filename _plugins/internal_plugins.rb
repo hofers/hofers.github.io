@@ -176,8 +176,8 @@ module Jekyll
   # wraps CONTENT in the markup the `.aberrate` styles need: the class, and a
   # `data-text` copy of the string that the two pseudo-element layers draw via
   # `content: attr(data-text)`. See _includes/styles/_sass/_aberration.scss. The layers
-  # are derived from the wrapped text's own colour, so this can go anywhere without
-  # having to say what colour it lands on.
+  # are derived from the wrapped text's own color, so this can go anywhere without
+  # having to say what color it lands on.
   #
   # The filter only writes the wrapper; `data-text` is filled in afterwards by the
   # post_render hook at the bottom of this file. It has to be, because the three layers
@@ -259,7 +259,7 @@ module Jekyll
         # a miserable thing to diagnose from the rendered page.
         if plain != inner
           Jekyll.logger.warn "Aberrate:", "markup inside #{inner.inspect} is not " \
-            "mirrored onto the colour layers; wrap the tag rather than the text inside it"
+            "mirrored onto the color layers; wrap the tag rather than the text inside it"
         end
 
         out << tag.sub(/\/?>\z/, %( data-text="#{attribute(plain)}">)) << inner << "</span>"
@@ -315,7 +315,7 @@ Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
   doc.output = Jekyll::UnicodeEmoji.emojify(doc.output)
 end
 
-# after the emoji hook, so a shortcode inside an aberrated span reaches the colour
+# after the emoji hook, so a shortcode inside an aberrated span reaches the color
 # layers as the character it renders as rather than as `:wave:`
 Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
   doc.output = Jekyll::Aberration.populate(doc.output)

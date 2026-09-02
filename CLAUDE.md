@@ -60,7 +60,8 @@ So, when a feature needs real explanation:
 example -- a 103-line header became 13 lines plus a doc.
 
 What is already split out this way: `docs/fonts.md`, `docs/early-hints.md`,
-`docs/html-edge-cache.md`, `docs/swashes.md`, `docs/chromatic-aberration.md`.
+`docs/html-edge-cache.md`, `docs/swashes.md`, `docs/chromatic-aberration.md`,
+`docs/color.md`.
 
 ## Project Structure
 
@@ -127,6 +128,38 @@ Create markdown files in `_posts/class/` following Jekyll naming conventions (YY
 - Page-specific styles can be added by setting `tags: css` in frontmatter
 - SCSS compilation happens inline during build
 
+### color
+
+Every color the site owns is authored once, as sRGB hex, in `$palette` in
+`_includes/styles/_sass/_colors.scss`. It compiles to `--color-*` custom properties on
+`:root`, and to a second table under `@media (color-gamut: p3)` where the chromatic
+entries carry more chroma than sRGB can hold. **Stylesheets say `var(--color-teal)` and
+nothing else** -- no Sass color variables, no hex literals.
+
+To change the color scheme, edit `$palette`. The wide-gamut half is derived by rule, not
+by hand, so it follows automatically.
+
+Three rules, because each has a failure that is quiet rather than loud:
+
+- **`colors.declare()` is included exactly once**, by `stylish.scss`. Page stylesheets are
+  separate Sass compilations inlined into the same document, so a second include is a
+  second copy of the whole table in the HTML.
+- **The P3 block must stay inside its `@supports (color: oklch(0 0 0))`.** Custom
+  properties accept any tokens, so without the gate an engine lacking `oklch()` stores the
+  widened values and fails at *use* -- and an invalid `var()` substitution inherits rather
+  than falling back to the sRGB value.
+- **`color.adjust()` cannot follow a custom property.** Derive shades into `$palette`
+  (see `deep-teal-shade`) rather than reaching for Sass color maths at the call site.
+
+Deliberately left as literals: Wordle's tile colors in `wordle-assistant.scss` and the
+vendored syntax theme in `_code-highlight.scss`. Both are other people's palettes, and
+widening them would make them wrong.
+
+Full notes in [docs/color.md](docs/color.md): the widening rule and the per-color gains,
+why near-neutrals are exempt (it is not only a byte saving -- it keeps `.aberrate` clear of
+out-of-range channels on iOS), the `+500 bytes brotli` per page this costs, and `$p3-boost`
+for dialling it back or off.
+
 ### Fonts
 
 Three faces ship as base64 inside `/assets/css/fonts.css`, which `_layouts/default.html`
@@ -169,6 +202,11 @@ is non-zero unless the feature is requested by name.
 
 `.aberrate` / `.aberrate--hover` in `_includes/styles/_sass/_aberration.scss` split heading
 text into RGB layers. See [docs/chromatic-aberration.md](docs/chromatic-aberration.md).
+
+Its `--ca-space` branch also tests `(color-gamut: p3)`, and is **unrelated** to the palette
+above. That one picks the space the compositor *adds* in so the layers sum back to the text
+color; getting it wrong is a visible cast. The palette's branch spends gamut on flat paint
+and fixes nothing. Do not change one to match the other.
 
 ### Images
 - Place source images in `assets/images/`

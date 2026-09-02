@@ -1,7 +1,5 @@
 // Portfolio Styles
 
-@use "colors";
-
 .pf-item {
   display: flex;
   flex-direction: column;
@@ -10,7 +8,7 @@
 
 .pf-text {
   & > h2 {
-    color: colors.$colorHeadingPrimary;
+    color: var(--color-heading-primary);
     font-style: italic;
     padding-bottom: 0.333rem;
     padding-top: 0.333rem;
