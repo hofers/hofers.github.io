@@ -28,7 +28,9 @@ $palette: (
   "light-gray": #adadad,
   "gray": #5a5a5a,
   "dark-gray": #4e4e4e,
-  "off-black": #333,
+  "off-black": #10161c,
+  "cyan": #00c9b4,
+  "deep-cyan": #009387,
   "teal": #13ffc8,
   "deep-teal": #0e9878,
 
@@ -48,6 +50,7 @@ $palette: (
 );
 
 $palette: map.set($palette, "deep-teal-shade", _snap(color.adjust(map.get($palette, "deep-teal"), $lightness: -8%)));
+$palette: map.set($palette, "deep-cyan-shade", _snap(color.adjust(map.get($palette, "deep-cyan"), $lightness: -8%)));
 $palette: map.set($palette, "off-white-shade", _snap(color.adjust(map.get($palette, "off-white"), $lightness: -8%)));
 
 $aliases: (

@@ -1,7 +1,7 @@
 @use "source";
 
 $boxShadowUnderline: var(--color-white) 0px -1px 0px 0px inset;
-$boxShadowHighlight: inset 0 -.5em 0 0 var(--color-deep-teal);
+$boxShadowHighlight: inset 0 -.5em 0 0 var(--color-cyan);
 
 html {
   font-size: 20px; // Set base size in px

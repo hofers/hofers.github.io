@@ -32,7 +32,7 @@ form {
       }
       & input[type=submit] {
         font-size: 1.2rem;
-        background-color: var(--color-deep-teal);
+        background-color: var(--color-deep-cyan);
         color: var(--color-off-white);
         padding-top: 0.3rem;
         padding-bottom: 0.3rem;
@@ -40,10 +40,10 @@ form {
         transition: background-color 0.2s ease;
         cursor: pointer;
         &:hover {
-          background-color: var(--color-deep-teal-shade);
+          background-color: var(--color-deep-cyan-shade);
         }
         &:disabled {
-          background-color: var(--color-deep-teal-shade);
+          background-color: var(--color-deep-cyan-shade);
           color: var(--color-off-white-shade);
         }
       }
