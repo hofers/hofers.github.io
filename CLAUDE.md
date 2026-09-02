@@ -200,8 +200,18 @@ is non-zero unless the feature is requested by name.
 
 ### Chromatic aberration
 
-`.aberrate` / `.aberrate--hover` in `_includes/styles/_sass/_aberration.scss` split heading
-text into RGB layers. See [docs/chromatic-aberration.md](docs/chromatic-aberration.md).
+`.aberrate` / `.aberrate--hover` / `.aberrate--wander` in
+`_includes/styles/_sass/_aberration.scss` split heading text into RGB layers -- always on,
+gated on hover, or in continuous motion. See
+[docs/chromatic-aberration.md](docs/chromatic-aberration.md).
+
+**The displacement is a product, and each variant supplies one factor**: the authored
+`--ca-shift`, times `--ca-gate` (0..1, what `--hover` transitions), times `--ca-wander-x`
+(-1..1, what `--wander` animates). `.aberrate` writes that line once and the factors default
+to 1 through their `@property` initial values, so the variants compose rather than fight --
+`aberrate: "hover wander"`, which the footer icons use, is a walk that runs only while
+hovered. A new variant should be a new factor, not another rule writing
+`--ca-active-shift`.
 
 Its `--ca-space` branch also tests `(color-gamut: p3)`, and is **unrelated** to the palette
 above. That one picks the space the compositor *adds* in so the layers sum back to the text

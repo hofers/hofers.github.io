@@ -170,8 +170,11 @@ module Jekyll
   # {{ CONTENT | aberrate }}                   always separated
   # {{ CONTENT | aberrate: "hover" }}          separates on hover/focus; inside a link,
   #                                            follows that link's hover
+  # {{ CONTENT | aberrate: "wander" }}         separation animates continuously, to about
+  #                                            +/- the authored distance on both axes
+  # {{ CONTENT | aberrate: "hover wander" }}   the walk, but only while hovered
   # {{ CONTENT | aberrate: "0.05em" }}         a wider separation than the default
-  # {{ CONTENT | aberrate: "hover 0.05em" }}   both; options are space-separated
+  # {{ CONTENT | aberrate: "hover 0.05em" }}   options are space-separated, in any order
   #
   # wraps CONTENT in the markup the `.aberrate` styles need: the class, and a
   # `data-text` copy of the string that the two pseudo-element layers draw via
@@ -204,27 +207,37 @@ module Jekyll
       %(<span class="#{classes}"#{style(shift)}>#{text}</span>)
     end
 
-    # Space-separated options in any order: `hover`, and/or a CSS length.
+    # Space-separated options in any order: any of the variants, and/or a CSS length.
+    # They compose -- each one supplies a different factor of the displacement, so
+    # "hover wander" is a walk that runs only while hovered.
+    VARIANTS = %w[hover wander].freeze
+
     def self.parse(options)
-      classes = ["aberrate"]
+      variants = []
       shift = nil
 
       options.to_s.split(/\s+/).reject(&:empty?).each do |token|
         case token
-        when "hover" then classes << "aberrate--hover"
-        when SHIFT   then shift = token
+        when *VARIANTS then variants |= [token]
+        when SHIFT     then shift = token
         else
-          Jekyll.logger.warn "Aberrate:", "ignoring option #{token.inspect}; " \
-            "expected \"hover\" or a CSS length"
+          Jekyll.logger.warn "Aberrate:", "ignoring option #{token.inspect}; expected " \
+            "#{VARIANTS.map(&:inspect).join(", ")} or a CSS length"
         end
       end
+
+      # Emitted in VARIANTS order rather than the order they were written, so the same
+      # pair of options is the same string in the output whichever way it was asked for.
+      classes = ["aberrate"] + VARIANTS.select { |v| variants.include?(v) }
+                                       .map { |variant| "aberrate--#{variant}" }
 
       [classes.join(" "), shift]
     end
 
-    # --ca-shift is the authored separation in both variants. The hover gate switches a
-    # separate --ca-active-shift between zero and this, so an inline value here does not
-    # have to fight the rest state for specificity.
+    # --ca-shift is the authored separation in every variant: the distance the layers
+    # hold, the distance the hover gate opens to, and the amplitude the wander walks.
+    # The variants each scale it by a factor of their own rather than overwriting it, so
+    # an inline value here does not have to fight a rest state for specificity.
     def self.style(shift)
       return "" if shift.nil?
 

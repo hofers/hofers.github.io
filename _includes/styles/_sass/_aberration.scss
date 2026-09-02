@@ -5,7 +5,9 @@
 // keeps the overlap on color and changes only the fringes.
 //
 // `plus-lighter` sums alpha too, so antialiased edges composite too dark: `.aberrate` is
-// for display sizes, `.aberrate--hover` for anything at body size.
+// for display sizes, `.aberrate--hover` for anything at body size. `.aberrate--wander`
+// puts the displacement in continuous motion, and composes with `--hover` -- together
+// they are a walk that only runs while the pointer is on the element.
 //
 // See docs/chromatic-aberration.md before changing this file. It records why the layers
 // derive from currentColor, why the base layer is a text-fill rather than a `color`, why
@@ -16,9 +18,41 @@
 @use "sass:math";
 @use "sass:string";
 
-// The three values the hover variant animates. Registered so they interpolate: that is
-// what lets one transition on the element drive both layers, instead of four of them
-// racing. A length-percentage because the `aberrate` filter accepts either.
+// Displacement is a product of three factors, and each variant supplies exactly one of
+// them. That is what lets the variants compose instead of fight: `hover wander` is the
+// gate opening while the path moves, and neither rule has to know about the other.
+//
+//   --ca-shift / --ca-drift    the authored separation, per axis
+//   --ca-gate                  0..1, how far open the effect is  (--hover transitions it)
+//   --ca-wander-x / -y         -1..1, where along the walk it is (--wander animates them)
+//
+// Each factor's *registered initial value* is its no-variant default, so plain `.aberrate`
+// declares none of them and no rule depends on source order to win.
+@property --ca-gate {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: false;
+}
+
+@property --ca-wander-x {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: false;
+}
+
+@property --ca-wander-y {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: false;
+}
+
+// Registration is what makes the two above animatable at all: keyframes step between
+// stops for an *unregistered* custom property, and a transition cannot run on one.
+//
+// The two below are registered for their type instead. They are derived, never animated
+// -- one transition on --ca-gate drives both layers, rather than four animations of the
+// same duration racing each other. A length that goes bad falls back to the 0px here,
+// where an unregistered one would invalidate the layer's whole transform.
 @property --ca-active-shift {
   syntax: "<length-percentage>";
   initial-value: 0px;
@@ -63,13 +97,14 @@ $ca-own: 1 - 2 * $ca-share;
   // Must match the space the compositor adds the layers back up in; see the docs.
   --ca-space: srgb;
   // em, so one value serves every size. The `aberrate` filter can override per use.
-  --ca-shift: 0.03em;
+  --ca-shift: 0.02em;
   // Vertical drift: without it horizontal strokes get no fringe at all.
   --ca-drift: 0.01em;
-  // What the layers are actually displaced by. Indirected so the hover variant can gate
-  // it without out-specifying an inline --ca-shift from the filter.
-  --ca-active-shift: var(--ca-shift);
-  --ca-active-drift: var(--ca-drift);
+  // What the layers are actually displaced by: the product above, written once here so a
+  // variant only ever supplies a factor. Both other factors are 1 unless a variant is
+  // present, and an inline --ca-shift from the filter scales whatever they are doing.
+  --ca-active-shift: calc(var(--ca-shift) * var(--ca-gate) * var(--ca-wander-x));
+  --ca-active-drift: calc(var(--ca-drift) * var(--ca-gate) * var(--ca-wander-y));
   --ca-active-alpha: 1;
   // How far outside its own box a layer may paint: Safari clips the blend to that
   // bound, and glyph ink leaves the box routinely -- swashes, descenders under a tight
@@ -121,25 +156,42 @@ $ca-own: 1 - 2 * $ca-share;
   }
 }
 
+// The four selectors a gated variant opens on. An enclosing link's state as well as the
+// element's own, and descendant rather than child because a footer icon's wrapper sits
+// inside the <i>, not directly under the <a>. :focus-visible carries the effect to the
+// keyboard, where a hover-only one is otherwise invisible.
+@mixin ca-open {
+  a:hover &,
+  a:focus-visible &,
+  &:hover,
+  &:focus-visible {
+    @content;
+  }
+}
+
 // Gated variant, for links and anything else that should only separate on interaction.
 // At rest it is ordinary text, not a dimmed effect: the layers are faded out and the
 // element paints its own color, because three coincident copies hit the alpha problem.
 // On hover the fill and the layers swap in step on the same duration and easing, so the
 // total stays on color throughout. See the docs.
 .aberrate--hover {
-  // 0px, not 0: ::before negates these in a calc, and `calc(0 * -1)` is a number, not a
-  // length, which invalidates its whole transform declaration.
-  --ca-active-shift: 0px;
-  --ca-active-drift: 0px;
+  // Body-size text at a glance, so the split has to survive being small: equal horizontal
+  // and vertical separation, larger than the display variant's drift. An inline --ca-shift
+  // from the filter still wins over this, since that lands in a style attribute.
+  --ca-shift: 0.02em;
+  --ca-drift: 0.02em;
+
+  // The only factor this variant touches. Closing the gate multiplies the displacement to
+  // zero rather than replacing it, which is what leaves --wander's factor free to compose.
+  --ca-gate: 0;
   --ca-active-alpha: 0;
 
   -webkit-text-fill-color: currentColor;
-  // All four on one element, one duration, one easing. The layers derive their position
-  // and their opacity from the first three, so they cannot come apart mid-transition --
-  // and the fill runs with them, which is what holds the sum on color throughout.
+  // One number and two paint properties, one duration, one easing. Both layers derive
+  // their position from --ca-gate arithmetically, so they cannot come apart mid-transition
+  // -- and the fill runs with them, which is what holds the sum on color throughout.
   transition:
-    --ca-active-shift 180ms ease-out,
-    --ca-active-drift 180ms ease-out,
+    --ca-gate 180ms ease-out,
     --ca-active-alpha 180ms ease-out,
     -webkit-text-fill-color 180ms ease-out;
 
@@ -147,17 +199,99 @@ $ca-own: 1 - 2 * $ca-share;
     transition: none;
   }
 
-  // Follow an enclosing link's state so the whole link separates, not just the fragment
-  // under the pointer. Descendant rather than child: a footer icon's wrapper sits inside
-  // the <i>, not directly under the <a>.
-  a:hover &,
-  a:focus-visible &,
-  &:hover,
-  &:focus-visible {
-    --ca-active-shift: var(--ca-shift);
-    --ca-active-drift: var(--ca-drift);
+  @include ca-open {
+    --ca-gate: 1;
     --ca-active-alpha: 1;
     -webkit-text-fill-color: ca-layer("g");
+  }
+}
+
+// Continuously-moving variant, for a glyph that should look like a lens hunting for
+// focus. Both displacements walk a looping path of their own instead of holding a value.
+// Nothing else about the effect changes: the layers are still mirrored from one number
+// per axis and still sum to the text color at every frame.
+//
+// The path is authored as a plain number in -1..1 and multiplied by the authored
+// separation at use, so the keyframes hold no lengths and an inline --ca-shift from the
+// filter narrows the whole walk. Keyframes cannot interpolate an *unregistered* custom
+// property -- they step between stops -- but relative color syntax, which the layers are
+// already gated on, is the stricter requirement in every engine, so anything that has
+// layers at all can animate them. See "One animation" in the docs.
+
+// Amplitude of the walk, which runs the full +/- of it. Named once because the combined
+// variant below has to state it too, rather than inherit it by source order.
+$ca-wander-amplitude: 0.05em !default;
+
+// Stops are unevenly spaced on purpose: evenly spaced ones read as a rhythm, which is the
+// one thing this must not do. The last value repeats the first so the loop does not jump.
+@keyframes ca-wander-x {
+  0%   { --ca-wander-x: 0.38; }
+  11%  { --ca-wander-x: -0.72; }
+  19%  { --ca-wander-x: 0.12; }
+  31%  { --ca-wander-x: 0.91; }
+  40%  { --ca-wander-x: -0.28; }
+  54%  { --ca-wander-x: 0.64; }
+  63%  { --ca-wander-x: -0.95; }
+  77%  { --ca-wander-x: 0.05; }
+  86%  { --ca-wander-x: -0.51; }
+  100% { --ca-wander-x: 0.38; }
+}
+
+@keyframes ca-wander-y {
+  0%   { --ca-wander-y: -0.44; }
+  14%  { --ca-wander-y: 0.68; }
+  23%  { --ca-wander-y: -0.90; }
+  36%  { --ca-wander-y: 0.21; }
+  47%  { --ca-wander-y: 0.83; }
+  58%  { --ca-wander-y: -0.16; }
+  71%  { --ca-wander-y: -0.77; }
+  84%  { --ca-wander-y: 0.47; }
+  100% { --ca-wander-y: -0.44; }
+}
+
+.aberrate--wander {
+  // The walk crosses zero, so the layers swap sides. Both axes get the same range -- a
+  // lens is not biased horizontally.
+  --ca-shift: #{$ca-wander-amplitude};
+  --ca-drift: #{$ca-wander-amplitude};
+
+  // Two clocks with no common period short enough to notice, which is what keeps a pair
+  // of periodic walks from reading as a repeating figure. Don't round these to 5s / 4s.
+  animation-name: ca-wander-x, ca-wander-y;
+  animation-duration: 5.3s, 4.1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  // --ca-wander-offset desyncs several on one page. Negative, so each starts part-way
+  // along its path with no ramp-in; the second clock takes a different multiple of it,
+  // or the pair would stay locked together and only the pair would move.
+  animation-delay: var(--ca-wander-offset, 0s), calc(var(--ca-wander-offset, 0s) * 1.7);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    // Not zero. Three coincident layers under plus-lighter hit the alpha problem, so at
+    // rest this holds a static split -- these two numbers put the product back at
+    // .aberrate's 0.02em / 0.01em.
+    --ca-wander-x: 0.4;
+    --ca-wander-y: 0.2;
+  }
+}
+
+// Both together: the walk, gated on hover. The two rules above already compose -- one
+// closes the gate, the other moves the path, and the product is zero until the pointer
+// arrives -- so all this adds is the amplitude, which would otherwise be settled by
+// source order, and a pause.
+.aberrate--hover.aberrate--wander {
+  --ca-shift: #{$ca-wander-amplitude};
+  --ca-drift: #{$ca-wander-amplitude};
+
+  // Nothing is visible at rest, so there is no reason to be restyling two layers 60 times
+  // a second until then -- and this is the variant that goes on a whole row of icons.
+  // Paused rather than stopped: the walk resumes where the last hover left it, so a second
+  // hover does not retrace the first, and the offsets above still spread the row out.
+  animation-play-state: paused;
+
+  @include ca-open {
+    animation-play-state: running;
   }
 }
 

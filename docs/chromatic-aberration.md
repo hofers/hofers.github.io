@@ -1,6 +1,6 @@
 # Chromatic aberration (`_includes/styles/_sass/_aberration.scss`)
 
-Design notes for the `.aberrate` / `.aberrate--hover` classes. The stylesheet carries only
+Design notes for the `.aberrate`, `.aberrate--hover` and `.aberrate--wander` classes. The stylesheet carries only
 what you need to edit it safely; this file is the record of why it is shaped that way, and
 of the things that were tried and rejected.
 
@@ -208,6 +208,35 @@ given, and transparent sums to nothing, so the shadow is invisible in the blend 
 pixel-identical to Chrome's uncut rendering. A shadow with a color would paint a slab of it
 under all three layers.
 
+## Displacement is a product, and each variant supplies one factor
+
+```
+displacement = --ca-shift * --ca-gate * --ca-wander-x     (and the same on the other axis)
+                 authored     0..1        -1..1
+                 amplitude    --hover     --wander
+```
+
+`.aberrate` writes that line once. `--ca-gate` and the two wander numbers are registered with
+an initial value of `1`, so plain `.aberrate` declares neither and no variant has to out-
+specify another to have its say: `--hover` closes the gate, `--wander` moves the path, and
+`hover wander` is both -- a walk that only runs while the pointer is on the element. That
+combination is what the footer icons use.
+
+This is not how it was first written. Each variant used to write `--ca-active-shift` itself,
+which meant the two could not be combined at all: they set the same property at the same
+specificity, so one won on source order and the filter warned rather than shipping whichever
+that was. Multiplying instead of overwriting is what makes them compose, and it is worth
+keeping that way -- a third variant should be a third factor.
+
+Two consequences worth knowing:
+
+- **The rest state of a gated variant is a product, not a literal.** It computes to `0px`
+  because it is `0.05em * 0 * 0.38`, a calculation that keeps its unit. See the note in "One
+  animation" about what a bare `0` used to do here.
+- **An inline `--ca-shift` from the filter scales whatever the variants are doing**, because
+  it is the first factor and lands in a style attribute. `{{ x | aberrate: "hover wander
+  0.03em" }}` narrows the walk without touching the gate.
+
 ## The hover variant
 
 At rest this is not a dimmed version of the effect, it is ordinary text: the layers are faded
@@ -216,6 +245,10 @@ because at zero displacement the three layers still paint, and three coincident 
 straight on the alpha problem above -- which is the state a link spends nearly all of its
 life in. Measured against untouched text at the same glyph origin, the rest state differs by
 0 pixels of 8500.
+
+`--ca-gate` is the only factor this variant touches, and closing it multiplies the
+displacement to zero rather than replacing it -- which is what leaves the wander factor free
+to keep moving underneath.
 
 The two halves swap in step on hover: the text goes from its full color to the green layer
 while the other two fade from nothing to full. Because the three sum to the text color, and
@@ -248,17 +281,24 @@ Two separate things were wrong, and the first is worth knowing about on its own:
   exactly that: `none` against `matrix(1, 0, 0, 1, 0, 0)`. The layers sit in the same place
   either way, so nothing looks wrong at rest -- but the two then *start* the transition from
   different kinds of value, `::after` matrix to matrix and `::before` out of `none`, which is
-  a different code path. Hence `0px`, and keep it.
+  a different code path. The gate retired the hazard rather than fixing it: the rest value is
+  now `--ca-shift * 0 * ...`, and a calculation over a length stays a length. Do not
+  "simplify" a variant back to writing a bare `0` into `--ca-active-shift`.
 - That alone did not fix it, because four animations can drift apart for reasons that are not
   in the stylesheet at all -- when each layer gets promoted to a composited layer, how a
   blended layer is scheduled.
 
-So the layers no longer animate. `--ca-active-shift`, `--ca-active-drift` and
-`--ca-active-alpha` are registered with `@property` so they interpolate, and the *element*
-transitions all three alongside its fill. The layers read them and paint: position from the
-first two, `opacity` from the third, no `transition` of their own. There is now one clock.
-Two layers cannot come apart when neither is animating -- the mirroring is arithmetic, done
-fresh from a single interpolated number every frame.
+So the layers no longer animate. The *element* transitions `--ca-gate` and
+`--ca-active-alpha` alongside its fill, and the layers read them and paint: position from the
+gate through the product above, `opacity` from the alpha, no `transition` of their own. There
+is now one clock. Two layers cannot come apart when neither is animating -- the mirroring is
+arithmetic, done fresh from a single interpolated number every frame.
+
+Both axes hang off that one number, so this is three transitions rather than four, and the
+displacement is not among them: `--ca-active-shift` and `--ca-active-drift` are recomputed
+from the gate, never interpolated. They stay registered for their *type* -- a registered
+length that goes bad falls back to the `0px` initial value, where an unregistered one would
+invalidate the layer's whole `transform` declaration.
 
 `@property` needs Safari 16.4, Chrome 85, Firefox 128; relative color syntax, which the
 layers are already gated on, needs Safari 16.4, Chrome 119, Firefox 128. The second is the
@@ -278,6 +318,109 @@ The state selectors are descendant (`a:hover &`) rather than child, because a fo
 wrapper sits inside the `<i>`, not directly under the `<a>`. `:focus-visible` carries the
 effect to the keyboard, where a hover-only effect is otherwise invisible.
 
+## The wander variant
+
+`.aberrate--wander` is the effect with both displacements in continuous motion, so the glyph
+reads as a lens hunting for focus rather than a lens stuck out of it.
+
+Nothing about the layers changes. Displacement still comes from one number per axis, the
+layers are still exact mirrors of it, and the three still sum to the text color at every
+frame -- the only difference from `.aberrate` is that the two numbers move.
+
+### Numbers in the keyframes, not lengths
+
+The walk is authored as a plain number in `-1..1` in `--ca-wander-x` / `--ca-wander-y`, and
+multiplied by `--ca-shift` / `--ca-drift` in an ordinary declaration:
+
+```scss
+--ca-active-shift: calc(var(--ca-shift) * var(--ca-gate) * var(--ca-wander-x));
+```
+
+Two reasons, and the second is the load-bearing one:
+
+- The amplitude stays a single authored length. `{{ x | aberrate: "wander 0.03em" }}` writes
+  an inline `--ca-shift` and narrows the whole walk, exactly as it narrows the static
+  separation in the other two variants. Lengths in the keyframes would have made the
+  filter's length option silently do nothing here.
+- A keyframe value containing `var()` has to be substituted before it can be interpolated,
+  and that is thin ice across engines. Literal numbers in the keyframes and the `calc()` in
+  a normal declaration is the boring path: the animation interpolates a bare number, and the
+  length falls out of a var substitution that happens the same way it does everywhere else.
+
+`--ca-wander-x` and `--ca-wander-y` are registered `inherits: false`. They are read on the
+element itself; `--ca-active-shift`, computed from them, is what inherits down to the layers.
+
+Registration matters for a second reason: keyframes cannot *interpolate* an unregistered
+custom property, they step between stops. So without `@property` the walk would be a stutter
+rather than a drift. That needs Safari 16.4 / Chrome 85 / Firefox 128, and the layers are
+already gated on relative color syntax, which is stricter in every engine -- anything that
+has layers at all can animate them smoothly, and no new `@supports` is needed.
+
+### What makes it look random
+
+Nothing here is random; CSS has no source of randomness that is safe to ship yet. Three
+cheap things stand in for it, and they matter in this order:
+
+- **Two clocks, not one.** The axes run separate animations at 5.3s and 4.1s. Each is
+  periodic, but the pair only returns to the same phase after their least common multiple,
+  which is minutes rather than seconds -- 3.6 of them here. Round these to 5s and 4s and the
+  figure closes every 20s and starts to read as a loop.
+- **Unevenly spaced stops.** Ten stops at irregular percentages with `ease-in-out` between
+  them gives the path changes of pace. Evenly spaced stops read as a rhythm no matter what
+  the values are, which is the one thing this must not do.
+- **A per-element offset.** `--ca-wander-offset` is an `animation-delay`, negative so the
+  element starts part-way along the path instead of ramping in from its first keyframe. The
+  second clock takes `1.7x` the same offset; giving both the same delay would slide the pair
+  along together and leave every element in the same relative phase. `stylish.scss` sets
+  four offsets on the footer, because five icons in a row moving in step read as one object
+  rather than five.
+
+The first and last stop of each keyframe set are the same value, so the loop does not jump.
+
+### Under `prefers-reduced-motion`
+
+The animation is dropped and the two numbers are pinned at `0.4` and `0.2`, which through
+the same multiply is exactly `.aberrate`'s static `0.02em` / `0.01em`. Deliberately not
+zero: at zero the three layers are coincident, and three coincident copies under
+`plus-lighter` are the alpha problem in "Why headings only". Reduced motion should take the
+motion away, not the effect.
+
+Combined with `--hover` the same pinning applies on top of that variant's `transition: none`,
+so a hovered icon is `.aberrate`'s static split, arrived at instantly.
+
+### Combined with `--hover`
+
+`hover wander` is what the footer icons use: at rest they are ordinary single-color icons,
+and the walk runs only while the pointer (or keyboard focus) is on one. The two rules already
+compose through the product -- one closes the gate, the other moves the path -- so the
+combined rule adds only two things:
+
+- **The amplitude.** Both variants set `--ca-shift`, at the same specificity, so on an
+  element carrying both it would be settled by which one is written later in the file. The
+  combined rule states it, from the same `$ca-wander-amplitude` the standalone variant uses.
+- **`animation-play-state: paused`, running only when open.** Nothing is visible at rest, so
+  there is no reason to restyle two layers every frame until the pointer arrives -- and this
+  is the variant that goes on a whole row of icons. Paused rather than stopped, so the walk
+  resumes where the last hover left it instead of retracing the same opening from keyframe
+  zero every time; the per-element offsets still hold the row apart.
+
+The gate transition and the walk are independent clocks and are meant to be. Sampled every
+frame of a hover: the gate runs 0 to 1 over the 180ms in `ease-out` while the wander numbers
+carry on moving underneath, and the layers are exact mirrors at every sample throughout.
+
+Leaving the pointer pauses the walk immediately and the gate closes over 180ms, so the layers
+retract along a frozen path rather than continuing to wander on the way out.
+
+### The cost
+
+A custom property driving `transform` is recomputed in style rather than run on the
+compositor -- the same trade the hover variant makes, and there for the same reason. The
+difference is that a standalone wander never stops: every element carrying one restyles
+itself and its two layers every frame for as long as the page is open. Combined with
+`--hover` that cost is only paid while something is hovered, which is most of why the footer
+uses the pair. Either way this is a variant to opt into on a handful of glyphs, not something
+to put on a page of headings.
+
 ## Smaller decisions worth not re-deriving
 
 - **`display: inline-block`** -- the layers are absolutely positioned against this box, and
@@ -287,9 +430,13 @@ effect to the keyboard, where a hover-only effect is otherwise invisible.
 - **`isolation: isolate`** -- blend the layers with each other, never with the page behind.
 - **`--ca-drift`** -- without vertical drift the horizontal strokes get no fringe at all; the
   channels stay perfectly stacked there and it reads as print misregistration, not a lens.
-- **`--ca-active-shift` / `--ca-active-drift`** -- indirected so the hover variant can gate
-  the displacement without having to out-specify an inline `--ca-shift` from the filter, and
-  registered so that gate can be a transition rather than a jump. See "One animation".
+  `.aberrate` runs half the horizontal shift (`0.02em` / `0.01em`), which is enough at display
+  sizes; `.aberrate--hover` overrides both to `0.02em`, because at body size the smaller drift
+  is invisible and the effect only has to read for the moment the pointer is over the link.
+- **`--ca-active-shift` / `--ca-active-drift`** -- the product the layers read, written once
+  in `.aberrate` so that a variant contributes a factor rather than a value. Registered for
+  their type, not for interpolation; the thing that interpolates is `--ca-gate`. See
+  "Displacement is a product".
 - **`content: attr(data-text) / ""`** -- the `/ ""` is alt text, and stops screen readers
   announcing the duplicated string. The element's own text is the green layer, so there is no
   extra text node and the accessible name stays single.
