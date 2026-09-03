@@ -173,6 +173,7 @@ module Jekyll
   # {{ CONTENT | aberrate: "wander" }}         separation animates continuously, to about
   #                                            +/- the authored distance on both axes
   # {{ CONTENT | aberrate: "hover wander" }}   the walk, but only while hovered
+  # {{ CONTENT | aberrate: "lift" }}           summed past white on an HDR display
   # {{ CONTENT | aberrate: "0.05em" }}         a wider separation than the default
   # {{ CONTENT | aberrate: "hover 0.05em" }}   options are space-separated, in any order
   #
@@ -210,7 +211,7 @@ module Jekyll
     # Space-separated options in any order: any of the variants, and/or a CSS length.
     # They compose -- each one supplies a different factor of the displacement, so
     # "hover wander" is a walk that runs only while hovered.
-    VARIANTS = %w[hover wander].freeze
+    VARIANTS = %w[hover wander lift].freeze
 
     def self.parse(options)
       variants = []

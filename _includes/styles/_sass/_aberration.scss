@@ -14,6 +14,7 @@
 // this is not an SVG filter, why the bleed is a shadow rather than a box, and what every
 // condition on the P3 branch at the bottom is load-bearing for.
 
+@use "lift";
 @use "sass:list";
 @use "sass:math";
 @use "sass:string";
@@ -293,6 +294,25 @@ $ca-wander-amplitude: 0.05em !default;
   @include ca-open {
     animation-play-state: running;
   }
+}
+
+// Overbright variant. The mechanism, the default and both invariants live in
+// _lift.scss, which `.lift` uses too -- there is one definition of what lifted means and
+// this rule only wires it to the gate. See docs/lift.md and docs/chromatic-aberration.md.
+//
+// This is the one variant that is not a factor of the displacement: it multiplies the
+// composited result rather than the separation, which is why it never appears in
+// --ca-active-shift. It still composes, by taking --ca-gate as its own gate, so
+// `hover lift` brings the glow up with the split and rides the transition the gate is
+// already running rather than adding a second one that could drift out of step.
+//
+// Scaling the layer colors instead cannot do this, and the difference is not subtle: a
+// layer clips on its own channel at 1/$ca-own, long before the sum does, so past ~1.3x
+// the split desaturates and by 6x the fringes are grey.
+.aberrate--lift {
+  --lift: #{lift.$lift-default};
+  --lift-gate: var(--ca-gate);
+  @include lift.paint;
 }
 
 // A desktop compositor on a wide-gamut display adds the layers up in the display's color

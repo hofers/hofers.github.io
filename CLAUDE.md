@@ -218,6 +218,45 @@ above. That one picks the space the compositor *adds* in so the layers sum back 
 color; getting it wrong is a visible cast. The palette's branch spends gamut on flat paint
 and fixes nothing. Do not change one to match the other.
 
+### Overbright text
+
+`.lift` / `.lift--hover` in `_includes/styles/_sass/_lift.scss` paint text past SDR white
+on a display with headroom. It needs nothing of the markup, so it is a bare class --
+`[text](url){:.lift}` in kramdown, or a selector in a stylesheet. `.aberrate--lift` is the
+same paint wired to the aberration's gate.
+
+The whole feature is `filter: brightness()` on a composited element, because **iOS
+composites in extended sRGB and does not clamp out-of-range channels**. There is no image
+and no gain map; an out-of-range *color* alone does nothing, since individual paint still
+clamps and only the composite escapes.
+
+**`filter` takes the whole element** -- background, border, box-shadow and any image
+inside it. Put it on the innermost box holding only the ink you want lifted, and skip it
+where there is no such box: an inline link takes it directly, the nav tabs lift their
+inner `<span>` because the tab paints a background and a halo, and a link wrapping media
+(portfolio screenshots) opts out entirely rather than blowing the photo out. `.bar` is the
+deliberate exception, where the background *is* the ink.
+
+**The `@media (dynamic-range: high)` gate is load-bearing, not etiquette.** With no
+headroom the multiply only clips -- on `.aberrate--lift` that clips each layer to grey and
+*damages* the aberration on the displays that cannot show the glow anyway.
+
+**Body-size glyphs go rough above ~1.4, and that bounds the whole feature.** The multiply
+amplifies the antialiasing ramp at a glyph's edge, and the clip at the display's headroom
+then holds the core back while the edges keep rising -- letterforms read as furred. It is
+the multiply, not the composited layer: `brightness(1)` and `opacity: .999` are both
+clean, and `will-change`/`translateZ` do nothing. So `$lift-default` is 1.3 and there is
+one value everywhere. There were three -- flat ink, headings, aberrated ink -- and they
+converged, because this ceiling binds harder than the reasons to separate them; split them
+again if one moves rather than assuming they were always one thing. Note this 1.3 is *not*
+the `1 / $ca-own` ceiling that shares its value.
+
+Full notes in [docs/lift.md](docs/lift.md): why the specified gain-map route loses to this
+one, what was measured on device (including that no HDR content need be present), why hue
+holds only while every channel stays under the display's headroom, and -- if the portable
+Chrome-compatible route is ever revisited -- the two silent failures in Apple's ISO
+21496-1 encoders.
+
 ### Images
 - Place source images in `assets/images/`
 - Run `./bin/make-images.sh` to generate responsive variants

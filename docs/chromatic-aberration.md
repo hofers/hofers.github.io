@@ -421,6 +421,59 @@ itself and its two layers every frame for as long as the page is open. Combined 
 uses the pair. Either way this is a variant to opt into on a handful of glyphs, not something
 to put on a page of headings.
 
+## The lift variant, and why the boost is not in the layer colors
+
+`aberrate: "lift"` scales the finished composite past SDR white. The mechanism, the two
+invariants and everything measured about it live in [lift.md](lift.md), which `.lift`
+shares; `.aberrate--lift` is three lines that wire that paint to this file's gate:
+
+```scss
+.aberrate--lift {
+  --lift: #{lift.$lift-default};   // 1.3
+  --lift-gate: var(--ca-gate);
+  @include lift.paint;
+}
+```
+
+Only two things about it are aberration's business.
+
+### It is the one variant that is not a factor of the displacement
+
+Every other variant supplies a factor of `--ca-active-shift`. This one never appears
+there — it multiplies the composited *result* rather than the separation. It still
+composes, by taking `--ca-gate` as a gate of its own, so `hover lift` brings the glow up
+with the split and rides the transition the gate is already running rather than adding a
+second one that could drift out of step with it.
+
+### Why the boost cannot go in `ca-layer()`
+
+Because there it comes out of the same budget as the fringe, and the budget is small.
+
+Each layer holds `$ca-own` of the channel it owns. Scaling every layer by `B` scales the
+sum by `B` — but a layer clips on its own channel as soon as `B * $ca-own > 1`, and past
+that the sum keeps rising while the *ratio* between channels collapses toward 1:1:1. The
+ceiling is `B = 1 / $ca-own = 3 / (1 + 2 * $ca-strength)`:
+
+| `$ca-strength` | max `B` before a layer clips | fringe at `B = 3` |
+| --- | --- | --- |
+| 0.65 (today) | 1.30x | grey, green layer reading yellow |
+| 0.35 | 1.76x | weak |
+| 0 | 3.00x | none by construction |
+
+At today's strength that is +0.4 stops, not worth a variant. Pushing past it was tried and
+behaves exactly as the table predicts: at 6x the layers are grey, and the green layer turns
+yellow because its blue channel clips hardest.
+
+`brightness()` has no such ceiling because it applies *after* the layers have summed, so
+it scales all three channels by one factor and every ratio survives. Measured side by side
+against a true 8x gain-map fill, `brightness(2)` was indistinguishable in brightness with
+the fringes still correct.
+
+In use on the site the aberrated value settled lower still, at **1.3**, because the
+fringes are the first thing to degrade once the multiply outruns the display's headroom.
+See "One constant" in [lift.md](lift.md) — and note that 1.3 there is *not* this
+section's `1 / $ca-own`, which is also 1.30 by coincidence of a different mechanism.
+
 ## Smaller decisions worth not re-deriving
 
 - **`display: inline-block`** -- the layers are absolutely positioned against this box, and

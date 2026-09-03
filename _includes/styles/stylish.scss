@@ -4,6 +4,7 @@
 @use "typography";
 @use "fa";
 @use "aberration";
+@use "lift";
 
 // Emit the color palette once here so it's present everywhere
 @include colors.declare();
@@ -90,6 +91,14 @@ body {
       margin-left: 0.3rem;
     }
 
+    // The tab lifts its text, not its box. `filter` would take the background and the
+    // shadow halo with it and wash the tab out, and the span is already where this
+    // link's own ink lives -- the underline and the hover highlight are both on it.
+    span {
+      --lift: #{lift.$lift-default};
+      @include lift.paint;
+    }
+
     &.active {
       color: var(--color-heading-primary);
 
@@ -141,6 +150,10 @@ body {
   max-width: 30rem;
   margin: 2.2rem auto 1.3rem;
   background-color: var(--color-background-tertiary);
+  // Near-white on near-black, so it lifts cleanly: its channels are equal and clip
+  // together, and a hairline is the one place a hard clip would show as a color cast.
+  --lift: #{lift.$lift-default};
+  @include lift.paint;
 }
 
 .blog-img {

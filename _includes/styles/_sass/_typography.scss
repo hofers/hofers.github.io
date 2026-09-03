@@ -1,4 +1,5 @@
 @use "source";
+@use "lift";
 
 $boxShadowUnderline: var(--color-white) 0px -1px 0px 0px inset;
 $boxShadowHighlight: inset 0 -.5em 0 0 var(--color-cyan);
@@ -25,6 +26,43 @@ a:hover,
 a:focus,
 a:active {
   box-shadow: $boxShadowHighlight;
+}
+
+// Headings and links are lifted by default. See docs/lift.md; the paint is one mixin so
+// the gate, the media query and the value all have a single definition.
+//
+// One value for both, because the ceiling that sets it -- body-size glyphs go rough above
+// about 1.4 -- binds harder than any reason to tell them apart. Headings and aberrated
+// ink each had their own number for a while and both converged here. If a display-size
+// heading is ever raised on its own, the aberrated ones have to be held down again:
+// `:is(h1, h2, h3, a):has(.aberrate)` is the selector that did it, keyed on carrying an
+// aberrated span rather than on the tag, so it followed the effect wherever it landed.
+//
+// An aberrated span sits *inside* its heading, so the filter here already covers it --
+// which is why `aberrate: "lift"` is not also on the Liquid calls in the layouts. Two
+// filters would multiply, not compose.
+//
+// The link half carries two exclusions.
+//
+// A link inside a heading is already covered by that heading's filter, and nesting a
+// second one multiplies rather than adding -- portfolio.md's `<h2><a>` is exactly this.
+//
+// The rest is one rule twice over: `filter` takes the *whole element*, so lifting a link
+// directly is only safe where its entire ink is glyphs and a hairline underline. It is
+// not, in two places. The nav tabs paint a background and a shadow halo, and lift the
+// span inside instead (see .nav in stylish.scss). A link wrapping media -- portfolio.md
+// wraps every screenshot in one -- would brighten the photograph, which reads as blowing
+// it out, and has no inner box to move the paint to, so it opts out entirely.
+//
+// Both :not() arguments use :where() so they contribute no specificity. Nothing depends
+// on that today, but it is what keeps this selector from outranking a later rule that
+// needs to hold one of these elements down.
+h1,
+h2,
+h3,
+a:not(:where(h1, h2, h3, .nav) a):not(:has(:where(img, picture, svg, video, canvas))) {
+  --lift: #{lift.$lift-default};
+  @include lift.paint;
 }
 
 h1 {
