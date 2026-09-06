@@ -5,26 +5,18 @@
 # ///
 """Bake contextual alternate (calt) rules into SundayClub-Bold from glyph geometry.
 
-Sunday Club exposes swsh/titl as *single* substitutions and salt with exactly one
-alternate per glyph, so `font-feature-settings` can only ever be applied to a whole
-element -- there is no way to say "swash just this f". Doing it by hand means wrapping
-single letters in <span>s, which additionally breaks liga/dlig/calt shaping across the
-element boundary.
+Sunday Club exposes swsh/titl as *single* substitutions and salt with one alternate per
+glyph, so `font-feature-settings` can only apply them to a whole element. Putting the
+choice in the font's own calt table instead lets browsers pick a variant with no markup:
+a decorative form is used wherever its overhanging ink, measured column by column, clears
+the neighbouring letters, and the plain glyph stands everywhere else.
 
-So instead we put the decision in the font's own calt table, which browsers apply by
-default with no markup at all. A decorative variant is used wherever its overhanging
-ink clears the neighbouring letters; otherwise the plain glyph stands.
+Variants with no overhang have no neighbour to clear, so geometry cannot place them:
+those go word-final (MIN_FLOURISH), or, where the difference is interior, are substituted
+unconditionally (ALWAYS_VARIANTS).
 
-Whether a variant "fits" is derived from the outlines, not hand-authored: we measure
-each variant's ink column by column and require a clear vertical gap against the
-neighbour sitting in that same column.
-
-Variants whose flourish stays inside the advance box have no neighbour to clear, so
-geometry cannot place them. Those (MIN_FLOURISH -- a tail below the baseline, or a sweep
-into a widened advance) go word-final, where a flourish reads as terminal and fires at most
-once per word; variants that are simply the letterform this face wants, differing only in
-their interior where a silhouette test cannot see them at all, are named in ALWAYS_VARIANTS
-and substituted unconditionally.
+Source of truth is the pristine vendor .woff, never the previous output -- subsetting an
+already-subset font ratchets its coverage down on every run. See docs/swashes.md.
 
 Usage:
     bin/font-features.py --report        # derived rules, writes nothing
@@ -77,10 +69,9 @@ def subset_unicodes() -> set[int]:
 # --- tuning -----------------------------------------------------------------
 
 # Tie-break order when two variants of a letter overhang by the same amount, most
-# decorative first. This is only a sort key -- it must name every substitution feature
-# in the font, including the ones EXCLUDE_FEATURES turns off, or lifting an exclusion
-# to experiment would raise ValueError in the sort below. Inclusion is decided by
-# EXCLUDE_FEATURES/EXCLUDE_VARIANTS, not by membership here.
+# decorative first. It must name every substitution feature in the font, including the
+# ones EXCLUDE_FEATURES turns off, or the sort below raises ValueError. Inclusion is
+# decided by EXCLUDE_FEATURES/EXCLUDE_VARIANTS, not by membership here.
 FEATURE_PRIORITY = ["swsh", "titl", "salt", "ss04", "ss03", "ss02", "ss01"]
 
 # Width of the vertical slices used for the fit test. Small enough that the
@@ -92,143 +83,55 @@ MIN_OVERHANG = 40
 # A swash may dip this far below a neighbour's own lower edge before we treat it as
 # engulfing the letter rather than arcing past it.
 ENGULF_SLACK = 50
-# How far a neighbour must stay *inside* the swash's silhouette, in font units.
-#
-# Raw clearance is the wrong measure here: Sunday Club's swashes are drawn to arc
-# over their neighbours and graze them, so good pairs interpenetrate freely (o before
-# f.swsh overlaps by 186 units and is exactly what you'd hand-pick) while bad pairs
-# overlap less (l before f.swsh, 174). What actually distinguishes them is whether the
-# neighbour pokes out past the swash -- an ascender or a dot piercing the stroke reads
-# as a mistake, a short letter tucked beneath it reads as intentional.
+# How far a neighbour must stay *inside* the swash's silhouette, in font units. Not a
+# clearance: these swashes are drawn to arc over their neighbours and graze them, so
+# overlap alone says nothing. See docs/swashes.md#what-keeps-arms-from-colliding.
 PROTRUSION_LIMIT = -20
-# How far an arm may reach past the far edge of the letter it arcs over.
-#
-# Geometry.covers requires an arm to stay inside its neighbour's advance, which is what
-# makes a one-position test sound. Demanding that to the unit is too literal: f.swsh
-# reaches 355 and the e after it is 352 wide, so "Hofer" lost the swash by three units of
-# font -- a third of a printed pixel. One column is the right size for the allowance,
-# because one column is the resolution the envelope is measured at: asking for containment
-# to any finer than that is asking for precision the measurement does not have. Anything
-# looser stops being rounding error and becomes the failure covers exists to prevent --
-# at 40 units an arm reaches far enough past its neighbour to land on the ascender of the
-# letter after it, which is where most of this script's collisions used to come from.
+# How far an arm may reach past the far edge of the letter it arcs over -- one column,
+# the resolution the envelope is measured at. Anything looser and an arm lands on the
+# ascender of the letter beyond. See docs/swashes.md#what-keeps-arms-from-colliding.
 COVER_SLACK = COLUMN
-# How much ink beyond the advance box is the letter's own terminal rather than an arm.
-#
-# The overhang test cuts at the advance, and a variant drawn narrower than the letter it
-# replaces pushes its own body a few units past that cut: Z.swsh keeps plain Z's top bar
-# but is 30 units narrower, so the bar's right terminal lands outside the box and shares
-# one column of the envelope with a swash diving 133 below the baseline. Read as an arm,
-# that column says Z.swsh rises 418 units over its neighbour and swallows it whole, and
-# the engulf test threw the pairing out. The same margin MIN_OVERHANG uses to decide what
-# counts as an overhang at all decides here where the arm starts.
+# How much ink beyond the advance box is the letter's own terminal rather than an arm --
+# the same margin MIN_OVERHANG uses for ink that is really there.
+# See docs/swashes.md#what-keeps-arms-from-colliding.
 ARM_MARGIN = MIN_OVERHANG
 # How far past the x-height band a letter may reach and still be something an arm can
-# arc over (units/em=1000).
-#
-# Clearance is not the whole question. Sunday Club's l.swsh clears a preceding t by 32
-# units and a preceding H by 21, which passes PROTRUSION_LIMIT -- but the arm runs level
-# along the top of that ascender for 22 columns, and two near-parallel strokes a fiftieth
-# of an em apart read as one tangled stroke, not as an arc. This is what "Atlantic" and
-# "Zarathustra" were doing: the l and the h each swung a 270-unit arm back over the t in
-# front of them, threading between its ascender and the cap line.
-#
-# What distinguishes the pairs that work is not how much room is left but what is under
-# the arm. This face draws its x-height letters to 366 and everything taller to 435 (t),
-# 445 (capitals) or 504 (ascenders), so there is a 69-unit band with nothing in it: an arm
-# either has a short letter beneath it, with the whole gap from x-height to its own stroke
-# to breathe in, or it has an extender beneath it and no room at all. 40 sits in that band
-# with margin on both sides, and is the same allowance MIN_OVERHANG uses for "ink that is
-# really there" elsewhere.
-#
-# Applied to under-sweeps as well, against the foot of the band rather than its top: a
-# descender in the way of a tail is the same situation upside down.
+# arc over (units/em=1000). Clearance is not the whole question: an arm needs a short
+# letter under it, or it threads between an extender and the cap line and reads as one
+# tangled stroke. See docs/swashes.md#what-keeps-arms-from-colliding.
 ARC_HEADROOM = 40
-# Letters whose ink defines the x-height band. Measured from the outlines because OS/2
-# cannot be trusted here -- this face reports sxHeight 500, which is nearer its ascender
-# (504) than the top of any x-height letter it draws (366).
+# Letters whose ink defines the x-height band. Measured from the outlines because this
+# face reports sxHeight 500, nearer its ascender (504) than the top of any x-height
+# letter it draws (366).
 XHEIGHT_LETTERS = "oxescanumrzvw"
 # Extra ink a variant adds *inside* its own advance box, below the plain glyph's floor or
-# past its right edge, that counts as a terminal flourish (units/em=1000).
-#
-# Some of Sunday Club's alternates decorate within the advance rather than overhanging it,
-# and the overhang test scores those 0 on both sides and discards them as style
-# preferences. That is correct by its own measure -- there is no neighbour for them to
-# clear, so there is no context to derive -- but it throws away two real letterforms:
-#
-#   s.swsh   a tail dropping 64 below the baseline, right edge still inside the advance
-#   a.titl   a terminal sweep 164 past plain a's right edge, with the advance widened
-#            152 to hold it, so it reaches over nothing
-#
-# Both have the same natural home. A flourish reads as deliberate at the end of a word and
-# as a stray mark in the middle of one, so they go word-final -- the one placement the
-# geometry cannot argue with, and one that fires at most once per word.
-#
-# 50 admits exactly those two in this face. Lowering it to 40 also pulls in y.salt, whose
-# extra depth comes not from a tail on the same skeleton but from a wholly redrawn y
-# (straight tail, 40 units narrower) -- mixing it in would put two different y shapes in
-# one line, so it stays above the bar.
+# past its right edge, that counts as a terminal flourish (units/em=1000). Such a variant
+# overhangs nothing, so it has no context to derive and goes word-final instead. 50 admits
+# s.swsh and a.titl. See docs/swashes.md#variants-with-nothing-to-overhang.
 MIN_FLOURISH = 50
 
-# Variants placed word-finally by name, because their difference is one the column
-# envelope cannot see at all: the fit test treats a glyph as a solid silhouette, which is
-# what makes it safe for collisions but blind to anything interior.
+# Variants placed word-finally by name, for a difference the column envelope cannot see:
+# it treats a glyph as a solid silhouette and is blind to anything interior.
 FINAL_VARIANTS: set[str] = set()
 
-# Variants that simply become the letter, substituted unconditionally.
-#
-# e.swsh is not a flourish at all: same advance, same silhouette to within 1 unit/em, no
-# overhang, no tail. What differs is interior -- the bar detaches from the bowl and the
-# aperture opens (2.7% of the ink moves, all of it at that junction). That is a letterform
-# preference rather than a contextual fix, so there is no context worth deriving; it reads
-# as the face's own e and is used everywhere.
-#
-# Emitted as a plain single substitution in a lookup that runs after everything else, which
-# is what keeps it from interfering: the contextual rules above name plain `e` in their
-# neighbour classes, and they have all had their say by the time this fires. The vendor's
-# kern classes already cover e.swsh (identical values for every pair tested), so spacing is
-# unaffected. Sunday Club is only used on h1/h2, which inherit `font-feature-settings:
-# "liga", "calt"`, so calt is never off where this matters.
-# C.swsh joins it for a different reason. Its spiral terminal is drawn wholly inside the
-# advance -- no overhang, no tail, nothing past plain C's own edges -- so the fit test
-# scores it 0 on every measure and has nothing to say about where it belongs. Unlike
-# e.swsh it is unmistakably a decorated letter rather than a preference, but a capital in
-# a heading is about one per word and almost always leads it, which is the classic place
-# for a swash and the placement the reference setting uses. There is no context to derive,
-# so it is a choice, and the choice is to use it.
-# i.salt is e.swsh's case exactly, and even less visible to the fit test. Same advance
-# (217), same bounding box to the unit, so the column envelope cannot tell the two apart
-# at all -- the difference is that the tittle joins the stem, one continuous contour from
-# baseline to 504 instead of a stem and a detached dot, which moves 1.8% of the ink and
-# nothing else. The vendor puts i and i.salt in the same kern class on both sides, so
-# spacing is untouched. Nothing to derive, so it is a choice: the joined i is the one the
-# site uses.
+# Variants that simply become the letter, substituted unconditionally. Each overhangs
+# nothing, so the fit test has nothing to say about where it belongs; these are the
+# letterforms the site wants. Emitted in a lookup that runs after everything else, so the
+# contextual rules above still see the plain glyphs their neighbour classes name.
+# See docs/swashes.md#variants-with-nothing-to-overhang.
 ALWAYS_VARIANTS: set[str] = {"e.swsh", "C.swsh", "i.salt"}
 
 # Escape hatches for dropping a variant out of the automatic set (each stays reachable
 # through the .salt/.swsh/.titl CSS classes). All empty: everything the font draws is a
-# candidate and the fit test decides.
-#
-# ss01-ss04 are worth keeping in particular because that is where Sunday Club hides the
-# intermediate arms. Its t has seven forms, five reaching left (alt3 156, alt2 192, titl
-# 204, alt1 300, swsh 340) and two reaching right (alt4 303, salt 335), which is a range
-# of lengths for a range of neighbours, not seven ways to draw the same letter. Excluding
-# a feature punches a hole in that ladder that nothing else can fill.
+# candidate and the fit test decides. ss01-ss04 hold this face's intermediate arms, so
+# excluding a feature punches a hole in a ladder of arm lengths -- see docs/swashes.md.
 EXCLUDE_VARIANTS: set[str] = set()
 EXCLUDE_FEATURES: set[str] = set()
 EXCLUDE_BASES: set[str] = set()
 
 # Which letters may be swashed automatically. Empty means every letter is eligible.
-#
-# calt matches positions, it cannot count, so there is no way to say "at most two swashes
-# per word" -- every eligible position whose neighbours tuck will fire. This set is the
-# only density control there is. It is currently open: the fit test is strict enough that
-# the extra lowercase bases (a b d h l m n p q r u v w) contribute 21 more rules, all of
-# them positions where the neighbour genuinely sits inside the swash.
-#
-# Pass --sparse for the restrained version -- capitals, which are naturally about one per
-# word and the classic place for a swash, plus the lowercase letters whose extenders are
-# this face's signature.
+# calt matches positions and cannot count, so this is the only density control there is;
+# --sparse swaps in SPARSE_BASES. See docs/swashes.md.
 AUTO_BASES: set[str] = set()
 
 SPARSE_BASES: set[str] = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ") | {
@@ -236,13 +139,12 @@ SPARSE_BASES: set[str] = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ") | {
 }
 
 # Whether a word's first letter may take a left swash, sweeping back into the word gap.
-# The space before it is widened to compensate (see add_word_space_kerns), so word
-# spacing survives. Set False to require a real letter before every left swash.
+# The space before it is widened to compensate (add_word_space_kerns), so word spacing
+# survives. Set False to require a real letter before every left swash.
 ALLOW_WORD_INITIAL = True
-# ...but only for swashes with a short reach. A capital's arm (H.swsh reaches 176) reads
-# as part of the letterform, whereas a long lowercase arc (t.swsh reaches 340) drawn over
-# an empty gap reads as a stray mark floating in front of the word -- it needs a letter
-# to arc over. Capitals clear this bar, the big lowercase sweeps do not.
+# ...but only for a short arm: a long arc drawn over an empty gap has nothing to arc over
+# and reads as a stray mark. Capitals clear this bar (H.swsh 176), the big lowercase
+# sweeps do not (t.swsh 340).
 WORD_INITIAL_MAX_REACH = 200
 
 
@@ -401,11 +303,9 @@ class Geometry:
                      margin: float = 0.0) -> dict[int, list[float]]:
         """Only the ink the variant adds beyond the plain glyph it replaces.
 
-        Measuring from the advance box alone is not enough: plain `f` already pokes
-        9 units left of its origin, and that sliver of ordinary sidebearing sits low
-        enough to look like a collision with whatever precedes it -- which wrongly
-        disqualified `o` before `f.swsh`, the very pairing in "Hofer". The swash is
-        the ink the variant adds, so the plain glyph's own overhang is the baseline.
+        The advance box alone is not the baseline: plain `f` already pokes 9 units left
+        of its origin, and that sliver of ordinary sidebearing sits low enough to read as
+        a collision with whatever precedes it.
 
         `margin` pushes the cut further out still; see arm_ink.
         """
@@ -422,8 +322,8 @@ class Geometry:
 
         Right at the advance the envelope stops telling arm from letter: one column can
         hold both a body terminal and the swash passing beneath it, and a test that reads
-        the column as a single span reads the pair as one enormous stroke. Everything that
-        asks *where the arm points* rather than *how much room it needs* works from here.
+        the column as a single span reads the pair as one enormous stroke. Everything
+        that asks *where the arm points* rather than *how much room it needs* works here.
         """
         return self.overhang_ink(name, side, base, margin=ARM_MARGIN)
 
@@ -433,12 +333,9 @@ class Geometry:
         if not ink:
             return 1
         # Judged at the tip, over the outer third of the arm's columns, and by the median
-        # of their midpoints rather than the bounding box. Both narrowings matter. An arm
-        # dips back to the baseline where it rejoins the stem, so a min/max midpoint reads
-        # overhead arcs as level; and the columns nearest the stem hold the letter itself,
-        # so averaging over the whole arm reads A.swsh -- whose curl sits at 300 but whose
-        # own left leg shares its columns -- as sweeping under, which cost it every
-        # neighbour it had and the word-initial placement the face draws it for.
+        # of their midpoints rather than the bounding box. Both narrowings matter: an arm
+        # dips back to the baseline where it rejoins the stem, and the columns nearest the
+        # stem hold the letter itself. See docs/swashes.md#what-keeps-arms-from-colliding.
         order = sorted(ink)
         tip = order[:max(1, len(order) // 3)] if side == "L" \
             else order[-max(1, len(order) // 3):]
@@ -489,11 +386,9 @@ class Geometry:
                   base: str | None = None) -> bool:
         """Whether the neighbour is too tall (or too deep) for the arm to arc over it.
 
-        A different question from protrusion, which asks whether the two outlines clear
-        each other and answers it in units. This asks whether there was ever room for the
-        arm to be there: an arm passing over an ascender has the 138 units between
-        x-height and ascender taken away from it before it starts, and what is left is a
-        gap too fine to read as one stroke arcing over another. See ARC_HEADROOM.
+        A different question from protrusion, which asks in units whether the two outlines
+        clear each other. This asks whether there was ever room for the arm to be there;
+        see ARC_HEADROOM.
 
         Asked of the arm's own columns only. The innermost columns of an overhang hold the
         variant's own body, and the letter it replaced stood next to that same extender
@@ -531,15 +426,10 @@ class Geometry:
         """Whether the neighbour is wide enough to sit under the whole overhang.
 
         An arm does not stop at the letter it was measured against. t.swsh reaches 340
-        units left, which is wider than i (217) or l (241), so after those it carries on
-        over the letter *beyond* -- one this rule never looked at and, being a single
-        position of calt backtrack, cannot look at. That is where most collisions come
-        from: an arm cleared its neighbour and landed on the next letter's ascender.
-
-        Requiring the overhang to fit within one neighbour's advance is what makes the
-        one-position test sound. It is also what the tucking metaphor already assumed:
-        a swash arcs over *a* letter, and one that outruns its neighbour is not arcing
-        over anything in particular.
+        units left, wider than i (217) or l (241), so after those it carries on over the
+        letter *beyond* -- one this rule, a single position of calt backtrack, cannot look
+        at. Requiring the overhang to fit within one neighbour's advance is what makes the
+        one-position test sound.
         """
         left, right = self.overhang(variant)
         if side == "R":
@@ -674,28 +564,8 @@ def variant_map(features) -> dict[str, dict[str, str]]:
 
 # The order the generated lookups are applied in, which is also the order of priority:
 # each one sees what the ones before it drew, and can be written in terms of the glyphs
-# they leave behind.
-#
-#   initial  a word-initial swash for the first letter of the run, which no backtrack
-#            class can reach -- there is nothing before it to name
-#   arms     every variant that reaches left, the long decoration this face is for
-#   tails    word-final flourishes drawn inside their own advance
-#   nubs     variants that only reach right, the short ones
-#   fallback the vendor's own defensive calt rules
-#   restyle  ALWAYS_VARIANTS
-#
-# Arms before nubs is the substantive ordering, and it is what the reference setting does:
-# in "Atlantic" the t swings a 340-unit arm back over the n, and the price is plain a and
-# plain n, because a right nub on the a would be arcing over that same n from the other
-# side. Deriving them in one pass made that a race the nub won by sitting earlier in the
-# word; deriving arms first makes it a decision, and 340 units of swash beats 86.
-#
-# The split pays a second time in precision. A rule's lookahead cannot see rules that have
-# not run yet, so a one-pass derivation has to assume the letter ahead may still turn into
-# any shape it has -- which is why plain `a` was refused after Z.salt on account of a.titl,
-# a form that only ever appears at the end of a word. By the time `nubs` runs, arms and
-# tails have both had their say, so its lookahead names the glyph that will actually be
-# drawn.
+# they leave behind. Arms before nubs is the substantive ordering.
+# See docs/swashes.md#six-lookups-in-order.
 STAGES = ("initial", "arms", "tails", "nubs", "fallback", "restyle")
 
 
@@ -744,10 +614,9 @@ def neighbour_glyphs(font: TTFont) -> list[str]:
     for cp, name in font["cmap"].getBestCmap().items():
         if cp not in keep:
             continue
-        # Cased letters only. Unicode also files the spacing modifiers under L, but
-        # a modifier letter never stands next to a letter inside a word, so admitting
-        # them just invents contexts: a.alt1's entire right-hand class came out as
-        # [circumflex], a rule that can never match.
+        # Cased letters only. Unicode also files the spacing modifiers under L, but a
+        # modifier letter never stands next to a letter inside a word, so admitting them
+        # only invents contexts that can never match.
         if unicodedata.category(chr(cp)) in ("Ll", "Lu", "Lt") and "." not in name:
             out.append(name)
     return sorted(set(out))
@@ -781,14 +650,11 @@ class Cast:
     """Which glyphs each lookup may find to its left and to its right.
 
     Both sides of a calt match are shapes rather than letters, and the two sides go wrong
-    in opposite directions. To the left the lookup sees what the passes before it drew --
-    a class written in plain letters would forbid a swash after any letter that took one,
-    which is most of the alphabet: "Atlantic" used to lose the arm on its t purely because
-    the A in front of it had turned into A.swsh first. To the right nothing has run yet
-    within the same lookup, so a letter can only be named as itself, and it may still be
-    swapped for something taller by a lookup further down the list -- there the sets are
-    used the other way round, and a letter qualifies only if every shape still open to it
-    clears the arm.
+    in opposite directions. To the left the lookup sees what the passes before it drew, so
+    a class written in plain letters would forbid a swash after any letter that took one.
+    To the right nothing has run yet within the same lookup, so a letter can only be named
+    as itself and may still be swapped for something taller further down the list -- there
+    a letter qualifies only if every shape still open to it clears the arm.
     """
 
     def __init__(self, geom: Geometry, variants, neighbours, ligatures, tail_variants):
@@ -871,11 +737,6 @@ def contextual_rules(geom: Geometry, variants, cast: Cast) -> list[Rule]:
         # Contexts already taken by a higher-priority rule for this letter. calt is
         # first-match-wins, so a rule whose context is wholly inside an earlier one can
         # never fire, and shipping it is dead weight in an inlined critical asset.
-        # Sunday Club's t.alt4 is the case in point: a right arm 32 units shorter than
-        # t.salt, which clears every neighbour t.alt4 clears and clears them by more.
-        # Nothing in the geometry ever picks it, so it is a choice between two lengths
-        # rather than a fit, and the fit test should say so instead of emitting a rule
-        # that quietly never matches.
         claimed_l: set[str] = set()
         claimed_r: set[str] = set()
 
@@ -886,14 +747,12 @@ def contextual_rules(geom: Geometry, variants, cast: Cast) -> list[Rule]:
             if over_l >= MIN_OVERHANG:
                 left = [n for n in preceding[stage]
                         if geom.tucks(var, n, "L", base) and geom.covers(var, n, "L")]
-                # Word-initial needs a short reach *and* an overhead arc. A descender
-                # sweep (j.titl) drawn under an empty gap bridges the two words at the
-                # baseline, the same stray mark as a long arc drawn over one.
+                # Word-initial needs a short reach *and* an overhead arc: a descender
+                # sweep (j.titl) under an empty gap bridges the two words at the baseline.
                 #
-                # Tested before the class is checked for emptiness, not after: A.swsh
-                # is drawn to lead a word and nothing else -- its curl starts where a
-                # preceding letter would end -- so the geometry rejects every letter and
-                # the gap is the only context it has.
+                # Tested before the class is checked for emptiness, not after: A.swsh is
+                # drawn to lead a word and nothing else, so the geometry rejects every
+                # letter and the gap is the only context it has.
                 if (ALLOW_WORD_INITIAL
                         and over_l <= WORD_INITIAL_MAX_REACH
                         and geom.orientation(var, "L", base) > 0):
@@ -1001,11 +860,9 @@ def reach_band(geom: Geometry, glyph: str, side: str):
     """Vertical extent of whatever `glyph` reaches outside its own advance box.
 
     Measured from the box and not, as the fit test does, from the plain letter's own
-    overhang. The two questions are different: the fit test asks what decoration a variant
-    adds, and can discount the sidebearing its letter always had, whereas this asks what
-    ink of it lands in the next letter's box -- and the hook `f` is simply drawn with,
-    67 units past its advance, lands there as squarely as any swash. Netting it off left
-    f and its variants out of the guard entirely.
+    overhang. The question here is what ink lands in the next letter's box, and the hook
+    `f` is simply drawn with, 67 units past its advance, lands there as squarely as any
+    swash.
     """
     return geom.band(glyph, side)
 
@@ -1029,11 +886,9 @@ def one_side_guards(reaching, blocked, word_chars, lookahead: bool):
     other -- each looks at one neighbour, and the clash is with the glyph past it -- so it
     has to be stated separately, over two positions.
 
-    Not as a blanket ban, though, because most of those pairs never touch: in "Zarathustra"
-    the u drops a tail below the baseline under the s while the t swings an arm over the
-    top of it, and reading that as a collision cost the reference setting two of its
-    swashes. So the two arms are compared as vertical extents and only the pairs that
-    actually meet are suppressed.
+    Not as a blanket ban: most such pairs never touch (an under-sweep and an overhead arc
+    share the letter happily), so the two arms are compared as vertical extents and only
+    the pairs that actually meet are suppressed.
     """
     conflicts = {}
     for base, band in blocked.items():
@@ -1053,24 +908,17 @@ def reshape_guards(geom: Geometry, targets, armed, side: str):
     """Keep a letter under an arm in the shape the arm was measured against.
 
     An arm and a variant in the letter next to it cannot normally collide -- covers puts
-    the arm inside that letter's advance box and the variant's own decoration outside it,
-    and those are different places. What breaks that is a variant which changes the box:
-    Sunday Club's r.swsh trades 150 units of advance for its arm, so an r that has already
-    been arced over by a following t.swsh shrinks under it, dragging the t 150 units left
-    and running its arm off the far side of the r into the letter beyond. Every long-range
-    collision the audit found came from this. It cuts the other way too, in smaller
-    amounts: a.swsh is 20 units narrower than a, which is enough to slide the a out from
-    under Z.swsh's tail, and refusing to allow for it is what kept the Z in "Zarathustra"
-    plain.
+    the arm inside that letter's advance box and the variant's own decoration outside it.
+    What breaks that is a variant which changes the box: r.swsh trades 150 units of
+    advance for its arm, so an r already arced over by a following t.swsh shrinks under
+    it, dragging the t left and running its arm off the far side into the letter beyond.
 
     Asked as the question the arm was derived from -- would this rule still have been
     written if the neighbour had been drawn this way -- so a variant that leaves the
     silhouette and the advance alone passes and keeps its decoration.
 
     Stated as an ignore in the later lookup rather than by striking those letters out of
-    the arms' neighbour classes, because the arm is the decoration worth keeping:
-    "aftertask" should swing the t over its r, not go plain to spare the r a nub it can
-    have anywhere else.
+    the arms' neighbour classes, because the arm is the decoration worth keeping.
     """
     conflicts = {}
     for base, variants in targets.items():
@@ -1150,11 +998,9 @@ def render_fea(geom, features, rules, cast, vendor_calt, word_chars, all_glyphs)
     w("feature calt {\n")
 
     # Word-initial swashes for the first letter of the run. Every other position has a
-    # glyph before it that a backtrack class can name; the first has nothing, and a class
-    # cannot match what is not there -- which is why "Film Festival" swashed its second F
-    # and not its first. Stated as the absence of any glyph at all, and placed ahead of
-    # everything else so the leading letter gets the most decorative form it can take
-    # rather than whatever a one-sided rule offers.
+    # glyph before it that a backtrack class can name; the first has nothing, so it is
+    # stated as the absence of any glyph at all. It runs ahead of everything else so the
+    # leading letter gets the most decorative form it can take.
     initial = [r for r in by_stage["arms"] if r.word_initial]
     if initial:
         w("    lookup initial {\n")
@@ -1184,9 +1030,8 @@ def render_fea(geom, features, rules, cast, vendor_calt, word_chars, all_glyphs)
 
     # Tails run before the nubs and after the arms. After, so a letter that already earned
     # a swash keeps it -- by then the glyph is no longer the plain one these rules match.
-    # Before, so that the nubs' lookahead can name the flourished glyph outright instead of
-    # refusing every letter that might one day end a word: plain `a` after Z.salt was
-    # refused on account of a.titl, which only ever appears at the end of one.
+    # Before, so the nubs' lookahead can name the flourished glyph outright rather than
+    # allowing for every letter that might one day end a word.
     #
     # "No letter follows" is stated as an ignore rather than a lookahead class because a
     # lookahead cannot match the end of the run, which is exactly where a word ending a
@@ -1296,9 +1141,8 @@ def add_word_space_kerns(font: TTFont, rules: list[Rule]) -> int:
     """Widen the word space before a word-initial swash by exactly what it consumes.
 
     A left swash on a word's first letter sweeps back into the gap, so "Software
-    Engineer" closes up into "SoftwareEngineer". Dropping the swash is one answer;
-    making room for it is the better one. Each variant gets a (space, variant) kern
-    equal to the ink it reaches back over, which restores the apparent gap.
+    Engineer" would otherwise close up into "SoftwareEngineer". Each variant gets a
+    (space, variant) kern equal to the ink it reaches back over, restoring the gap.
 
     Appended as a new lookup on the existing kern feature rather than rebuilt from a
     .fea, so the vendor's 1975 pair kerns and its class-kerning compaction survive.

@@ -1,18 +1,13 @@
 // Colors
 //
 // Every color is written down once, in OKLCh, in $palette, at the chroma it should have on
-// a wide-gamut display. It compiles to two tables of --color-* custom properties on :root:
-// the sRGB rendering, which is what a non-P3 display gets, and the authored values under
-// (color-gamut: p3). Only chroma differs between them; lightness and hue pass through
-// untouched.
+// a wide-gamut display. It compiles to a table of --color-* custom properties holding the
+// sRGB rendering of each, and a second under (color-gamut: p3) holding the authored values.
 //
 // The invariant: an authored color must be inside Display P3, since that is the boundary
 // its chroma is measured against.
 //
-// Shades are not in either table. They are relative-color declarations the engine resolves
-// against whichever table won, so $shades takes a source name and nothing else.
-//
-// See docs/color.md for more.
+// See docs/color.md#the-narrowing-rule.
 
 @use "sass:color";
 @use "sass:math";
@@ -73,11 +68,8 @@ $palette: (
   "halo-8": oklch(86.2% 0.3214 141.22deg),
 );
 
-// Shades are computed by the browser, not here: oklch(from var(--color-x) …) resolves
-// after the cascade has picked a table, so one declaration serves both gamuts and neither
-// table needs an entry. Chroma is scaled rather than held, because a gamut's boundary
-// contracts as lightness drops and the accents sit on it; where the factor still overshoots,
-// the engine gamut-maps.
+// Chroma is scaled, not held: a gamut's boundary contracts as lightness drops and the
+// accents sit on it, so a constant-chroma step walks straight out of gamut.
 $shade-lightness: 0.08 !default;
 $shade-chroma: 0.87 !default;
 
@@ -99,8 +91,8 @@ $aliases: (
 // How much of the authored P3 chroma the wide-gamut table takes.
 $p3-boost: 1 !default;
 
-// Below this chroma a color is being used as a neutral and is therefore exempted. 
-// See docs/color.md.
+// Below this chroma a color counts as a neutral and is exempted; see
+// docs/color.md#why-near-neutrals-are-exempt.
 $p3-min-chroma: 0.02 !default;
 
 // $color re-expressed with the chroma it would have had if it had been authored against

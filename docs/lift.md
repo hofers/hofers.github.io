@@ -56,7 +56,6 @@ Four results, three of which contradict the obvious guess:
 `$lift-default` is **1.3**, everywhere — headings, links, nav labels, `.bar`, and
 `.aberrate--lift`.
 
-It started at 3, which looked best in isolation on a test page, and came down in use.
 There were three constants for a while: flat body-size ink, headings, and aberrated ink
 lower again because its fringes are the first thing to degrade once the multiply outruns
 the display's headroom. All three converged on 1.3, because the ceiling below binds harder
@@ -131,9 +130,9 @@ lifted, and skip it where no such box exists.** `.bar` is the deliberate excepti
 there the background *is* the ink.
 
 Both exclusions are written with `:where()` inside `:not()` and `:has()` so they
-contribute no specificity. The link rule has to stay at `(0,0,2)` and lose to
-`:is(h1, h2, h3, a):has(.aberrate)` at `(0,1,1)`, or the footer icons silently go back to
-3x. Using `:is()` there instead is a one-character change that breaks it quietly.
+contribute no specificity, which keeps the link rule at `(0,0,2)` and lets any more
+specific lift, or a `--lift` override, win over it. Using `:is()` there instead is a
+one-character change that raises the specificity quietly.
 
 **Hue holds only under the headroom.** The multiply is uniform, so ratios are preserved
 exactly — right up until a channel exceeds what the display can show, at which point that

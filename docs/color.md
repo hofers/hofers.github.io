@@ -6,8 +6,9 @@ table of `--color-*` custom properties on `:root` holding the sRGB rendering of 
 second table under `@media (color-gamut: p3)` holding the authored values themselves.
 Stylesheets only ever say `var(--color-teal)` and never learn which of the two they got.
 
-Colors are custom properties rather than Sass variables so 
-that they can be inlined at compile time.
+Colors are custom properties rather than Sass variables because the table a page gets is
+chosen at run time, by the cascade, and the derived shades are resolved by the engine
+against whichever one won.
 
 The palette is authored at the wide end and derived at the narrow end.
 

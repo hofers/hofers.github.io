@@ -25,7 +25,9 @@ and the inlined base64. The generated rules land in `bin/sundayclub.fea` for ins
 and can be hand-edited then recompiled with `--fea-in`.
 
 Density is controlled by `AUTO_BASES` in the script, since `calt` matches positions and
-cannot count swashes per word. It is now empty, meaning every letter is eligible; run with
+cannot count swashes per word. It is empty, so every letter is eligible; the fit test is
+strict enough that the extra lowercase bases (`a b d h l m n p q r u v w`) add only 21
+rules, all of them positions where the neighbour genuinely sits inside the swash. Run with
 `--sparse` for the restrained set (capitals plus `f g j k t x y z`).
 
 Every feature the font ships is a candidate (`EXCLUDE_FEATURES` is empty). That matters
@@ -34,8 +36,8 @@ forms, five reaching left (`alt3` 156, `alt2` 192, `titl` 204, `alt1` 300, `swsh
 two reaching right (`alt4` 303, `salt` 335). Rules are emitted longest-arm-first and `calt`
 is first-match-wins, so each letter gets a ladder -- the longest arm its neighbour can take,
 down to the plain glyph. A rule whose context is wholly contained in a higher-priority one
-can never fire and is dropped; `t.alt4` goes this way, since `t.salt` clears every
-neighbour it does and clears them by more.
+can never fire and is dropped; `t.alt4` goes this way, since `t.salt` -- a right arm 32
+units longer -- clears every neighbour it does and clears them by more.
 
 ## Six lookups, in order
 
@@ -53,8 +55,8 @@ rather than in terms of what was typed.
 | `restyle` | `ALWAYS_VARIANTS` |
 
 `initial` exists because a backtrack class cannot match what is not there. Every other
-position has a glyph before it to name -- including a word after a space, which is why
-"Film Festival" used to swash its second `F` and not its first. It is stated as
+position has a glyph before it to name -- including a word after a space, so without this
+lookup "Film Festival" swashes its second `F` and not its first. It is stated as
 `ignore sub @anyglyph F';` followed by the unguarded rule, so it fires only where nothing
 precedes, and it runs first so the leading letter gets the most decorative form it can
 take rather than whatever a one-sided rule offers. Word-initial placement is otherwise
@@ -75,6 +77,12 @@ had their say, so its lookahead names the glyph that will actually be drawn.
 
 ## What keeps arms from colliding
 
+- **Overlap is not the measure; protrusion is** (`PROTRUSION_LIMIT`). These swashes are
+  drawn to arc over their neighbours and graze them, so the good pairs interpenetrate
+  freely (`o` before `f.swsh` overlaps by 186 units and is exactly what you would
+  hand-pick) while bad ones overlap less (`l` before `f.swsh`, 174). What separates them
+  is whether the neighbour pokes out past the swash: an ascender or a dot piercing the
+  stroke reads as a mistake, a short letter tucked beneath it reads as intentional.
 - **Both sides are tested against what will actually be drawn.** `calt` walks the run once,
   left to right, so a backtrack class must name variant glyphs -- write it in plain letters
   and a swash can never follow a swash ("Atlantic" loses the arm on its `t` because the `A`
@@ -84,11 +92,11 @@ had their say, so its lookahead names the glyph that will actually be drawn.
   is not the whole question. `l.swsh` clears a preceding `t` by 32 units and a preceding `H`
   by 21, which passes `PROTRUSION_LIMIT` -- but the arm runs level along the top of that
   extender for 22 columns, and two near-parallel strokes a fiftieth of an em apart read as
-  one tangled stroke rather than an arc. This is what "Atlantic" and "Zarathustra" were
-  doing: the `l` and the `h` each swung a 270-unit arm back over the `t` in front of it,
-  threading between its ascender and the cap line. What separates the pairs that work is not
-  how much room is left but what is beneath the arm, and this face leaves a clean band to cut
-  in -- x-height letters top out at 366 and the next thing up is `t` at 435, capitals at 445,
+  one tangled stroke rather than an arc. Without the test, the `l` and the `h` in "Atlantic"
+  and "Zarathustra" each swing a 270-unit arm back over the `t` in front of them, threading
+  between its ascender and the cap line. What separates the pairs that work is not how much
+  room is left but what is beneath the arm, and this face leaves a clean band to cut in --
+  x-height letters top out at 366 and the next thing up is `t` at 435, capitals at 445,
   ascenders at 504. So an arm's own columns must find nothing taller than
   `x_top + ARC_HEADROOM`, and an under-sweep nothing deeper than `x_bottom - ARC_HEADROOM`.
   The band is measured off the outlines because OS/2 cannot be trusted here: Sunday Club
@@ -99,8 +107,11 @@ had their say, so its lookahead names the glyph that will actually be drawn.
   the tight ones (`t.swsh` over `v` at 22 units), and overall decoration falls 59% to 58%.
 - **`Geometry.covers` keeps an arm inside the one letter it arcs over**, to within
   `COVER_SLACK`, which is one column -- the resolution the envelope is measured at, and no
-  more. At 40 units of slack an arm reaches far enough past its neighbour to land on the
-  ascender of the letter after it, which was this script's largest source of collisions.
+  more. Demanding containment to the unit is too literal in the other direction: `f.swsh`
+  reaches 355 and the `e` after it is 352 wide, so "Hofer" loses its swash by three font
+  units, a third of a printed pixel. At 40 units of slack an arm reaches far enough past
+  its neighbour to land on the ascender of the letter after it, which was this script's
+  largest source of collisions.
 - **A letter under an arm keeps the shape the arm was measured against** (`reshape_guards`).
   An arm and a variant in the letter beside it normally cannot collide -- `covers` puts the
   arm inside that letter's box and the variant's decoration outside it. What breaks that is
@@ -153,11 +164,17 @@ a letter that already earned a swash keeps it:
   lookahead class cannot match the end of a run, and `@wordchar` includes variant and
   ligature glyphs because `arms` may already have replaced the following letter. It runs
   *before* `nubs` so that the nubs' lookahead can name the flourished glyph outright.
+  `MIN_FLOURISH` is 50 because that admits exactly those two: at 40 it also pulls in
+  `y.salt`, whose extra depth comes not from a tail on the same skeleton but from a wholly
+  redrawn `y` (straight tail, 40 units narrower), and mixing it in puts two different `y`
+  shapes in one line.
 - `restyle` -- unconditional, for `ALWAYS_VARIANTS`. Holds three glyphs, for two reasons.
   `e.swsh` and `i.salt` are not flourishes. `e.swsh` has the same advance and silhouette as
   plain `e` to within 1 unit/em, but with the bar detached from the bowl so the aperture
-  opens; `i.salt` is closer still -- same advance, same bounding box to the unit, differing
-  only in that the tittle joins the stem into one contour instead of floating free. Both are
+  opens (2.7% of the ink moves, all of it at that junction); `i.salt` is closer still --
+  same advance (217), same bounding box to the unit, differing only in that the tittle
+  joins the stem into one contour from baseline to 504 instead of floating free (1.8% of
+  the ink). Both are
   simply the letterforms the site wants, and the column envelope is a silhouette test that
   cannot see interior differences like these. `C.swsh` is the opposite -- unmistakably a
   decorated letter, its spiral terminal drawn wholly inside the advance, so the fit test
@@ -181,6 +198,7 @@ reports 10.9%, nearly all of it one position away.
 
 `font-feature-settings` on `h1,h2,h3,p,li,th` must name `"calt"` explicitly: the site sets
 `letter-spacing` on `html`, and Chrome drops contextual alternates when letter-spacing is
-non-zero unless the feature is requested by name.
+non-zero unless the feature is requested by name. Everything above rides on that, the
+unconditional `restyle` substitutions included.
 
 The `.salt`, `.swsh` and `.titl` classes remain for deliberate one-off overrides.

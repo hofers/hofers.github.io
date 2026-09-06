@@ -5,15 +5,9 @@
 # ///
 """Prune the inlined Source Sans Pro Light and regenerate its base64.
 
-The vendor build carries a GPOS table three times the size of its outlines: 42.6KB
-against 14.1KB of glyf, holding the `size` feature (an optical-size record no browser
-consults) and kern pairs for glyphs the subset does not contain. Since this font is
-inlined into the critical CSS of every page, that dead table is paid on every page
-view, so it is worth pruning even though the charset is already minimal.
-
-Kerning is kept -- it is only 4.8KB once pruned to the shipped glyphs, and body copy
-is where it shows. Hinting (fpgm/prep/cvt) is kept too: 1.9KB for legibility at the
-site's 20px base size on Windows.
+The vendor GPOS is three times the size of the outlines, and this face is inlined into
+the critical CSS of every page, so the dead weight is paid on every page view. What is
+cut and what is kept: docs/fonts.md#source-sans-pro.
 
 Source of truth is the pristine vendor file, never the previous output -- subsetting
 an already-subset font would silently ratchet the coverage down on every run.
@@ -43,8 +37,7 @@ COVERAGE = (
     + "‘’“”"                # curly quotes
 )
 
-# 'size' is an optical-size record browsers ignore; 'frac' is unreachable without
-# markup that asks for it. Neither is worth the table weight.
+# Layout features to keep; everything else the vendor ships is dropped.
 KEEP_FEATURES = ["kern", "ccmp", "liga", "clig"]
 
 

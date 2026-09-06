@@ -3,12 +3,10 @@
 How `/assets/css/fonts.css` is preloaded during origin think-time, and the Cloudflare
 dashboard configuration it depends on. Background in [fonts.md](fonts.md).
 
-> **Superseded in part, 2026-08-28.** The premise below -- that HTML is `cf-cache-status:
-> DYNAMIC` and every view is a full origin trip -- stopped being true when the HTML was
-> edge-cached; see [html-edge-cache.md](html-edge-cache.md). Think-time fell from a median
-> of 112ms to 5ms, and with it the value of the hint, from 46-101ms to 17-19ms. The `103` is
-> still configured and still worth keeping as insurance for a colo miss, where the original
-> numbers apply again. Everything below remains accurate for the cache-miss path.
+> **Scope.** Everything below describes the cache-miss path. The HTML is now edge-cached
+> ([html-edge-cache.md](html-edge-cache.md)), so think-time is a 5ms median and the hint is
+> worth 17-19ms rather than the 46-101ms measured against a full origin trip. The `103` is
+> kept as insurance for a colo miss, where these numbers apply again.
 
 The cold-start RTT measured in [fonts.md](fonts.md) is dead air, not bandwidth: the HTML was
 `cf-cache-status: DYNAMIC`, so every page view was a full trip to the GitHub Pages origin
@@ -44,8 +42,7 @@ the origin is. Measured on the live site against both a within-run control (real
 n=3 uncontended, 98-168ms) and a clean local control (real `103`, real bytes, think-time
 calibrated to production), a fast connection saves **60-130ms**, not 188-404ms.
 
-Both are worth having and neither is the headline on its own. The optimisation pays out
-most where it is needed most, which is the shape you want, but do not quote the constrained
+The optimisation pays out most where it is needed most, but do not quote the constrained
 figure for a desktop visitor.
 
 One trap specific to re-deriving this. The preload is slower than a normal fetch -- 177ms

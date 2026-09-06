@@ -1,8 +1,8 @@
 # Chromatic aberration (`_includes/styles/_sass/_aberration.scss`)
 
-Design notes for the `.aberrate`, `.aberrate--hover` and `.aberrate--wander` classes. The stylesheet carries only
-what you need to edit it safely; this file is the record of why it is shaped that way, and
-of the things that were tried and rejected.
+Design notes for the `.aberrate` classes and their variants. The stylesheet carries only
+what you need to edit it safely; this file records why it is shaped that way, and what was
+tried and rejected.
 
 ## What it does
 
@@ -23,12 +23,11 @@ of the effect.
 
 ### Derived from `currentColor`, not from a compiled color
 
-Not a convenience, a correctness condition. An `h1` is `$colorHeadingPrimary`, a subtitle
-`h2` is `$colorHeadingSecondary`, and a portfolio item's title is a `$colorHeadingPrimary`
-link *inside* an `h2` -- three different colors, and a layer set that sums to the wrong one
-silently recolors the heading. (The `h2` rule this replaced left portfolio titles about 10%
-dim.) It also means the effect follows a color that changes under it, a link's `:hover`
-among them, with no rule of its own.
+Not a convenience, a correctness condition. An `h1` is `--color-heading-primary`, a subtitle
+`h2` is `--color-heading-secondary`, and a portfolio item's title is a
+`--color-heading-primary` link *inside* an `h2` -- three different colors, and a layer set
+that sums to the wrong one silently recolors the heading. It also means the effect follows a
+color that changes under it, a link's `:hover` among them, with no rule of its own.
 
 ### Not an SVG filter
 
@@ -95,21 +94,11 @@ down, and three layers accumulate that three times over. It shows on h2 and not 
 dull reason -- `#fbfeff`'s layers overflow and clip to white, which is about where they were
 headed anyway, while `#e2e9ea`'s land just past the top of red and blue.
 
-### Chrome changed sides, and that is the lesson
-
-The first two rows used to be one row. Chrome composited in sRGB on the very Mac where Safari
-did not, and the branch was gated on a WebKit-only feature query for exactly that reason. As
-of Chrome 152 (measured on macOS 26.7, P3 display) it composites in the display's space like
-every other app on the machine, and the sRGB split it used to need now blows the h2 out to
-255 247 255 -- within a point of the number macOS Safari produced from the same mistake, which
-is how you can tell it is the same mistake and not a new one. The h1 `#fbfeff` clips to a flat
-255 255 255.
-
-The branch is no longer gated on the engine, because the engine was never what determined the
-answer -- the platform's compositor was, and engines migrate onto it. What the conditions now
-describe is a machine, not a browser: a desktop-class compositor and a wide-gamut display,
-minus iOS. Anything that ships a color-managed compositor on a P3 display lands on the P3
-side by default, which is the direction the whole ecosystem has been moving.
+The branch is gated on the machine and not on the engine, because the engine is not what
+determines the answer -- the platform's compositor is, and engines migrate onto it. What the
+conditions describe is a desktop-class compositor and a wide-gamut display, minus iOS.
+Anything shipping a color-managed compositor on a P3 display lands on the P3 side by
+default, which is the direction the ecosystem has been moving.
 
 ### Why the gate is shaped the way it is
 
@@ -137,14 +126,14 @@ over, by two independent facts. The branch needs both:
 `(color-gamut: p3)` is the display half, since a machine on an sRGB display composites in sRGB
 and reports the narrower gamut from the same profile that decides it.
 
-What is deliberately *not* in the gate any more is an engine test. `-webkit-named-image` used
-to be there, as the WebKit half -- a real feature no Chromium had, not a version sniff. It was
-an honest reading of the measurements at the time and it still went stale the moment Chrome's
-compositor moved, in the direction that produces the loudest error. A detector for the other
-side was considered and rejected: `paint()`, the obvious Chromium-only feature, reports
-unsupported in Chrome 152 (`CSS.supports('background: paint(id)')` is false), and the
-remaining candidates are all one release away from the same fate. Naming engines is what
-failed; the gate describes the hardware instead.
+What is deliberately *not* in the gate is an engine test. `-webkit-named-image` is the
+obvious WebKit half -- a real feature no Chromium has, not a version sniff -- and it is still
+the wrong instrument: an engine test goes stale the moment that engine's compositor moves,
+in the direction that produces the loudest error. A detector for the other side is no better.
+`paint()`, the obvious Chromium-only feature, reports unsupported in Chrome 152
+(`CSS.supports('background: paint(id)')` is false), and the remaining candidates are all one
+release away from the same fate. Naming engines is what fails; the gate describes the
+hardware instead.
 
 ### What is measured and what is inferred
 
@@ -222,17 +211,16 @@ specify another to have its say: `--hover` closes the gate, `--wander` moves the
 `hover wander` is both -- a walk that only runs while the pointer is on the element. That
 combination is what the footer icons use.
 
-This is not how it was first written. Each variant used to write `--ca-active-shift` itself,
-which meant the two could not be combined at all: they set the same property at the same
-specificity, so one won on source order and the filter warned rather than shipping whichever
-that was. Multiplying instead of overwriting is what makes them compose, and it is worth
-keeping that way -- a third variant should be a third factor.
+A third variant should be a third factor, not another rule writing `--ca-active-shift`. Two
+variants that each write that property set the same property at the same specificity: one
+wins on source order and the two cannot be combined at all. Multiplying rather than
+overwriting is what makes them compose.
 
 Two consequences worth knowing:
 
 - **The rest state of a gated variant is a product, not a literal.** It computes to `0px`
-  because it is `0.05em * 0 * 0.38`, a calculation that keeps its unit. See the note in "One
-  animation" about what a bare `0` used to do here.
+  because it is `0.05em * 0 * 0.38`, a calculation that keeps its unit. See "One animation"
+  for why a bare `0` here is a hazard.
 - **An inline `--ca-shift` from the filter scales whatever the variants are doing**, because
   it is the first factor and lands in a style attribute. `{{ x | aberrate: "hover wander
   0.03em" }}` narrows the walk without touching the gate.
@@ -259,40 +247,36 @@ animating.
 
 ### One animation, not four
 
-The obvious way to write the transition is the way this started: each layer transitions its
-own `transform` and its own `opacity`, and the element transitions its fill. That is four
-animations of the same 180ms, and nothing but the engine's good manners keeps them together.
-Safari's manners were not good -- for roughly the first tenth of a second of every hover the
-red layer stood further out than the blue one, then the two settled. On a footer icon, where
-the whole glyph is one shape, it reads as a flinch.
+The obvious shape is four animations of the same 180ms: each layer transitioning its own
+`transform` and its own `opacity`, and the element transitioning its fill. Nothing but the
+engine's good manners keeps them together, and Safari's are not good enough -- for roughly
+the first tenth of a second of every hover the red layer stands further out than the blue
+one, then the two settle. On a footer icon, where the whole glyph is one shape, it reads as
+a flinch.
 
-The same staggering broke the color invariant, and that one had a name before it had a
-cause: a green flash on hover. The fill moves from the text color to the green third and the
-other two layers fade in to make the difference up; the sum only holds if those halves are
-exactly in step. When the fill got there first there was nothing yet adding red and blue back,
-so the glyph showed the green third of its color until the layers caught up.
+The same staggering breaks the color invariant, as a green flash on hover. The fill moves
+from the text color to the green third and the other two layers fade in to make the
+difference up; the sum only holds if those halves are exactly in step. A fill that arrives
+first shows the green third of the color until the layers catch up.
 
-Two separate things were wrong, and the first is worth knowing about on its own:
+A unitless `0` rest value is a separate hazard on the same path, and worth knowing on its
+own. `translate()` takes a `<length-percentage>`, `::before` *negates* the value, and
+`calc(0 * -1)` is a number, so `::before`'s whole `transform` declaration is invalid at
+computed-value time and falls back to `none`, while `::after`, which uses the variable
+directly, keeps a valid `translate(0, 0)` -- both engines report exactly that, `none` against
+`matrix(1, 0, 0, 1, 0, 0)`. The layers sit in the same place either way, so nothing looks
+wrong at rest, but the two then *start* the transition from different kinds of value, which
+is a different code path. The product retires the hazard rather than fixing it: the rest
+value is `--ca-shift * 0 * ...`, and a calculation over a length stays a length. Do not
+"simplify" a variant back to writing a bare `0` into `--ca-active-shift`.
 
-- The rest value was `0`, unitless, and `::before` *negates* it. `translate()` takes a
-  `<length-percentage>` and `calc(0 * -1)` is a number, so `::before`'s whole `transform`
-  declaration was invalid at computed-value time and fell back to `none`, while `::after`,
-  which uses the variable directly, kept a valid `translate(0, 0)`. Both engines report
-  exactly that: `none` against `matrix(1, 0, 0, 1, 0, 0)`. The layers sit in the same place
-  either way, so nothing looks wrong at rest -- but the two then *start* the transition from
-  different kinds of value, `::after` matrix to matrix and `::before` out of `none`, which is
-  a different code path. The gate retired the hazard rather than fixing it: the rest value is
-  now `--ca-shift * 0 * ...`, and a calculation over a length stays a length. Do not
-  "simplify" a variant back to writing a bare `0` into `--ca-active-shift`.
-- That alone did not fix it, because four animations can drift apart for reasons that are not
-  in the stylesheet at all -- when each layer gets promoted to a composited layer, how a
-  blended layer is scheduled.
-
-So the layers no longer animate. The *element* transitions `--ca-gate` and
-`--ca-active-alpha` alongside its fill, and the layers read them and paint: position from the
-gate through the product above, `opacity` from the alpha, no `transition` of their own. There
-is now one clock. Two layers cannot come apart when neither is animating -- the mirroring is
-arithmetic, done fresh from a single interpolated number every frame.
+Retiring it is not enough on its own, because four animations can drift apart for reasons
+that are not in the stylesheet at all -- when each layer gets promoted to a composited layer,
+how a blended layer is scheduled. So the layers do not animate. The *element* transitions
+`--ca-gate` and `--ca-active-alpha` alongside its fill, and the layers read them and paint:
+position from the gate through the product above, `opacity` from the alpha, no `transition`
+of their own. There is one clock, and two layers cannot come apart when neither is animating
+-- the mirroring is arithmetic, done fresh from a single interpolated number every frame.
 
 Both axes hang off that one number, so this is three transitions rather than four, and the
 displacement is not among them: `--ca-active-shift` and `--ca-active-drift` are recomputed
@@ -493,6 +477,9 @@ section's `1 / $ca-own`, which is also 1.30 by coincidence of a different mechan
 - **`content: attr(data-text) / ""`** -- the `/ ""` is alt text, and stops screen readers
   announcing the duplicated string. The element's own text is the green layer, so there is no
   extra text node and the accessible name stays single.
+- **`data-text` is filled in after rendering**, by a `post_render` hook rather than by the
+  `aberrate` filter that emits the wrapper; both are in `_plugins/internal_plugins.rb`,
+  which says why.
 - **`text-shadow: none`** -- a glow underneath three stacked copies reads as mud.
 - **`font-feature-settings` is inherited**, so all three layers shape identically and the
   contextual swashes line up. A mismatch would misregister every alternate glyph.

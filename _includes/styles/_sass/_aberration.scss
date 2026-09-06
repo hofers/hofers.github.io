@@ -1,34 +1,23 @@
-// Chromatic aberration for light text on a dark ground.
+// Chromatic aberration for light text on a dark ground: the text split into red, green
+// and blue layers, the outer two displaced.
 //
-// Splits the text into red, green and blue layers and displaces the outer two. The three
-// layers must sum to the text color -- `ca-layer()` enforces that, so any $ca-strength
-// keeps the overlap on color and changes only the fringes.
+// The invariant is that the three layers sum to the text color -- `ca-layer()` enforces
+// it, so any $ca-strength keeps the overlap on color and changes only the fringes.
+// `plus-lighter` sums alpha as well, so antialiased edges composite too dark: `.aberrate`
+// is for display sizes, `.aberrate--hover` for anything at body size.
 //
-// `plus-lighter` sums alpha too, so antialiased edges composite too dark: `.aberrate` is
-// for display sizes, `.aberrate--hover` for anything at body size. `.aberrate--wander`
-// puts the displacement in continuous motion, and composes with `--hover` -- together
-// they are a walk that only runs while the pointer is on the element.
-//
-// See docs/chromatic-aberration.md before changing this file. It records why the layers
-// derive from currentColor, why the base layer is a text-fill rather than a `color`, why
-// this is not an SVG filter, why the bleed is a shadow rather than a box, and what every
-// condition on the P3 branch at the bottom is load-bearing for.
+// See docs/chromatic-aberration.md before changing this file.
 
 @use "lift";
 @use "sass:list";
 @use "sass:math";
 @use "sass:string";
 
-// Displacement is a product of three factors, and each variant supplies exactly one of
-// them. That is what lets the variants compose instead of fight: `hover wander` is the
-// gate opening while the path moves, and neither rule has to know about the other.
-//
-//   --ca-shift / --ca-drift    the authored separation, per axis
-//   --ca-gate                  0..1, how far open the effect is  (--hover transitions it)
-//   --ca-wander-x / -y         -1..1, where along the walk it is (--wander animates them)
-//
-// Each factor's *registered initial value* is its no-variant default, so plain `.aberrate`
-// declares none of them and no rule depends on source order to win.
+// Displacement is a product of three factors and each variant supplies exactly one, which
+// is what lets them compose rather than fight. Each factor's registered initial value is
+// its no-variant default, so plain `.aberrate` declares none of them and no rule depends
+// on source order to win. See
+// docs/chromatic-aberration.md#displacement-is-a-product-and-each-variant-supplies-one-factor.
 @property --ca-gate {
   syntax: "<number>";
   initial-value: 1;
@@ -50,10 +39,9 @@
 // Registration is what makes the two above animatable at all: keyframes step between
 // stops for an *unregistered* custom property, and a transition cannot run on one.
 //
-// The two below are registered for their type instead. They are derived, never animated
-// -- one transition on --ca-gate drives both layers, rather than four animations of the
-// same duration racing each other. A length that goes bad falls back to the 0px here,
-// where an unregistered one would invalidate the layer's whole transform.
+// The two below are registered for their type rather than for interpolation: a length that
+// goes bad falls back to the 0px here, where an unregistered one would invalidate the
+// layer's whole transform.
 @property --ca-active-shift {
   syntax: "<length-percentage>";
   initial-value: 0px;
@@ -95,21 +83,20 @@ $ca-own: 1 - 2 * $ca-share;
 }
 
 .aberrate {
-  // Must match the space the compositor adds the layers back up in; see the docs.
+  // The space the compositor will add the layers back up in; the branch at the bottom
+  // picks the other value.
   --ca-space: srgb;
   // em, so one value serves every size. The `aberrate` filter can override per use.
   --ca-shift: 0.02em;
   // Vertical drift: without it horizontal strokes get no fringe at all.
   --ca-drift: 0.01em;
-  // What the layers are actually displaced by: the product above, written once here so a
-  // variant only ever supplies a factor. Both other factors are 1 unless a variant is
-  // present, and an inline --ca-shift from the filter scales whatever they are doing.
+  // The product, written once here so a variant only ever supplies a factor.
   --ca-active-shift: calc(var(--ca-shift) * var(--ca-gate) * var(--ca-wander-x));
   --ca-active-drift: calc(var(--ca-drift) * var(--ca-gate) * var(--ca-wander-y));
   --ca-active-alpha: 1;
-  // How far outside its own box a layer may paint: Safari clips the blend to that
-  // bound, and glyph ink leaves the box routinely -- swashes, descenders under a tight
-  // line-height. An em is more than a face can use, and costs nothing. See the docs.
+  // How far outside its own box a layer may paint: Safari clips the blend to that bound,
+  // and glyph ink leaves the box routinely. See
+  // docs/chromatic-aberration.md#the-bleed-and-why-it-is-a-shadow.
   --ca-bleed: 1em;
 
   // inline-block: the layers are absolutely positioned against this box, and an inline
@@ -117,8 +104,9 @@ $ca-own: 1 - 2 * $ca-share;
   display: inline-block;
   position: relative;
   isolation: isolate; // blend the layers with each other, never with the page behind
-  // The element's own text *is* the green layer, so the accessible name stays single.
-  // A fill rather than a `color` -- see the docs.
+  // The element's own text *is* the green layer, so the accessible name stays single. A
+  // fill rather than a `color`; see
+  // docs/chromatic-aberration.md#why-the-base-layer-is-painted-with--webkit-text-fill-color.
   -webkit-text-fill-color: ca-layer("g");
   text-shadow: none;  // a glow underneath three stacked copies reads as mud
 
@@ -128,20 +116,20 @@ $ca-own: 1 - 2 * $ca-share;
     inset: 0;
     padding: inherit; // inset: 0 is the padding box, so the layers need the same one
     // Widens the paint bounds by --ca-bleed, so Safari stops cutting the ink off at the
-    // box. Transparent adds nothing under plus-lighter, and a shadow is not layout: an
-    // actually bigger box gives the page a horizontal scrollbar. Don't swap it for one.
+    // box. Paint, not layout: an actually bigger box gives the page a horizontal
+    // scrollbar, so don't swap this for a border or an outline.
     box-shadow: 0 0 0 var(--ca-bleed) transparent;
     mix-blend-mode: plus-lighter;
     pointer-events: none; // never let a layer swallow a click meant for the link
     text-shadow: none;
-    // Every animated quantity is read from the element, never transitioned here. Two
-    // layers transitioning for themselves is two animations that can drift apart.
+    // Read from the element, never transitioned here: two layers transitioning for
+    // themselves are two animations that can drift apart.
     opacity: var(--ca-active-alpha);
   }
 
   // The `/ ""` is alt text: it stops screen readers announcing the duplicated string.
   // Gated on relative color syntax -- without it the copies would paint the full text
-  // color and three of those under plus-lighter blow out to white.
+  // color, and three of those under plus-lighter blow out to white.
   @supports (color: #{"color(from currentColor srgb r g b)"}) {
     &::before {
       content: attr(data-text) / "";
@@ -157,10 +145,9 @@ $ca-own: 1 - 2 * $ca-share;
   }
 }
 
-// The four selectors a gated variant opens on. An enclosing link's state as well as the
-// element's own, and descendant rather than child because a footer icon's wrapper sits
-// inside the <i>, not directly under the <a>. :focus-visible carries the effect to the
-// keyboard, where a hover-only one is otherwise invisible.
+// The four selectors a gated variant opens on. Descendant rather than child, because a
+// footer icon's wrapper sits inside the <i> and not directly under the <a>;
+// :focus-visible carries the effect to the keyboard, where a hover-only one is invisible.
 @mixin ca-open {
   a:hover &,
   a:focus-visible &,
@@ -170,27 +157,23 @@ $ca-own: 1 - 2 * $ca-share;
   }
 }
 
-// Gated variant, for links and anything else that should only separate on interaction.
-// At rest it is ordinary text, not a dimmed effect: the layers are faded out and the
-// element paints its own color, because three coincident copies hit the alpha problem.
-// On hover the fill and the layers swap in step on the same duration and easing, so the
-// total stays on color throughout. See the docs.
+// Gated variant, for links and anything else that should only separate on interaction. At
+// rest it is ordinary text rather than a dimmed effect, because three coincident copies
+// hit the alpha problem. See docs/chromatic-aberration.md#the-hover-variant.
 .aberrate--hover {
-  // Body-size text at a glance, so the split has to survive being small: equal horizontal
-  // and vertical separation, larger than the display variant's drift. An inline --ca-shift
-  // from the filter still wins over this, since that lands in a style attribute.
+  // Body size, so the split has to survive being small: equal separation on both axes,
+  // larger than the display variant's drift.
   --ca-shift: 0.02em;
   --ca-drift: 0.02em;
 
-  // The only factor this variant touches. Closing the gate multiplies the displacement to
-  // zero rather than replacing it, which is what leaves --wander's factor free to compose.
+  // Closing the gate multiplies the displacement to zero rather than replacing it, which
+  // is what leaves --wander's factor free to keep moving underneath.
   --ca-gate: 0;
   --ca-active-alpha: 0;
 
   -webkit-text-fill-color: currentColor;
-  // One number and two paint properties, one duration, one easing. Both layers derive
-  // their position from --ca-gate arithmetically, so they cannot come apart mid-transition
-  // -- and the fill runs with them, which is what holds the sum on color throughout.
+  // One duration and one easing across all three: the fill has to move in step with the
+  // layers, or the sum comes off color part-way through.
   transition:
     --ca-gate 180ms ease-out,
     --ca-active-alpha 180ms ease-out,
@@ -208,16 +191,9 @@ $ca-own: 1 - 2 * $ca-share;
 }
 
 // Continuously-moving variant, for a glyph that should look like a lens hunting for
-// focus. Both displacements walk a looping path of their own instead of holding a value.
-// Nothing else about the effect changes: the layers are still mirrored from one number
-// per axis and still sum to the text color at every frame.
-//
-// The path is authored as a plain number in -1..1 and multiplied by the authored
+// focus. The path is authored as a plain number in -1..1 and multiplied by the authored
 // separation at use, so the keyframes hold no lengths and an inline --ca-shift from the
-// filter narrows the whole walk. Keyframes cannot interpolate an *unregistered* custom
-// property -- they step between stops -- but relative color syntax, which the layers are
-// already gated on, is the stricter requirement in every engine, so anything that has
-// layers at all can animate them. See "One animation" in the docs.
+// filter narrows the whole walk. See docs/chromatic-aberration.md#the-wander-variant.
 
 // Amplitude of the walk, which runs the full +/- of it. Named once because the combined
 // variant below has to state it too, rather than inherit it by source order.
@@ -263,8 +239,8 @@ $ca-wander-amplitude: 0.05em !default;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   // --ca-wander-offset desyncs several on one page. Negative, so each starts part-way
-  // along its path with no ramp-in; the second clock takes a different multiple of it,
-  // or the pair would stay locked together and only the pair would move.
+  // along its path with no ramp-in; the second clock takes a different multiple of it, or
+  // the pair stays locked together and only the pair moves.
   animation-delay: var(--ca-wander-offset, 0s), calc(var(--ca-wander-offset, 0s) * 1.7);
 
   @media (prefers-reduced-motion: reduce) {
@@ -277,10 +253,9 @@ $ca-wander-amplitude: 0.05em !default;
   }
 }
 
-// Both together: the walk, gated on hover. The two rules above already compose -- one
-// closes the gate, the other moves the path, and the product is zero until the pointer
-// arrives -- so all this adds is the amplitude, which would otherwise be settled by
-// source order, and a pause.
+// Both together: the walk, gated on hover. The two rules above already compose, so this
+// adds only the amplitude -- otherwise settled by source order, since both set it at the
+// same specificity -- and a pause.
 .aberrate--hover.aberrate--wander {
   --ca-shift: #{$ca-wander-amplitude};
   --ca-drift: #{$ca-wander-amplitude};
@@ -296,19 +271,11 @@ $ca-wander-amplitude: 0.05em !default;
   }
 }
 
-// Overbright variant. The mechanism, the default and both invariants live in
-// _lift.scss, which `.lift` uses too -- there is one definition of what lifted means and
-// this rule only wires it to the gate. See docs/lift.md and docs/chromatic-aberration.md.
-//
-// This is the one variant that is not a factor of the displacement: it multiplies the
-// composited result rather than the separation, which is why it never appears in
-// --ca-active-shift. It still composes, by taking --ca-gate as its own gate, so
-// `hover lift` brings the glow up with the split and rides the transition the gate is
-// already running rather than adding a second one that could drift out of step.
-//
-// Scaling the layer colors instead cannot do this, and the difference is not subtle: a
-// layer clips on its own channel at 1/$ca-own, long before the sum does, so past ~1.3x
-// the split desaturates and by 6x the fringes are grey.
+// Overbright variant. The paint lives in _lift.scss, which `.lift` uses too, and this
+// rule only wires it to the gate. It is the one variant that is not a factor of the
+// displacement -- it multiplies the composited result rather than the separation, which is
+// why it never appears in --ca-active-shift. See
+// docs/chromatic-aberration.md#the-lift-variant-and-why-the-boost-is-not-in-the-layer-colors.
 .aberrate--lift {
   --lift: #{lift.$lift-default};
   --lift-gate: var(--ca-gate);
@@ -316,16 +283,11 @@ $ca-wander-amplitude: 0.05em !default;
 }
 
 // A desktop compositor on a wide-gamut display adds the layers up in the display's color
-// space, so there they have to be split in Display P3 instead. This is a property of the
-// platform, not of the engine -- Chrome used to composite in sRGB on the same Mac where
-// Safari did not, and stopped. iOS is the exception that both conditions below exclude,
-// and getting it wrong there turns the heading pale green. Read the docs before touching
-// either: `-webkit-touch-callout` is the iOS-family test, hover/pointer catches an iPad
-// on a trackpad, and neither is redundant.
-//
-// _colors.scss branches on the same media feature for an unrelated reason -- it widens the
-// palette into P3 there. This one is a blend correction, that one is a gamut. Changing one
-// to match the other breaks whichever you moved; see docs/color.md.
+// space, so there they have to be split in Display P3 instead. The conditions describe a
+// machine, not an engine, and every one of them matters: iOS composites in extended sRGB
+// and getting it wrong there turns the heading pale green, so it is excluded twice --
+// `-webkit-touch-callout` is the iOS-family test and hover/pointer catches an iPad on a
+// trackpad. See docs/chromatic-aberration.md#why-the-gate-is-shaped-the-way-it-is.
 @supports #{"not (-webkit-touch-callout: none)"} {
   @media (color-gamut: p3) and (hover: hover) and (pointer: fine) {
     .aberrate {

@@ -30,14 +30,8 @@ onmessage = function(e) {
    * (e.g. 'bbgyb' for guess: 'HELLO' for solution 'ALLAY')
    * and record the size of each of these groups.
    * 
-   * Then, calculate and record the bits of information for each
-   * guess based on these group sizes. This is the total information
-   * derived from all of the group sizes divided by the number
-   * of remaining solutions. The information derived from a given
-   * group size is equal to the size of the group multiplied by
-   * the log2 of the quotient of the number of solutions remaining
-   * over the size of the current group. The bits of information
-   * corresponding to each guess can be considered its "score".
+   * The guess's score is the bits of information those group
+   * sizes carry, averaged over the remaining solutions.
    */
   const guesses = ALL_GUESSES.split(" ");
   const numSolutions = solutions.length;
@@ -102,10 +96,6 @@ onmessage = function(e) {
       maxGroupLength: maxGroupLength
     };
   })
-  /**
-   * Sort the scored guesses in descending order.
-   * (i.e. highest scores first)
-   */
   scoredGuesses.sort((a, b) => 
     solutions.includes(a.guess) 
       ? solutions.includes(b.guess) 
@@ -115,15 +105,6 @@ onmessage = function(e) {
         ? (b.bits * solveWeight) - a.bits
         : b.bits - a.bits
   );
-  /**
-   * If every remaining solution has a guess score that's tied with
-   * the best guess, only return remaining solutions as guesses, up to 10.
-   * 
-   * Otherwise, if the user has toggled Hard Mode on, only return the top ten
-   * remaining guesses that are valid in Hard Mode.
-   * 
-   * Otherwise, simply return the top 10 guesses.
-   */
   if (solutions.every(
     w => scoredGuesses.find(
       g => g.guess === w 

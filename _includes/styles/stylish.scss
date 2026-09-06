@@ -6,7 +6,8 @@
 @use "aberration";
 @use "lift";
 
-// Emit the color palette once here so it's present everywhere
+// The palette is declared exactly once, here.
+// See docs/color.md#declare-is-included-exactly-once.
 @include colors.declare();
 
 @keyframes rotation {
@@ -91,9 +92,8 @@ body {
       margin-left: 0.3rem;
     }
 
-    // The tab lifts its text, not its box. `filter` would take the background and the
-    // shadow halo with it and wash the tab out, and the span is already where this
-    // link's own ink lives -- the underline and the hover highlight are both on it.
+    // `filter` takes the whole element, so the tab lifts its span rather than its box.
+    // See docs/lift.md#the-three-invariants.
     span {
       --lift: #{lift.$lift-default};
       @include lift.paint;
@@ -150,8 +150,8 @@ body {
   max-width: 30rem;
   margin: 2.2rem auto 1.3rem;
   background-color: var(--color-background-tertiary);
-  // Near-white on near-black, so it lifts cleanly: its channels are equal and clip
-  // together, and a hairline is the one place a hard clip would show as a color cast.
+  // The lift exception: here the background is the ink.
+  // See docs/lift.md#the-three-invariants.
   --lift: #{lift.$lift-default};
   @include lift.paint;
 }

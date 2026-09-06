@@ -98,11 +98,9 @@ def clashes(shaper: Shaper, run):
                 if j == idx or other == "space":
                     continue
                 # Measure in the arm's own frame, which is the frame the derivation
-                # used. Slicing on a shared absolute grid instead shifts the column
-                # boundaries by up to half a column, and at the tip of a swash -- where
-                # the outline is near vertical and a neighbour's stem is a couple of
-                # units away -- that alone flips the verdict. The point here is to catch
-                # what the rules failed to model, not to re-litigate their quantisation.
+                # used. On a shared absolute grid the column boundaries shift by up to
+                # half a column, which at the tip of a swash -- outline near vertical,
+                # a neighbour's stem a couple of units away -- flips the verdict.
                 cols = geom.columns(other, ox - x)
                 worst = float("-inf")
                 for k, (amin, amax) in ink.items():

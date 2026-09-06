@@ -20,11 +20,11 @@ bin/subset-sourcesans.py --report   # measure, write nothing
 a font request. That is 87% of a typical page's compressed weight, which makes these the
 only assets on the site where a wasted kilobyte is worth chasing.
 
-They are *base64 in a stylesheet*, but that stylesheet is no longer inlined into the HTML.
-`assets/css/fonts.scss` builds it to `/assets/css/fonts.css` and `_layouts/default.html`
-links it render-blocking as the first element in `<head>`. See "Why a separate file"
-below for the measurements; the short version is that inlining made every page view
-re-download 40KB the visitor already had.
+They are *base64 in a stylesheet*, and that stylesheet is a file of its own rather than
+inline in the HTML: `assets/css/fonts.scss` builds it to `/assets/css/fonts.css` and
+`_layouts/default.html` links it render-blocking as the first element in `<head>`. See
+"Why a separate file" below for the measurements; the short version is that inlining made
+every page view re-download 40KB the visitor already had.
 
 **The href carries no cache-buster, and must not grow one.** It is a bare
 `/assets/css/fonts.css`, because Cloudflare replays a *static* `Link` header for it as a
@@ -32,14 +32,14 @@ re-download 40KB the visitor already had.
 build-time digest. A `?v=` that drifts from that hardcoded header costs a double download.
 Freshness is handled at the edge instead, by `stale-while-revalidate` on the response.
 
-This replaced a `FontCacheKey` generator that stamped `?v=<digest>` onto the href. If the
-Early Hints rules are ever removed, that is the scheme to restore -- hash the *inputs*
-(`inline-fonts.scss` plus `_includes/fonts/*.b64`) rather than the rendered output, since
-the layout needs the value while rendering, before any page output exists to hash.
+If the Early Hints rules are ever removed, the scheme to restore is a `?v=<digest>` stamped
+on the href by a generator that hashes the *inputs* (`inline-fonts.scss` plus
+`_includes/fonts/*.b64`) rather than the rendered output, since the layout needs the value
+while rendering, before any page output exists to hash.
 
-Note the `.ttf` fallback `url()`s in `inline-fonts.scss` are **root-relative**. They used
-to be `../assets/...`, which resolved against the HTML document; from
-`/assets/css/fonts.css` that same string resolves to `/assets/assets/...` and 404s.
+Note the `.ttf` fallback `url()`s in `inline-fonts.scss` are **root-relative**. A relative
+`../assets/...` resolves against the stylesheet, so from `/assets/css/fonts.css` it becomes
+`/assets/assets/...` and 404s.
 
 Base64 is close to free once brotli has run -- the inflation is about 1% against the raw
 woff2 -- so the cost is the *font*, not the encoding. Both inlined text faces are built by
@@ -52,13 +52,16 @@ already-subset font ratchets its coverage down a little on every run:
 | Source Sans Pro Light | `assets/fonts/SourceSansPro-Light.vendor.woff2` | `bin/subset-sourcesans.py` |
 | SFSymbols (icons) | `assets/fonts/SFSymbols/` | hand-built, 5 glyphs, already minimal |
 
-Source Sans Pro's vendor build shipped a `GPOS` three times the size of its outlines --
+## Source Sans Pro
+
+Source Sans Pro's vendor build ships a `GPOS` three times the size of its outlines --
 42.6KB against 14.1KB of `glyf` -- holding the `size` feature, which is an optical-size
-record no browser consults, and kern pairs for glyphs the subset does not contain. Pruning
-`GPOS` to the shipped glyphs takes it to 4.8KB and the file from 14.5KB to 9.1KB. Kerning is
-kept, and so is hinting: 1.9KB for legibility at the site's 20px base on Windows. The script
-fails the build if coverage regresses against the vendor file, and pins `head.modified` so an
-unchanged rebuild does not churn the base64 blob in git.
+record no browser consults, `frac`, which nothing on the site asks for, and kern pairs for
+glyphs the subset does not contain. Pruning `GPOS` to the shipped glyphs takes it to 4.8KB
+and the file from 14.5KB to 9.1KB. Kerning is kept, and so is hinting: 1.9KB for legibility
+at the site's 20px base on Windows. The script fails the build if coverage regresses against
+the vendor file, and pins `head.modified` so an unchanged rebuild does not churn the base64
+blob in git.
 
 ## Why a separate file, and what it costs
 
@@ -109,9 +112,9 @@ renders immediately in a local face and reflows on arrival; `optional` is worse 
 either, since a miss pins the whole load to the fallback.
 
 **Do not add metric-matched fallback `@font-face` rules (`size-adjust`, `ascent-override`
-…) to go with this.** It was built, measured and reverted. Because `block` means the
-fallback is never painted, matching its metrics only changes the geometry of a layout
-nobody ever sees. It cost 146 bytes brotli'd on every page view and bought a human nothing.
+…) to go with this.** Measured and rejected: because `block` means the fallback is never
+painted, matching its metrics only changes the geometry of a layout nobody ever sees. It
+cost 146 bytes brotli'd on every page view and bought a human nothing.
 This changes if the faces ever stop being inlined -- over the network the block period can
 genuinely expire, the fallback really paints, and metric matching becomes a user-facing fix.
 

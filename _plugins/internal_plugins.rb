@@ -57,7 +57,6 @@ module Jekyll
 
   # {% pdf TITLE | FILE %}
   # creates an iframe with title `TITLE` for displaying a PDF located at `FILE`
-  # uses PDF.js for rendering PDFs
   class PDFTag < Liquid::Tag
     def initialize(tag_name, input, tokens)
       super
@@ -78,20 +77,16 @@ module Jekyll
   end
 
   # replaces every `:shortcode:` in rendered HTML with the Unicode emoji it names,
-  # e.g. `:wave:` -> 👋. Stands in for jemoji, which substituted a 20px PNG served
-  # from github.githubassets.com -- same authoring syntax, no request, no image.
+  # e.g. `:wave:` -> 👋.
   module UnicodeEmoji
-    # tags whose contents are markup or code samples, and must be left alone
     SKIP_TAGS = %w[code pre tt script style].freeze
 
-    # mirrors jemoji: only pages/documents that are written out as HTML
     def self.emojiable?(doc)
       return false unless doc.is_a?(Jekyll::Page) || doc.write?
       doc.output_ext == ".html" || doc.permalink.to_s.end_with?("/")
     end
 
-    # walks the rendered HTML, substituting in text nodes only, so that neither
-    # tag attributes nor the contents of SKIP_TAGS are touched
+    # substitutes in text nodes only, so tag attributes and SKIP_TAGS contents are untouched
     def self.emojify(html)
       return html unless html.include?(":")
 
@@ -138,10 +133,8 @@ module Jekyll
   # replaces the last space in `CONTENT` with a non-breaking space
   # used to prevent runts in text
   #
-  # The last space is looked for in text only. `CONTENT` here is rendered HTML, and a
-  # plain replace_last lands inside the final tag whenever a paragraph ends in markup --
-  # `<a href=` becomes `<a&nbsp;href=`, and an attribute is silently lost. A space inside
-  # a tag is never the runt anyway; the one that matters is between the last two words.
+  # `CONTENT` is rendered HTML, so the last space is looked for outside tags: replacing
+  # one inside a tag silently breaks the attribute it sits in.
   module KillRuntsFilter
     def kill_runts(input)
       text = input.to_s
@@ -179,25 +172,18 @@ module Jekyll
   #
   # wraps CONTENT in the markup the `.aberrate` styles need: the class, and a
   # `data-text` copy of the string that the two pseudo-element layers draw via
-  # `content: attr(data-text)`. See _includes/styles/_sass/_aberration.scss. The layers
-  # are derived from the wrapped text's own color, so this can go anywhere without
-  # having to say what color it lands on.
+  # `content: attr(data-text)`. See docs/chromatic-aberration.md.
   #
-  # The filter only writes the wrapper; `data-text` is filled in afterwards by the
-  # post_render hook at the bottom of this file. It has to be, because the three layers
-  # draw the same string three times and any difference between them misregisters every
-  # glyph after it -- and Liquid runs before two things that still change the text:
-  # kramdown's smart quotes (`"hi"` -> `“hi”`, and every apostrophe), and the emoji
-  # substitution above. Reading the attribute off the *rendered* HTML is the only point
-  # at which what the layers draw is guaranteed to be what the element says.
+  # The filter writes only the wrapper; `data-text` is filled in by the post_render hook
+  # at the bottom of this file, because Liquid runs before kramdown's smart quotes and
+  # the emoji substitution and all three layers must draw the same string.
   module Aberration
-    # Only lengths, and only into the one custom property -- this is interpolated
-    # into a style attribute, so anything else is dropped rather than trusted.
+    # Interpolated into a style attribute, so anything but a length is dropped rather
+    # than trusted.
     SHIFT = /\A-?(?:\d+\.?\d*|\.\d+)(?:em|rem|px|ch|%)\z/
 
-    # An `&` that does not already open an entity. Entities are left intact: a
-    # data-text attribute decodes them exactly as the element's own text does, so
-    # `&nbsp;` from kill_runts survives into content: attr() as a real space.
+    # An `&` that does not already open an entity: entities must reach `attr()` intact,
+    # so `&nbsp;` from kill_runts stays a real space.
     BARE_AMPERSAND = /&(?!(?:[a-zA-Z][a-zA-Z0-9]*|\#[0-9]+|\#x[0-9a-fA-F]+);)/
 
     def self.wrap(input, options = nil)
@@ -208,9 +194,6 @@ module Jekyll
       %(<span class="#{classes}"#{style(shift)}>#{text}</span>)
     end
 
-    # Space-separated options in any order: any of the variants, and/or a CSS length.
-    # They compose -- each one supplies a different factor of the displacement, so
-    # "hover wander" is a walk that runs only while hovered.
     VARIANTS = %w[hover wander lift].freeze
 
     def self.parse(options)
@@ -235,10 +218,6 @@ module Jekyll
       [classes.join(" "), shift]
     end
 
-    # --ca-shift is the authored separation in every variant: the distance the layers
-    # hold, the distance the hover gate opens to, and the amplitude the wander walks.
-    # The variants each scale it by a factor of their own rather than overwriting it, so
-    # an inline value here does not have to fight a rest state for specificity.
     def self.style(shift)
       return "" if shift.nil?
 
@@ -249,11 +228,10 @@ module Jekyll
       text.gsub(BARE_AMPERSAND, "&amp;").gsub('"', "&quot;").gsub("<", "&lt;").gsub(">", "&gt;")
     end
 
-    # Fills in data-text on every wrapper the filter left, reading it off the rendered
-    # HTML. Runs last, so smart quotes and emoji are already applied.
     OPENING = /<span[\s]+class="[^"]*\baberrate\b[^"]*"[^>]*>/
     ANY_SPAN = %r{</?span\b[^>]*>}
 
+    # Fills in data-text on every wrapper the filter left, read off the rendered HTML.
     def self.populate(html)
       return html unless html.include?("aberrate")
 
@@ -267,10 +245,6 @@ module Jekyll
         inner = read_span(scanner)
         plain = inner.gsub(%r{</?[^>]+>}, "")
 
-        # The layers can only draw a string, so tags inside cannot be mirrored onto
-        # them. Strip them for the attribute and say so, rather than letting three
-        # disagreeing layers ship: that misregisters every glyph after the tag, and is
-        # a miserable thing to diagnose from the rendered page.
         if plain != inner
           Jekyll.logger.warn "Aberrate:", "markup inside #{inner.inspect} is not " \
             "mirrored onto the color layers; wrap the tag rather than the text inside it"
@@ -283,8 +257,7 @@ module Jekyll
       out
     end
 
-    # Everything up to this span's own closing tag, counting nested spans so that a
-    # wrapper around content that itself contains one is not cut short.
+    # Everything up to this span's own closing tag, counting nested spans.
     def self.read_span(scanner)
       depth = 1
       inner = +""
@@ -329,8 +302,8 @@ Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
   doc.output = Jekyll::UnicodeEmoji.emojify(doc.output)
 end
 
-# after the emoji hook, so a shortcode inside an aberrated span reaches the color
-# layers as the character it renders as rather than as `:wave:`
+# Registered after the emoji hook, so a shortcode inside an aberrated span reaches the
+# color layers as the character it renders as.
 Jekyll::Hooks.register [:pages, :documents], :post_render do |doc|
   doc.output = Jekyll::Aberration.populate(doc.output)
 end
