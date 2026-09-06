@@ -10,14 +10,18 @@
 // See docs/color.md#declare-is-included-exactly-once.
 @include colors.declare();
 
+$radius-top: 0.25rem;
+$radius-bottom: 2.566665rem;
+
+$halo-blur: 15px;
+$halo-spill: 4px;
+
 @keyframes rotation {
   0% {
     --angle: 0deg;
-    filter: blur(10px);
   }
   100% {
     --angle: 360deg;
-    filter: blur(10px);
   }
 }
 
@@ -35,12 +39,7 @@ body {
 
 .container {
   background-color: var(--color-background-primary);
-  box-shadow: 0.05rem 0 0.25rem var(--color-gray);
-  outline: transparent 2px inset;
-  border-bottom-left-radius: 2.566665rem;
-  border-bottom-right-radius: 2.566665rem;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  border-radius: $radius-top $radius-top $radius-bottom $radius-bottom;
   display: inline-block;
   min-width: calc(100% - 2.5rem);
   padding: 0 1.25rem;
@@ -56,16 +55,15 @@ body {
       var(--color-halo-1), var(--color-halo-2), var(--color-halo-3), var(--color-halo-4),
       var(--color-halo-5), var(--color-halo-6), var(--color-halo-7), var(--color-halo-8),
       var(--color-halo-9), var(--color-halo-10), var(--color-halo-1));
-    border-bottom-left-radius: 2.566665rem;
-    border-bottom-right-radius: 2.566665rem;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-radius: inherit;
     content:"";
-    filter: blur(10px);
-    height: 100%;
-    width: 100%;
+    filter: blur($halo-blur);
+    top: calc($halo-spill / -2);
+    left: calc($halo-spill / -2);
+    height: calc(100% + $halo-spill);
+    width: calc(100% + $halo-spill);
+    pointer-events: none;
     position: absolute;
-    left: 0;
     animation: rotation 15s linear infinite;
     z-index: -1;
   }
