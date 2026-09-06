@@ -59,13 +59,15 @@ $palette: (
 
   "h1-glow": oklch(84.76% 0.0628 207.47deg),
   "halo-1": oklch(89.35% 0.1911 193.76deg),
-  "halo-2": oklch(56.67% 0.2456 263.21deg),
-  "halo-3": oklch(52.66% 0.294 288.89deg),
+  "halo-2": oklch(51.864% 0.26903 263.286),
+  "halo-3": oklch(50.031% 0.28907 286.773),
   "halo-4": oklch(66.57% 0.3235 322.59deg),
   "halo-5": oklch(65.54% 0.2857 354.79deg),
-  "halo-6": oklch(80.78% 0.1843 76.39deg),
-  "halo-7": oklch(93.87% 0.2404 115.6deg),
-  "halo-8": oklch(86.2% 0.3214 141.22deg),
+  "halo-6": oklch(64.86% 0.2965 28.96deg),
+  "halo-7": oklch(80.78% 0.1843 76.39deg),
+  "halo-8": oklch(93.87% 0.2404 115.6deg),
+  "halo-9": oklch(86.2% 0.3214 141.22deg),
+  "halo-10": oklch(88.084% 0.20581 158.088),
 );
 
 // Chroma is scaled, not held: a gamut's boundary contracts as lightness drops and the

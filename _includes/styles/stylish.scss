@@ -52,11 +52,10 @@ body {
 
   &:before {
     --angle: 0deg;
-    // Eight stops, then the first again so the sweep closes seamlessly.
     background: conic-gradient(from var(--angle),
       var(--color-halo-1), var(--color-halo-2), var(--color-halo-3), var(--color-halo-4),
       var(--color-halo-5), var(--color-halo-6), var(--color-halo-7), var(--color-halo-8),
-      var(--color-halo-1));
+      var(--color-halo-9), var(--color-halo-10), var(--color-halo-1));
     border-bottom-left-radius: 2.566665rem;
     border-bottom-right-radius: 2.566665rem;
     border-top-left-radius: 0.25rem;

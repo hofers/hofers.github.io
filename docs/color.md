@@ -44,46 +44,21 @@ within 0.5/2^18 of the boundary. Far finer than the four decimals the result is 
 
 ### What the current palette gives up in sRGB
 
-| name | authored | sRGB chroma | cut |
-| --- | --- | --- | --- |
-| `page` | `oklch(0% 0 0deg)` | — unchanged | — |
-| `red` | `oklch(46.01% 0.2114 27.24deg)` | 0.1876 | −11% |
-| `dark-red` | `oklch(33.81% 0.1526 25.47deg)` | 0.1354 | −11% |
-| `white` | `oklch(99.5% 0.0035 219.53deg)` | — unchanged | — |
-| `off-white` | `oklch(97.31% 0 0deg)` | — unchanged | — |
-| `light-gray` | `oklch(74.76% 0 0deg)` | — unchanged | — |
-| `gray` | `oklch(46.76% 0 0deg)` | — unchanged | — |
-| `dark-gray` | `oklch(42.39% 0 0deg)` | — unchanged | — |
-| `off-black` | `oklch(19.69% 0.0152 248.61deg)` | — unchanged | — |
-| `cyan` | `oklch(74.99% 0.1821 181.83deg)` | 0.1345 | **−26%** |
-| `deep-cyan` | `oklch(59.63% 0.1422 184.78deg)` | 0.1052 | **−26%** |
-| `teal` | `oklch(89% 0.1983 169.59deg)` | 0.1753 | −12% |
-| `deep-teal` | `oklch(60.6% 0.1592 170.6deg)` | 0.1167 | **−27%** |
-| `heading-secondary` | `oklch(92.9% 0.0076 207.14deg)` | — unchanged | — |
-| `heading-tertiary` | `oklch(91.69% 0.0077 207.14deg)` | — unchanged | — |
-| `body-primary` | `oklch(83.23% 0.0057 211.04deg)` | — unchanged | — |
-| `h1-glow` | `oklch(84.76% 0.0628 207.47deg)` | 0.0565 | −10% |
-| `halo-1` | `oklch(89.35% 0.1911 193.76deg)` | 0.1482 | **−22%** |
-| `halo-2` | `oklch(56.67% 0.2456 263.21deg)` | 0.2290 | −7% |
-| `halo-3` | `oklch(52.66% 0.294 288.89deg)` | 0.2744 | −7% |
-| `halo-4` | `oklch(66.57% 0.3235 322.59deg)` | 0.2965 | −8% |
-| `halo-5` | `oklch(65.54% 0.2857 354.79deg)` | 0.2513 | −12% |
-| `halo-6` | `oklch(80.78% 0.1843 76.39deg)` | 0.1603 | −13% |
-| `halo-7` | `oklch(93.87% 0.2404 115.6deg)` | 0.2066 | −14% |
-| `halo-8` | `oklch(86.2% 0.3214 141.22deg)` | 0.2730 | −15% |
-| `deep-teal-shade` | derived | 0.1013 | **−27%** |
-| `deep-cyan-shade` | derived | 0.0911 | **−26%** |
-| `off-white-shade` | derived | — unchanged | — |
+The cut is uneven, because P3's advantage over sRGB is uneven. It is widest in the
+green–cyan corner and nearly absent in the blues and violets: `deep-teal` loses 27% of its
+chroma on an sRGB display, `cyan` and `deep-cyan` 26%, while `halo-3` — a violet — loses
+2%. A palette that moved away from teal would lose correspondingly less, and that would not
+be a bug.
 
-The cuts are uneven because P3's advantage over sRGB is uneven. It is largest in the
-green–cyan corner, which is why the teals and cyans give up three to four times what the
-blues and violets do. A palette that moved away from teal would lose correspondingly less on
-an sRGB display, and that would not be a bug.
+Every accent is authored at 89–100% of the chroma P3 can give it at its lightness and hue.
+That is the condition under which any of this is worth doing: a palette sitting well inside
+P3 would narrow to almost the same numbers, because the scaling is proportional, and
+proportional to a small number is a small number. `h1-glow` is the case that shows it — at
+39% of the boundary it is a tint rather than an accent, and the two tables hand it 0.0628
+and 0.0565, a difference nobody will see.
 
-Every accent sits at 98–100% of the chroma P3 can give it at its lightness and hue. That is
-the condition under which any of this is worth doing: a palette sitting well inside P3 would
-narrow to almost the same numbers, because the scaling is proportional and proportional to a
-small number is a small number.
+The per-color numbers are not reproduced here. They are `$palette` and the two `--color-*`
+tables the build emits from it, and a copy in prose would only drift from them.
 
 ## The derived shades
 
