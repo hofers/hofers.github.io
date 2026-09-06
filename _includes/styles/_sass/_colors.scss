@@ -1,73 +1,26 @@
 // Colors
-// See docs/color.md for more
+//
+// Every color is written down once, in OKLCh, in $palette, at the chroma it should have on
+// a wide-gamut display. It compiles to two tables of --color-* custom properties on :root:
+// the sRGB rendering, which is what a non-P3 display gets, and the authored values under
+// (color-gamut: p3). Only chroma differs between them; lightness and hue pass through
+// untouched.
+//
+// The invariant: an authored color must be inside Display P3, since that is the boundary
+// its chroma is measured against.
+//
+// Shades are not in either table. They are relative-color declarations the engine resolves
+// against whichever table won, so $shades takes a source name and nothing else.
+//
+// See docs/color.md for more.
 
 @use "sass:color";
-@use "sass:map";
 @use "sass:math";
 
 @function _round($n, $places) {
   $f: math.pow(10, $places);
   @return math.div(math.round($n * $f), $f);
 }
-
-// Snap to 8-bit channels.
-@function _snap($color) {
-  @return rgb(
-    math.round(color.channel($color, "red", $space: rgb)),
-    math.round(color.channel($color, "green", $space: rgb)),
-    math.round(color.channel($color, "blue", $space: rgb))
-  );
-}
-
-$palette: (
-  "page": #000,
-  "red": #a8000e,
-  "dark-red": #6d020c,
-  "white": #fbfeff,
-  "off-white": #f6f6f6,
-  "light-gray": #adadad,
-  "gray": #5a5a5a,
-  "dark-gray": #4e4e4e,
-  "off-black": #10161c,
-  "cyan": #00c9b4,
-  "deep-cyan": #009387,
-  "teal": #13ffc8,
-  "deep-teal": #0e9878,
-
-  "heading-secondary": #e2e9ea,
-  "heading-tertiary": #dee5e6,
-  "body-primary": #c4c9ca,
-
-  "h1-glow": #a2d8e0,
-  "halo-1": #27faf8,
-  "halo-2": #2767fa,
-  "halo-3": #7227fa,
-  "halo-4": #e227fa,
-  "halo-5": #fa2799,
-  "halo-6": #fab027,
-  "halo-7": #e6fa27,
-  "halo-8": #48fa27,
-);
-
-$palette: map.set($palette, "deep-teal-shade", _snap(color.adjust(map.get($palette, "deep-teal"), $lightness: -8%)));
-$palette: map.set($palette, "deep-cyan-shade", _snap(color.adjust(map.get($palette, "deep-cyan"), $lightness: -8%)));
-$palette: map.set($palette, "off-white-shade", _snap(color.adjust(map.get($palette, "off-white"), $lightness: -8%)));
-
-$aliases: (
-  "background-primary": "off-black",
-  "background-secondary": "gray",
-  "background-tertiary": "off-white",
-  "heading-primary": "white",
-  "body-secondary": "light-gray",
-  "body-tertiary": "dark-gray",
-);
-
-// How much of the available P3 headroom to take.
-$p3-boost: 1 !default;
-
-// Below this chroma a color is being used as a neutral and is therefore exempted. 
-// See docs/color.md.
-$p3-min-chroma: 0.02 !default;
 
 // Iterations of the chroma bisection below.
 $p3-steps: 18 !default;
@@ -90,10 +43,70 @@ $p3-steps: 18 !default;
   @return $lo;
 }
 
+$palette: (
+  "page": oklch(0% 0 0deg),
+  "red": oklch(46.01% 0.2114 27.24deg),
+  "dark-red": oklch(33.81% 0.1526 25.47deg),
+  "white": oklch(99.5% 0.0035 219.53deg),
+  "off-white": oklch(97.31% 0 0deg),
+  "light-gray": oklch(74.76% 0 0deg),
+  "gray": oklch(46.76% 0 0deg),
+  "dark-gray": oklch(42.39% 0 0deg),
+  "off-black": oklch(19.69% 0.0152 248.61deg),
+  "cyan": oklch(74.99% 0.1821 181.83deg),
+  "deep-cyan": oklch(59.63% 0.1422 184.78deg),
+  "teal": oklch(89% 0.1983 169.59deg),
+  "deep-teal": oklch(60.6% 0.1592 170.6deg),
+
+  "heading-secondary": oklch(92.9% 0.0076 207.14deg),
+  "heading-tertiary": oklch(91.69% 0.0077 207.14deg),
+  "body-primary": oklch(83.23% 0.0057 211.04deg),
+
+  "h1-glow": oklch(84.76% 0.0628 207.47deg),
+  "halo-1": oklch(89.35% 0.1911 193.76deg),
+  "halo-2": oklch(56.67% 0.2456 263.21deg),
+  "halo-3": oklch(52.66% 0.294 288.89deg),
+  "halo-4": oklch(66.57% 0.3235 322.59deg),
+  "halo-5": oklch(65.54% 0.2857 354.79deg),
+  "halo-6": oklch(80.78% 0.1843 76.39deg),
+  "halo-7": oklch(93.87% 0.2404 115.6deg),
+  "halo-8": oklch(86.2% 0.3214 141.22deg),
+);
+
+// Shades are computed by the browser, not here: oklch(from var(--color-x) …) resolves
+// after the cascade has picked a table, so one declaration serves both gamuts and neither
+// table needs an entry. Chroma is scaled rather than held, because a gamut's boundary
+// contracts as lightness drops and the accents sit on it; where the factor still overshoots,
+// the engine gamut-maps.
+$shade-lightness: 0.08 !default;
+$shade-chroma: 0.87 !default;
+
+$shades: (
+  "deep-teal-shade": "deep-teal",
+  "deep-cyan-shade": "deep-cyan",
+  "off-white-shade": "off-white",
+);
+
+$aliases: (
+  "background-primary": "off-black",
+  "background-secondary": "gray",
+  "background-tertiary": "off-white",
+  "heading-primary": "white",
+  "body-secondary": "light-gray",
+  "body-tertiary": "dark-gray",
+);
+
+// How much of the authored P3 chroma the wide-gamut table takes.
+$p3-boost: 1 !default;
+
+// Below this chroma a color is being used as a neutral and is therefore exempted. 
+// See docs/color.md.
+$p3-min-chroma: 0.02 !default;
+
 // $color re-expressed with the chroma it would have had if it had been authored against
-// P3's boundary instead of sRGB's. Returns null for anything that should not move, which
-// is how the caller knows to emit nothing.
-@function _widen($color) {
+// sRGB's boundary instead of P3's. Returns null for anything that should not move, which
+// is how the caller knows the color is the same in both tables.
+@function _narrow($color) {
   $l: color.channel($color, "lightness", $space: oklch);
   $c: color.channel($color, "chroma", $space: oklch);
   $h: color.channel($color, "hue", $space: oklch);
@@ -102,37 +115,57 @@ $p3-steps: 18 !default;
     @return null;
   }
 
-  $srgb-max: _max-chroma($l, $h, srgb);
+  $p3-max: _max-chroma($l, $h, display-p3);
 
-  // Black and white have no hue to widen along, and would divide by zero.
-  @if $srgb-max == 0 {
+  // Black and white have no hue to move along, and would divide by zero.
+  @if $p3-max == 0 {
     @return null;
   }
 
-  $widened: $c + $p3-boost * ($c * math.div(_max-chroma($l, $h, display-p3), $srgb-max) - $c);
-  @return oklch(_round($l, 2) _round($widened, 4) _round($h, 1));
+  @return oklch($l _round($c * math.div(_max-chroma($l, $h, srgb), $p3-max), 4) $h);
+}
+
+// The wide-gamut value: the authored color, or a partial step back toward its sRGB
+// rendering when $p3-boost is dialled down.
+@function _boost($srgb, $authored) {
+  @if $p3-boost == 1 {
+    @return $authored;
+  }
+
+  $floor: color.channel($srgb, "chroma", $space: oklch);
+  $ceiling: color.channel($authored, "chroma", $space: oklch);
+
+  @return oklch(
+    color.channel($authored, "lightness", $space: oklch)
+    _round($floor + $p3-boost * ($ceiling - $floor), 4)
+    color.channel($authored, "hue", $space: oklch)
+  );
 }
 
 @mixin declare {
   :root {
     @each $name, $value in $palette {
-      --color-#{$name}: #{$value};
+      $srgb: _narrow($value);
+
+      --color-#{$name}: #{if($srgb, $srgb, $value)};
     }
 
     @each $name, $target in $aliases {
       --color-#{$name}: var(--color-#{$target});
     }
+
+    @each $name, $source in $shades {
+      --color-#{$name}: oklch(from var(--color-#{$source}) calc(l - #{$shade-lightness}) calc(c * #{$shade-chroma}) h);
+    }
   }
 
-  @supports (color: oklch(0 0 0)) {
-    @media (color-gamut: p3) {
-      :root {
-        @each $name, $value in $palette {
-          $wide: _widen($value);
+  @media (color-gamut: p3) {
+    :root {
+      @each $name, $value in $palette {
+        $srgb: _narrow($value);
 
-          @if $wide {
-            --color-#{$name}: #{$wide};
-          }
+        @if $srgb {
+          --color-#{$name}: #{_boost($srgb, $value)};
         }
       }
     }
